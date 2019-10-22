@@ -5,6 +5,9 @@
     /// </summary>
     public class PlayerValues
     {
+
+        private const int ScoreLimit = 3;
+
         #region Properties
 
         /// <summary>
@@ -13,7 +16,7 @@
         /// <value>
         ///     The player lives.
         /// </value>
-        public int PlayerLives { get; private set; }
+        public int Lives { get; private set; }
 
         /// <summary>
         ///     Gets the player score.
@@ -21,7 +24,7 @@
         /// <value>
         ///     The player score.
         /// </value>
-        public int PlayerScore { get; private set; }
+        public int Score { get; private set; }
 
         /// <summary>
         ///     Gets a value indicating whether [game over].
@@ -42,8 +45,8 @@
         /// <param name="score">The score.</param>
         public PlayerValues(int lives, int score)
         {
-            this.PlayerLives = lives;
-            this.PlayerScore = score;
+            this.Lives = lives;
+            this.Score = score;
         }
 
         #endregion
@@ -51,28 +54,28 @@
         #region Methods
 
         /// <summary>
-        ///     Decreases Player Lives.
+        ///     Decreases Lives.
         ///     Precondition: None
         ///     Postcondition: Lives == Lives@prev - 1
         /// </summary>
         public void LoseALife()
         {
-            this.PlayerLives--;
-            if (this.PlayerLives <= 0)
+            this.Lives--;
+            if (this.Lives <= 0)
             {
                 this.GameOver = true;
             }
         }
 
         /// <summary>
-        ///     Increases Player Score.
+        ///     Increases Score.
         ///     Precondition: None
         ///     Postcondition: Score == Score@prev + 1
         /// </summary>
         public void IncreaseScore()
         {
-            this.PlayerScore++;
-            if (this.PlayerScore >= 3)
+            this.Score++;
+            if (this.Score >= ScoreLimit)
             {
                 this.GameOver = true;
             }

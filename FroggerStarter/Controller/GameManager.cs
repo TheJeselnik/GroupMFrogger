@@ -15,9 +15,9 @@ namespace FroggerStarter.Controller
 
         public delegate void GameOverHandler();
 
-        public delegate void PlayerLivesHandler(int lives);
+        public delegate void LivesHandler(int lives);
 
-        public delegate void PlayerScoreHandler(int score);
+        public delegate void ScoreHandler(int score);
 
         #endregion
 
@@ -29,8 +29,8 @@ namespace FroggerStarter.Controller
         public const double LaneHeight = 50;
 
         private const int BottomLaneOffset = 5;
-        private const int InitialPlayerLives = 3;
-        private const int InitialPlayerScore = 0;
+        private const int InitialLives = 3;
+        private const int InitialScore = 0;
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
         private Canvas gameCanvas;
@@ -38,7 +38,7 @@ namespace FroggerStarter.Controller
         private PlayerValues playerValues;
         private DispatcherTimer timer;
         private RoadManager roadManager;
-        private CollisionManager collisionManager;
+        private CollisionDetector collisionDetector;
         private PlayerMovementManager playerMovementManager;
 
         #endregion
@@ -59,7 +59,7 @@ namespace FroggerStarter.Controller
         /// <value>
         ///     The player lives.
         /// </value>
-        public int PlayerLives => this.playerValues.PlayerLives;
+        public int Lives => this.playerValues.Lives;
 
         /// <summary>
         ///     Gets the player score.
@@ -67,7 +67,7 @@ namespace FroggerStarter.Controller
         /// <value>
         ///     The player score.
         /// </value>
-        public int PlayerScore => this.playerValues.PlayerScore;
+        public int Score => this.playerValues.Score;
 
         #endregion
 
@@ -108,12 +108,12 @@ namespace FroggerStarter.Controller
         /// <summary>
         ///     Occurs when [player score updated].
         /// </summary>
-        public event PlayerScoreHandler PlayerScoreUpdated;
+        public event ScoreHandler ScoreUpdated;
 
         /// <summary>
         ///     Occurs when [player lives updated].
         /// </summary>
-        public event PlayerLivesHandler PlayerLivesUpdated;
+        public event LivesHandler LivesUpdated;
 
         /// <summary>
         ///     Occurs when [game over updated].
@@ -140,10 +140,10 @@ namespace FroggerStarter.Controller
         {
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
             this.createAndPlacePlayer();
-            this.playerValues = new PlayerValues(InitialPlayerLives, InitialPlayerScore);
+            this.playerValues = new PlayerValues(InitialLives, InitialScore);
             this.roadManager =
                 new RoadManager(this.backgroundHeight, this.backgroundWidth, LaneHeight, BottomLaneOffset);
-            this.collisionManager = new CollisionManager();
+            this.collisionDetector = new CollisionDetector();
             this.createAndPlaceVehicles();
             this.playerMovementManager = new PlayerMovementManager(this.player,
                 this.backgroundHeight, this.backgroundWidth, this.TopShoulderY, BottomLaneOffset);
@@ -224,7 +224,7 @@ namespace FroggerStarter.Controller
         {
             foreach (var currVehicle in this.roadManager.AllVehicles)
             {
-                if (!this.collisionManager.ObjectsCollide(currVehicle, this.player))
+                if (!this.collisionDetector.IsCollisionBetween(currVehicle, this.player))
                 {
                     continue;
                 }
@@ -269,12 +269,12 @@ namespace FroggerStarter.Controller
 
         private void onPlayerScoreUpdated()
         {
-            this.PlayerScoreUpdated?.Invoke(this.PlayerScore);
+            this.ScoreUpdated?.Invoke(this.Score);
         }
 
         private void onPlayerLivesUpdated()
         {
-            this.PlayerLivesUpdated?.Invoke(this.PlayerLives);
+            this.LivesUpdated?.Invoke(this.Lives);
         }
 
         private void onGameOver()

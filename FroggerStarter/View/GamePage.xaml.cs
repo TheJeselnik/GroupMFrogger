@@ -38,8 +38,8 @@ namespace FroggerStarter.View
             this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth);
             this.gameManager.InitializeGame(this.canvas);
 
-            this.gameManager.PlayerScoreUpdated += this.scoreOnPlayerScoreUpdated;
-            this.gameManager.PlayerLivesUpdated += this.livesOnPlayerLivesUpdated;
+            this.gameManager.ScoreUpdated += this.scoreOnScoreUpdated;
+            this.gameManager.LivesUpdated += this.livesOnLivesUpdated;
             this.gameManager.GameOverUpdated += this.gameOverOnGameOverUpdated;
         }
 
@@ -48,12 +48,12 @@ namespace FroggerStarter.View
             this.gameOverTextBlock.Visibility = Visibility.Visible;
         }
 
-        private void scoreOnPlayerScoreUpdated(int score)
+        private void scoreOnScoreUpdated(int score)
         {
             this.scoreTextBlock.Text = $"Score: {score.ToString()}";
         }
 
-        private void livesOnPlayerLivesUpdated(int lives)
+        private void livesOnLivesUpdated(int lives)
         {
             this.livesRemainingTextBlock.Text = $"Lives: {lives.ToString()}";
         }

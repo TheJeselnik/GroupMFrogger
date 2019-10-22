@@ -119,7 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controller\CollisionManager.cs" />
+    <Compile Include="Controller\CollisionDetector.cs" />
     <Compile Include="Controller\RoadManager.cs" />
     <Compile Include="Model\Lane.cs" />
     <Compile Include="Controller\PlayerMovementManager.cs" />

@@ -6,7 +6,7 @@ namespace FroggerStarter.Controller
     /// <summary>
     ///     Handles collision checking of Game Objects.
     /// </summary>
-    public class CollisionManager
+    public class CollisionDetector
     {
         #region Methods
 
@@ -20,7 +20,7 @@ namespace FroggerStarter.Controller
         /// <returns>
         ///     True if both gameObjects collide, otherwise false.
         /// </returns>
-        public bool ObjectsCollide(GameObject firstGameObject, GameObject secondGameObject)
+        public bool IsCollisionBetween(GameObject firstGameObject, GameObject secondGameObject)
         {
             var firstGameObjectRect = constructRectangle(firstGameObject);
             var secondGameObjectRect = constructRectangle(secondGameObject);
