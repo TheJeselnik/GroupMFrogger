@@ -11,6 +11,9 @@ namespace FroggerStarter.Controller
     {
         #region Data members
 
+        private const int NumberOfLanes = 5;
+
+
         private readonly double laneHeight;
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
@@ -90,6 +93,15 @@ namespace FroggerStarter.Controller
             this.lanes.Add(fifthLane);
 
             this.TopShoulderY = fifthLaneLocation - this.laneHeight;
+        }
+
+        private void calculateLaneLocations()
+        {
+            var bottomShoulderLocation = this.backgroundHeight - this.bottomOffset - this.laneHeight;
+            for (var i = 0; i < NumberOfLanes; i++)
+            {
+                
+            }
         }
 
         /// <summary>
