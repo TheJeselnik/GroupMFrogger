@@ -224,7 +224,7 @@ namespace FroggerStarter.Controller
         {
             foreach (var currVehicle in this.roadManager.AllVehicles)
             {
-                if (!this.collisionDetector.IsCollisionBetween(currVehicle, this.player))
+                if (this.collisionDetector.IsCollisionBetween(currVehicle, this.player))
                 {
                     this.playerLosesLife();
                     this.roadManager.ResetSpeed();
