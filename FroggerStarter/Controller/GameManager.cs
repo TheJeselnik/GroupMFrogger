@@ -226,11 +226,9 @@ namespace FroggerStarter.Controller
             {
                 if (!this.collisionDetector.IsCollisionBetween(currVehicle, this.player))
                 {
-                    continue;
+                    this.playerLosesLife();
+                    this.roadManager.ResetSpeed();
                 }
-
-                this.playerLosesLife();
-                this.roadManager.ResetSpeed();
             }
         }
 

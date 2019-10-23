@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using FroggerStarter.Model;
 
 namespace FroggerStarter.Controller
@@ -6,7 +7,7 @@ namespace FroggerStarter.Controller
     /// <summary>
     ///     Manages lanes and shoulders
     /// </summary>
-    public class RoadManager
+    public class RoadManager : IEnumerable<Vehicle>
     {
         #region Data members
 
@@ -130,5 +131,15 @@ namespace FroggerStarter.Controller
         }
 
         #endregion
+
+        public IEnumerator<Vehicle> GetEnumerator()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
     }
 }
