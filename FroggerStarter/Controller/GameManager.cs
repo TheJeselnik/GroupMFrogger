@@ -216,7 +216,7 @@ namespace FroggerStarter.Controller
 
         private void timerOnTick(object sender, object e)
         {
-            this.roadManager.MoveVehiclesInEachLane();
+            this.roadManager.MoveVehicles();
             this.checkEachVehicleForCollision();
         }
 

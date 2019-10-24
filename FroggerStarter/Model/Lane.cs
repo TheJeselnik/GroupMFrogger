@@ -11,8 +11,6 @@ namespace FroggerStarter.Model
     {
         #region Data members
 
-        private const double LaneLeftBoundary = 0.0;
-
         private double speed;
         private readonly double initialSpeed;
 
@@ -107,6 +105,7 @@ namespace FroggerStarter.Model
             }
         }
 
+        //TODO Refactor method, might need to adjust spacing per adding new vehicles. Especially trucks
         private void placeVehicles()
         {
             var emptyHorizontalLaneSpace = this.laneWidth - this.measureVehiclesWidth();

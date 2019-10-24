@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using FroggerStarter.Model;
 
 namespace FroggerStarter.Controller
@@ -13,8 +12,7 @@ namespace FroggerStarter.Controller
         #region Data members
 
         private const int NumberOfLanes = 5;
-        private double leftBoundary = 0;
-
+        private const double LeftBoundary = 0.0;
 
         private readonly double laneHeight;
         private readonly double backgroundHeight;
@@ -64,6 +62,7 @@ namespace FroggerStarter.Controller
 
         #region Methods
 
+        //TODO Adjust the way Lanes are defined. Settings needed.
         private void establishLanes()
         {
             this.lanes = new List<Lane>();
@@ -97,6 +96,7 @@ namespace FroggerStarter.Controller
             this.TopShoulderY = fifthLaneLocation - this.laneHeight;
         }
 
+        //TODO Helper method for above. Need to calculate locations then place all according to settings, like amount of lanes
         private void calculateLaneLocations()
         {
             var bottomShoulderLocation = this.backgroundHeight - this.bottomOffset - this.laneHeight;
@@ -107,11 +107,11 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        ///     Moves the vehicles in each lane.
+        ///     Moves the vehicles
         ///     Precondition: None
         ///     Postcondition: VehiclesInLane Speed == Speed@prev + Speed
         /// </summary>
-        public void MoveVehiclesInEachLane()
+        public void MoveVehicles()
         {
             foreach (var currVehicle in this.AllVehicles)
             {
@@ -123,7 +123,7 @@ namespace FroggerStarter.Controller
 
         private void resetVehicleIfPastLeftBoundary(GameObject vehicle)
         {
-            if (vehicle.X + vehicle.Width < this.leftBoundary)
+            if (vehicle.X + vehicle.Width < LeftBoundary)
             {
                 vehicle.X = this.backgroundWidth;
             }
@@ -133,12 +133,12 @@ namespace FroggerStarter.Controller
         {
             if (vehicle.X > this.backgroundWidth)
             {
-                vehicle.X = this.leftBoundary - vehicle.Width;
+                vehicle.X = LeftBoundary - vehicle.Width;
             }
         }
 
         /// <summary>
-        ///     Resets the speed.
+        ///     Resets the speed per each lane.
         ///     Precondition: None
         ///     Postcondition: Speed of each lane == initialSpeed
         /// </summary>
@@ -164,6 +164,7 @@ namespace FroggerStarter.Controller
 
         #endregion
 
+        //TODO incorporate IEnumerable methods with the collection of vehicles
         public IEnumerator<Vehicle> GetEnumerator()
         {
             throw new System.NotImplementedException();
