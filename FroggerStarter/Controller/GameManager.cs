@@ -29,7 +29,7 @@ namespace FroggerStarter.Controller
         public const double LaneHeight = 50;
 
         private const int BottomLaneOffset = 5;
-        private const int InitialLives = 3;
+        private const int InitialLives = 4;
         private const int InitialScore = 0;
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
