@@ -59,10 +59,10 @@ namespace FroggerStarter.Model
             this.direction = direction;
             this.laneWidth = laneWidth;
             this.laneHeight = laneHeight;
+            this.initialSpeed = speed;
             this.VehiclesInLane = new List<Vehicle>();
             this.addVehiclesToLane();
             this.placeVehicles();
-            this.initialSpeed = speed;
         }
 
         #endregion

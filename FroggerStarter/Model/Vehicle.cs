@@ -55,6 +55,7 @@ namespace FroggerStarter.Model
             this.vehicleType = vehicleType;
             this.direction = direction;
             this.initialSpeedX = initialSpeedX;
+            this.ResetSpeedX();
             this.assignVehicleSprite();
             this.rotateSprite();
         }

@@ -13,7 +13,7 @@ namespace FroggerStarter.Controller
 
         private const int NumberOfLanes = 5;
         private const double LeftBoundary = 0.0;
-        private const double SpeedIncrease = 0.005;
+        private const double SpeedIncrease = 0.00005;
 
         private readonly double laneHeight;
         private readonly double backgroundHeight;
@@ -119,6 +119,7 @@ namespace FroggerStarter.Controller
                 this.resetVehiclePastRightBoundary(currVehicle);
                 this.resetVehicleIfPastLeftBoundary(currVehicle);
                 currVehicle.Move();
+                this.increaseSpeed();
             }
         }
 
@@ -143,7 +144,7 @@ namespace FroggerStarter.Controller
         ///     Precondition: None
         ///     Postcondition: Speed of each vehicle = SpeedX@prev + SpeedIncrease
         /// </summary>
-        public void IncreaseSpeed()
+        private void increaseSpeed()
         {
             foreach (var currVehicle in this.AllVehicles)
             {
