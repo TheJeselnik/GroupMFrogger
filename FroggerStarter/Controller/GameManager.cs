@@ -217,6 +217,7 @@ namespace FroggerStarter.Controller
         private void timerOnTick(object sender, object e)
         {
             this.roadManager.MoveVehicles();
+            this.roadManager.IncreaseSpeed();
             this.checkEachVehicleForCollision();
         }
 
@@ -227,7 +228,6 @@ namespace FroggerStarter.Controller
                 if (this.collisionDetector.IsCollisionBetween(currVehicle, this.player))
                 {
                     this.playerLosesLife();
-                    this.roadManager.ResetSpeed();
                 }
             }
         }
@@ -237,6 +237,7 @@ namespace FroggerStarter.Controller
             this.playerValues.LoseALife();
             this.onPlayerLivesUpdated();
             this.resetFrogIfGameIsNotOver();
+            this.roadManager.ResetSpeed();
         }
 
         private void playerScores()

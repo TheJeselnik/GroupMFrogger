@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Windows.Foundation;
 
 namespace FroggerStarter.Model
@@ -11,15 +10,14 @@ namespace FroggerStarter.Model
     {
         #region Data members
 
-        private double speed;
-        private readonly double initialSpeed;
-
-        private readonly Vehicle.Direction direction;
         private Point location;
+
         private readonly int numberOfVehicles;
-        private readonly Vehicle.VehicleType vehicleType;
         private readonly double laneWidth;
         private readonly double laneHeight;
+        private readonly double initialSpeed;
+        private readonly Vehicle.VehicleType vehicleType;
+        private readonly Vehicle.Direction direction;
 
         #endregion
 
@@ -32,21 +30,6 @@ namespace FroggerStarter.Model
         ///     The vehicles in lane.
         /// </value>
         public IList<Vehicle> VehiclesInLane { get; }
-
-        public double Speed
-        {
-            get => this.speed;
-            set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-
-                this.speed = value;
-                this.setVehiclesSpeed();
-            }
-        }
 
         /// <summary>
         ///     Gets or sets the y location of the lane.
@@ -79,8 +62,6 @@ namespace FroggerStarter.Model
             this.VehiclesInLane = new List<Vehicle>();
             this.addVehiclesToLane();
             this.placeVehicles();
-
-            this.Speed = speed;
             this.initialSpeed = speed;
         }
 
@@ -92,16 +73,8 @@ namespace FroggerStarter.Model
         {
             for (var i = 0; i < this.numberOfVehicles; i++)
             {
-                var newVehicle = new Vehicle(this.vehicleType, this.direction);
+                var newVehicle = new Vehicle(this.vehicleType, this.direction, this.initialSpeed);
                 this.VehiclesInLane.Add(newVehicle);
-            }
-        }
-
-        private void setVehiclesSpeed()
-        {
-            foreach (var vehicle in this.VehiclesInLane)
-            {
-                vehicle.SetSpeed(this.Speed, 0);
             }
         }
 
@@ -142,24 +115,6 @@ namespace FroggerStarter.Model
             }
 
             return vehiclesWidth;
-        }
-
-        private void increaseSpeed()
-        {
-            if (this.Speed < 15)
-            {
-                this.Speed += 0.005;
-            }
-        }
-
-        /// <summary>
-        ///     Resets the speed.
-        ///     Precondition: None
-        ///     Postcondition: Speed == initialSpeed
-        /// </summary>
-        public void ResetSpeed()
-        {
-            this.Speed = this.initialSpeed;
         }
 
         #endregion

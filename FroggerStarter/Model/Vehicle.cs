@@ -36,6 +36,7 @@ namespace FroggerStarter.Model
 
         #region Data members
 
+        private readonly double initialSpeedX;
         private readonly VehicleType vehicleType;
         private readonly Direction direction;
 
@@ -47,10 +48,13 @@ namespace FroggerStarter.Model
         ///     Initializes a new instance of the <see cref="Vehicle" /> class.
         /// </summary>
         /// <param name="vehicleType">the type of vehicle</param>
-        public Vehicle(VehicleType vehicleType, Direction direction)
+        /// <param name="direction">direction the vehicle is facing</param>
+        /// <param name="initialSpeedX">initial speed of a vehicle for movement along X</param>
+        public Vehicle(VehicleType vehicleType, Direction direction, double initialSpeedX)
         {
             this.vehicleType = vehicleType;
             this.direction = direction;
+            this.initialSpeedX = initialSpeedX;
             this.assignVehicleSprite();
             this.rotateSprite();
         }
@@ -82,6 +86,16 @@ namespace FroggerStarter.Model
                     this.MoveLeft();
                     break;
             }
+        }
+
+        /// <summary>
+        /// Resets the speed x.
+        ///     Precondition: None
+        ///     Postcondition: Vehicle.X == initialSpeedX && Vehicle.Y == Y@prev
+        /// </summary>
+        public void ResetSpeedX()
+        {
+            this.SetSpeed(this.initialSpeedX, this.SpeedY);
         }
 
         private void assignVehicleSprite()
