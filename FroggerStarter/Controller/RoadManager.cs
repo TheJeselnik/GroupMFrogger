@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using FroggerStarter.Model;
 
 namespace FroggerStarter.Controller
 {
     /// <summary>
-    ///     Manages lanes and shoulders
+    ///     Manages lanes and vehicles
     /// </summary>
     public class RoadManager : IEnumerable<Vehicle>
     {
         #region Data members
 
         private const int NumberOfLanes = 5;
+        private double leftBoundary = 0;
 
 
         private readonly double laneHeight;
@@ -68,27 +70,27 @@ namespace FroggerStarter.Controller
             var bottomShoulderLocation = this.backgroundHeight - this.bottomOffset - this.laneHeight;
 
             var firstLaneLocation = bottomShoulderLocation - this.laneHeight;
-            var firstLane = new Lane(2, Vehicle.VehicleType.Car, firstLaneLocation, Lane.Direction.Left,
+            var firstLane = new Lane(2, Vehicle.VehicleType.Car, firstLaneLocation, Vehicle.Direction.Left,
                 this.backgroundWidth, this.laneHeight, 1);
             this.lanes.Add(firstLane);
 
             var secondLaneLocation = firstLaneLocation - this.laneHeight;
-            var secondLane = new Lane(3, Vehicle.VehicleType.SemiTruck, secondLaneLocation, Lane.Direction.Right,
+            var secondLane = new Lane(3, Vehicle.VehicleType.SemiTruck, secondLaneLocation, Vehicle.Direction.Right,
                 this.backgroundWidth, this.laneHeight, 2);
             this.lanes.Add(secondLane);
 
             var thirdLaneLocation = secondLaneLocation - this.laneHeight;
-            var thirdLane = new Lane(3, Vehicle.VehicleType.Car, thirdLaneLocation, Lane.Direction.Left,
+            var thirdLane = new Lane(3, Vehicle.VehicleType.Car, thirdLaneLocation, Vehicle.Direction.Left,
                 this.backgroundWidth, this.laneHeight, 3);
             this.lanes.Add(thirdLane);
 
             var fourthLaneLocation = thirdLaneLocation - this.laneHeight;
-            var fourthLane = new Lane(2, Vehicle.VehicleType.SemiTruck, fourthLaneLocation, Lane.Direction.Left,
+            var fourthLane = new Lane(2, Vehicle.VehicleType.SemiTruck, fourthLaneLocation, Vehicle.Direction.Left,
                 this.backgroundWidth, this.laneHeight, 4);
             this.lanes.Add(fourthLane);
 
             var fifthLaneLocation = fourthLaneLocation - this.laneHeight;
-            var fifthLane = new Lane(3, Vehicle.VehicleType.Car, fifthLaneLocation, Lane.Direction.Right,
+            var fifthLane = new Lane(3, Vehicle.VehicleType.Car, fifthLaneLocation, Vehicle.Direction.Right,
                 this.backgroundWidth, this.laneHeight, 5);
             this.lanes.Add(fifthLane);
 
@@ -111,9 +113,27 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MoveVehiclesInEachLane()
         {
-            foreach (var currLane in this.lanes)
+            foreach (var currVehicle in this.AllVehicles)
             {
-                currLane.MoveVehicles();
+                this.resetVehiclePastRightBoundary(currVehicle);
+                this.resetVehicleIfPastLeftBoundary(currVehicle);
+                currVehicle.Move();
+            }
+        }
+
+        private void resetVehicleIfPastLeftBoundary(GameObject vehicle)
+        {
+            if (vehicle.X + vehicle.Width < this.leftBoundary)
+            {
+                vehicle.X = this.backgroundWidth;
+            }
+        }
+
+        private void resetVehiclePastRightBoundary(GameObject vehicle)
+        {
+            if (vehicle.X > this.backgroundWidth)
+            {
+                vehicle.X = this.leftBoundary - vehicle.Width;
             }
         }
 
@@ -135,9 +155,9 @@ namespace FroggerStarter.Controller
             this.AllVehicles = new List<Vehicle>();
             foreach (var currLane in this.lanes)
             {
-                foreach (var vehicle in currLane.VehiclesInLane)
+                foreach (var currVehicle in currLane.VehiclesInLane)
                 {
-                    this.AllVehicles.Add(vehicle);
+                    this.AllVehicles.Add(currVehicle);
                 }
             }
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Windows.Foundation;
-using Windows.UI.Xaml.Media;
 
 namespace FroggerStarter.Model
 {
@@ -10,21 +9,6 @@ namespace FroggerStarter.Model
     /// </summary>
     public class Lane
     {
-        #region Types and Delegates
-
-        /// <summary>
-        ///     Matches the directions of vehicles in a lane
-        /// </summary>
-        public enum Direction
-        {
-            Up,
-            Down,
-            Left,
-            Right
-        }
-
-        #endregion
-
         #region Data members
 
         private const double LaneLeftBoundary = 0.0;
@@ -32,10 +16,10 @@ namespace FroggerStarter.Model
         private double speed;
         private readonly double initialSpeed;
 
+        private readonly Vehicle.Direction direction;
         private Point location;
         private readonly int numberOfVehicles;
         private readonly Vehicle.VehicleType vehicleType;
-        private readonly Direction direction;
         private readonly double laneWidth;
         private readonly double laneHeight;
 
@@ -85,7 +69,7 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Initializes a new instance of the <see cref="Lane" /> class.
         /// </summary>
-        public Lane(int numberOfVehicles, Vehicle.VehicleType vehicleType, double yLocation, Direction direction,
+        public Lane(int numberOfVehicles, Vehicle.VehicleType vehicleType, double yLocation, Vehicle.Direction direction,
             double laneWidth, double laneHeight, double speed)
         {
             this.numberOfVehicles = numberOfVehicles;
@@ -110,21 +94,9 @@ namespace FroggerStarter.Model
         {
             for (var i = 0; i < this.numberOfVehicles; i++)
             {
-                var newVehicle = new Vehicle(this.vehicleType);
+                var newVehicle = new Vehicle(this.vehicleType, this.direction);
                 this.VehiclesInLane.Add(newVehicle);
-                this.rotateVehiclesIfMovingRight(newVehicle);
             }
-        }
-
-        private void rotateVehiclesIfMovingRight(GameObject newVehicle)
-        {
-            if (this.direction != Direction.Right)
-            {
-                return;
-            }
-
-            newVehicle.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-            newVehicle.Sprite.RenderTransform = new ScaleTransform {ScaleX = -1};
         }
 
         private void setVehiclesSpeed()
@@ -171,46 +143,6 @@ namespace FroggerStarter.Model
             }
 
             return vehiclesWidth;
-        }
-
-        /// <summary>
-        ///     Moves the vehicles.
-        ///     Precondition: None
-        ///     Postcondition: X == X@prev + Speed
-        /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public void MoveVehicles()
-        {
-            foreach (var currVehicle in this.VehiclesInLane)
-            {
-                switch (this.direction)
-                {
-                    case Direction.Right:
-                        if (currVehicle.X > this.laneWidth)
-                        {
-                            currVehicle.X = LaneLeftBoundary - currVehicle.Width;
-                        }
-
-                        currVehicle.MoveRight();
-                        break;
-                    case Direction.Left:
-                        if (currVehicle.X + currVehicle.Width < LaneLeftBoundary)
-                        {
-                            currVehicle.X = this.laneWidth;
-                        }
-
-                        currVehicle.MoveLeft();
-                        break;
-                    case Direction.Up:
-                        break;
-                    case Direction.Down:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
-
-            this.increaseSpeed();
         }
 
         private void increaseSpeed()
