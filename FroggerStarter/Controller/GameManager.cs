@@ -40,6 +40,7 @@ namespace FroggerStarter.Controller
         private RoadManager roadManager;
         private CollisionDetector collisionDetector;
         private PlayerMovementManager playerMovementManager;
+        private AnimationManager animationManager;
 
         #endregion
 
@@ -144,6 +145,7 @@ namespace FroggerStarter.Controller
             this.roadManager =
                 new RoadManager(this.backgroundHeight, this.backgroundWidth, LaneHeight, BottomLaneOffset);
             this.collisionDetector = new CollisionDetector();
+            this.animationManager = new AnimationManager();
             this.createAndPlaceVehicles();
             this.playerMovementManager = new PlayerMovementManager(this.player,
                 this.backgroundHeight, this.backgroundWidth, this.TopShoulderY, BottomLaneOffset);
@@ -233,6 +235,8 @@ namespace FroggerStarter.Controller
 
         private void playerLosesLife()
         {
+            // TODO Animation start, probably turn off global timer
+
             this.playerValues.LoseALife();
             this.onPlayerLivesUpdated();
             this.resetFrogIfGameIsNotOver();

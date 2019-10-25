@@ -138,7 +138,7 @@
         <Rectangle Width="5" Height="1" Fill="{StaticResource PrimaryBoneShade}" Canvas.Top="18" Canvas.Left="32"/>
         <Rectangle Width="3" Height="1" Fill="{StaticResource PrimaryBoneShade}" Canvas.Top="19" Canvas.Left="11"/>
         <Rectangle Width="3" Height="1" Fill="{StaticResource PrimaryBoneShade}" Canvas.Top="19" Canvas.Left="36"/>
-        <Rectangle Width="8" Height="1" Fill="{StaticResource PrimaryBoneColor}" Canvas.Top="6" Canvas.Left="21"/>
+        <Rectangle Width="12" Height="1" Fill="{StaticResource PrimaryBoneColor}" Canvas.Top="6" Canvas.Left="19"/>
         <Rectangle Width="12" Height="1" Fill="{StaticResource PrimaryBoneShade}" Canvas.Top="27" Canvas.Left="19"/>
         <Rectangle Width="3" Height="7" Fill="{StaticResource TongueColor}" Canvas.Top="18" Canvas.Left="25"/>
         <Rectangle Width="3" Height="7" Fill="{StaticResource TongueColor}" Canvas.Top="24" Canvas.Left="26"/>
@@ -158,6 +158,9 @@
         <Rectangle Width="3" Height="1" Fill="{StaticResource PrimaryBoneShade}" Canvas.Top="24" Canvas.Left="13"/>
         <Rectangle Width="5" Height="1" Fill="{StaticResource PrimaryBoneShade}" Canvas.Top="21" Canvas.Left="8"/>
         <Rectangle Width="2" Height="1" Fill="{StaticResource PrimaryBoneShade}" Canvas.Top="17" Canvas.Left="6"/>
+        <Rectangle Width="2" Height="2" Fill="{StaticResource PrimaryBoneColor}" Canvas.Top="7" Canvas.Left="8"/>
+        <Rectangle Width="2" Height="2" Fill="{StaticResource PrimaryBoneColor}" Canvas.Top="7" Canvas.Left="40"/>
+        <Rectangle Width="6" Height="1" Fill="{StaticResource PrimaryBoneColor}" Canvas.Top="5" Canvas.Left="22"/>
     </Canvas>
 
 </local:BaseSprite>
