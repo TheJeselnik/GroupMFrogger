@@ -270,6 +270,7 @@ namespace FroggerStarter.Controller
         {
             this.playerValues.IncreaseScore();
             this.onPlayerScoreUpdated();
+            this.playerMovementManager.CanMove = false;
             this.resetFrogIfGameIsNotOver();
         }
 
