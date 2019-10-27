@@ -82,9 +82,6 @@ namespace FroggerStarter.Controller
         private void endFrogAnimation()
         {
             this.FrogDying = false;
-            this.player.Sprite.Visibility = Visibility.Collapsed;
-            this.player.SetSprite(this.player.FrogSprite);
-            this.player.Sprite.Visibility = Visibility.Visible;
             this.timer.Stop();
         }
 

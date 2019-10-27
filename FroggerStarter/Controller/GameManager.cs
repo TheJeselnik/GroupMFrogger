@@ -171,8 +171,8 @@ namespace FroggerStarter.Controller
         {
             foreach (var currDeathSprite in this.player.DeathSprites)
             {
-                this.gameCanvas.Children.Add(currDeathSprite);
                 currDeathSprite.Visibility = Visibility.Collapsed;
+                this.gameCanvas.Children.Add(currDeathSprite);
             }
         }
 
@@ -282,9 +282,17 @@ namespace FroggerStarter.Controller
             else
             {
                 this.playerValues.ReviveFrog();
+                this.resetPlayerSpriteToFrog();
                 this.setPlayerToCenterOfBottomLane();
                 this.playerMovementManager.CanMove = true;
             }
+        }
+
+        private void resetPlayerSpriteToFrog()
+        {
+            this.player.Sprite.Visibility = Visibility.Collapsed;
+            this.player.SetSprite(this.player.FrogSprite);
+            this.player.Sprite.Visibility = Visibility.Visible;
         }
 
         private void gameOver()
