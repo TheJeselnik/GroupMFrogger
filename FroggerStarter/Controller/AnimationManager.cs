@@ -24,7 +24,7 @@ namespace FroggerStarter.Controller
 
         public void AnimateFrogDeath(Frog player)
         {
-
+            
         }
 
         private void setupGameTimer()

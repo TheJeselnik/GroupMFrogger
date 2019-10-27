@@ -34,6 +34,14 @@
         /// </value>
         public bool GameOver { get; private set; }
 
+        /// <summary>
+        /// Gets a value indicating whether [frog dying].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [frog dying]; otherwise, <c>false</c>.
+        /// </value>
+        public bool FrogDying { get; set; }
+
         #endregion
 
         #region Constructors

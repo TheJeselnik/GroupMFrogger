@@ -71,22 +71,22 @@ namespace FroggerStarter.Controller
 
             var firstLaneLocation = bottomShoulderLocation - this.laneHeight;
             var firstLane = new Lane(2, Vehicle.VehicleType.Car, firstLaneLocation, Vehicle.Direction.Left,
-                this.backgroundWidth, this.laneHeight, 1);
+                this.backgroundWidth, this.laneHeight, 3);
             this.lanes.Add(firstLane);
 
             var secondLaneLocation = firstLaneLocation - this.laneHeight;
             var secondLane = new Lane(3, Vehicle.VehicleType.SemiTruck, secondLaneLocation, Vehicle.Direction.Right,
-                this.backgroundWidth, this.laneHeight, 2);
+                this.backgroundWidth, this.laneHeight, 3.5);
             this.lanes.Add(secondLane);
 
             var thirdLaneLocation = secondLaneLocation - this.laneHeight;
             var thirdLane = new Lane(3, Vehicle.VehicleType.Car, thirdLaneLocation, Vehicle.Direction.Left,
-                this.backgroundWidth, this.laneHeight, 3);
+                this.backgroundWidth, this.laneHeight, 4);
             this.lanes.Add(thirdLane);
 
             var fourthLaneLocation = thirdLaneLocation - this.laneHeight;
             var fourthLane = new Lane(2, Vehicle.VehicleType.SemiTruck, fourthLaneLocation, Vehicle.Direction.Left,
-                this.backgroundWidth, this.laneHeight, 4);
+                this.backgroundWidth, this.laneHeight, 4.5);
             this.lanes.Add(fourthLane);
 
             var fifthLaneLocation = fourthLaneLocation - this.laneHeight;
@@ -119,7 +119,6 @@ namespace FroggerStarter.Controller
                 this.resetVehiclePastRightBoundary(currVehicle);
                 this.resetVehicleIfPastLeftBoundary(currVehicle);
                 currVehicle.Move();
-                this.increaseSpeed();
             }
         }
 
