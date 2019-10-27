@@ -1,25 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using FroggerStarter.Model;
-using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Controller
 {
     /// <summary>
-    /// Handles animations in the game.
+    ///     Handles animations in the game.
     /// </summary>
     public class AnimationManager
     {
-        private Frog player;
-        private int frogDeathTicks;
+        #region Data members
 
+        private int frogDeathTicks;
+        private Frog player;
         private DispatcherTimer timer;
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets a value indicating whether [frog dying].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [frog dying]; otherwise, <c>false</c>.
+        /// </value>
         public bool FrogDying { get; private set; }
+
+        #endregion
+
+        #region Methods
 
         public void AnimateFrogDeath(Frog frog)
         {
@@ -51,17 +61,22 @@ namespace FroggerStarter.Controller
             if (this.frogDeathTicks == this.player.DeathSprites.Count)
             {
                 this.endFrogAnimation();
-                return;
             }
+            else
+            {
+                var oldX = this.player.X;
+                var oldY = this.player.Y;
 
-            var oldX = this.player.X;
-            var oldY = this.player.Y;
-            this.player.Sprite.Visibility = Visibility.Collapsed;
-            this.player.SetSprite(this.player.DeathSprites[this.frogDeathTicks]);
-            this.player.Sprite.Visibility = Visibility.Visible;
-            this.player.X = oldX;
-            this.player.Y = oldY;
-            this.frogDeathTicks++;
+                this.player.Sprite.Visibility = Visibility.Collapsed;
+
+                this.player.SetSprite(this.player.DeathSprites[this.frogDeathTicks]);
+                this.player.Sprite.Visibility = Visibility.Visible;
+
+                this.player.X = oldX;
+                this.player.Y = oldY;
+
+                this.frogDeathTicks++;
+            }
         }
 
         private void endFrogAnimation()
@@ -72,5 +87,7 @@ namespace FroggerStarter.Controller
             this.player.Sprite.Visibility = Visibility.Visible;
             this.timer.Stop();
         }
+
+        #endregion
     }
 }
