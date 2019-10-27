@@ -1,4 +1,5 @@
-﻿using FroggerStarter.View.Sprites;
+﻿using System.Collections.Generic;
+using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model
 {
@@ -13,6 +14,13 @@ namespace FroggerStarter.Model
         private const int SpeedXDirection = 50;
         private const int SpeedYDirection = 50;
 
+        public BaseSprite FrogSprite = new FrogSprite();
+
+        /// <summary>
+        ///     The death sprites
+        /// </summary>
+        public IList<BaseSprite> DeathSprites { get; private set; }
+
         #endregion
 
         #region Constructors
@@ -22,8 +30,32 @@ namespace FroggerStarter.Model
         /// </summary>
         public Frog()
         {
-            Sprite = new FrogSprite();
+            Sprite = this.FrogSprite;
             SetSpeed(SpeedXDirection, SpeedYDirection);
+            this.setDeathSprites();
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Sets the sprite of the player frog.
+        ///     Precondition: None
+        ///     Postcondition: player.Sprite = sprite
+        /// </summary>
+        /// <param name="sprite">The sprite.</param>
+        public void SetSprite(BaseSprite sprite)
+        {
+            Sprite = sprite;
+        }
+
+        private void setDeathSprites()
+        {
+            IList<BaseSprite> deathSprites = new List<BaseSprite>() {
+                new FrogFirstDeathSprite(), new FrogSecondDeathSprite(), new FrogThirdDeathSprite(), new FrogCrossbonesSprite()
+            };
+            this.DeathSprites = deathSprites;
         }
 
         #endregion

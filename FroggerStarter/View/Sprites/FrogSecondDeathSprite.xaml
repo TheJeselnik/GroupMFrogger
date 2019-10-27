@@ -1,5 +1,5 @@
 ﻿<local:BaseSprite
-    x:Class="FroggerStarter.View.Sprites.FrogDeathSprite"
+    x:Class="FroggerStarter.View.Sprites.FrogSecondDeathSprite"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:FroggerStarter.View.Sprites"
@@ -10,13 +10,8 @@
     Width="50">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryFrogColor" Color="Lime"/>
-        <SolidColorBrush x:Key="SecondaryFrogColor" Color="Purple"/>
-
-        <SolidColorBrush x:Key="PrimaryDamagedColor" Color="Yellow"/>
-        <SolidColorBrush x:Key="SecondaryDamagedColor" Color="Blue"/>
-        <SolidColorBrush x:Key="PrimaryFadingColor" Color="DarkGray"/>
-        <SolidColorBrush x:Key="SecondaryFadingColor" Color="DarkRed"/>
+        <SolidColorBrush x:Key="PrimaryFrogColor" Color="CadetBlue"/>
+        <SolidColorBrush x:Key="SecondaryFrogColor" Color="DarkSlateGray"/>
     </UserControl.Resources>
 
     <Canvas Width="50" Height="50" Background="Transparent">

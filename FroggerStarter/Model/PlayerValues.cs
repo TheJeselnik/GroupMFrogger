@@ -40,7 +40,7 @@
         /// <value>
         ///   <c>true</c> if [frog dying]; otherwise, <c>false</c>.
         /// </value>
-        public bool FrogDying { get; set; }
+        public bool FrogDying { get; private set; }
 
         #endregion
 
@@ -69,6 +69,7 @@
         public void LoseALife()
         {
             this.Lives--;
+            this.FrogDying = true;
             if (this.Lives <= 0)
             {
                 this.GameOver = true;
@@ -87,6 +88,16 @@
             {
                 this.GameOver = true;
             }
+        }
+
+        /// <summary>
+        /// Revives the frog.
+        ///     Precondition: FrogDying = true
+        ///     Postcondition: FrogDying = false;
+        /// </summary>
+        public void ReviveFrog()
+        {
+            this.FrogDying = false;
         }
 
         #endregion

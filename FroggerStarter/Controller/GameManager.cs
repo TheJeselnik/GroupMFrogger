@@ -141,6 +141,7 @@ namespace FroggerStarter.Controller
         {
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
             this.createAndPlacePlayer();
+            this.createFrogAnimationSprites();
             this.playerValues = new PlayerValues(InitialLives, InitialScore);
             this.roadManager =
                 new RoadManager(this.backgroundHeight, this.backgroundWidth, LaneHeight, BottomLaneOffset);
@@ -150,6 +151,7 @@ namespace FroggerStarter.Controller
             this.playerMovementManager = new PlayerMovementManager(this.player,
                 this.backgroundHeight, this.backgroundWidth, this.TopShoulderY, BottomLaneOffset);
         }
+
 
         private void createAndPlaceVehicles()
         {
@@ -164,6 +166,14 @@ namespace FroggerStarter.Controller
             this.player = new Frog();
             this.gameCanvas.Children.Add(this.player.Sprite);
             this.setPlayerToCenterOfBottomLane();
+        }
+        private void createFrogAnimationSprites()
+        {
+            foreach (var currDeathSprite in this.player.DeathSprites)
+            {
+                this.gameCanvas.Children.Add(currDeathSprite);
+                currDeathSprite.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void setPlayerToCenterOfBottomLane()
@@ -220,13 +230,23 @@ namespace FroggerStarter.Controller
         {
             this.roadManager.MoveVehicles();
             this.checkEachVehicleForCollision();
+
+            this.checkIfFrogIsDoneDying();
+        }
+
+        private void checkIfFrogIsDoneDying()
+        {
+            if (this.playerValues.FrogDying && !this.animationManager.FrogDying)
+            {
+                this.resetFrogIfGameIsNotOver();
+            }
         }
 
         private void checkEachVehicleForCollision()
         {
             foreach (var currVehicle in this.roadManager.AllVehicles)
             {
-                if (this.collisionDetector.IsCollisionBetween(currVehicle, this.player))
+                if (this.collisionDetector.IsCollisionBetween(currVehicle, this.player) && !this.playerValues.FrogDying)
                 {
                     this.playerLosesLife();
                 }
@@ -235,12 +255,15 @@ namespace FroggerStarter.Controller
 
         private void playerLosesLife()
         {
-            // TODO Animation start, probably turn off global timer
-
+            this.playerMovementManager.CanMove = false;
             this.playerValues.LoseALife();
+            this.animateFrogDeath();
             this.onPlayerLivesUpdated();
-            this.resetFrogIfGameIsNotOver();
-            this.roadManager.ResetSpeed();
+        }
+
+        private void animateFrogDeath()
+        {
+            this.animationManager.AnimateFrogDeath(this.player);
         }
 
         private void playerScores()
@@ -258,7 +281,9 @@ namespace FroggerStarter.Controller
             }
             else
             {
+                this.playerValues.ReviveFrog();
                 this.setPlayerToCenterOfBottomLane();
+                this.playerMovementManager.CanMove = true;
             }
         }
 
@@ -266,7 +291,6 @@ namespace FroggerStarter.Controller
         {
             this.timer.Stop();
             this.onGameOver();
-            this.playerMovementManager.CanMove = false;
         }
 
         private void onPlayerScoreUpdated()
