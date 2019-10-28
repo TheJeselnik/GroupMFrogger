@@ -148,8 +148,11 @@
     <Compile Include="View\Sprites\FrogFirstDeathSprite.xaml.cs">
       <DependentUpon>FrogFirstDeathSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\FrogHomeLandingSpotSprite.xaml.cs">
-      <DependentUpon>FrogHomeLandingSpotSprite.xaml</DependentUpon>
+    <Compile Include="View\Sprites\FrogHomeSprite.xaml.cs">
+      <DependentUpon>FrogHomeSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\FrogLandedSprite.xaml.cs">
+      <DependentUpon>FrogLandedSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\FrogSecondDeathSprite.xaml.cs">
       <DependentUpon>FrogSecondDeathSprite.xaml</DependentUpon>
@@ -205,7 +208,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\FrogHomeLandingSpotSprite.xaml">
+    <Page Include="View\Sprites\FrogHomeSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\FrogLandedSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

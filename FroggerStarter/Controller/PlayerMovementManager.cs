@@ -91,7 +91,7 @@ namespace FroggerStarter.Controller
 
         private bool playerAtTopBoundary()
         {
-            return this.player.Y <= 100;
+            return this.player.Y <= 105;
         }
 
         /// <summary>

@@ -6,9 +6,9 @@ namespace FroggerStarter.View.Sprites
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class FrogHomeLandingSpotSprite
+    public sealed partial class FrogHomeSprite
     {
-        public FrogHomeLandingSpotSprite()
+        public FrogHomeSprite()
         {
             this.InitializeComponent();
         }

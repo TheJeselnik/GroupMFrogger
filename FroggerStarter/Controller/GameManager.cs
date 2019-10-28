@@ -2,6 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Model;
+using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Controller
 {
@@ -231,7 +232,8 @@ namespace FroggerStarter.Controller
         private void timerOnTick(object sender, object e)
         {
             this.roadManager.MoveVehicles();
-            this.checkEachVehicleForCollision();
+            this.checkPlayerCollisionWithVehicles();
+            this.checkPlayerCollisionWithFrogHomes();
 
             this.checkIfFrogIsDoneDying();
         }
@@ -244,7 +246,7 @@ namespace FroggerStarter.Controller
             }
         }
 
-        private void checkEachVehicleForCollision()
+        private void checkPlayerCollisionWithVehicles()
         {
             foreach (var currVehicle in this.roadManager.AllVehicles)
             {
@@ -253,6 +255,24 @@ namespace FroggerStarter.Controller
                     this.playerLosesLife();
                 }
             }
+        }
+
+        private void checkPlayerCollisionWithFrogHomes()
+        {
+            foreach (var currFrogHome in this.topShoulder.FrogHomes)
+            {
+                if (this.collisionDetector.IsCollisionBetween(currFrogHome, this.player))
+                {
+                    this.addFrogToFrogHome(currFrogHome);
+                }
+            }
+        }
+
+        private void addFrogToFrogHome(FrogHome frogHome)
+        {
+            frogHome.AddFrog();
+            this.gameCanvas.Children.Add(frogHome.Sprite);
+            this.playerScores();
         }
 
         private void playerLosesLife()

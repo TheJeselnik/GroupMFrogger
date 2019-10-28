@@ -21,7 +21,7 @@ namespace FroggerStarter.Model
         /// </summary>
         public FrogHome()
         {
-            Sprite = new FrogHomeLandingSpotSprite();
+            Sprite = new FrogHomeSprite();
         }
 
         /// <summary>
@@ -30,6 +30,7 @@ namespace FroggerStarter.Model
         public void AddFrog()
         {
             this.HasFrog = true;
+            Sprite = new FrogLandedSprite();
         }
     }
 }
