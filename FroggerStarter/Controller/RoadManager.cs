@@ -9,6 +9,7 @@ namespace FroggerStarter.Controller
     /// </summary>
     public class RoadManager : IEnumerable<Vehicle>
     {
+
         #region Data members
 
         private int ticks;
@@ -25,6 +26,14 @@ namespace FroggerStarter.Controller
         ///     All vehicles.
         /// </value>
         public IList<Vehicle> AllVehicles { get; private set; }
+
+        /// <summary>
+        ///     Gets the new vehicles.
+        /// </summary>
+        /// <value>
+        ///     New vehicles.
+        /// </value>
+        public IList<Vehicle> NewVehiclesAdded { get; private set; }
 
         /// <summary>
         ///     The y coordinate of the top shoulder
@@ -55,14 +64,21 @@ namespace FroggerStarter.Controller
 
         #region Methods
 
-        private static void placeLanes()
+        private void placeLanes()
         {
             var currentY = GameSettings.RoadHeight - GameSettings.LaneHeight * 2 + GameSettings.RoadOffsetHeight;
             foreach (var currVehicleLane in GameSettings.VehicleLanes)
             {
                 currVehicleLane.Y = currentY;
                 currentY -= GameSettings.LaneHeight;
+                currVehicleLane.VehicleAdded += this.addNewVehicle;
             }
+        }
+
+        private void addNewVehicle(Vehicle vehicle)
+        {
+            this.NewVehiclesAdded = new List<Vehicle> {vehicle};
+            this.AllVehicles.Add(vehicle);
         }
 
         /// <summary>
@@ -95,7 +111,7 @@ namespace FroggerStarter.Controller
             this.ticks++;
         }
 
-        public void addVehicleToLanes()
+        private void addVehicleToLanes()
         {
             foreach (var currVehicleLane in GameSettings.VehicleLanes)
             {
