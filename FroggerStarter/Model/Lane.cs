@@ -13,7 +13,7 @@ namespace FroggerStarter.Model
 
         private Point location;
 
-        private readonly int maxVehicles;
+        public readonly int MaxVehicles;
         private readonly double initialSpeed;
         private readonly Vehicle.Direction direction;
         private readonly Vehicle.VehicleType vehicleType;
@@ -54,12 +54,13 @@ namespace FroggerStarter.Model
             this.vehicleType = vehicleType;
             this.direction = direction;
             this.initialSpeed = speed;
-            this.maxVehicles = maxVehicles;
+            this.MaxVehicles = maxVehicles;
             this.VehiclesInLane = new List<Vehicle>();
         }
 
         #endregion
 
+        // TODO queue up a lane to add a vehicle, to remove vehicles??
         public void PlaceVehicle()
         {
             var newVehicle = new Vehicle(this.vehicleType, this.direction, this.initialSpeed);

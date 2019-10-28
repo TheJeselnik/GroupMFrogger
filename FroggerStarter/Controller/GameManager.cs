@@ -144,16 +144,25 @@ namespace FroggerStarter.Controller
             this.collisionDetector = new CollisionDetector();
             this.animationManager = new AnimationManager();
             this.topShoulder = new Shoulder(this.player.Width);
-            this.createAndPlaceVehicles();
+            this.addVehiclesToCanvas();
+            this.addFrogHomesToCanvas();
             this.playerMovementManager = new PlayerMovementManager(this.player);
         }
 
 
-        private void createAndPlaceVehicles()
+        private void addVehiclesToCanvas()
         {
             foreach (var vehicle in this.roadManager.AllVehicles)
             {
                 this.gameCanvas.Children.Add(vehicle.Sprite);
+            }
+        }
+
+        private void addFrogHomesToCanvas()
+        {
+            foreach (var frogHome in this.topShoulder.FrogHomes)
+            {
+                this.gameCanvas.Children.Add(frogHome.Sprite);
             }
         }
 
@@ -175,7 +184,7 @@ namespace FroggerStarter.Controller
         private void setPlayerToCenterOfBottomLane()
         {
             this.player.X = this.backgroundWidth / 2 - this.player.Width / 2;
-            this.player.Y = this.backgroundHeight - this.player.Height - GameSettings.BottomOffsetHeight;
+            this.player.Y = this.backgroundHeight - this.player.Height - GameSettings.RoadOffsetHeight;
         }
 
         /// <summary>

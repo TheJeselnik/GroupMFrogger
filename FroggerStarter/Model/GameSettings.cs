@@ -10,20 +10,12 @@ namespace FroggerStarter.Model
         #region Properties
 
         /// <summary>
-        /// Gets the number of frog homes.
+        ///     Gets the road offset y.
         /// </summary>
         /// <value>
-        /// The number of frog homes.
+        ///     The road offset y.
         /// </value>
-        public static int NumberOfFrogHomes { get; } = 5;
-
-        /// <summary>
-        ///     Gets the bottom lane offset y.
-        /// </summary>
-        /// <value>
-        ///     The bottom lane offset y.
-        /// </value>
-        public static double BottomOffsetHeight { get; } = 5;
+        public static double RoadOffsetHeight { get; } = 5;
 
         /// <summary>
         ///     Gets the height of the lane.
@@ -50,29 +42,12 @@ namespace FroggerStarter.Model
         public static double RoadHeight { get; set; }
 
         /// <summary>
-        /// Gets the left edge of road.
+        ///     Gets the left edge of road.
         /// </summary>
         /// <value>
-        /// The left edge of road.
+        ///     The left edge of road.
         /// </value>
         public static double LeftEdgeOfRoad { get; } = 0.0;
-
-        /// <summary>
-        ///     Gets the bottom shoulder.
-        /// </summary>
-        /// <value>
-        ///     The bottom shoulder.
-        /// </value>
-        public static Lane BottomShoulder { get; private set; }
-
-        // TODO set as a shoulder object?
-        /// <summary>
-        ///     Gets the top shoulder.
-        /// </summary>
-        /// <value>
-        ///     The top shoulder.
-        /// </value>
-        public static Lane TopShoulder { get; private set; }
 
         /// <summary>
         ///     Gets or sets the first lane.
@@ -80,7 +55,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The first lane.
         /// </value>
-        public static Lane FirstLane { get; set; } = 
+        public static Lane FirstLane { get; } =
             new Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Left, 3.0, 3);
 
         /// <summary>
@@ -89,7 +64,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The second lane.
         /// </value>
-        public static Lane SecondLane { get; set; } =
+        public static Lane SecondLane { get; } =
             new Lane(Vehicle.VehicleType.SemiTruck, Vehicle.Direction.Right, 3.5, 2);
 
         /// <summary>
@@ -98,7 +73,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The third lane.
         /// </value>
-        public static Lane ThirdLane { get; set; } = 
+        public static Lane ThirdLane { get; } =
             new Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Left, 4.0, 4);
 
         /// <summary>
@@ -107,7 +82,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The fourth lane.
         /// </value>
-        public static Lane FourthLane { get; set; } =
+        public static Lane FourthLane { get; } =
             new Lane(Vehicle.VehicleType.SemiTruck, Vehicle.Direction.Left, 4.5, 3);
 
         /// <summary>
@@ -116,7 +91,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The fifth lane.
         /// </value>
-        public static Lane FifthLane { get; set; } = new 
+        public static Lane FifthLane { get; } = new
             Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Right, 5.0, 5);
 
         /// <summary>
@@ -126,22 +101,7 @@ namespace FroggerStarter.Model
         ///     The vehicle lanes.
         /// </value>
         public static IList<Lane> VehicleLanes { get; } = new List<Lane>
-            {FirstLane, SecondLane, ThirdLane, FourthLane, FifthLane};
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        ///     Initializes the <see cref="GameSettings" /> class.
-        /// </summary>
-        static GameSettings()
-        {
-        }
-
-        #endregion
-
-        #region Methods
+            { FirstLane, SecondLane, ThirdLane, FourthLane, FifthLane };
 
         #endregion
     }

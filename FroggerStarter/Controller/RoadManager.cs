@@ -43,13 +43,19 @@ namespace FroggerStarter.Controller
             this.getAllVehicles();
         }
 
+        public Vehicle this[int index]
+        {
+            get => this.AllVehicles[index];
+            set => this.AllVehicles.Insert(index, value);
+        }
+
         #endregion
 
         #region Methods
 
         private static void placeLanes()
         {
-            var currentY = GameSettings.RoadHeight - GameSettings.LaneHeight * 2 + GameSettings.BottomOffsetHeight;
+            var currentY = GameSettings.RoadHeight - GameSettings.LaneHeight * 2 + GameSettings.RoadOffsetHeight;
             foreach (var currVehicleLane in GameSettings.VehicleLanes)
             {
                 currVehicleLane.Y = currentY;
@@ -130,17 +136,16 @@ namespace FroggerStarter.Controller
             }
         }
 
-        #endregion
-
-        //TODO incorporate IEnumerable methods with the collection of vehicles
         public IEnumerator<Vehicle> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return this.AllVehicles.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
+
+        #endregion
     }
 }
