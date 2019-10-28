@@ -1,6 +1,4 @@
-﻿
-
-using FroggerStarter.View.Sprites;
+﻿using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model
 {
@@ -11,11 +9,27 @@ namespace FroggerStarter.Model
     {
 
         /// <summary>
+        /// Gets a value indicating whether this instance has frog.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has frog; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasFrog { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="FrogHome"/> class.
         /// </summary>
         public FrogHome()
         {
             Sprite = new FrogHomeLandingSpotSprite();
+        }
+
+        /// <summary>
+        /// Adds the frog to the home.
+        /// </summary>
+        public void AddFrog()
+        {
+            this.HasFrog = true;
         }
     }
 }
