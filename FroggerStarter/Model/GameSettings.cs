@@ -1,9 +1,9 @@
 ﻿namespace FroggerStarter.Model
 {
     /// <summary>
-    ///     Manages values of the player, like lives, score, and if the game is over.
+    ///     Manages values and settings of the game, like lives, score, road settings.
     /// </summary>
-    public class PlayerValues
+    public class GameSettings
     {
 
         private const int ScoreLimit = 3;
@@ -47,11 +47,11 @@
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PlayerValues" /> class.
+        ///     Initializes a new instance of the <see cref="GameSettings" /> class.
         /// </summary>
         /// <param name="lives">The lives.</param>
         /// <param name="score">The score.</param>
-        public PlayerValues(int lives, int score)
+        public GameSettings(int lives, int score)
         {
             this.Lives = lives;
             this.Score = score;
