@@ -132,7 +132,7 @@ namespace FroggerStarter.Controller
 
         private bool playerAtBottomBoundary()
         {
-            return this.player.Y + this.player.Height >= GameSettings.RoadWidth - GameSettings.RoadOffsetHeight;
+            return this.player.Y + this.player.Height >= GameSettings.RoadHeight - GameSettings.RoadOffsetHeight;
         }
 
         #endregion
