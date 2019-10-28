@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Model;
@@ -62,6 +63,14 @@ namespace FroggerStarter.Controller
         ///     The player score.
         /// </value>
         public int Score => this.playerValues.Score;
+
+        /// <summary>
+        /// Gets the frog homes.
+        /// </summary>
+        /// <value>
+        /// The frog homes.
+        /// </value>
+        public IList<FrogHome> FrogHomes => this.topShoulder.FrogHomes;
 
         #endregion
 
@@ -144,7 +153,7 @@ namespace FroggerStarter.Controller
             this.topShoulder = new Shoulder(this.player.Width);
             this.addVehiclesToCanvas();
             this.addFrogHomesToCanvas();
-            this.playerMovementManager = new PlayerMovementManager(this.player);
+            this.playerMovementManager = new PlayerMovementManager(this.player, this.FrogHomes);
         }
 
         private void addVehiclesToCanvas()

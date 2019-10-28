@@ -10,11 +10,11 @@
     Width="50">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryFrogColor" Color="MediumPurple"/>
+        <SolidColorBrush x:Key="PrimaryFrogColor" Color="OrangeRed"/>
         <SolidColorBrush x:Key="SecondaryFrogColor" Color="DodgerBlue"/>
         <SolidColorBrush x:Key="EyeColor" Color="LightSeaGreen"/>
         <SolidColorBrush x:Key="IrisColor" Color="DarkBlue"/>
-        <SolidColorBrush x:Key="MouthColor" Color="DarkRed"/>
+        <SolidColorBrush x:Key="MouthColor" Color="HotPink"/>
     </UserControl.Resources>
 
     <Canvas Width="50" Height="50" Background="Transparent">

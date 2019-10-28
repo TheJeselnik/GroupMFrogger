@@ -30,7 +30,11 @@ namespace FroggerStarter.Model
         public void AddFrog()
         {
             this.HasFrog = true;
+            var oldX = this.X;
+            var oldY = this.Y;
             Sprite = new FrogLandedSprite();
+            this.X = oldX;
+            this.Y = oldY;
         }
     }
 }

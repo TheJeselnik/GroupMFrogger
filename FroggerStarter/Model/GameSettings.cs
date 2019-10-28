@@ -74,6 +74,14 @@ namespace FroggerStarter.Model
         public static double LeftEdgeOfRoad { get; } = 0.0;
 
         /// <summary>
+        /// Gets the top edge of lanes.
+        /// </summary>
+        /// <value>
+        /// The top edge of lanes.
+        /// </value>
+        public static double TopEdgeOfLanes { get; } = 105;
+
+        /// <summary>
         ///     Gets or sets the first lane.
         /// </summary>
         /// <value>

@@ -1,4 +1,5 @@
-﻿using FroggerStarter.Model;
+﻿using System.Collections.Generic;
+using FroggerStarter.Model;
 
 namespace FroggerStarter.Controller
 {
@@ -10,6 +11,7 @@ namespace FroggerStarter.Controller
         #region Data members
 
         private readonly Frog player;
+        private IList<FrogHome> frogHomes;
 
         #endregion
 
@@ -28,12 +30,14 @@ namespace FroggerStarter.Controller
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PlayerMovementManager" /> class.
+        /// Initializes a new instance of the <see cref="PlayerMovementManager" /> class.
         /// </summary>
         /// <param name="player">The player.</param>
-        public PlayerMovementManager(Frog player)
+        /// <param name="frogHomes">The frog homes.</param>
+        public PlayerMovementManager(Frog player, IList<FrogHome> frogHomes)
         {
             this.player = player;
+            this.frogHomes = frogHomes;
         }
 
         #endregion
@@ -83,7 +87,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerUp()
         {
-            if (!this.playerAtTopBoundary() && this.CanMove)
+            if (this.playerCanMoveUp() || this.playerBelowFrogHome())
             {
                 this.player.MoveUp();
             }
@@ -91,7 +95,26 @@ namespace FroggerStarter.Controller
 
         private bool playerAtTopBoundary()
         {
-            return this.player.Y <= 105;
+            return this.player.Y <= GameSettings.TopEdgeOfLanes;
+        }
+
+        private bool playerCanMoveUp()
+        {
+            return !this.playerAtTopBoundary() && this.CanMove;
+        }
+
+        private bool playerBelowFrogHome()
+        {
+            var canMoveIntoFrogHome = false;
+            foreach (var currFrogHome in this.frogHomes)
+            {
+                if (this.player.X.Equals(currFrogHome.X) && this.playerAtTopBoundary() && !currFrogHome.HasFrog)
+                {
+                    canMoveIntoFrogHome = true;
+                }
+            }
+
+            return canMoveIntoFrogHome;
         }
 
         /// <summary>
