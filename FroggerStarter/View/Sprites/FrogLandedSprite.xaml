@@ -18,6 +18,7 @@
     </UserControl.Resources>
 
     <Canvas Width="50" Height="50" Background="Transparent">
+        <local:FrogHomeSprite/>
         <Rectangle Width="11" Height="5" Fill="{StaticResource PrimaryFrogColor}" Canvas.Left="10" Canvas.Top="5"/>
         <Rectangle Width="11" Height="5" Fill="{StaticResource PrimaryFrogColor}" Canvas.Left="29" Canvas.Top="5"/>
         <Rectangle Width="38" Height="8" Fill="{StaticResource PrimaryFrogColor}" Canvas.Left="6" Canvas.Top="10"/>
