@@ -11,7 +11,7 @@ namespace FroggerStarter.Controller
         #region Data members
 
         private readonly Frog player;
-        private IList<FrogHome> frogHomes;
+        private readonly IList<FrogHome> frogHomes;
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace FroggerStarter.Controller
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerMovementManager" /> class.
+        ///     Initializes a new instance of the <see cref="PlayerMovementManager" /> class.
         /// </summary>
         /// <param name="player">The player.</param>
         /// <param name="frogHomes">The frog homes.</param>
