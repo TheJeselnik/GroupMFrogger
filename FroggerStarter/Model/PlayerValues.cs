@@ -6,8 +6,6 @@
     public class PlayerValues
     {
 
-        private const int ScoreLimit = 3;
-
         #region Properties
 
         /// <summary>
@@ -49,12 +47,10 @@
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlayerValues" /> class.
         /// </summary>
-        /// <param name="lives">The lives.</param>
-        /// <param name="score">The score.</param>
-        public PlayerValues(int lives, int score)
+        public PlayerValues()
         {
-            this.Lives = lives;
-            this.Score = score;
+            this.Lives = GameSettings.InitialLives;
+            this.Score = GameSettings.InitialScore;
         }
 
         #endregion
@@ -84,7 +80,7 @@
         public void IncreaseScore()
         {
             this.Score++;
-            if (this.Score >= ScoreLimit)
+            if (this.Score >= GameSettings.ScoreLimit)
             {
                 this.GameOver = true;
             }

@@ -4,6 +4,7 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using FroggerStarter.Controller;
+using FroggerStarter.Model;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -37,6 +38,9 @@ namespace FroggerStarter.View
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
             this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth);
             this.gameManager.InitializeGame(this.canvas);
+
+            this.scoreTextBlock.Text = $"Score: {GameSettings.InitialScore}";
+            this.livesRemainingTextBlock.Text = $"Lives: {GameSettings.InitialLives}";
 
             this.gameManager.ScoreUpdated += this.scoreOnScoreUpdated;
             this.gameManager.LivesUpdated += this.livesOnLivesUpdated;

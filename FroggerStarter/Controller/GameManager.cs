@@ -23,8 +23,6 @@ namespace FroggerStarter.Controller
 
         #region Data members
 
-        private const int InitialLives = 4;
-        private const int InitialScore = 0;
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
         private Canvas gameCanvas;
@@ -139,7 +137,7 @@ namespace FroggerStarter.Controller
             GameSettings.RoadWidth = this.backgroundWidth;
             this.createAndPlacePlayer();
             this.createFrogAnimationSprites();
-            this.playerValues = new PlayerValues(InitialLives, InitialScore);
+            this.playerValues = new PlayerValues();
             this.roadManager = new RoadManager();
             this.collisionDetector = new CollisionDetector();
             this.animationManager = new AnimationManager();
@@ -148,7 +146,6 @@ namespace FroggerStarter.Controller
             this.addFrogHomesToCanvas();
             this.playerMovementManager = new PlayerMovementManager(this.player);
         }
-
 
         private void addVehiclesToCanvas()
         {

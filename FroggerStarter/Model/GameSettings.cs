@@ -10,6 +10,30 @@ namespace FroggerStarter.Model
         #region Properties
 
         /// <summary>
+        /// Gets the initial lives.
+        /// </summary>
+        /// <value>
+        /// The initial lives.
+        /// </value>
+        public static int InitialLives { get; } = 4;
+
+        /// <summary>
+        /// Gets the initial score.
+        /// </summary>
+        /// <value>
+        /// The initial score.
+        /// </value>
+        public static int InitialScore { get; } = 0;
+
+        /// <summary>
+        /// Gets the score limit.
+        /// </summary>
+        /// <value>
+        /// The score limit.
+        /// </value>
+        public static int ScoreLimit { get; } = 5;
+
+        /// <summary>
         ///     Gets the road offset y.
         /// </summary>
         /// <value>
@@ -55,7 +79,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The first lane.
         /// </value>
-        public static Lane FirstLane { get; } =
+        private static Lane FirstLane { get; } =
             new Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Left, 3.0, 3);
 
         /// <summary>
@@ -64,7 +88,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The second lane.
         /// </value>
-        public static Lane SecondLane { get; } =
+        private static Lane SecondLane { get; } =
             new Lane(Vehicle.VehicleType.SemiTruck, Vehicle.Direction.Right, 3.5, 2);
 
         /// <summary>
@@ -73,7 +97,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The third lane.
         /// </value>
-        public static Lane ThirdLane { get; } =
+        private static Lane ThirdLane { get; } =
             new Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Left, 4.0, 4);
 
         /// <summary>
@@ -82,7 +106,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The fourth lane.
         /// </value>
-        public static Lane FourthLane { get; } =
+        private static Lane FourthLane { get; } =
             new Lane(Vehicle.VehicleType.SemiTruck, Vehicle.Direction.Left, 4.5, 3);
 
         /// <summary>
@@ -91,7 +115,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The fifth lane.
         /// </value>
-        public static Lane FifthLane { get; } = new
+        private static Lane FifthLane { get; } = new
             Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Right, 5.0, 5);
 
         /// <summary>
