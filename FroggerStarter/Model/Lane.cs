@@ -61,7 +61,27 @@ namespace FroggerStarter.Model
         #endregion
 
         // TODO queue up a lane to add a vehicle, to remove vehicles??
-        public void PlaceVehicle()
+        /// <summary>
+        /// Adds the vehicle.
+        ///     Precondition: VehiclesInLane.Count lessThan MaxVehicles
+        ///     Postcondition: New vehicle queued up
+        /// </summary>
+        public void AddVehicle()
+        {
+            this.placeVehicle();
+        }
+
+        /// <summary>
+        /// Removes the vehicle.
+        ///     Precondition: VehiclesInLane.Count greaterThan 1
+        ///     Postcondition: Vehicle queued for deletion
+        /// </summary>
+        public void RemoveVehicle()
+        {
+
+        }
+
+        private void placeVehicle()
         {
             var newVehicle = new Vehicle(this.vehicleType, this.direction, this.initialSpeed);
             var vehicleYOffset = calculateVehicleYOffset(newVehicle);

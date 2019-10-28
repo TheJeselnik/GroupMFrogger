@@ -40,6 +40,7 @@ namespace FroggerStarter.Controller
         public RoadManager()
         {
             placeLanes();
+            this.AddVehicleToLanes();
             this.getAllVehicles();
         }
 
@@ -60,7 +61,6 @@ namespace FroggerStarter.Controller
             {
                 currVehicleLane.Y = currentY;
                 currentY -= GameSettings.LaneHeight;
-                currVehicleLane.PlaceVehicle();
             }
         }
 
@@ -76,6 +76,34 @@ namespace FroggerStarter.Controller
                 resetVehiclePastRightBoundary(currVehicle);
                 resetVehicleIfPastLeftBoundary(currVehicle);
                 currVehicle.Move();
+            }
+        }
+
+        /// <summary>
+        /// Adds the vehicle to lanes.
+        ///     Precondition: currVehicleLane.VehiclesInLane.Count lessThan currVehicleLane.MaxVehicles
+        ///     Postcondition: New vehicle queued up in currVehicleLane
+        /// </summary>
+        public void AddVehicleToLanes()
+        {
+            foreach (var currVehicleLane in GameSettings.VehicleLanes)
+            {
+                if (currVehicleLane.VehiclesInLane.Count < currVehicleLane.MaxVehicles)
+                {
+                    currVehicleLane.AddVehicle();
+                }
+            }
+        }
+        /// <summary>
+        /// Resets the vehicles to one.
+        ///     Precondition: currVehicleLane.VehiclesInLane.Count greaterThan 1
+        ///     Postcondition: Vehicle in currVehicleLane queued for deletion
+        /// </summary>
+        public void ResetOneVehiclePerLane()
+        {
+            foreach (var currVehicleLane in GameSettings.VehicleLanes)
+            {
+                
             }
         }
 
