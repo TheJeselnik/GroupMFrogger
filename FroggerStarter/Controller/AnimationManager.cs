@@ -44,7 +44,7 @@ namespace FroggerStarter.Controller
         {
             this.timer = new DispatcherTimer();
             this.timer.Tick += this.timerOnTick;
-            this.timer.Interval = new TimeSpan(0, 0, 0, 1);
+            this.timer.Interval = new TimeSpan(0, 0, 0, 0, 500);
             this.timer.Start();
         }
 

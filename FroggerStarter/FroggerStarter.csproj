@@ -123,9 +123,10 @@
     <Compile Include="Controller\CollisionDetector.cs" />
     <Compile Include="Controller\RoadManager.cs" />
     <Compile Include="Model\FrogHome.cs" />
+    <Compile Include="Model\GameSettings.cs" />
     <Compile Include="Model\Lane.cs" />
     <Compile Include="Controller\PlayerMovementManager.cs" />
-    <Compile Include="Model\GameSettings.cs" />
+    <Compile Include="Model\PlayerValues.cs" />
     <Compile Include="Model\Vehicle.cs" />
     <Compile Include="Model\Frog.cs" />
     <Compile Include="Controller\GameManager.cs" />
