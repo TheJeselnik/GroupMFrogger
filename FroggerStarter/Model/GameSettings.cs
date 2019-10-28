@@ -33,13 +33,22 @@ namespace FroggerStarter.Model
         /// </value>
         public static int ScoreLimit { get; } = 5;
 
+
         /// <summary>
         ///     Gets the road offset y.
         /// </summary>
         /// <value>
         ///     The road offset y.
         /// </value>
-        public static double RoadOffsetHeight { get; } = 5;
+        public static double VehicleSpacing { get; } = 25.0;
+
+        /// <summary>
+        ///     Gets the road offset y.
+        /// </summary>
+        /// <value>
+        ///     The road offset y.
+        /// </value>
+        public static double RoadOffsetHeight { get; } = 5.0;
 
         /// <summary>
         ///     Gets the height of the lane.
@@ -47,7 +56,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The height of the lane.
         /// </value>
-        public static double LaneHeight { get; } = 50;
+        public static double LaneHeight { get; } = 50.0;
 
         /// <summary>
         ///     Gets or sets the width of the road.
@@ -79,7 +88,7 @@ namespace FroggerStarter.Model
         /// <value>
         /// The top edge of lanes.
         /// </value>
-        public static double TopEdgeOfLanes { get; } = 105;
+        public static double TopEdgeOfLanes { get; } = 105.0;
 
         /// <summary>
         ///     Gets or sets the first lane.

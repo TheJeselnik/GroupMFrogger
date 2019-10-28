@@ -68,7 +68,10 @@ namespace FroggerStarter.Model
         /// </summary>
         public void AddVehicle()
         {
-            this.placeVehicle();
+            if (this.vehiclesClearOfLeftEdge() && this.vehiclesClearOfRightEdge())
+            {
+                this.placeVehicle();
+            }
         }
 
         /// <summary>
@@ -109,6 +112,32 @@ namespace FroggerStarter.Model
         {
             var emptyVerticalSpace = GameSettings.LaneHeight - newVehicle.Height;
             return emptyVerticalSpace / 2;
+        }
+
+        private bool vehiclesClearOfLeftEdge()
+        {
+            foreach (var currVehicle in this.VehiclesInLane)
+            {
+                if (currVehicle.X - 25.0 < GameSettings.LeftEdgeOfRoad)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool vehiclesClearOfRightEdge()
+        {
+            foreach (var currVehicle in this.VehiclesInLane)
+            {
+                if (currVehicle.X + currVehicle.Width + 25.0 > GameSettings.RoadWidth)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

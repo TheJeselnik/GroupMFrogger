@@ -11,6 +11,7 @@ namespace FroggerStarter.Controller
     {
         #region Data members
 
+        private int ticks;
         private const double SpeedIncrease = 0.00005;
 
         #endregion
@@ -40,7 +41,7 @@ namespace FroggerStarter.Controller
         public RoadManager()
         {
             placeLanes();
-            this.AddVehicleToLanes();
+            this.addVehicleToLanes();
             this.getAllVehicles();
         }
 
@@ -80,11 +81,21 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        /// Adds the vehicle to lanes.
+        /// Adds a vehicle to lanes.
         ///     Precondition: currVehicleLane.VehiclesInLane.Count lessThan currVehicleLane.MaxVehicles
         ///     Postcondition: New vehicle queued up in currVehicleLane
         /// </summary>
-        public void AddVehicleToLanes()
+        public void CheckToAddVehicleToLanes()
+        {
+            if (this.ticks % 4000 == 0)
+            {
+                this.addVehicleToLanes();
+            }
+
+            this.ticks++;
+        }
+
+        public void addVehicleToLanes()
         {
             foreach (var currVehicleLane in GameSettings.VehicleLanes)
             {
@@ -94,6 +105,7 @@ namespace FroggerStarter.Controller
                 }
             }
         }
+
         /// <summary>
         /// Resets the vehicles to one.
         ///     Precondition: currVehicleLane.VehiclesInLane.Count greaterThan 1
