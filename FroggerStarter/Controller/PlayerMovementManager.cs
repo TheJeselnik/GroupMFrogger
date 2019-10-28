@@ -10,10 +10,6 @@ namespace FroggerStarter.Controller
         #region Data members
 
         private readonly Frog player;
-        private readonly double backgroundHeight;
-        private readonly double backgroundWidth;
-        private readonly double topShoulderY;
-        private readonly double bottomOffset;
 
         #endregion
 
@@ -35,18 +31,9 @@ namespace FroggerStarter.Controller
         ///     Initializes a new instance of the <see cref="PlayerMovementManager" /> class.
         /// </summary>
         /// <param name="player">The player.</param>
-        /// <param name="backgroundHeight">Height of the background.</param>
-        /// <param name="backgroundWidth">Width of the background.</param>
-        /// <param name="topShoulderY">The top shoulder y.</param>
-        /// <param name="bottomOffset">The bottom offset.</param>
-        public PlayerMovementManager(Frog player, double backgroundHeight, double backgroundWidth, double topShoulderY,
-            double bottomOffset)
+        public PlayerMovementManager(Frog player)
         {
             this.player = player;
-            this.backgroundHeight = backgroundHeight;
-            this.backgroundWidth = backgroundWidth;
-            this.topShoulderY = topShoulderY;
-            this.bottomOffset = bottomOffset;
         }
 
         #endregion
@@ -68,7 +55,7 @@ namespace FroggerStarter.Controller
 
         private bool playerAtLeftBoundary()
         {
-            return this.player.X <= 0;
+            return this.player.X <= GameSettings.LeftEdgeOfRoad;
         }
 
         /// <summary>
@@ -86,7 +73,7 @@ namespace FroggerStarter.Controller
 
         private bool playerAtRightBoundary()
         {
-            return this.player.X + this.player.Width >= this.backgroundWidth;
+            return this.player.X + this.player.Width >= GameSettings.RoadWidth;
         }
 
         /// <summary>
@@ -104,7 +91,7 @@ namespace FroggerStarter.Controller
 
         private bool playerAtTopBoundary()
         {
-            return this.player.Y <= this.topShoulderY;
+            return this.player.Y <= 100;
         }
 
         /// <summary>
@@ -122,7 +109,7 @@ namespace FroggerStarter.Controller
 
         private bool playerAtBottomBoundary()
         {
-            return this.player.Y + this.player.Height >= this.backgroundHeight - this.bottomOffset;
+            return this.player.Y + this.player.Height >= GameSettings.RoadWidth - GameSettings.BottomOffsetHeight;
         }
 
         #endregion

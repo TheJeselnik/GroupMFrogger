@@ -11,15 +11,7 @@ namespace FroggerStarter.Controller
     {
         #region Data members
 
-        private const int NumberOfLanes = 5;
-        private const double LeftBoundary = 0.0;
         private const double SpeedIncrease = 0.00005;
-
-        private readonly double laneHeight;
-        private readonly double backgroundHeight;
-        private readonly double backgroundWidth;
-        private readonly double bottomOffset;
-        private IList<Lane> lanes;
 
         #endregion
 
@@ -45,17 +37,9 @@ namespace FroggerStarter.Controller
         /// <summary>
         ///     Initializes a new instance of the <see cref="RoadManager" /> class.
         /// </summary>
-        /// <param name="backgroundHeight">Height of the background.</param>
-        /// <param name="backgroundWidth">Width of the background.</param>
-        /// <param name="laneHeight">Height of the lane.</param>
-        /// <param name="bottomOffset">The bottom offset.</param>
-        public RoadManager(double backgroundHeight, double backgroundWidth, double laneHeight, double bottomOffset)
+        public RoadManager()
         {
-            this.backgroundHeight = backgroundHeight;
-            this.backgroundWidth = backgroundWidth;
-            this.laneHeight = laneHeight;
-            this.bottomOffset = bottomOffset;
-            this.establishLanes();
+            placeLanes();
             this.getAllVehicles();
         }
 
@@ -63,47 +47,14 @@ namespace FroggerStarter.Controller
 
         #region Methods
 
-        //TODO Adjust the way Lanes are defined. Settings needed.
-        private void establishLanes()
+        private static void placeLanes()
         {
-            this.lanes = new List<Lane>();
-            var bottomShoulderLocation = this.backgroundHeight - this.bottomOffset - this.laneHeight;
-
-            var firstLaneLocation = bottomShoulderLocation - this.laneHeight;
-            var firstLane = new Lane(2, Vehicle.VehicleType.Car, firstLaneLocation, Vehicle.Direction.Left,
-                this.backgroundWidth, this.laneHeight, 3);
-            this.lanes.Add(firstLane);
-
-            var secondLaneLocation = firstLaneLocation - this.laneHeight;
-            var secondLane = new Lane(3, Vehicle.VehicleType.SemiTruck, secondLaneLocation, Vehicle.Direction.Right,
-                this.backgroundWidth, this.laneHeight, 3.5);
-            this.lanes.Add(secondLane);
-
-            var thirdLaneLocation = secondLaneLocation - this.laneHeight;
-            var thirdLane = new Lane(3, Vehicle.VehicleType.Car, thirdLaneLocation, Vehicle.Direction.Left,
-                this.backgroundWidth, this.laneHeight, 4);
-            this.lanes.Add(thirdLane);
-
-            var fourthLaneLocation = thirdLaneLocation - this.laneHeight;
-            var fourthLane = new Lane(2, Vehicle.VehicleType.SemiTruck, fourthLaneLocation, Vehicle.Direction.Left,
-                this.backgroundWidth, this.laneHeight, 4.5);
-            this.lanes.Add(fourthLane);
-
-            var fifthLaneLocation = fourthLaneLocation - this.laneHeight;
-            var fifthLane = new Lane(3, Vehicle.VehicleType.Car, fifthLaneLocation, Vehicle.Direction.Right,
-                this.backgroundWidth, this.laneHeight, 5);
-            this.lanes.Add(fifthLane);
-
-            this.TopShoulderY = fifthLaneLocation - this.laneHeight;
-        }
-
-        //TODO Helper method for above. Need to calculate locations then place all according to settings, like amount of lanes
-        private void calculateLaneLocations()
-        {
-            var bottomShoulderLocation = this.backgroundHeight - this.bottomOffset - this.laneHeight;
-            for (var i = 0; i < NumberOfLanes; i++)
+            var currentY = GameSettings.RoadHeight - GameSettings.LaneHeight * 2 + GameSettings.BottomOffsetHeight;
+            foreach (var currVehicleLane in GameSettings.VehicleLanes)
             {
-                
+                currVehicleLane.Y = currentY;
+                currentY -= GameSettings.LaneHeight;
+                currVehicleLane.PlaceVehicle();
             }
         }
 
@@ -116,25 +67,25 @@ namespace FroggerStarter.Controller
         {
             foreach (var currVehicle in this.AllVehicles)
             {
-                this.resetVehiclePastRightBoundary(currVehicle);
-                this.resetVehicleIfPastLeftBoundary(currVehicle);
+                resetVehiclePastRightBoundary(currVehicle);
+                resetVehicleIfPastLeftBoundary(currVehicle);
                 currVehicle.Move();
             }
         }
 
-        private void resetVehicleIfPastLeftBoundary(GameObject vehicle)
+        private static void resetVehicleIfPastLeftBoundary(GameObject vehicle)
         {
-            if (vehicle.X + vehicle.Width < LeftBoundary)
+            if (vehicle.X + vehicle.Width < GameSettings.LeftEdgeOfRoad)
             {
-                vehicle.X = this.backgroundWidth;
+                vehicle.X = GameSettings.RoadWidth;
             }
         }
 
-        private void resetVehiclePastRightBoundary(GameObject vehicle)
+        private static void resetVehiclePastRightBoundary(GameObject vehicle)
         {
-            if (vehicle.X > this.backgroundWidth)
+            if (vehicle.X > GameSettings.RoadWidth)
             {
-                vehicle.X = LeftBoundary - vehicle.Width;
+                vehicle.X = GameSettings.LeftEdgeOfRoad - vehicle.Width;
             }
         }
 
@@ -170,7 +121,7 @@ namespace FroggerStarter.Controller
         private void getAllVehicles()
         {
             this.AllVehicles = new List<Vehicle>();
-            foreach (var currLane in this.lanes)
+            foreach (var currLane in GameSettings.VehicleLanes)
             {
                 foreach (var currVehicle in currLane.VehiclesInLane)
                 {

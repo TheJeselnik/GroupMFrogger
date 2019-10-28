@@ -23,12 +23,6 @@ namespace FroggerStarter.Controller
 
         #region Data members
 
-        /// <summary>
-        ///     The lane height
-        /// </summary>
-        public const double LaneHeight = 50;
-
-        private const int BottomLaneOffset = 5;
         private const int InitialLives = 4;
         private const int InitialScore = 0;
         private readonly double backgroundHeight;
@@ -41,6 +35,7 @@ namespace FroggerStarter.Controller
         private CollisionDetector collisionDetector;
         private PlayerMovementManager playerMovementManager;
         private AnimationManager animationManager;
+        private Shoulder topShoulder;
 
         #endregion
 
@@ -140,16 +135,17 @@ namespace FroggerStarter.Controller
         public void InitializeGame(Canvas gamePage)
         {
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
+            GameSettings.RoadHeight = this.backgroundHeight;
+            GameSettings.RoadWidth = this.backgroundWidth;
             this.createAndPlacePlayer();
             this.createFrogAnimationSprites();
             this.playerValues = new PlayerValues(InitialLives, InitialScore);
-            this.roadManager =
-                new RoadManager(this.backgroundHeight, this.backgroundWidth, LaneHeight, BottomLaneOffset);
+            this.roadManager = new RoadManager();
             this.collisionDetector = new CollisionDetector();
             this.animationManager = new AnimationManager();
+            this.topShoulder = new Shoulder(this.player.Width);
             this.createAndPlaceVehicles();
-            this.playerMovementManager = new PlayerMovementManager(this.player,
-                this.backgroundHeight, this.backgroundWidth, this.TopShoulderY, BottomLaneOffset);
+            this.playerMovementManager = new PlayerMovementManager(this.player);
         }
 
 
@@ -179,7 +175,7 @@ namespace FroggerStarter.Controller
         private void setPlayerToCenterOfBottomLane()
         {
             this.player.X = this.backgroundWidth / 2 - this.player.Width / 2;
-            this.player.Y = this.backgroundHeight - this.player.Height - BottomLaneOffset;
+            this.player.Y = this.backgroundHeight - this.player.Height - GameSettings.BottomOffsetHeight;
         }
 
         /// <summary>

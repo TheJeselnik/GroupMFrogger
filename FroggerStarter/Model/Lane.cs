@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Windows.Foundation;
 
 namespace FroggerStarter.Model
@@ -12,12 +13,10 @@ namespace FroggerStarter.Model
 
         private Point location;
 
-        private readonly int numberOfVehicles;
-        private readonly double laneWidth;
-        private readonly double laneHeight;
+        private readonly int maxVehicles;
         private readonly double initialSpeed;
-        private readonly Vehicle.VehicleType vehicleType;
         private readonly Vehicle.Direction direction;
+        private readonly Vehicle.VehicleType vehicleType;
 
         #endregion
 
@@ -50,73 +49,45 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Initializes a new instance of the <see cref="Lane" /> class.
         /// </summary>
-        public Lane(int numberOfVehicles, Vehicle.VehicleType vehicleType, double yLocation, Vehicle.Direction direction,
-            double laneWidth, double laneHeight, double speed)
+        public Lane(Vehicle.VehicleType vehicleType, Vehicle.Direction direction, double speed, int maxVehicles)
         {
-            this.numberOfVehicles = numberOfVehicles;
             this.vehicleType = vehicleType;
-            this.Y = yLocation;
             this.direction = direction;
-            this.laneWidth = laneWidth;
-            this.laneHeight = laneHeight;
             this.initialSpeed = speed;
+            this.maxVehicles = maxVehicles;
             this.VehiclesInLane = new List<Vehicle>();
-            this.addVehiclesToLane();
-            this.placeVehicles();
         }
 
         #endregion
 
-        #region Methods
-
-        private void addVehiclesToLane()
+        public void PlaceVehicle()
         {
-            for (var i = 0; i < this.numberOfVehicles; i++)
+            var newVehicle = new Vehicle(this.vehicleType, this.direction, this.initialSpeed);
+            var vehicleYOffset = calculateVehicleYOffset(newVehicle);
+            switch (this.direction)
             {
-                var newVehicle = new Vehicle(this.vehicleType, this.direction, this.initialSpeed);
-                this.VehiclesInLane.Add(newVehicle);
+                case Vehicle.Direction.Up:
+                    break;
+                case Vehicle.Direction.Down:
+                    break;
+                case Vehicle.Direction.Left:
+                    newVehicle.X = GameSettings.RoadWidth;
+                    newVehicle.Y = this.Y - vehicleYOffset;
+                    break;
+                case Vehicle.Direction.Right:
+                    newVehicle.X = GameSettings.LeftEdgeOfRoad - newVehicle.Width;
+                    newVehicle.Y = this.Y - vehicleYOffset;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
+            this.VehiclesInLane.Add(newVehicle);
         }
 
-        //TODO Refactor method, might need to adjust spacing per adding new vehicles. Especially trucks
-        private void placeVehicles()
+        private static double calculateVehicleYOffset(GameObject newVehicle)
         {
-            var emptyHorizontalLaneSpace = this.laneWidth - this.measureVehiclesWidth();
-            var gapBetweenVehicles = emptyHorizontalLaneSpace / this.VehiclesInLane.Count;
-            var vehicleOffset = 0.0;
-            var firstCarPlaced = false;
-
-            foreach (var currVehicle in this.VehiclesInLane)
-            {
-                if (!firstCarPlaced)
-                {
-                    currVehicle.X = gapBetweenVehicles / 2;
-                    vehicleOffset += currVehicle.X;
-                    firstCarPlaced = true;
-                }
-                else
-                {
-                    currVehicle.X = vehicleOffset;
-                }
-
-                var emptyVerticalLaneSpace = this.laneHeight - currVehicle.Height;
-                var laneVerticalOffset = emptyVerticalLaneSpace / 2;
-                currVehicle.Y = this.Y + laneVerticalOffset;
-                vehicleOffset += gapBetweenVehicles + currVehicle.Width;
-            }
+            var emptyVerticalSpace = GameSettings.LaneHeight - newVehicle.Height;
+            return emptyVerticalSpace / 2;
         }
-
-        private double measureVehiclesWidth()
-        {
-            var vehiclesWidth = 0.0;
-            foreach (var currVehicle in this.VehiclesInLane)
-            {
-                vehiclesWidth += currVehicle.Width;
-            }
-
-            return vehiclesWidth;
-        }
-
-        #endregion
     }
 }

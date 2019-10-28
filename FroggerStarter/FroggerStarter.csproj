@@ -127,6 +127,7 @@
     <Compile Include="Model\Lane.cs" />
     <Compile Include="Controller\PlayerMovementManager.cs" />
     <Compile Include="Model\PlayerValues.cs" />
+    <Compile Include="Model\Shoulder.cs" />
     <Compile Include="Model\Vehicle.cs" />
     <Compile Include="Model\Frog.cs" />
     <Compile Include="Controller\GameManager.cs" />
