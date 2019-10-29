@@ -10,7 +10,15 @@ namespace FroggerStarter.Model
     public class Lane
     {
 
+        /// <summary>
+        /// Occurs when [vehicle added].
+        /// </summary>
         public event EventHandler<Vehicle> VehicleAdded;
+
+        /// <summary>
+        /// Occurs when [vehicle removed].
+        /// </summary>
+        public event EventHandler<Vehicle> VehicleRemoved;
 
         #region Data members
 
@@ -78,11 +86,11 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
-        /// Removes the vehicle.
+        /// Removes the added vehicles.
         ///     Precondition: VehiclesInLane.Count greaterThan 1
         ///     Postcondition: Vehicle queued for deletion
         /// </summary>
-        public void RemoveVehicle()
+        public void RemoveAddedVehicles()
         {
 
         }
@@ -123,7 +131,7 @@ namespace FroggerStarter.Model
         {
             foreach (var currVehicle in this.VehiclesInLane)
             {
-                if (currVehicle.X - 25.0 < GameSettings.LeftEdgeOfRoad)
+                if (currVehicle.X - GameSettings.VehicleSpacing < GameSettings.LeftEdgeOfRoad)
                 {
                     return false;
                 }
@@ -136,7 +144,7 @@ namespace FroggerStarter.Model
         {
             foreach (var currVehicle in this.VehiclesInLane)
             {
-                if (currVehicle.X + currVehicle.Width + 25.0 > GameSettings.RoadWidth)
+                if (currVehicle.X + currVehicle.Width + GameSettings.VehicleSpacing > GameSettings.RoadWidth)
                 {
                     return false;
                 }
@@ -146,6 +154,11 @@ namespace FroggerStarter.Model
         }
 
         private void onVehicleAdded(Vehicle vehicle)
+        {
+            this.VehicleAdded?.Invoke(this, vehicle);
+        }
+
+        private void onVehicleRemoved(Vehicle vehicle)
         {
             this.VehicleAdded?.Invoke(this, vehicle);
         }
