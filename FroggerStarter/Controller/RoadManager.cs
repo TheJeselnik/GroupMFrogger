@@ -11,7 +11,15 @@ namespace FroggerStarter.Controller
     public class RoadManager : IEnumerable<Vehicle>
     {
 
-        public event EventHandler<Vehicle> VehicledAdded;
+        /// <summary>
+        /// Occurs when [vehicled added].
+        /// </summary>
+        public event EventHandler<Vehicle> VehicleAdded;
+
+        /// <summary>
+        /// Occurs when [vehicled removed].
+        /// </summary>
+        public event EventHandler<Vehicle> VehicleRemoved;
 
         #region Data members
 
@@ -29,14 +37,6 @@ namespace FroggerStarter.Controller
         ///     All vehicles.
         /// </value>
         public IList<Vehicle> AllVehicles { get; private set; }
-
-        /// <summary>
-        ///     Gets the new vehicles.
-        /// </summary>
-        /// <value>
-        ///     New vehicles.
-        /// </value>
-        public IList<Vehicle> NewVehiclesAdded { get; private set; }
 
         /// <summary>
         ///     The y coordinate of the top shoulder
@@ -76,6 +76,7 @@ namespace FroggerStarter.Controller
                 currVehicleLane.Y = currentY;
                 currentY -= GameSettings.LaneHeight;
                 currVehicleLane.VehicleAdded += this.addNewVehicle;
+                currVehicleLane.VehicleAdded += this.removeVehicle;
             }
         }
 
@@ -83,6 +84,12 @@ namespace FroggerStarter.Controller
         {
             this.AllVehicles.Add(vehicle);
             this.onVehicleAdded(vehicle);
+        }
+
+        private void removeVehicle(object sender, Vehicle vehicle)
+        {
+            this.AllVehicles.Remove(vehicle);
+            this.onVehicleRemoved(vehicle);
         }
 
         /// <summary>
@@ -136,7 +143,7 @@ namespace FroggerStarter.Controller
         {
             foreach (var currVehicleLane in GameSettings.VehicleLanes)
             {
-                
+                currVehicleLane.RemoveAddedVehicles();
             }
         }
 
@@ -209,7 +216,12 @@ namespace FroggerStarter.Controller
 
         private void onVehicleAdded(Vehicle vehicle)
         {
-            this.VehicledAdded?.Invoke(this, vehicle);
+            this.VehicleAdded?.Invoke(this, vehicle);
+        }
+
+        private void onVehicleRemoved(Vehicle vehicle)
+        {
+            this.VehicleRemoved?.Invoke(this, vehicle);
         }
 
         #endregion

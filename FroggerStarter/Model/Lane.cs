@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.Foundation;
 
 namespace FroggerStarter.Model
@@ -92,7 +93,12 @@ namespace FroggerStarter.Model
         /// </summary>
         public void RemoveAddedVehicles()
         {
-
+            const int firstItem = 1;
+            foreach (var currVehicle in this.VehiclesInLane.TakeLast(this.VehiclesInLane.Count - firstItem))
+            {
+                this.VehiclesInLane.Remove(currVehicle);
+                this.onVehicleRemoved(currVehicle);
+            }
         }
 
         private void placeVehicle()
@@ -131,7 +137,7 @@ namespace FroggerStarter.Model
         {
             foreach (var currVehicle in this.VehiclesInLane)
             {
-                if (currVehicle.X - GameSettings.VehicleSpacing < GameSettings.LeftEdgeOfRoad)
+                if (currVehicle.X - 25 < GameSettings.LeftEdgeOfRoad)
                 {
                     return false;
                 }
@@ -144,7 +150,7 @@ namespace FroggerStarter.Model
         {
             foreach (var currVehicle in this.VehiclesInLane)
             {
-                if (currVehicle.X + currVehicle.Width + GameSettings.VehicleSpacing > GameSettings.RoadWidth)
+                if (currVehicle.X + currVehicle.Width + 25 > GameSettings.RoadWidth)
                 {
                     return false;
                 }
@@ -160,7 +166,7 @@ namespace FroggerStarter.Model
 
         private void onVehicleRemoved(Vehicle vehicle)
         {
-            this.VehicleAdded?.Invoke(this, vehicle);
+            this.VehicleRemoved?.Invoke(this, vehicle);
         }
     }
 }

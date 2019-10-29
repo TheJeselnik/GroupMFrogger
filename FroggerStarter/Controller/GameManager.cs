@@ -149,13 +149,20 @@ namespace FroggerStarter.Controller
             this.addFrogHomesToCanvas();
             this.playerMovementManager = new PlayerMovementManager(this.player, this.FrogHomes);
 
-            this.roadManager.VehicledAdded += this.vehicleAdded;
+            this.roadManager.VehicleAdded += this.vehicleAdded;
+            this.roadManager.VehicleRemoved += this.vehicleRemoved;
         }
 
         private void vehicleAdded(object sender, Vehicle vehicle)
         {
             this.gameCanvas.Children.Add(vehicle.Sprite);
         }
+
+        private void vehicleRemoved(object sender, Vehicle vehicle)
+        {
+            this.gameCanvas.Children.Remove(vehicle.Sprite);
+        }
+
 
         private void addVehiclesToCanvas()
         {
@@ -292,6 +299,7 @@ namespace FroggerStarter.Controller
             this.playerValues.LoseALife();
             this.animateFrogDeath();
             this.onLivesUpdated(this.Lives);
+            this.roadManager.ResetOneVehiclePerLane();
         }
 
         private void animateFrogDeath()

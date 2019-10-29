@@ -39,7 +39,7 @@ namespace FroggerStarter.Model
         /// <value>
         /// The vehicle spacing.
         /// </value>
-        public static double VehicleSpacing { get; } = 15.0;
+        public static double VehicleSpacing { get; } = 25.0;
 
         /// <summary>
         ///     Gets the road offset y.
