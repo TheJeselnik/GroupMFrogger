@@ -12,19 +12,18 @@ namespace FroggerStarter.Controller
     {
 
         /// <summary>
-        /// Occurs when [vehicled added].
+        /// Occurs when [vehicle added].
         /// </summary>
         public event EventHandler<Vehicle> VehicleAdded;
 
         /// <summary>
-        /// Occurs when [vehicled removed].
+        /// Occurs when [vehicle removed].
         /// </summary>
         public event EventHandler<Vehicle> VehicleRemoved;
 
         #region Data members
 
         private int ticks;
-        private const double SpeedIncrease = 0.00005;
 
         #endregion
 
@@ -95,7 +94,7 @@ namespace FroggerStarter.Controller
         /// <summary>
         ///     Moves the vehicles
         ///     Precondition: None
-        ///     Postcondition: VehiclesInLane Speed == Speed@prev + Speed
+        ///     Postcondition: VehiclesInLane X == X@prev + Speed
         /// </summary>
         public void MoveVehicles()
         {
@@ -160,35 +159,6 @@ namespace FroggerStarter.Controller
             if (vehicle.X > GameSettings.RoadWidth)
             {
                 vehicle.X = GameSettings.LeftEdgeOfRoad - vehicle.Width;
-            }
-        }
-
-        /// <summary>
-        ///     Increases the speed of all vehicles on the road.
-        ///     Precondition: None
-        ///     Postcondition: Speed of each vehicle = SpeedX@prev + SpeedIncrease
-        /// </summary>
-        private void increaseSpeed()
-        {
-            foreach (var currVehicle in this.AllVehicles)
-            {
-                if (currVehicle.SpeedX < 15)
-                {
-                    currVehicle.SetSpeed(currVehicle.SpeedX + SpeedIncrease, currVehicle.SpeedY);
-                }
-            }
-        }
-
-        /// <summary>
-        ///     Resets the speed per each lane.
-        ///     Precondition: None
-        ///     Postcondition: Speed of each lane == initialSpeed
-        /// </summary>
-        public void ResetSpeed()
-        {
-            foreach (var currVehicle in this.AllVehicles)
-            {
-                currVehicle.ResetSpeedX();
             }
         }
 
