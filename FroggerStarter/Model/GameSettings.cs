@@ -10,58 +10,50 @@ namespace FroggerStarter.Model
         #region Properties
 
         /// <summary>
-        /// Gets the initial lives.
+        ///     Gets the initial lives.
         /// </summary>
         /// <value>
-        /// The initial lives.
+        ///     The initial lives.
         /// </value>
         public static int InitialLives { get; } = 4;
 
         /// <summary>
-        /// Gets the initial score.
+        ///     Gets the initial score.
         /// </summary>
         /// <value>
-        /// The initial score.
+        ///     The initial score.
         /// </value>
         public static int InitialScore { get; } = 0;
 
         /// <summary>
-        /// Gets the score limit.
+        ///     Gets the timer milliseconds.
         /// </summary>
         /// <value>
-        /// The score limit.
-        /// </value>
-        public static int ScoreLimit { get; } = 5;
-
-        /// <summary>
-        /// Gets the timer milliseconds.
-        /// </summary>
-        /// <value>
-        /// The timer milliseconds.
+        ///     The timer milliseconds.
         /// </value>
         public static int TimerMilliseconds { get; } = 15;
 
         /// <summary>
-        /// Gets the width of the timer.
+        ///     Gets the width of the timer.
         /// </summary>
         /// <value>
-        /// The width of the timer.
+        ///     The width of the timer.
         /// </value>
         public static int TimerWidth { get; } = 640;
 
         /// <summary>
-        /// Gets the time limit seconds.
+        ///     Gets the time limit seconds.
         /// </summary>
         /// <value>
-        /// The time limit seconds.
+        ///     The time limit seconds.
         /// </value>
         public static double TimeLimitSeconds { get; } = 20.0;
 
         /// <summary>
-        /// Gets the required minimum spacing of vehicles
+        ///     Gets the required minimum spacing of vehicles
         /// </summary>
         /// <value>
-        /// The vehicle spacing.
+        ///     The vehicle spacing.
         /// </value>
         public static double VehicleSpacing { get; } = 25.0;
 
@@ -106,12 +98,20 @@ namespace FroggerStarter.Model
         public static double LeftEdgeOfRoad { get; } = 0.0;
 
         /// <summary>
-        /// Gets the top edge of lanes.
+        ///     Gets the top edge of lanes.
         /// </summary>
         /// <value>
-        /// The top edge of lanes.
+        ///     The top edge of lanes.
         /// </value>
         public static double TopEdgeOfLanes { get; } = 105.0;
+
+        /// <summary>
+        /// Gets the score multiplier.
+        /// </summary>
+        /// <value>
+        /// The score multiplier.
+        /// </value>
+        public static double ScoreMultiplier { get; } = 200.0;
 
         /// <summary>
         ///     Gets or sets the first lane.
@@ -165,7 +165,7 @@ namespace FroggerStarter.Model
         ///     The vehicle lanes.
         /// </value>
         public static IList<Lane> VehicleLanes { get; } = new List<Lane>
-            { FirstLane, SecondLane, ThirdLane, FourthLane, FifthLane };
+            {FirstLane, SecondLane, ThirdLane, FourthLane, FifthLane};
 
         #endregion
     }

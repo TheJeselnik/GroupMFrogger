@@ -108,7 +108,8 @@ namespace FroggerStarter.Controller
             var canMoveIntoFrogHome = false;
             foreach (var currFrogHome in this.frogHomes)
             {
-                if (this.player.X.Equals(currFrogHome.X) && this.playerAtTopBoundary() && !currFrogHome.HasFrog && this.CanMove)
+                if (this.player.X.Equals(currFrogHome.X) && this.playerAtTopBoundary() && !currFrogHome.HasFrog &&
+                    this.CanMove)
                 {
                     canMoveIntoFrogHome = true;
                 }

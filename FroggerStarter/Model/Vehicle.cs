@@ -13,15 +13,6 @@ namespace FroggerStarter.Model
         #region Types and Delegates
 
         /// <summary>
-        ///     Enum Types of vehicles
-        /// </summary>
-        public enum VehicleType
-        {
-            Car,
-            SemiTruck
-        }
-
-        /// <summary>
         ///     Enum Types of four directions a vehicle can be facing and move
         /// </summary>
         public enum Direction
@@ -30,6 +21,15 @@ namespace FroggerStarter.Model
             Down,
             Left,
             Right
+        }
+
+        /// <summary>
+        ///     Enum Types of vehicles
+        /// </summary>
+        public enum VehicleType
+        {
+            Car,
+            SemiTruck
         }
 
         #endregion
@@ -65,7 +65,7 @@ namespace FroggerStarter.Model
         #region Methods
 
         /// <summary>
-        /// Moves the vehicle the direction it is facing.
+        ///     Moves the vehicle the direction it is facing.
         ///     Precondition: None
         ///     Postcondition: Vehicle.X == X@prev + Speed || Vehicle.Y == Y@prev + Speed
         /// </summary>
@@ -74,29 +74,29 @@ namespace FroggerStarter.Model
             switch (this.direction)
             {
                 case Direction.Left:
-                    this.MoveLeft();
+                    MoveLeft();
                     break;
                 case Direction.Right:
-                    this.MoveRight();
+                    MoveRight();
                     break;
                 case Direction.Up:
                     break;
                 case Direction.Down:
                     break;
                 default:
-                    this.MoveLeft();
+                    MoveLeft();
                     break;
             }
         }
 
         /// <summary>
-        /// Resets the speed x.
+        ///     Resets the speed x.
         ///     Precondition: None
         ///     Postcondition: Vehicle.X == initialSpeedX && Vehicle.Y == Y@prev
         /// </summary>
         public void ResetSpeedX()
         {
-            this.SetSpeed(this.initialSpeedX, this.SpeedY);
+            SetSpeed(this.initialSpeedX, SpeedY);
         }
 
         private void assignVehicleSprite()
@@ -114,6 +114,7 @@ namespace FroggerStarter.Model
                     break;
             }
         }
+
         private void rotateSprite()
         {
             switch (this.direction)
@@ -125,8 +126,8 @@ namespace FroggerStarter.Model
                 case Direction.Left:
                     break;
                 case Direction.Right:
-                    this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-                    this.Sprite.RenderTransform = new ScaleTransform { ScaleX = -1 };
+                    Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+                    Sprite.RenderTransform = new ScaleTransform {ScaleX = -1};
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -20,10 +20,10 @@ namespace FroggerStarter.Controller
         #region Properties
 
         /// <summary>
-        /// Gets a value indicating whether [frog dying].
+        ///     Gets a value indicating whether [frog dying].
         /// </summary>
         /// <value>
-        ///   <c>true</c> if [frog dying]; otherwise, <c>false</c>.
+        ///     <c>true</c> if [frog dying]; otherwise, <c>false</c>.
         /// </value>
         public bool FrogDying { get; private set; }
 

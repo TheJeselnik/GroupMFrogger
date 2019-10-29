@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Model;
@@ -13,30 +12,6 @@ namespace FroggerStarter.Controller
     /// </summary>
     public class GameManager
     {
-        #region Types and Delegates
-
-        /// <summary>
-        /// Occurs when [game over reached].
-        /// </summary>
-        public event EventHandler GameOverReached;
-
-        /// <summary>
-        /// Occurs when [lives updated].
-        /// </summary>
-        public event EventHandler<int> LivesUpdated;
-
-        /// <summary>
-        /// Occurs when [score updated].
-        /// </summary>
-        public event EventHandler<int> ScoreUpdated;
-
-        /// <summary>
-        /// Occurs when [life time updated].
-        /// </summary>
-        public event EventHandler<double> LifeTimerUpdated;
-
-        #endregion
-
         #region Data members
 
         private readonly double backgroundHeight;
@@ -84,10 +59,10 @@ namespace FroggerStarter.Controller
         public int Score => this.playerValues.Score;
 
         /// <summary>
-        /// Gets the frog homes.
+        ///     Gets the frog homes.
         /// </summary>
         /// <value>
-        /// The frog homes.
+        ///     The frog homes.
         /// </value>
         public IList<FrogHome> FrogHomes => this.topShoulder.FrogHomes;
 
@@ -127,6 +102,26 @@ namespace FroggerStarter.Controller
 
         #region Methods
 
+        /// <summary>
+        ///     Occurs when [game over reached].
+        /// </summary>
+        public event EventHandler GameOverReached;
+
+        /// <summary>
+        ///     Occurs when [lives updated].
+        /// </summary>
+        public event EventHandler<int> LivesUpdated;
+
+        /// <summary>
+        ///     Occurs when [score updated].
+        /// </summary>
+        public event EventHandler<int> ScoreUpdated;
+
+        /// <summary>
+        ///     Occurs when [life time updated].
+        /// </summary>
+        public event EventHandler<double> LifeTimerUpdated;
+
         private void setupGameTimer()
         {
             this.timer = new DispatcherTimer();
@@ -148,19 +143,35 @@ namespace FroggerStarter.Controller
             this.gameCanvas = gamePage ?? throw new ArgumentNullException(nameof(gamePage));
             GameSettings.RoadHeight = this.backgroundHeight;
             GameSettings.RoadWidth = this.backgroundWidth;
-            this.createAndPlacePlayer();
-            this.createFrogAnimationSprites();
-            this.playerValues = new PlayerValues();
-            this.roadManager = new RoadManager();
-            this.collisionDetector = new CollisionDetector();
-            this.animationManager = new AnimationManager();
-            this.topShoulder = new Shoulder(this.player.Width);
-            this.addVehiclesToCanvas();
-            this.addFrogHomesToCanvas();
-            this.playerMovementManager = new PlayerMovementManager(this.player, this.FrogHomes);
+
+            this.addFrogSprites();
+            this.instantiateHelperClasses();
+            this.addNonPlayerSprites();
 
             this.roadManager.VehicleAdded += this.vehicleAdded;
             this.roadManager.VehicleRemoved += this.vehicleRemoved;
+        }
+
+        private void addNonPlayerSprites()
+        {
+            this.addVehiclesToCanvas();
+            this.addFrogHomesToCanvas();
+        }
+
+        private void addFrogSprites()
+        {
+            this.createAndPlacePlayer();
+            this.createFrogAnimationSprites();
+        }
+
+        private void instantiateHelperClasses()
+        {
+            this.roadManager = new RoadManager();
+            this.topShoulder = new Shoulder(this.player.Width);
+            this.playerValues = new PlayerValues();
+            this.animationManager = new AnimationManager();
+            this.collisionDetector = new CollisionDetector();
+            this.playerMovementManager = new PlayerMovementManager(this.player, this.FrogHomes);
         }
 
         private void vehicleAdded(object sender, Vehicle vehicle)
@@ -172,7 +183,6 @@ namespace FroggerStarter.Controller
         {
             this.gameCanvas.Children.Remove(vehicle.Sprite);
         }
-
 
         private void addVehiclesToCanvas()
         {
@@ -196,6 +206,7 @@ namespace FroggerStarter.Controller
             this.gameCanvas.Children.Add(this.player.Sprite);
             this.setPlayerToCenterOfBottomLane();
         }
+
         private void createFrogAnimationSprites()
         {
             foreach (var currDeathSprite in this.player.DeathSprites)
@@ -258,7 +269,7 @@ namespace FroggerStarter.Controller
         private void timerOnTick(object sender, object e)
         {
             this.roadManager.MoveVehicles();
-            this.roadManager.CheckToAddVehicleToLanes();
+            this.checkToAddVehiclesToLanes();
 
             this.checkPlayerCollisionWithVehicles();
             this.checkPlayerCollisionWithFrogHomes();
@@ -267,9 +278,17 @@ namespace FroggerStarter.Controller
             this.updateLifeTimer();
         }
 
+        private void checkToAddVehiclesToLanes()
+        {
+            if (!this.playerValues.FrogDying)
+            {
+                this.roadManager.CheckToAddVehicleToLanes();
+            }
+        }
+
         private void updateLifeTimer()
         {
-            this.lifeTimer -= 2*millisecondsToSeconds(GameSettings.TimerMilliseconds);
+            this.lifeTimer -= 2 * millisecondsToSeconds(GameSettings.TimerMilliseconds);
             if (this.lifeTimer < 0.0)
             {
                 this.lifeTimer = 0.0;
@@ -306,7 +325,8 @@ namespace FroggerStarter.Controller
             var collision = false;
             while (enumerator.MoveNext())
             {
-                if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player) && !this.playerValues.FrogDying)
+                if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player) &&
+                    !this.playerValues.FrogDying)
                 {
                     collision = true;
                 }
@@ -316,6 +336,7 @@ namespace FroggerStarter.Controller
             {
                 this.playerLosesLife();
             }
+
             enumerator.Dispose();
         }
 

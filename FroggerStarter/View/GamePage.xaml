@@ -31,6 +31,6 @@
         <TextBlock x:Name="scoreTextBlock" Canvas.Left="530" Text="00000" Style="{StaticResource PlayerHudStyle}" Canvas.Top="25" Width="118" TextAlignment="Right"/>
         <TextBlock x:Name="gameOverTextBlock" Canvas.Left="220" Canvas.Top="185" Text="GAME OVER" Style="{StaticResource LargerHudStyle}" Visibility="Collapsed" Canvas.ZIndex="1"/>
         <TextBlock Canvas.Left="5" Canvas.Top="360" Text="Time:" Style="{StaticResource PlayerHudStyle}"/>
-        <Rectangle x:Name="timeProgressRectangle" Height="15" Canvas.Left="5" Canvas.Top="390" Fill="HotPink"/>
+        <Rectangle x:Name="timeProgressRectangle" Height="15" Width="640" Canvas.Left="5" Canvas.Top="390" Fill="HotPink"/>
     </Canvas>
 </Page>

@@ -10,22 +10,11 @@ namespace FroggerStarter.Model
     /// </summary>
     public class Lane
     {
-
-        /// <summary>
-        /// Occurs when [vehicle added].
-        /// </summary>
-        public event EventHandler<Vehicle> VehicleAdded;
-
-        /// <summary>
-        /// Occurs when [vehicle removed].
-        /// </summary>
-        public event EventHandler<Vehicle> VehicleRemoved;
-
         #region Data members
 
-        private Point location;
-
         public readonly int MaxVehicles;
+
+        private Point location;
         private readonly double initialSpeed;
         private readonly Vehicle.Direction direction;
         private readonly Vehicle.VehicleType vehicleType;
@@ -72,9 +61,20 @@ namespace FroggerStarter.Model
 
         #endregion
 
-        // TODO queue up a lane to add a vehicle, to remove vehicles??
+        #region Methods
+
         /// <summary>
-        /// Adds the vehicle.
+        ///     Occurs when [vehicle added].
+        /// </summary>
+        public event EventHandler<Vehicle> VehicleAdded;
+
+        /// <summary>
+        ///     Occurs when [vehicle removed].
+        /// </summary>
+        public event EventHandler<Vehicle> VehicleRemoved;
+
+        /// <summary>
+        ///     Adds the vehicle.
         ///     Precondition: VehiclesInLane.Count lessThan MaxVehicles
         ///     Postcondition: New vehicle queued up
         /// </summary>
@@ -87,7 +87,7 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
-        /// Removes the added vehicles.
+        ///     Removes the added vehicles.
         ///     Precondition: VehiclesInLane.Count greaterThan 1
         ///     Postcondition: Vehicle queued for deletion
         /// </summary>
@@ -168,5 +168,7 @@ namespace FroggerStarter.Model
         {
             this.VehicleRemoved?.Invoke(this, vehicle);
         }
+
+        #endregion
     }
 }

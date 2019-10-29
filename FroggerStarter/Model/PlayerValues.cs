@@ -5,7 +5,6 @@
     /// </summary>
     public class PlayerValues
     {
-
         #region Properties
 
         /// <summary>
@@ -33,10 +32,10 @@
         public bool GameOver { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether [frog dying].
+        ///     Gets a value indicating whether [frog dying].
         /// </summary>
         /// <value>
-        ///   <c>true</c> if [frog dying]; otherwise, <c>false</c>.
+        ///     <c>true</c> if [frog dying]; otherwise, <c>false</c>.
         /// </value>
         public bool FrogDying { get; private set; }
 
@@ -59,7 +58,7 @@
 
         /// <summary>
         ///     Decreases Lives.
-        ///     Precondition: None
+        ///     Precondition: Lives >= 1
         ///     Postcondition: Lives == Lives@prev - 1
         /// </summary>
         public void LoseALife()
@@ -79,13 +78,13 @@
         /// </summary>
         public void IncreaseScore(double timeRemaining)
         {
-            var newScore = timeRemaining * this.Lives * 100;
+            var newScore = timeRemaining * this.Lives * GameSettings.ScoreMultiplier;
             this.Score += (int) newScore;
         }
 
         /// <summary>
-        /// Checks for game over from score.
-        ///     Precondition: None
+        ///     Checks for game over from score.
+        ///     Precondition: GameOver = false
         ///     Postcondition: GameOver = true || GameOver = false
         /// </summary>
         /// <param name="allFrogHomesFilled">if set to <c>true</c> [all frog homes filled].</param>
@@ -95,7 +94,7 @@
         }
 
         /// <summary>
-        /// Revives the frog.
+        ///     Revives the frog.
         ///     Precondition: FrogDying = true
         ///     Postcondition: FrogDying = false;
         /// </summary>

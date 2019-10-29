@@ -16,6 +16,10 @@ namespace FroggerStarter.Model
 
         public BaseSprite FrogSprite = new FrogSprite();
 
+        #endregion
+
+        #region Properties
+
         /// <summary>
         ///     The death sprites
         /// </summary>
@@ -52,8 +56,9 @@ namespace FroggerStarter.Model
 
         private void setDeathSprites()
         {
-            IList<BaseSprite> deathSprites = new List<BaseSprite>() {
-                new FrogFirstDeathSprite(), new FrogSecondDeathSprite(), new FrogThirdDeathSprite(), new FrogCrossbonesSprite()
+            IList<BaseSprite> deathSprites = new List<BaseSprite> {
+                new FrogFirstDeathSprite(), new FrogSecondDeathSprite(), new FrogThirdDeathSprite(),
+                new FrogCrossbonesSprite()
             };
             this.DeathSprites = deathSprites;
         }
