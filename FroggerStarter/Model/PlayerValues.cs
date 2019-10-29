@@ -75,15 +75,23 @@
         /// <summary>
         ///     Increases Score.
         ///     Precondition: None
-        ///     Postcondition: Score == Score@prev + 1
+        ///     Postcondition: Score += timeRemaining * remainingLives * 1000
         /// </summary>
-        public void IncreaseScore()
+        public void IncreaseScore(double timeRemaining)
         {
-            this.Score++;
-            if (this.Score >= GameSettings.ScoreLimit)
-            {
-                this.GameOver = true;
-            }
+            var newScore = timeRemaining * this.Lives * 100;
+            this.Score += (int) newScore;
+        }
+
+        /// <summary>
+        /// Checks for game over from score.
+        ///     Precondition: None
+        ///     Postcondition: GameOver = true || GameOver = false
+        /// </summary>
+        /// <param name="allFrogHomesFilled">if set to <c>true</c> [all frog homes filled].</param>
+        public void CheckForGameOverFromScore(bool allFrogHomesFilled)
+        {
+            this.GameOver = allFrogHomesFilled;
         }
 
         /// <summary>

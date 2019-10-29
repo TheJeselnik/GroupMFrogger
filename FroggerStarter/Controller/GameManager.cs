@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Model;
@@ -273,6 +274,7 @@ namespace FroggerStarter.Controller
             {
                 this.lifeTimer = 0.0;
             }
+
             this.onLifeTimerUpdated(this.lifeTimer);
             if (this.lifeTimer <= 0.0 && !this.playerValues.FrogDying)
             {
@@ -335,6 +337,22 @@ namespace FroggerStarter.Controller
             this.playerScores();
         }
 
+        private bool allFrogHomesFilled()
+        {
+            var enumerator = this.topShoulder.FrogHomes.GetEnumerator();
+            var homesFilled = 0;
+            while (enumerator.MoveNext())
+            {
+                if (enumerator.Current != null && enumerator.Current.HasFrog)
+                {
+                    homesFilled++;
+                }
+            }
+
+            enumerator.Dispose();
+            return homesFilled == this.topShoulder.FrogHomes.Count;
+        }
+
         private void playerLosesLife()
         {
             this.playerMovementManager.CanMove = false;
@@ -351,11 +369,11 @@ namespace FroggerStarter.Controller
 
         private void playerScores()
         {
-            this.playerValues.IncreaseScore();
+            this.playerValues.IncreaseScore(this.lifeTimer);
             this.onScoreUpdated(this.Score);
             this.playerMovementManager.CanMove = false;
+            this.playerValues.CheckForGameOverFromScore(this.allFrogHomesFilled());
             this.resetFrogIfGameIsNotOver();
-            this.resetLifeTimer();
         }
 
         private void resetFrogIfGameIsNotOver()
