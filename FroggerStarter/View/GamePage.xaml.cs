@@ -46,6 +46,13 @@ namespace FroggerStarter.View
             this.gameManager.ScoreUpdated += this.scoreOnScoreUpdated;
             this.gameManager.LivesUpdated += this.livesOnLivesUpdated;
             this.gameManager.GameOverReached += this.gameOverOnGameOverReached;
+            this.gameManager.LifeTimerUpdated += this.lifeTimerOnLifeTimerUpdated;
+        }
+
+        private void lifeTimerOnLifeTimerUpdated(object sender, double timeRemaining)
+        {
+            var percentageValue = timeRemaining * 0.05;
+            this.timeProgressRectangle.Width = percentageValue * GameSettings.TimerWidth;
         }
 
         private void gameOverOnGameOverReached(object sender, EventArgs e)

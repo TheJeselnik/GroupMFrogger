@@ -34,6 +34,30 @@ namespace FroggerStarter.Model
         public static int ScoreLimit { get; } = 5;
 
         /// <summary>
+        /// Gets the timer milliseconds.
+        /// </summary>
+        /// <value>
+        /// The timer milliseconds.
+        /// </value>
+        public static int TimerMilliseconds { get; } = 15;
+
+        /// <summary>
+        /// Gets the width of the timer.
+        /// </summary>
+        /// <value>
+        /// The width of the timer.
+        /// </value>
+        public static int TimerWidth { get; } = 640;
+
+        /// <summary>
+        /// Gets the time limit seconds.
+        /// </summary>
+        /// <value>
+        /// The time limit seconds.
+        /// </value>
+        public static double TimeLimitSeconds { get; } = 20.0;
+
+        /// <summary>
         /// Gets the required minimum spacing of vehicles
         /// </summary>
         /// <value>

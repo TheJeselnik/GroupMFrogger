@@ -137,7 +137,7 @@ namespace FroggerStarter.Model
         {
             foreach (var currVehicle in this.VehiclesInLane)
             {
-                if (currVehicle.X - 25 < GameSettings.LeftEdgeOfRoad)
+                if (currVehicle.X - GameSettings.VehicleSpacing < GameSettings.LeftEdgeOfRoad)
                 {
                     return false;
                 }
@@ -150,7 +150,7 @@ namespace FroggerStarter.Model
         {
             foreach (var currVehicle in this.VehiclesInLane)
             {
-                if (currVehicle.X + currVehicle.Width + 25 > GameSettings.RoadWidth)
+                if (currVehicle.X + currVehicle.Width + GameSettings.VehicleSpacing > GameSettings.RoadWidth)
                 {
                     return false;
                 }

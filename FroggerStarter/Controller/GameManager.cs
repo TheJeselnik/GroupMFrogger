@@ -29,21 +29,30 @@ namespace FroggerStarter.Controller
         /// </summary>
         public event EventHandler<int> ScoreUpdated;
 
+        /// <summary>
+        /// Occurs when [life time updated].
+        /// </summary>
+        public event EventHandler<double> LifeTimerUpdated;
+
         #endregion
 
         #region Data members
 
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
-        private Canvas gameCanvas;
+        private double lifeTimer = GameSettings.TimeLimitSeconds;
+
         private Frog player;
         private PlayerValues playerValues;
+
+        private Canvas gameCanvas;
         private DispatcherTimer timer;
+        private Shoulder topShoulder;
+
         private RoadManager roadManager;
         private CollisionDetector collisionDetector;
         private PlayerMovementManager playerMovementManager;
         private AnimationManager animationManager;
-        private Shoulder topShoulder;
 
         #endregion
 
@@ -121,7 +130,7 @@ namespace FroggerStarter.Controller
         {
             this.timer = new DispatcherTimer();
             this.timer.Tick += this.timerOnTick;
-            this.timer.Interval = new TimeSpan(0, 0, 0, 0, 15);
+            this.timer.Interval = new TimeSpan(0, 0, 0, 0, GameSettings.TimerMilliseconds);
             this.timer.Start();
         }
 
@@ -254,6 +263,31 @@ namespace FroggerStarter.Controller
             this.checkPlayerCollisionWithFrogHomes();
 
             this.checkIfFrogIsDoneDying();
+            this.updateLifeTimer();
+        }
+
+        private void updateLifeTimer()
+        {
+            this.lifeTimer -= 2*millisecondsToSeconds(GameSettings.TimerMilliseconds);
+            if (this.lifeTimer < 0.0)
+            {
+                this.lifeTimer = 0.0;
+            }
+            this.onLifeTimerUpdated(this.lifeTimer);
+            if (this.lifeTimer <= 0.0 && !this.playerValues.FrogDying)
+            {
+                this.playerLosesLife();
+            }
+        }
+
+        private void resetLifeTimer()
+        {
+            this.lifeTimer = 20.0;
+        }
+
+        private static double millisecondsToSeconds(double milliseconds)
+        {
+            return milliseconds * 0.001;
         }
 
         private void checkIfFrogIsDoneDying()
@@ -321,6 +355,7 @@ namespace FroggerStarter.Controller
             this.onScoreUpdated(this.Score);
             this.playerMovementManager.CanMove = false;
             this.resetFrogIfGameIsNotOver();
+            this.resetLifeTimer();
         }
 
         private void resetFrogIfGameIsNotOver()
@@ -335,6 +370,7 @@ namespace FroggerStarter.Controller
                 this.resetPlayerSpriteToFrog();
                 this.setPlayerToCenterOfBottomLane();
                 this.playerMovementManager.CanMove = true;
+                this.resetLifeTimer();
             }
         }
 
@@ -364,6 +400,11 @@ namespace FroggerStarter.Controller
         private void onGameOverReached(EventArgs e)
         {
             this.GameOverReached?.Invoke(this, e);
+        }
+
+        private void onLifeTimerUpdated(double timeRemaining)
+        {
+            this.LifeTimerUpdated?.Invoke(this, timeRemaining);
         }
 
         #endregion
