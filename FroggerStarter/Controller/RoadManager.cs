@@ -76,7 +76,7 @@ namespace FroggerStarter.Controller
                 currVehicleLane.Y = currentY;
                 currentY -= GameSettings.LaneHeight;
                 currVehicleLane.VehicleAdded += this.addNewVehicle;
-                currVehicleLane.VehicleAdded += this.removeVehicle;
+                currVehicleLane.VehicleRemoved += this.removeVehicle;
             }
         }
 
