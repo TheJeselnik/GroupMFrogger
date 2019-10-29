@@ -40,8 +40,8 @@ namespace FroggerStarter.View
             this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth);
             this.gameManager.InitializeGame(this.canvas);
 
-            this.scoreTextBlock.Text = $"Score: {GameSettings.InitialScore}";
-            this.livesRemainingTextBlock.Text = $"Lives: {GameSettings.InitialLives}";
+            this.scoreTextBlock.Text = $"{GameSettings.InitialScore:00000}";
+            this.livesRemainingTextBlock.Text = $"{GameSettings.InitialLives}";
 
             this.gameManager.ScoreUpdated += this.scoreOnScoreUpdated;
             this.gameManager.LivesUpdated += this.livesOnLivesUpdated;
@@ -62,12 +62,12 @@ namespace FroggerStarter.View
 
         private void scoreOnScoreUpdated(object sender, int score)
         {
-            this.scoreTextBlock.Text = $"Score: {score.ToString()}";
+            this.scoreTextBlock.Text = $"{score:00000}";
         }
 
         private void livesOnLivesUpdated(object sender, int lives)
         {
-            this.livesRemainingTextBlock.Text = $"Lives: {lives.ToString()}";
+            this.livesRemainingTextBlock.Text = $"{lives}";
         }
 
         #endregion
