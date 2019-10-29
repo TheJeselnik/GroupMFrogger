@@ -14,11 +14,20 @@ namespace FroggerStarter.Controller
     {
         #region Types and Delegates
 
-        public delegate void GameOverHandler();
+        /// <summary>
+        /// Occurs when [game over reached].
+        /// </summary>
+        public event EventHandler GameOverReached;
 
-        public delegate void LivesHandler(int lives);
+        /// <summary>
+        /// Occurs when [lives updated].
+        /// </summary>
+        public event EventHandler<int> LivesUpdated;
 
-        public delegate void ScoreHandler(int score);
+        /// <summary>
+        /// Occurs when [score updated].
+        /// </summary>
+        public event EventHandler<int> ScoreUpdated;
 
         #endregion
 
@@ -108,21 +117,6 @@ namespace FroggerStarter.Controller
 
         #region Methods
 
-        /// <summary>
-        ///     Occurs when [player score updated].
-        /// </summary>
-        public event ScoreHandler ScoreUpdated;
-
-        /// <summary>
-        ///     Occurs when [player lives updated].
-        /// </summary>
-        public event LivesHandler LivesUpdated;
-
-        /// <summary>
-        ///     Occurs when [game over updated].
-        /// </summary>
-        public event GameOverHandler GameOverUpdated;
-
         private void setupGameTimer()
         {
             this.timer = new DispatcherTimer();
@@ -154,6 +148,13 @@ namespace FroggerStarter.Controller
             this.addVehiclesToCanvas();
             this.addFrogHomesToCanvas();
             this.playerMovementManager = new PlayerMovementManager(this.player, this.FrogHomes);
+
+            this.roadManager.VehicledAdded += this.vehicleAdded;
+        }
+
+        private void vehicleAdded(object sender, Vehicle vehicle)
+        {
+            this.gameCanvas.Children.Add(vehicle.Sprite);
         }
 
         private void addVehiclesToCanvas()
@@ -290,7 +291,7 @@ namespace FroggerStarter.Controller
             this.playerMovementManager.CanMove = false;
             this.playerValues.LoseALife();
             this.animateFrogDeath();
-            this.onPlayerLivesUpdated();
+            this.onLivesUpdated(this.Lives);
         }
 
         private void animateFrogDeath()
@@ -301,7 +302,7 @@ namespace FroggerStarter.Controller
         private void playerScores()
         {
             this.playerValues.IncreaseScore();
-            this.onPlayerScoreUpdated();
+            this.onScoreUpdated(this.Score);
             this.playerMovementManager.CanMove = false;
             this.resetFrogIfGameIsNotOver();
         }
@@ -331,22 +332,22 @@ namespace FroggerStarter.Controller
         private void gameOver()
         {
             this.timer.Stop();
-            this.onGameOver();
+            this.onGameOverReached(EventArgs.Empty);
         }
 
-        private void onPlayerScoreUpdated()
+        private void onScoreUpdated(int score)
         {
-            this.ScoreUpdated?.Invoke(this.Score);
+            this.ScoreUpdated?.Invoke(this, score);
         }
 
-        private void onPlayerLivesUpdated()
+        private void onLivesUpdated(int lives)
         {
-            this.LivesUpdated?.Invoke(this.Lives);
+            this.LivesUpdated?.Invoke(this, lives);
         }
 
-        private void onGameOver()
+        private void onGameOverReached(EventArgs e)
         {
-            this.GameOverUpdated?.Invoke();
+            this.GameOverReached?.Invoke(this, e);
         }
 
         #endregion

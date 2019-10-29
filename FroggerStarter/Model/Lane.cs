@@ -10,7 +10,7 @@ namespace FroggerStarter.Model
     public class Lane
     {
 
-        public delegate void VehicleAddedHandler(Vehicle vehicle);
+        public event EventHandler<Vehicle> VehicleAdded;
 
         #region Data members
 
@@ -32,14 +32,6 @@ namespace FroggerStarter.Model
         ///     The vehicles in lane.
         /// </value>
         public IList<Vehicle> VehiclesInLane { get; }
-
-        /// <summary>
-        ///     Gets the new vehicle in lane.
-        /// </summary>
-        /// <value>
-        ///     The new vehicle in lane.
-        /// </value>
-        public Vehicle NewVehicle { get; set; }
 
         /// <summary>
         ///     Gets or sets the y location of the lane.
@@ -70,8 +62,6 @@ namespace FroggerStarter.Model
         }
 
         #endregion
-
-        public event VehicleAddedHandler VehicleAdded;
 
         // TODO queue up a lane to add a vehicle, to remove vehicles??
         /// <summary>
@@ -119,9 +109,8 @@ namespace FroggerStarter.Model
                     throw new ArgumentOutOfRangeException();
             }
 
-            this.NewVehicle = newVehicle;
             this.VehiclesInLane.Add(newVehicle);
-            this.onVehicleAdded();
+            this.onVehicleAdded(newVehicle);
         }
 
         private static double calculateVehicleYOffset(GameObject newVehicle)
@@ -156,9 +145,9 @@ namespace FroggerStarter.Model
             return true;
         }
 
-        private void onVehicleAdded()
+        private void onVehicleAdded(Vehicle vehicle)
         {
-            this.VehicleAdded?.Invoke(this.NewVehicle);
+            this.VehicleAdded?.Invoke(this, vehicle);
         }
     }
 }

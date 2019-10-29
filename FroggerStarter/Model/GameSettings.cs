@@ -33,14 +33,13 @@ namespace FroggerStarter.Model
         /// </value>
         public static int ScoreLimit { get; } = 5;
 
-
         /// <summary>
-        ///     Gets the road offset y.
+        /// Gets the required minimum spacing of vehicles
         /// </summary>
         /// <value>
-        ///     The road offset y.
+        /// The vehicle spacing.
         /// </value>
-        public static double VehicleSpacing { get; } = 25.0;
+        public static double VehicleSpacing { get; } = 15.0;
 
         /// <summary>
         ///     Gets the road offset y.

@@ -1,4 +1,5 @@
-﻿using Windows.Foundation;
+﻿using System;
+using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
@@ -44,20 +45,20 @@ namespace FroggerStarter.View
 
             this.gameManager.ScoreUpdated += this.scoreOnScoreUpdated;
             this.gameManager.LivesUpdated += this.livesOnLivesUpdated;
-            this.gameManager.GameOverUpdated += this.gameOverOnGameOverUpdated;
+            this.gameManager.GameOverReached += this.gameOverOnGameOverReached;
         }
 
-        private void gameOverOnGameOverUpdated()
+        private void gameOverOnGameOverReached(object sender, EventArgs e)
         {
             this.gameOverTextBlock.Visibility = Visibility.Visible;
         }
 
-        private void scoreOnScoreUpdated(int score)
+        private void scoreOnScoreUpdated(object sender, int score)
         {
             this.scoreTextBlock.Text = $"Score: {score.ToString()}";
         }
 
-        private void livesOnLivesUpdated(int lives)
+        private void livesOnLivesUpdated(object sender, int lives)
         {
             this.livesRemainingTextBlock.Text = $"Lives: {lives.ToString()}";
         }

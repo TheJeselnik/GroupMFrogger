@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using FroggerStarter.Model;
 
@@ -9,6 +10,8 @@ namespace FroggerStarter.Controller
     /// </summary>
     public class RoadManager : IEnumerable<Vehicle>
     {
+
+        public event EventHandler<Vehicle> VehicledAdded;
 
         #region Data members
 
@@ -49,7 +52,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public RoadManager()
         {
-            placeLanes();
+            this.placeLanes();
             this.addVehicleToLanes();
             this.getAllVehicles();
         }
@@ -66,6 +69,7 @@ namespace FroggerStarter.Controller
 
         private void placeLanes()
         {
+            this.AllVehicles = new List<Vehicle>();
             var currentY = GameSettings.RoadHeight - GameSettings.LaneHeight * 2 + GameSettings.RoadOffsetHeight;
             foreach (var currVehicleLane in GameSettings.VehicleLanes)
             {
@@ -75,10 +79,10 @@ namespace FroggerStarter.Controller
             }
         }
 
-        private void addNewVehicle(Vehicle vehicle)
+        private void addNewVehicle(object sender, Vehicle vehicle)
         {
-            this.NewVehiclesAdded = new List<Vehicle> {vehicle};
             this.AllVehicles.Add(vehicle);
+            this.onVehicleAdded(vehicle);
         }
 
         /// <summary>
@@ -103,9 +107,10 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void CheckToAddVehicleToLanes()
         {
-            if (this.ticks % 4000 == 0)
+            if (this.ticks % 200 == 0)
             {
                 this.addVehicleToLanes();
+                this.ticks = 0;
             }
 
             this.ticks++;
@@ -200,6 +205,11 @@ namespace FroggerStarter.Controller
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        private void onVehicleAdded(Vehicle vehicle)
+        {
+            this.VehicledAdded?.Invoke(this, vehicle);
         }
 
         #endregion

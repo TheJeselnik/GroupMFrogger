@@ -36,11 +36,11 @@ namespace FroggerStarter.Controller
             this.player = frog;
             this.FrogDying = true;
             this.frogDeathTicks = 0;
-            this.setupGameTimer();
+            this.setupAnimationTimer();
             this.timer.Start();
         }
 
-        private void setupGameTimer()
+        private void setupAnimationTimer()
         {
             this.timer = new DispatcherTimer();
             this.timer.Tick += this.timerOnTick;
