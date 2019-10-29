@@ -266,13 +266,21 @@ namespace FroggerStarter.Controller
 
         private void checkPlayerCollisionWithVehicles()
         {
-            foreach (var currVehicle in this.roadManager.AllVehicles)
+            var enumerator = this.roadManager.AllVehicles.GetEnumerator();
+            var collision = false;
+            while (enumerator.MoveNext())
             {
-                if (this.collisionDetector.IsCollisionBetween(currVehicle, this.player) && !this.playerValues.FrogDying)
+                if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player) && !this.playerValues.FrogDying)
                 {
-                    this.playerLosesLife();
+                    collision = true;
                 }
             }
+
+            if (collision)
+            {
+                this.playerLosesLife();
+            }
+            enumerator.Dispose();
         }
 
         private void checkPlayerCollisionWithFrogHomes()
