@@ -17,9 +17,24 @@ namespace FroggerStarter.Model
         /// </summary>
         public enum Direction
         {
+            /// <summary>
+            ///     Up direction
+            /// </summary>
             Up,
+
+            /// <summary>
+            ///     Down direction
+            /// </summary>
             Down,
+
+            /// <summary>
+            ///     The left direction
+            /// </summary>
             Left,
+
+            /// <summary>
+            ///     The right direction
+            /// </summary>
             Right
         }
 
@@ -28,7 +43,14 @@ namespace FroggerStarter.Model
         /// </summary>
         public enum VehicleType
         {
+            /// <summary>
+            ///     The car
+            /// </summary>
             Car,
+
+            /// <summary>
+            ///     The semi truck
+            /// </summary>
             SemiTruck
         }
 
@@ -92,7 +114,7 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Resets the speed x.
         ///     Precondition: None
-        ///     Postcondition: Vehicle.X == initialSpeedX && Vehicle.Y == Y@prev
+        ///     Postcondition: Vehicle.X == initialSpeedX AND Vehicle.Y == Y@prev
         /// </summary>
         public void ResetSpeedX()
         {

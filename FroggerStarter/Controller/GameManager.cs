@@ -337,6 +337,7 @@ namespace FroggerStarter.Controller
                     this.addFrogToFrogHome(enumerator.Current);
                 }
             }
+
             enumerator.Dispose();
         }
 

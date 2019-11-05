@@ -14,6 +14,9 @@ namespace FroggerStarter.Model
         private const int SpeedXDirection = 50;
         private const int SpeedYDirection = 50;
 
+        /// <summary>
+        ///     The frog sprite
+        /// </summary>
         public BaseSprite FrogSprite = new FrogSprite();
 
         #endregion

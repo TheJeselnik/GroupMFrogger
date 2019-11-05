@@ -31,6 +31,14 @@ namespace FroggerStarter.Controller
         /// </summary>
         public double TopShoulderY { get; private set; }
 
+        /// <summary>
+        ///     Gets or sets the <see cref="Vehicle" /> at the specified index.
+        /// </summary>
+        /// <value>
+        ///     The <see cref="Vehicle" />.
+        /// </value>
+        /// <param name="index">The index.</param>
+        /// <returns></returns>
         public Vehicle this[int index]
         {
             get => this.AllVehicles[index];
@@ -55,6 +63,12 @@ namespace FroggerStarter.Controller
 
         #region Methods
 
+        /// <summary>
+        ///     Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        ///     An enumerator that can be used to iterate through the collection.
+        /// </returns>
         public IEnumerator<Vehicle> GetEnumerator()
         {
             return this.AllVehicles.GetEnumerator();

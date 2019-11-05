@@ -42,10 +42,10 @@ namespace FroggerStarter.Model
         public static int TimerWidth { get; } = 640;
 
         /// <summary>
-        /// Gets the ticks until spawn cars.
+        ///     Gets the ticks until spawn cars.
         /// </summary>
         /// <value>
-        /// The ticks until spawn cars.
+        ///     The ticks until spawn cars.
         /// </value>
         public static int TicksUntilSpawnCars { get; } = 200;
 
@@ -114,10 +114,10 @@ namespace FroggerStarter.Model
         public static double TopEdgeOfLanes { get; } = 105.0;
 
         /// <summary>
-        /// Gets the score multiplier.
+        ///     Gets the score multiplier.
         /// </summary>
         /// <value>
-        /// The score multiplier.
+        ///     The score multiplier.
         /// </value>
         public static double ScoreMultiplier { get; } = 200.0;
 

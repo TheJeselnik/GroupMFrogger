@@ -26,6 +26,9 @@ namespace FroggerStarter.View
 
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="GamePage" /> class.
+        /// </summary>
         public GamePage()
         {
             this.InitializeComponent();
@@ -40,7 +43,7 @@ namespace FroggerStarter.View
             this.gameManager = new GameManager(this.applicationHeight, this.applicationWidth);
             this.gameManager.InitializeGame(this.canvas);
 
-            this.scoreTextBlock.Text = $"{GameSettings.InitialScore:00000}";
+            this.scoreTextBlock.Text = $"{GameSettings.InitialScore:000000}";
             this.livesRemainingTextBlock.Text = $"{GameSettings.InitialLives}";
 
             this.gameManager.ScoreUpdated += this.scoreOnScoreUpdated;
@@ -48,6 +51,10 @@ namespace FroggerStarter.View
             this.gameManager.GameOverReached += this.gameOverOnGameOverReached;
             this.gameManager.LifeTimerUpdated += this.lifeTimerOnLifeTimerUpdated;
         }
+
+        #endregion
+
+        #region Methods
 
         private void lifeTimerOnLifeTimerUpdated(object sender, double timeRemaining)
         {
@@ -62,17 +69,13 @@ namespace FroggerStarter.View
 
         private void scoreOnScoreUpdated(object sender, int score)
         {
-            this.scoreTextBlock.Text = $"{score:00000}";
+            this.scoreTextBlock.Text = $"{score:000000}";
         }
 
         private void livesOnLivesUpdated(object sender, int lives)
         {
             this.livesRemainingTextBlock.Text = $"{lives}";
         }
-
-        #endregion
-
-        #region Methods
 
         private void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)
         {

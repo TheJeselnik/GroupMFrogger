@@ -31,6 +31,12 @@ namespace FroggerStarter.Controller
 
         #region Methods
 
+        /// <summary>
+        ///     Animates the frog death.
+        ///     Precondition: none
+        ///     Postcondition: Frog animations queued to new timer
+        /// </summary>
+        /// <param name="frog">The frog.</param>
         public void AnimateFrogDeath(Frog frog)
         {
             this.player = frog;

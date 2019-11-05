@@ -17,6 +17,12 @@ namespace FroggerStarter.Model
 
         #region Properties
 
+        /// <summary>
+        ///     Gets the frog homes.
+        /// </summary>
+        /// <value>
+        ///     The frog homes.
+        /// </value>
         public IList<FrogHome> FrogHomes { get; } = new List<FrogHome>();
 
         #endregion
@@ -37,6 +43,12 @@ namespace FroggerStarter.Model
 
         #region Methods
 
+        /// <summary>
+        ///     Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        ///     An enumerator that can be used to iterate through the collection.
+        /// </returns>
         public IEnumerator<FrogHome> GetEnumerator()
         {
             return this.FrogHomes.GetEnumerator();
