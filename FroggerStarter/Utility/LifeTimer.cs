@@ -1,33 +1,42 @@
-﻿
-
-using FroggerStarter.Model;
+﻿using FroggerStarter.Model;
 
 namespace FroggerStarter.Utility
 {
     /// <summary>
-    /// Defines the timer for the player/frog's life
+    ///     Defines the timer for the player/frog's life
     /// </summary>
     public class LifeTimer
     {
+        #region Properties
 
         /// <summary>
-        /// Gets the time remaining.
+        ///     Gets the time remaining.
         /// </summary>
         /// <value>
-        /// The time remaining.
+        ///     The time remaining.
         /// </value>
         public double TimeRemaining { get; private set; }
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="LifeTimer"/> class.
+        ///     Initializes a new instance of the <see cref="LifeTimer" /> class.
         /// </summary>
         public LifeTimer()
         {
             this.ResetTimeRemaining();
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
-        /// Updates the timer for the frog's remaining time.
+        ///     Updates the timer for the frog's remaining time.
+        ///     Precondition: TimeRemaining != null
+        ///     Postcondition: TimeRemaining = TimeRemaining@prev - GameSettings.TimerMilliseconds
         /// </summary>
         public void UpdateTimer()
         {
@@ -39,7 +48,9 @@ namespace FroggerStarter.Utility
         }
 
         /// <summary>
-        /// Resets the time remaining.
+        ///     Resets the time remaining.
+        ///     Precondition: none
+        ///     Postcondition: TimeRemaining = GameSettings.TimeLimitSeconds
         /// </summary>
         public void ResetTimeRemaining()
         {
@@ -50,5 +61,7 @@ namespace FroggerStarter.Utility
         {
             return milliseconds * 0.001;
         }
+
+        #endregion
     }
 }

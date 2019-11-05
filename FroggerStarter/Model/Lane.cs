@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation;
@@ -8,7 +9,7 @@ namespace FroggerStarter.Model
     /// <summary>
     ///     Represents a horizontal lane.
     /// </summary>
-    public class Lane
+    public class Lane : IEnumerable<Vehicle>
     {
         #region Data members
 
@@ -29,7 +30,7 @@ namespace FroggerStarter.Model
         /// <value>
         ///     The vehicles in lane.
         /// </value>
-        public IList<Vehicle> VehiclesInLane { get; }
+        private IList<Vehicle> VehiclesInLane { get; }
 
         /// <summary>
         ///     Gets or sets the y location of the lane.
@@ -63,6 +64,16 @@ namespace FroggerStarter.Model
 
         #region Methods
 
+        public IEnumerator<Vehicle> GetEnumerator()
+        {
+            return this.VehiclesInLane.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
         /// <summary>
         ///     Occurs when [vehicle added].
         /// </summary>
@@ -74,8 +85,21 @@ namespace FroggerStarter.Model
         public event EventHandler<Vehicle> VehicleRemoved;
 
         /// <summary>
+        ///     Determines whether [has room for vehicles].
+        ///     Precondition: none
+        ///     Postcondition: True if VehiclesInLane.Count lessThan MaxVehicles
+        /// </summary>
+        /// <returns>
+        ///     <c>true</c> if [has room for vehicles]; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasRoomForVehicles()
+        {
+            return this.VehiclesInLane.Count < this.MaxVehicles;
+        }
+
+        /// <summary>
         ///     Adds the vehicle.
-        ///     Precondition: VehiclesInLane.Count lessThan MaxVehicles
+        ///     Precondition: vehiclesInLane.Count lessThan MaxVehicles
         ///     Postcondition: New vehicle queued up
         /// </summary>
         public void AddVehicle()
@@ -88,7 +112,7 @@ namespace FroggerStarter.Model
 
         /// <summary>
         ///     Removes the added vehicles.
-        ///     Precondition: VehiclesInLane.Count greaterThan 1
+        ///     Precondition: vehiclesInLane.Count greaterThan 1
         ///     Postcondition: Vehicle queued for deletion
         /// </summary>
         public void RemoveAddedVehicles()

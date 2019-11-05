@@ -10,17 +10,6 @@ namespace FroggerStarter.Controller
     /// </summary>
     public class RoadManager : IEnumerable<Vehicle>
     {
-
-        /// <summary>
-        /// Occurs when [vehicle added].
-        /// </summary>
-        public event EventHandler<Vehicle> VehicleAdded;
-
-        /// <summary>
-        /// Occurs when [vehicle removed].
-        /// </summary>
-        public event EventHandler<Vehicle> VehicleRemoved;
-
         #region Data members
 
         private int ticks;
@@ -42,6 +31,12 @@ namespace FroggerStarter.Controller
         /// </summary>
         public double TopShoulderY { get; private set; }
 
+        public Vehicle this[int index]
+        {
+            get => this.AllVehicles[index];
+            set => this.AllVehicles.Insert(index, value);
+        }
+
         #endregion
 
         #region Constructors
@@ -56,15 +51,29 @@ namespace FroggerStarter.Controller
             this.getAllVehicles();
         }
 
-        public Vehicle this[int index]
-        {
-            get => this.AllVehicles[index];
-            set => this.AllVehicles.Insert(index, value);
-        }
-
         #endregion
 
         #region Methods
+
+        public IEnumerator<Vehicle> GetEnumerator()
+        {
+            return this.AllVehicles.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
+        /// <summary>
+        ///     Occurs when [vehicle added].
+        /// </summary>
+        public event EventHandler<Vehicle> VehicleAdded;
+
+        /// <summary>
+        ///     Occurs when [vehicle removed].
+        /// </summary>
+        public event EventHandler<Vehicle> VehicleRemoved;
 
         private void placeLanes()
         {
@@ -126,7 +135,7 @@ namespace FroggerStarter.Controller
         {
             foreach (var currVehicleLane in GameSettings.VehicleLanes)
             {
-                if (currVehicleLane.VehiclesInLane.Count < currVehicleLane.MaxVehicles)
+                if (currVehicleLane.HasRoomForVehicles())
                 {
                     currVehicleLane.AddVehicle();
                 }
@@ -134,7 +143,7 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        /// Resets the vehicles to one.
+        ///     Resets the vehicles to one.
         ///     Precondition: currVehicleLane.VehiclesInLane.Count greaterThan 1
         ///     Postcondition: Vehicle in currVehicleLane queued for deletion
         /// </summary>
@@ -167,21 +176,14 @@ namespace FroggerStarter.Controller
             this.AllVehicles = new List<Vehicle>();
             foreach (var currLane in GameSettings.VehicleLanes)
             {
-                foreach (var currVehicle in currLane.VehiclesInLane)
+                var enumerator = currLane.GetEnumerator();
+                while (enumerator.MoveNext())
                 {
-                    this.AllVehicles.Add(currVehicle);
+                    this.AllVehicles.Add(enumerator.Current);
                 }
+
+                enumerator.Dispose();
             }
-        }
-
-        public IEnumerator<Vehicle> GetEnumerator()
-        {
-            return this.AllVehicles.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
         }
 
         private void onVehicleAdded(Vehicle vehicle)
