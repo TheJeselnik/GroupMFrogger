@@ -51,7 +51,7 @@ namespace FroggerStarter.View
 
         private void lifeTimerOnLifeTimerUpdated(object sender, double timeRemaining)
         {
-            var percentageValue = timeRemaining * 0.05;
+            var percentageValue = timeRemaining * 0.1;
             this.timeProgressRectangle.Width = percentageValue * GameSettings.TimerWidth;
         }
 

@@ -42,12 +42,20 @@ namespace FroggerStarter.Model
         public static int TimerWidth { get; } = 640;
 
         /// <summary>
+        /// Gets the ticks until spawn cars.
+        /// </summary>
+        /// <value>
+        /// The ticks until spawn cars.
+        /// </value>
+        public static int TicksUntilSpawnCars { get; } = 200;
+
+        /// <summary>
         ///     Gets the time limit seconds.
         /// </summary>
         /// <value>
         ///     The time limit seconds.
         /// </value>
-        public static double TimeLimitSeconds { get; } = 20.0;
+        public static double TimeLimitSeconds { get; } = 10.0;
 
         /// <summary>
         ///     Gets the required minimum spacing of vehicles

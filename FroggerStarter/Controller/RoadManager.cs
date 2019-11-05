@@ -107,13 +107,13 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        /// Adds a vehicle to lanes.
+        ///     Adds a vehicle to lanes.
         ///     Precondition: currVehicleLane.VehiclesInLane.Count lessThan currVehicleLane.MaxVehicles
         ///     Postcondition: New vehicle queued up in currVehicleLane
         /// </summary>
         public void CheckToAddVehicleToLanes()
         {
-            if (this.ticks % 200 == 0)
+            if (this.ticks % GameSettings.TicksUntilSpawnCars == 0)
             {
                 this.addVehicleToLanes();
                 this.ticks = 0;
