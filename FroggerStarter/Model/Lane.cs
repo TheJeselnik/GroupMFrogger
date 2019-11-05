@@ -13,7 +13,7 @@ namespace FroggerStarter.Model
     {
         #region Data members
 
-        public readonly int MaxVehicles;
+        private readonly int maxVehicles;
 
         private Point location;
         private readonly double initialSpeed;
@@ -56,7 +56,7 @@ namespace FroggerStarter.Model
             this.vehicleType = vehicleType;
             this.direction = direction;
             this.initialSpeed = speed;
-            this.MaxVehicles = maxVehicles;
+            this.maxVehicles = maxVehicles;
             this.VehiclesInLane = new List<Vehicle>();
         }
 
@@ -64,6 +64,12 @@ namespace FroggerStarter.Model
 
         #region Methods
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        /// An enumerator that can be used to iterate through the collection.
+        /// </returns>
         public IEnumerator<Vehicle> GetEnumerator()
         {
             return this.VehiclesInLane.GetEnumerator();
@@ -87,19 +93,19 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Determines whether [has room for vehicles].
         ///     Precondition: none
-        ///     Postcondition: True if VehiclesInLane.Count lessThan MaxVehicles
+        ///     Postcondition: True if VehiclesInLane.Count lessThan maxVehicles
         /// </summary>
         /// <returns>
         ///     <c>true</c> if [has room for vehicles]; otherwise, <c>false</c>.
         /// </returns>
         public bool HasRoomForVehicles()
         {
-            return this.VehiclesInLane.Count < this.MaxVehicles;
+            return this.VehiclesInLane.Count < this.maxVehicles;
         }
 
         /// <summary>
         ///     Adds the vehicle.
-        ///     Precondition: vehiclesInLane.Count lessThan MaxVehicles
+        ///     Precondition: vehiclesInLane.Count lessThan maxVehicles
         ///     Postcondition: New vehicle queued up
         /// </summary>
         public void AddVehicle()
