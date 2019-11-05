@@ -65,7 +65,7 @@ namespace FroggerStarter.Controller
         /// <value>
         ///     The frog homes.
         /// </value>
-        public IList<FrogHome> FrogHomes => this.topShoulder.FrogHomes;
+        private IList<FrogHome> FrogHomes => this.topShoulder.FrogHomes;
 
         #endregion
 
@@ -343,13 +343,15 @@ namespace FroggerStarter.Controller
 
         private void checkPlayerCollisionWithFrogHomes()
         {
-            foreach (var currFrogHome in this.topShoulder.FrogHomes)
+            var enumerator = this.topShoulder.FrogHomes.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                if (this.collisionDetector.IsCollisionBetween(currFrogHome, this.player))
+                if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player))
                 {
-                    this.addFrogToFrogHome(currFrogHome);
+                    this.addFrogToFrogHome(enumerator.Current);
                 }
             }
+            enumerator.Dispose();
         }
 
         private void addFrogToFrogHome(FrogHome frogHome)
