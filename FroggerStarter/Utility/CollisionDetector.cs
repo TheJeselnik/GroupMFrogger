@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using FroggerStarter.Model;
 
-namespace FroggerStarter.Controller
+namespace FroggerStarter.Utility
 {
     /// <summary>
     ///     Handles collision checking of Game Objects.

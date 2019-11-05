@@ -36,6 +36,7 @@ namespace FroggerStarter.Controller
             this.player = frog;
             this.FrogDying = true;
             this.frogDeathTicks = 0;
+            this.animateFrogDeathSprites();
             this.setupAnimationTimer();
             this.timer.Start();
         }
