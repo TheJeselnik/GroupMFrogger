@@ -1,14 +1,13 @@
-﻿using System;
+﻿
 using Windows.Foundation;
 using Windows.UI.Xaml.Media;
-using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model
 {
     /// <summary>
     ///     Defines the vehicle model
     /// </summary>
-    public class Vehicle : GameObject
+    public abstract class Vehicle : GameObject
     {
         #region Types and Delegates
 
@@ -17,16 +16,6 @@ namespace FroggerStarter.Model
         /// </summary>
         public enum Direction
         {
-            /// <summary>
-            ///     Up direction
-            /// </summary>
-            Up,
-
-            /// <summary>
-            ///     Down direction
-            /// </summary>
-            Down,
-
             /// <summary>
             ///     The left direction
             /// </summary>
@@ -58,9 +47,9 @@ namespace FroggerStarter.Model
 
         #region Data members
 
+        private readonly Direction vehicleDirection;
+
         private readonly double initialSpeedX;
-        private readonly VehicleType vehicleType;
-        private readonly Direction direction;
 
         #endregion
 
@@ -69,17 +58,12 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Initializes a new instance of the <see cref="Vehicle" /> class.
         /// </summary>
-        /// <param name="vehicleType">the type of vehicle</param>
         /// <param name="direction">direction the vehicle is facing</param>
-        /// <param name="initialSpeedX">initial speed of a vehicle for movement along X</param>
-        public Vehicle(VehicleType vehicleType, Direction direction, double initialSpeedX)
+        /// <param name="initialSpeed">initial speed of vehicle</param>
+        public Vehicle(Direction direction, double initialSpeed)
         {
-            this.vehicleType = vehicleType;
-            this.direction = direction;
-            this.initialSpeedX = initialSpeedX;
-            this.ResetSpeedX();
-            this.assignVehicleSprite();
-            this.rotateSprite();
+            this.vehicleDirection = direction;
+            this.initialSpeedX = initialSpeed;
         }
 
         #endregion
@@ -93,17 +77,13 @@ namespace FroggerStarter.Model
         /// </summary>
         public void Move()
         {
-            switch (this.direction)
+            switch (this.vehicleDirection)
             {
                 case Direction.Left:
                     MoveLeft();
                     break;
                 case Direction.Right:
                     MoveRight();
-                    break;
-                case Direction.Up:
-                    break;
-                case Direction.Down:
                     break;
                 default:
                     MoveLeft();
@@ -119,41 +99,6 @@ namespace FroggerStarter.Model
         public void ResetSpeedX()
         {
             SetSpeed(this.initialSpeedX, SpeedY);
-        }
-
-        private void assignVehicleSprite()
-        {
-            switch (this.vehicleType)
-            {
-                case VehicleType.Car:
-                    Sprite = new CarSprite();
-                    break;
-                case VehicleType.SemiTruck:
-                    Sprite = new SemiTruckSprite();
-                    break;
-                default:
-                    Sprite = new CarSprite();
-                    break;
-            }
-        }
-
-        private void rotateSprite()
-        {
-            switch (this.direction)
-            {
-                case Direction.Up:
-                    break;
-                case Direction.Down:
-                    break;
-                case Direction.Left:
-                    break;
-                case Direction.Right:
-                    Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-                    Sprite.RenderTransform = new ScaleTransform {ScaleX = -1};
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
 
         #endregion

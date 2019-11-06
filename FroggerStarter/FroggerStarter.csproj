@@ -121,6 +121,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\AnimationManager.cs" />
+    <Compile Include="Model\Car.cs" />
+    <Compile Include="Model\SemiTruck.cs" />
     <Compile Include="Utility\CollisionDetector.cs" />
     <Compile Include="Controller\RoadManager.cs" />
     <Compile Include="Model\FrogHome.cs" />

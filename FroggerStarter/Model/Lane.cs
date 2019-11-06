@@ -133,14 +133,11 @@ namespace FroggerStarter.Model
 
         private void placeVehicle()
         {
-            var newVehicle = new Vehicle(this.vehicleType, this.direction, this.initialSpeed);
+            var newVehicle = this.createVehicle();
             var vehicleYOffset = calculateVehicleYOffset(newVehicle);
+
             switch (this.direction)
             {
-                case Vehicle.Direction.Up:
-                    break;
-                case Vehicle.Direction.Down:
-                    break;
                 case Vehicle.Direction.Left:
                     newVehicle.X = GameSettings.RoadWidth;
                     newVehicle.Y = this.Y - vehicleYOffset;
@@ -155,6 +152,19 @@ namespace FroggerStarter.Model
 
             this.VehiclesInLane.Add(newVehicle);
             this.onVehicleAdded(newVehicle);
+        }
+
+        private Vehicle createVehicle()
+        {
+            switch (this.vehicleType)
+            {
+                case Vehicle.VehicleType.Car:
+                    return new Car(this.direction, this.initialSpeed);
+                case Vehicle.VehicleType.SemiTruck:
+                    return new SemiTruck(this.direction, this.initialSpeed);
+                default:
+                    return new Car(this.direction, this.initialSpeed);
+            }
         }
 
         private static double calculateVehicleYOffset(GameObject newVehicle)

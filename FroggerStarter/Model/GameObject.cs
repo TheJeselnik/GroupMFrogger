@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.Foundation;
 using FroggerStarter.View.Sprites;
+using Windows.UI.Xaml.Media;
 
 namespace FroggerStarter.Model
 {
@@ -169,6 +170,12 @@ namespace FroggerStarter.Model
 
             this.SpeedX = speedX;
             this.SpeedY = speedY;
+        }
+
+        public void RotateSprite()
+        {
+            Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+            Sprite.RenderTransform = new ScaleTransform { ScaleX = -1 };
         }
 
         #endregion
