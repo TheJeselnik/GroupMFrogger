@@ -46,7 +46,7 @@ namespace FroggerStarter.Controller
 
         /// <summary>
         ///     Moves the player to the left.
-        ///     Precondition: CanMove && player.X greater than 0
+        ///     Precondition: CanMove AND player.X greater than 0
         ///     Postcondition: player.X = player.X@prev - player.Width
         /// </summary>
         public void MovePlayerLeft()
@@ -64,7 +64,7 @@ namespace FroggerStarter.Controller
 
         /// <summary>
         ///     Moves the player to the right.
-        ///     Precondition: CanMove && player.X + player.Width less than backgroundWidth
+        ///     Precondition: CanMove AND player.X + player.Width less than backgroundWidth
         ///     Postcondition: player.X = player.X@prev + player.Width
         /// </summary>
         public void MovePlayerRight()
@@ -82,7 +82,7 @@ namespace FroggerStarter.Controller
 
         /// <summary>
         ///     Moves the player up.
-        ///     Precondition: CanMove && player.Y less than topShoulderY
+        ///     Precondition: CanMove AND player.Y less than topShoulderY
         ///     Postcondition: player.Y = player.Y@prev - player.Height
         /// </summary>
         public void MovePlayerUp()
@@ -120,7 +120,7 @@ namespace FroggerStarter.Controller
 
         /// <summary>
         ///     Moves the player down.
-        ///     Precondition: CanMove && player.Y greater than bottomOffset
+        ///     Precondition: CanMove AND player.Y greater than bottomOffset
         ///     Postcondition: player.Y = player.Y@prev + player.Height
         /// </summary>
         public void MovePlayerDown()
