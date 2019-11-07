@@ -1,7 +1,4 @@
 ﻿
-using Windows.Foundation;
-using Windows.UI.Xaml.Media;
-
 namespace FroggerStarter.Model
 {
     /// <summary>
@@ -60,7 +57,7 @@ namespace FroggerStarter.Model
         /// </summary>
         /// <param name="direction">direction the vehicle is facing</param>
         /// <param name="initialSpeed">initial speed of vehicle</param>
-        public Vehicle(Direction direction, double initialSpeed)
+        protected Vehicle(Direction direction, double initialSpeed)
         {
             this.vehicleDirection = direction;
             this.initialSpeedX = initialSpeed;
