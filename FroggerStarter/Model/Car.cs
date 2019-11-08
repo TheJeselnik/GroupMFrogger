@@ -23,7 +23,5 @@ namespace FroggerStarter.Model
                 this.RotateSprite();
             }
         }     
-        
-
     }
 }

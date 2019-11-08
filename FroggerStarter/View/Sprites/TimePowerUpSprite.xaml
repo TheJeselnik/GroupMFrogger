@@ -49,20 +49,20 @@
         <Rectangle Fill="{StaticResource PrimaryClockColor}" Height="2" Width="2" Canvas.Left="32" Canvas.Top="32"/>
         <Rectangle Fill="{StaticResource PrimaryClockColor}" Height="12" Width="2" Canvas.Top="14" Canvas.Left="38"/>
 
-        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="4" Canvas.Top="13" Canvas.Left="29"/>
-        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="4" Canvas.Top="17" Canvas.Left="21"/>
-        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="4" Canvas.Top="15" Canvas.Left="25"/>
+        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="4" Canvas.Top="16" Canvas.Left="29"/>
+        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="4" Canvas.Top="18" Canvas.Left="21"/>
+        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="4" Canvas.Top="17" Canvas.Left="25"/>
         <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="2" Canvas.Top="19" Canvas.Left="19"/>
-        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="2" Canvas.Top="17" Canvas.Left="17"/>
-        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="2" Canvas.Top="15" Canvas.Left="15"/>
-        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="2" Canvas.Top="13" Canvas.Left="13"/>
+        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="2" Canvas.Top="18" Canvas.Left="17"/>
+        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="2" Canvas.Top="17" Canvas.Left="15"/>
+        <Rectangle Fill="{StaticResource PrimaryHandColor}" Height="2" Width="2" Canvas.Top="16" Canvas.Left="13"/>
         
-        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="21" Canvas.Left="21"/>
-        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="31" Canvas.Left="26"/>
-        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="23" Canvas.Left="22"/>
-        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="25" Canvas.Left="23"/>
-        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="27" Canvas.Left="24"/>
-        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="29" Canvas.Left="25"/>
+        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="21" Canvas.Left="20"/>
+        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="31" Canvas.Left="25"/>
+        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="23" Canvas.Left="21"/>
+        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="25" Canvas.Left="22"/>
+        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="27" Canvas.Left="23"/>
+        <Rectangle Fill="{StaticResource SecondHandColor}" Height="2" Width="1" Canvas.Top="29" Canvas.Left="24"/>
 
     </Canvas>
 </local:BaseSprite>

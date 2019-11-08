@@ -121,6 +121,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\AnimationManager.cs" />
+    <Compile Include="Model\BonusTimePowerUp.cs" />
     <Compile Include="Model\Car.cs" />
     <Compile Include="Model\PowerUp.cs" />
     <Compile Include="Model\SemiTruck.cs" />

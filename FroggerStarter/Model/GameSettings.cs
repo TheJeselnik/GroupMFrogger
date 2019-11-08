@@ -58,6 +58,14 @@ namespace FroggerStarter.Model
         public static double TimeLimitSeconds { get; } = 10.0;
 
         /// <summary>
+        ///     Gets the bonus time reward.
+        /// </summary>
+        /// <value>
+        ///     The bonus time reward.
+        /// </value>
+        public static double BonusTimeRewardSeconds { get; } = 5.0;
+
+        /// <summary>
         ///     Gets the required minimum spacing of vehicles
         /// </summary>
         /// <value>
