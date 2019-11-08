@@ -172,10 +172,13 @@ namespace FroggerStarter.Model
             this.SpeedY = speedY;
         }
 
+        /// <summary>
+        /// Rotates the sprite.
+        /// </summary>
         public void RotateSprite()
         {
-            Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-            Sprite.RenderTransform = new ScaleTransform { ScaleX = -1 };
+            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.Sprite.RenderTransform = new ScaleTransform { ScaleX = -1 };
         }
 
         #endregion

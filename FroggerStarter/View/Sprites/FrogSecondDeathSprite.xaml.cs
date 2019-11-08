@@ -8,6 +8,9 @@ namespace FroggerStarter.View.Sprites
     /// </summary>
     public sealed partial class FrogSecondDeathSprite
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrogSecondDeathSprite"/> class.
+        /// </summary>
         public FrogSecondDeathSprite()
         {
             this.InitializeComponent();
