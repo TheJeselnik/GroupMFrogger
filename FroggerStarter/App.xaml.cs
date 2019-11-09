@@ -44,6 +44,7 @@ namespace FroggerStarter
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
+                rootFrame.Navigate(typeof(StartGamePage), null);
 
                 rootFrame.NavigationFailed += this.OnNavigationFailed;
 
