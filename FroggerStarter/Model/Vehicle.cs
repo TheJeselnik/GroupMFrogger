@@ -1,5 +1,4 @@
-﻿
-namespace FroggerStarter.Model
+﻿namespace FroggerStarter.Model
 {
     /// <summary>
     ///     Defines the vehicle model
@@ -37,7 +36,12 @@ namespace FroggerStarter.Model
             /// <summary>
             ///     The semi truck
             /// </summary>
-            SemiTruck
+            SemiTruck,
+
+            /// <summary>
+            ///     The oil semi truck
+            /// </summary>
+            OilSemiTruck
         }
 
         #endregion

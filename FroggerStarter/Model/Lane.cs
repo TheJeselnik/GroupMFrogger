@@ -171,25 +171,36 @@ namespace FroggerStarter.Model
 
         private Vehicle createVehicle()
         {
-            const int maxValue = 2;
-            const double speedOffset = 0.05;
-
-            var number = new Random().Next(maxValue);
-            var speed = speedOffset;
-
-            if (number == 0)
-            {
-                speed = -speedOffset;
-            }
-
             switch (this.vehicleType)
             {
                 case Vehicle.VehicleType.Car:
                     return new Car(this.direction, this.initialSpeed);
                 case Vehicle.VehicleType.SemiTruck:
-                    return number == 0 ? new SemiTruck(this.direction, this.initialSpeed) : new OilSemiTruck(this.direction, this.initialSpeed + speed);
+                    return new SemiTruck(this.direction, this.initialSpeed);
+                case Vehicle.VehicleType.OilSemiTruck:
+                    return new OilSemiTruck(this.direction, this.initialSpeed);
                 default:
                     return new Car(this.direction, this.initialSpeed);
+            }
+        }
+
+        //TODO keeping to reuse in potential levels
+        private SemiTruck pickFromSemiTruckVariants()
+        {
+            Vehicle.VehicleType[] vehicleTypes = {Vehicle.VehicleType.SemiTruck, Vehicle.VehicleType.OilSemiTruck};
+            var random = new Random();
+            var index = random.Next(vehicleTypes.Length - 1);
+
+            switch (vehicleTypes[index])
+            {
+                case Vehicle.VehicleType.Car:
+                    throw new ArgumentOutOfRangeException();
+                case Vehicle.VehicleType.SemiTruck:
+                    return new SemiTruck(this.direction, this.initialSpeed);
+                case Vehicle.VehicleType.OilSemiTruck:
+                    return new OilSemiTruck(this.direction, this.initialSpeed);
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 

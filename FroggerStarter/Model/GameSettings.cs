@@ -179,7 +179,7 @@ namespace FroggerStarter.Model
         ///     The fourth lane.
         /// </value>
         private static Lane FourthLane { get; } =
-            new Lane(Vehicle.VehicleType.SemiTruck, Vehicle.Direction.Left, 4.5, 3);
+            new Lane(Vehicle.VehicleType.OilSemiTruck, Vehicle.Direction.Left, 4.5, 3);
 
         /// <summary>
         ///     Gets or sets the fifth lane.
