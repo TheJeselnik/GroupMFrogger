@@ -122,6 +122,7 @@
     </Compile>
     <Compile Include="Controller\AnimationManager.cs" />
     <Compile Include="Model\Car.cs" />
+    <Compile Include="Model\OilSemiTruck.cs" />
     <Compile Include="Model\PowerUp.cs" />
     <Compile Include="Model\SemiTruck.cs" />
     <Compile Include="Utility\CollisionDetector.cs" />
@@ -169,6 +170,9 @@
       <DependentUpon>FrogThirdDeathSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\ISpriteRenderer.cs" />
+    <Compile Include="View\Sprites\OilSemiTruckSprite.xaml.cs">
+      <DependentUpon>OilSemiTruckSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\SemiTruckSprite.xaml.cs">
       <DependentUpon>SemiTruckSprite.xaml</DependentUpon>
     </Compile>
@@ -182,6 +186,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\oil-logo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -233,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\FrogThirdDeathSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\OilSemiTruckSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

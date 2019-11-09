@@ -156,12 +156,23 @@ namespace FroggerStarter.Model
 
         private Vehicle createVehicle()
         {
+            const int maxValue = 2;
+            const double speedOffset = 0.05;
+
+            var number = new Random().Next(maxValue);
+            var speed = speedOffset;
+
+            if (number == 0)
+            {
+                speed = -speedOffset;
+            }
+
             switch (this.vehicleType)
             {
                 case Vehicle.VehicleType.Car:
                     return new Car(this.direction, this.initialSpeed);
                 case Vehicle.VehicleType.SemiTruck:
-                    return new SemiTruck(this.direction, this.initialSpeed);
+                    return number == 0 ? new SemiTruck(this.direction, this.initialSpeed) : new OilSemiTruck(this.direction, this.initialSpeed + speed);
                 default:
                     return new Car(this.direction, this.initialSpeed);
             }
