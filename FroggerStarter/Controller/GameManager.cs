@@ -290,7 +290,7 @@ namespace FroggerStarter.Controller
 
         private void updateLifeTimer()
         {
-            this.lifeTimer.UpdateTimer();
+            this.lifeTimer.DecreaseTimeRemaining();
             this.onLifeTimerUpdated(this.lifeTimer.TimeRemaining);
             if (this.lifeTimer.TimeRemaining <= 0.0 && !this.playerValues.FrogDying)
             {
