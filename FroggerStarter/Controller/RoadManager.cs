@@ -12,7 +12,7 @@ namespace FroggerStarter.Controller
     {
         #region Data members
 
-        private int ticks;
+        private int addVehicleTicks;
 
         #endregion
 
@@ -25,6 +25,14 @@ namespace FroggerStarter.Controller
         ///     All vehicles.
         /// </value>
         public IList<Vehicle> AllVehicles { get; private set; }
+
+        /// <summary>
+        /// Gets the power ups.
+        /// </summary>
+        /// <value>
+        /// The power ups.
+        /// </value>
+        public IList<PowerUp> PowerUps { get; private set; }
 
         /// <summary>
         ///     The y coordinate of the top shoulder
@@ -55,7 +63,7 @@ namespace FroggerStarter.Controller
         public RoadManager()
         {
             this.placeLanes();
-            this.addVehicleToLanes();
+            addVehicleToLanes();
             this.getAllVehicles();
         }
 
@@ -88,6 +96,11 @@ namespace FroggerStarter.Controller
         ///     Occurs when [vehicle removed].
         /// </summary>
         public event EventHandler<Vehicle> VehicleRemoved;
+
+        /// <summary>
+        ///     Occurs when [vehicle removed].
+        /// </summary>
+        public event EventHandler<PowerUp> PowerUpAdded;
 
         private void placeLanes()
         {
@@ -130,22 +143,35 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
+        /// Adds the power up to a random lane.
+        ///     Precondition: None
+        ///     Postcondition: RandomLane.AddPowerUp
+        /// </summary>
+        /// <param name="powerUp">The power up.</param>
+        public void AddPowerUp(PowerUp powerUp)
+        {
+            var random = new Random();
+            var index = random.Next(GameSettings.VehicleLanes.Count - 1);
+            GameSettings.VehicleLanes[index].AddPowerUp(powerUp);
+        }
+
+        /// <summary>
         ///     Adds a vehicle to lanes.
         ///     Precondition: currVehicleLane.VehiclesInLane.Count lessThan currVehicleLane.MaxVehicles
         ///     Postcondition: New vehicle queued up in currVehicleLane
         /// </summary>
         public void CheckToAddVehicleToLanes()
         {
-            if (this.ticks % GameSettings.TicksUntilSpawnCars == 0)
+            if (this.addVehicleTicks % GameSettings.TicksUntilSpawnCars == 0)
             {
-                this.addVehicleToLanes();
-                this.ticks = 0;
+                addVehicleToLanes();
+                this.addVehicleTicks = 0;
             }
 
-            this.ticks++;
+            this.addVehicleTicks++;
         }
 
-        private void addVehicleToLanes()
+        private static void addVehicleToLanes()
         {
             foreach (var currVehicleLane in GameSettings.VehicleLanes)
             {
@@ -208,6 +234,12 @@ namespace FroggerStarter.Controller
         private void onVehicleRemoved(Vehicle vehicle)
         {
             this.VehicleRemoved?.Invoke(this, vehicle);
+        }
+
+        //TODO potentially unnecessary
+        private void onPowerUpAdded(PowerUp powerUp)
+        {
+            this.PowerUpAdded?.Invoke(this, powerUp);
         }
 
         #endregion

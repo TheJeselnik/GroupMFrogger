@@ -273,11 +273,17 @@ namespace FroggerStarter.Controller
             this.roadManager.MoveVehicles();
             this.checkToAddVehiclesToLanes();
 
-            this.checkPlayerCollisionWithVehicles();
-            this.checkPlayerCollisionWithFrogHomes();
+            this.checkForPlayerCollision();
 
             this.checkIfFrogIsDoneDying();
             this.updateLifeTimer();
+        }
+
+        private void checkForPlayerCollision()
+        {
+            this.checkPlayerCollisionWithPowerUps();
+            this.checkPlayerCollisionWithVehicles();
+            this.checkPlayerCollisionWithFrogHomes();
         }
 
         private void checkToAddVehiclesToLanes()
@@ -339,6 +345,17 @@ namespace FroggerStarter.Controller
             }
 
             enumerator.Dispose();
+        }
+
+        private void checkPlayerCollisionWithPowerUps()
+        {
+            foreach (var currPowerUp in this.roadManager.PowerUps)
+            {
+                if (this.collisionDetector.IsCollisionBetween(currPowerUp, this.player))
+                {
+                    
+                }
+            }
         }
 
         private void addFrogToFrogHome(FrogHome frogHome)

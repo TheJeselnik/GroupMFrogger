@@ -50,6 +50,22 @@ namespace FroggerStarter.Model
         public static int TicksUntilSpawnCars { get; } = 200;
 
         /// <summary>
+        /// Gets the bonus time power up chance.
+        /// </summary>
+        /// <value>
+        /// The bonus time power up chance.
+        /// </value>
+        public static double BonusTimePowerUpChance { get; } = 99.9;
+
+        /// <summary>
+        /// Gets the bonus time power up chance ceiling.
+        /// </summary>
+        /// <value>
+        /// The bonus time power up chance ceiling.
+        /// </value>
+        public static double BonusTimePowerUpChanceCeiling { get; } = 100.0;
+
+        /// <summary>
         ///     Gets the time limit seconds.
         /// </summary>
         /// <value>

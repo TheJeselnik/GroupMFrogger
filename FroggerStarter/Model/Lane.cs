@@ -131,10 +131,25 @@ namespace FroggerStarter.Model
             }
         }
 
+        /// <summary>
+        /// Adds the power up.
+        /// Precondition: None
+        /// Postcondition: Powerup added to lane
+        /// </summary>
+        /// <param name="powerUp">The power up.</param>
+        public void AddPowerUp(PowerUp powerUp)
+        {
+            var powerUpYOffset = calculateObjectYOffset(powerUp);
+            powerUp.Y = this.Y - powerUpYOffset;
+            var random = new Random();
+            var randomX = random.Next((int) GameSettings.RoadWidth);
+            powerUp.X = randomX;
+        }
+
         private void placeVehicle()
         {
             var newVehicle = this.createVehicle();
-            var vehicleYOffset = calculateVehicleYOffset(newVehicle);
+            var vehicleYOffset = calculateObjectYOffset(newVehicle);
 
             switch (this.direction)
             {
@@ -167,7 +182,7 @@ namespace FroggerStarter.Model
             }
         }
 
-        private static double calculateVehicleYOffset(GameObject newVehicle)
+        private static double calculateObjectYOffset(GameObject newVehicle)
         {
             var emptyVerticalSpace = GameSettings.LaneHeight - newVehicle.Height;
             return emptyVerticalSpace / 2;
