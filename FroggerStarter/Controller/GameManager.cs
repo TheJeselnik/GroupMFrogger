@@ -281,7 +281,7 @@ namespace FroggerStarter.Controller
 
         private void checkForPlayerCollision()
         {
-            this.checkPlayerCollisionWithPowerUps();
+            //this.checkPlayerCollisionWithPowerUps();
             this.checkPlayerCollisionWithVehicles();
             this.checkPlayerCollisionWithFrogHomes();
         }
