@@ -30,6 +30,7 @@ namespace FroggerStarter.Controller
         private LifeTimer lifeTimer;
         private PlayerMovementManager playerMovementManager;
         private AnimationManager animationManager;
+        private IList<WaterCrossing> waterCrossings;
 
         #endregion
 
@@ -146,6 +147,7 @@ namespace FroggerStarter.Controller
             GameSettings.RoadWidth = this.backgroundWidth;
 
             this.addFrogSprites();
+            this.waterCrossings = new List<WaterCrossing>();
             this.instantiateHelperClasses();
             this.addNonPlayerSprites();
 
@@ -167,15 +169,20 @@ namespace FroggerStarter.Controller
 
         private void instantiateHelperClasses()
         {
-            this.roadManager = new RoadManager();
-            this.roadManager.WaterAdded += this.waterAdded;
-            this.roadManager.PlaceLanes();
+            this.instantiateRoadManager();
             this.topShoulder = new Shoulder(this.player.Width);
             this.playerValues = new PlayerValues();
             this.animationManager = new AnimationManager();
             this.collisionDetector = new CollisionDetector();
             this.lifeTimer = new LifeTimer();
             this.playerMovementManager = new PlayerMovementManager(this.player, this.FrogHomes);
+        }
+
+        private void instantiateRoadManager()
+        {
+            this.roadManager = new RoadManager();
+            this.roadManager.WaterAdded += this.waterAdded;
+            this.roadManager.PlaceLanes();
         }
 
         private void vehicleAdded(object sender, Vehicle vehicle)
@@ -191,6 +198,8 @@ namespace FroggerStarter.Controller
         private void waterAdded(object sender, WaterCrossing waterCrossing)
         {
             this.gameCanvas.Children.Add(waterCrossing.Sprite);
+            this.gameCanvas.Children.Move((uint) (this.gameCanvas.Children.Count -1), 0);
+            this.waterCrossings.Add(waterCrossing);
         }
 
         private void addVehiclesToCanvas()
@@ -289,6 +298,7 @@ namespace FroggerStarter.Controller
         private void checkForPlayerCollision()
         {
             //this.checkPlayerCollisionWithPowerUps();
+            this.checkPlayerCollisionWithWater();
             this.checkPlayerCollisionWithVehicles();
             this.checkPlayerCollisionWithFrogHomes();
         }
@@ -324,17 +334,27 @@ namespace FroggerStarter.Controller
         private void checkPlayerCollisionWithVehicles()
         {
             var enumerator = this.roadManager.AllVehicles.GetEnumerator();
-            var collision = false;
+            var vehicleCollision = false;
+            var waterCollision = false;
             while (enumerator.MoveNext())
             {
                 if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player) &&
                     !this.playerValues.FrogDying)
                 {
-                    collision = true;
+                    vehicleCollision = true;
                 }
             }
 
-            if (collision)
+            foreach (var currWaterCrossing in this.waterCrossings)
+            {
+                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player) &&
+                    !this.playerValues.FrogDying)
+                {
+                    waterCollision = true;
+                }
+            }
+
+            if (vehicleCollision && !waterCollision)
             {
                 SoundEffects.PlayDeathSound();
                 this.playerLosesLife();
@@ -363,7 +383,26 @@ namespace FroggerStarter.Controller
             {
                 if (this.collisionDetector.IsCollisionBetween(currPowerUp, this.player))
                 {
-                    
+                }
+            }
+        }
+
+        private void checkPlayerCollisionWithWater()
+        {
+            foreach (var currWaterCrossing in this.waterCrossings)
+            {
+                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player))
+                {
+                }
+            }
+        }
+
+        private void checkPlayerCollisionWithWaterVehicles()
+        {
+            foreach (var currWaterCrossing in this.waterCrossings)
+            {
+                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player))
+                {
                 }
             }
         }

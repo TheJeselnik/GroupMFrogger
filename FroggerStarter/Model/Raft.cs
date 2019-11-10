@@ -17,7 +17,7 @@ namespace FroggerStarter.Model
         {
             Sprite = new RaftSprite();
             this.SetSpeed(initialSpeed, SpeedY);
-
+            this.IsWaterVehicle = true;
             if (direction == Direction.Right)
             {
                 this.RotateSprite();

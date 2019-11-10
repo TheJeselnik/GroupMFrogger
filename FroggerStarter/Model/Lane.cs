@@ -200,6 +200,8 @@ namespace FroggerStarter.Model
                     return new SemiTruck(this.direction, this.initialSpeed);
                 case Vehicle.VehicleType.OilSemiTruck:
                     return new OilSemiTruck(this.direction, this.initialSpeed);
+                case Vehicle.VehicleType.Raft:
+                    return new Raft(this.direction, this.initialSpeed);
                 default:
                     return new Car(this.direction, this.initialSpeed);
             }

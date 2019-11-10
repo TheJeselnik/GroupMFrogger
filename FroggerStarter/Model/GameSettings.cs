@@ -196,7 +196,7 @@ namespace FroggerStarter.Model
         ///     The fifth lane.
         /// </value>
         private static Lane FirstLevelFifthLane { get; } = new
-            Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Right, 5.0, 5, true);
+            Lane(Vehicle.VehicleType.Raft, Vehicle.Direction.Right, 5.0, 5, true);
 
         /// <summary>
         ///     Gets the vehicle lanes of the first level.

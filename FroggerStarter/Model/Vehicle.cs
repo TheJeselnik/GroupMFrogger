@@ -41,7 +41,12 @@
             /// <summary>
             ///     The oil semi truck
             /// </summary>
-            OilSemiTruck
+            OilSemiTruck,
+
+            /// <summary>
+            /// The raft
+            /// </summary>
+            Raft
         }
 
         #endregion
@@ -53,6 +58,11 @@
         private readonly double initialSpeedX;
 
         #endregion
+
+        /// <summary>
+        /// The is water vehicle
+        /// </summary>
+        public bool IsWaterVehicle = false;
 
         #region Constructors
 
