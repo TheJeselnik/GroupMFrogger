@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -123,6 +123,7 @@
     <Compile Include="Controller\AnimationManager.cs" />
     <Compile Include="Model\BonusTimePowerUp.cs" />
     <Compile Include="Model\Car.cs" />
+    <Compile Include="Model\HighScore.cs" />
     <Compile Include="Model\OilSemiTruck.cs" />
     <Compile Include="Model\PowerUp.cs" />
     <Compile Include="Model\Raft.cs" />
@@ -143,10 +144,14 @@
     <Compile Include="Utility\LifeTimer.cs" />
     <Compile Include="Controller\PowerUpManager.cs" />
     <Compile Include="Utility\SoundEffects.cs" />
+    <Compile Include="ViewModel\HighScoreViewModel.cs" />
     <Compile Include="View\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\HighScoreBoard.xaml.cs">
+      <DependentUpon>HighScoreBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LevelTwoGamePage.xaml.cs">
       <DependentUpon>LevelTwoGamePage.xaml</DependentUpon>
     </Compile>
@@ -229,6 +234,10 @@
     <Page Include="View\GamePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\HighScoreBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LevelTwoGamePage.xaml">
       <SubType>Designer</SubType>
