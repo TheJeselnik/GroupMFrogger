@@ -101,7 +101,5 @@ namespace FroggerStarter.Utility
         {
             player.Pause();
         }
-
-
     }
 }

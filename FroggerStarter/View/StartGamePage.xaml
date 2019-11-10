@@ -27,11 +27,10 @@
     <Canvas x:Name="canvas" Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}" Background="Black">
 
         <sprites:FrogSprite Canvas.Left="300" Canvas.Top="67"/>
-        <sprites:FrogHomeSprite></sprites:FrogHomeSprite>
-        <sprites:FrogHomeSprite Canvas.Left="600" Canvas.Top="360"></sprites:FrogHomeSprite>
-        <sprites:FrogHomeSprite Canvas.Top="360"></sprites:FrogHomeSprite>
-        <sprites:FrogHomeSprite Canvas.Left="600"></sprites:FrogHomeSprite>
-
+        <sprites:FrogHomeSprite/>
+        <sprites:FrogHomeSprite Canvas.Left="600" Canvas.Top="360"/>
+        <sprites:FrogHomeSprite Canvas.Top="360"/>
+        <sprites:FrogHomeSprite Canvas.Left="600"/>
 
         <TextBlock Canvas.Left="233" Canvas.Top="139" Text="Big Ol' Frog" Style="{StaticResource TitleStyle}"/>
         <TextBlock Canvas.Left="194" Canvas.Top="256" Text="Press Enter to Start" Style="{StaticResource StartGameStyle}"/>
