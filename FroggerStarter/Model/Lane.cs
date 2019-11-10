@@ -19,6 +19,7 @@ namespace FroggerStarter.Model
         private readonly double initialSpeed;
         private readonly Vehicle.Direction direction;
         private readonly Vehicle.VehicleType vehicleType;
+        private readonly bool hasWater;
 
         #endregion
 
@@ -51,12 +52,14 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Initializes a new instance of the <see cref="Lane" /> class.
         /// </summary>
-        public Lane(Vehicle.VehicleType vehicleType, Vehicle.Direction direction, double speed, int maxVehicles)
+        public Lane(Vehicle.VehicleType vehicleType, Vehicle.Direction direction, double speed, int maxVehicles,
+            bool hasWater)
         {
             this.vehicleType = vehicleType;
             this.direction = direction;
             this.initialSpeed = speed;
             this.maxVehicles = maxVehicles;
+            this.hasWater = hasWater;
             this.VehiclesInLane = new List<Vehicle>();
         }
 
@@ -89,6 +92,11 @@ namespace FroggerStarter.Model
         ///     Occurs when [vehicle removed].
         /// </summary>
         public event EventHandler<Vehicle> VehicleRemoved;
+
+        /// <summary>
+        ///     Occurs when [water added].
+        /// </summary>
+        public event EventHandler<WaterCrossing> WaterAdded;
 
         /// <summary>
         ///     Determines whether [has room for vehicles].
@@ -132,9 +140,9 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
-        /// Adds the power up.
-        /// Precondition: None
-        /// Postcondition: Powerup added to lane
+        ///     Adds the power up.
+        ///     Precondition: None
+        ///     Postcondition: Powerup added to lane
         /// </summary>
         /// <param name="powerUp">The power up.</param>
         public void AddPowerUp(PowerUp powerUp)
@@ -144,6 +152,19 @@ namespace FroggerStarter.Model
             var random = new Random();
             var randomX = random.Next((int) GameSettings.RoadWidth);
             powerUp.X = randomX;
+        }
+
+        /// <summary>
+        ///     Adds the water.
+        ///     Precondition: None
+        ///     Postcondition: Water Crossing added to lane
+        /// </summary>
+        public void AddWater()
+        {
+            if (this.hasWater)
+            {
+                this.onWaterAdded(new WaterCrossing {Y = this.Y - GameSettings.WaterCrossingOffsetHeight});
+            }
         }
 
         private void placeVehicle()
@@ -244,6 +265,11 @@ namespace FroggerStarter.Model
         private void onVehicleRemoved(Vehicle vehicle)
         {
             this.VehicleRemoved?.Invoke(this, vehicle);
+        }
+
+        private void onWaterAdded(WaterCrossing waterCrossing)
+        {
+            this.WaterAdded?.Invoke(this, waterCrossing);
         }
 
         #endregion

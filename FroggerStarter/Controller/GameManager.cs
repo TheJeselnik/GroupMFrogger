@@ -168,6 +168,8 @@ namespace FroggerStarter.Controller
         private void instantiateHelperClasses()
         {
             this.roadManager = new RoadManager();
+            this.roadManager.WaterAdded += this.waterAdded;
+            this.roadManager.PlaceLanes();
             this.topShoulder = new Shoulder(this.player.Width);
             this.playerValues = new PlayerValues();
             this.animationManager = new AnimationManager();
@@ -184,6 +186,11 @@ namespace FroggerStarter.Controller
         private void vehicleRemoved(object sender, Vehicle vehicle)
         {
             this.gameCanvas.Children.Remove(vehicle.Sprite);
+        }
+
+        private void waterAdded(object sender, WaterCrossing waterCrossing)
+        {
+            this.gameCanvas.Children.Add(waterCrossing.Sprite);
         }
 
         private void addVehiclesToCanvas()

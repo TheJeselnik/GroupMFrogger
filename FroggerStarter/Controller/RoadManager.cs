@@ -62,9 +62,6 @@ namespace FroggerStarter.Controller
         /// </summary>
         public RoadManager()
         {
-            this.placeLanes();
-            addVehicleToLanes();
-            this.getAllVehicles();
         }
 
         #endregion
@@ -102,17 +99,32 @@ namespace FroggerStarter.Controller
         /// </summary>
         public event EventHandler<PowerUp> PowerUpAdded;
 
-        private void placeLanes()
+        /// <summary>
+        ///     Occurs when [water added].
+        /// </summary>
+        public event EventHandler<WaterCrossing> WaterAdded;
+
+        /// <summary>
+        /// Places the lanes.
+        /// </summary>
+        public void PlaceLanes()
         {
             this.AllVehicles = new List<Vehicle>();
             var currentY = GameSettings.RoadHeight - GameSettings.LaneHeight * 2 + GameSettings.RoadOffsetHeight;
-            foreach (var currVehicleLane in GameSettings.VehicleLanes)
+            foreach (var currVehicleLane in GameSettings.FirstLevelVehicleLanes)
             {
                 currVehicleLane.Y = currentY;
                 currentY -= GameSettings.LaneHeight;
+
                 currVehicleLane.VehicleAdded += this.addNewVehicle;
                 currVehicleLane.VehicleRemoved += this.removeVehicle;
+                currVehicleLane.WaterAdded += this.addWater;
+
+                currVehicleLane.AddWater();
             }
+
+            addVehicleToLanes();
+            this.getAllVehicles();
         }
 
         private void addNewVehicle(object sender, Vehicle vehicle)
@@ -125,6 +137,11 @@ namespace FroggerStarter.Controller
         {
             this.AllVehicles.Remove(vehicle);
             this.onVehicleRemoved(vehicle);
+        }
+
+        private void addWater(object sender, WaterCrossing waterCrossing)
+        {
+            this.onWaterAdded(waterCrossing);
         }
 
         /// <summary>
@@ -151,8 +168,8 @@ namespace FroggerStarter.Controller
         public void AddPowerUp(PowerUp powerUp)
         {
             var random = new Random();
-            var index = random.Next(GameSettings.VehicleLanes.Count - 1);
-            GameSettings.VehicleLanes[index].AddPowerUp(powerUp);
+            var index = random.Next(GameSettings.FirstLevelVehicleLanes.Count - 1);
+            GameSettings.FirstLevelVehicleLanes[index].AddPowerUp(powerUp);
         }
 
         /// <summary>
@@ -173,7 +190,7 @@ namespace FroggerStarter.Controller
 
         private static void addVehicleToLanes()
         {
-            foreach (var currVehicleLane in GameSettings.VehicleLanes)
+            foreach (var currVehicleLane in GameSettings.FirstLevelVehicleLanes)
             {
                 if (currVehicleLane.HasRoomForVehicles())
                 {
@@ -189,7 +206,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void ResetOneVehiclePerLane()
         {
-            foreach (var currVehicleLane in GameSettings.VehicleLanes)
+            foreach (var currVehicleLane in GameSettings.FirstLevelVehicleLanes)
             {
                 currVehicleLane.RemoveAddedVehicles();
             }
@@ -214,7 +231,7 @@ namespace FroggerStarter.Controller
         private void getAllVehicles()
         {
             this.AllVehicles = new List<Vehicle>();
-            foreach (var currLane in GameSettings.VehicleLanes)
+            foreach (var currLane in GameSettings.FirstLevelVehicleLanes)
             {
                 var enumerator = currLane.GetEnumerator();
                 while (enumerator.MoveNext())
@@ -240,6 +257,10 @@ namespace FroggerStarter.Controller
         private void onPowerUpAdded(PowerUp powerUp)
         {
             this.PowerUpAdded?.Invoke(this, powerUp);
+        }
+        private void onWaterAdded(WaterCrossing waterCrossing)
+        {
+            this.WaterAdded?.Invoke(this, waterCrossing);
         }
 
         #endregion

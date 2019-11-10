@@ -50,18 +50,18 @@ namespace FroggerStarter.Model
         public static int TicksUntilSpawnCars { get; } = 200;
 
         /// <summary>
-        /// Gets the bonus time power up chance.
+        ///     Gets the bonus time power up chance.
         /// </summary>
         /// <value>
-        /// The bonus time power up chance.
+        ///     The bonus time power up chance.
         /// </value>
         public static double BonusTimePowerUpChance { get; } = 99.9;
 
         /// <summary>
-        /// Gets the bonus time power up chance ceiling.
+        ///     Gets the bonus time power up chance ceiling.
         /// </summary>
         /// <value>
-        /// The bonus time power up chance ceiling.
+        ///     The bonus time power up chance ceiling.
         /// </value>
         public static double BonusTimePowerUpChanceCeiling { get; } = 100.0;
 
@@ -96,6 +96,14 @@ namespace FroggerStarter.Model
         ///     The road offset y.
         /// </value>
         public static double RoadOffsetHeight { get; } = 5.0;
+
+        /// <summary>
+        ///     Gets the height of the water crossing offset.
+        /// </summary>
+        /// <value>
+        ///     The height of the water crossing offset.
+        /// </value>
+        public static double WaterCrossingOffsetHeight { get; } = 10.0;
 
         /// <summary>
         ///     Gets the height of the lane.
@@ -146,58 +154,58 @@ namespace FroggerStarter.Model
         public static double ScoreMultiplier { get; } = 200.0;
 
         /// <summary>
-        ///     Gets or sets the first lane.
+        ///     Gets or sets the first lane of the first level.
         /// </summary>
         /// <value>
         ///     The first lane.
         /// </value>
-        private static Lane FirstLane { get; } =
-            new Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Left, 3.0, 3);
+        private static Lane FirstLevelFirstLane { get; } =
+            new Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Left, 3.0, 3, false);
 
         /// <summary>
-        ///     Gets or sets the second lane.
+        ///     Gets or sets the second lane of the first level.
         /// </summary>
         /// <value>
         ///     The second lane.
         /// </value>
-        private static Lane SecondLane { get; } =
-            new Lane(Vehicle.VehicleType.SemiTruck, Vehicle.Direction.Right, 3.5, 2);
+        private static Lane FirstLevelSecondLane { get; } =
+            new Lane(Vehicle.VehicleType.SemiTruck, Vehicle.Direction.Right, 3.5, 2, false);
 
         /// <summary>
-        ///     Gets or sets the third lane.
+        ///     Gets or sets the third lane of the first level.
         /// </summary>
         /// <value>
         ///     The third lane.
         /// </value>
-        private static Lane ThirdLane { get; } =
-            new Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Left, 4.0, 4);
+        private static Lane FirstLevelThirdLane { get; } =
+            new Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Left, 4.0, 4, false);
 
         /// <summary>
-        ///     Gets or sets the fourth lane.
+        ///     Gets or sets the fourth lane of the first level.
         /// </summary>
         /// <value>
         ///     The fourth lane.
         /// </value>
-        private static Lane FourthLane { get; } =
-            new Lane(Vehicle.VehicleType.OilSemiTruck, Vehicle.Direction.Left, 4.5, 3);
+        private static Lane FirstLevelFourthLane { get; } =
+            new Lane(Vehicle.VehicleType.OilSemiTruck, Vehicle.Direction.Left, 4.5, 3, false);
 
         /// <summary>
-        ///     Gets or sets the fifth lane.
+        ///     Gets or sets the fifth lane of the first level.
         /// </summary>
         /// <value>
         ///     The fifth lane.
         /// </value>
-        private static Lane FifthLane { get; } = new
-            Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Right, 5.0, 5);
+        private static Lane FirstLevelFifthLane { get; } = new
+            Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Right, 5.0, 5, true);
 
         /// <summary>
-        ///     Gets the vehicle lanes.
+        ///     Gets the vehicle lanes of the first level.
         /// </summary>
         /// <value>
         ///     The vehicle lanes.
         /// </value>
-        public static IList<Lane> VehicleLanes { get; } = new List<Lane>
-            {FirstLane, SecondLane, ThirdLane, FourthLane, FifthLane};
+        public static IList<Lane> FirstLevelVehicleLanes { get; } = new List<Lane>
+            {FirstLevelFirstLane, FirstLevelSecondLane, FirstLevelThirdLane, FirstLevelFourthLane, FirstLevelFifthLane};
 
         #endregion
     }

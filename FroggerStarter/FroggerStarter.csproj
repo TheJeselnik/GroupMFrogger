@@ -125,7 +125,9 @@
     <Compile Include="Model\Car.cs" />
     <Compile Include="Model\OilSemiTruck.cs" />
     <Compile Include="Model\PowerUp.cs" />
+    <Compile Include="Model\Raft.cs" />
     <Compile Include="Model\SemiTruck.cs" />
+    <Compile Include="Model\WaterCrossing.cs" />
     <Compile Include="Utility\CollisionDetector.cs" />
     <Compile Include="Controller\RoadManager.cs" />
     <Compile Include="Model\FrogHome.cs" />
@@ -179,11 +181,17 @@
     <Compile Include="View\Sprites\OilSemiTruckSprite.xaml.cs">
       <DependentUpon>OilSemiTruckSprite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\RaftSprite.xaml.cs">
+      <DependentUpon>RaftSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\SemiTruckSprite.xaml.cs">
       <DependentUpon>SemiTruckSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\TimePowerUpSprite.xaml.cs">
       <DependentUpon>TimePowerUpSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\WaterCrossingSprite.xaml.cs">
+      <DependentUpon>WaterCrossingSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StartGamePage.xaml.cs">
       <DependentUpon>StartGamePage.xaml</DependentUpon>
@@ -266,11 +274,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Sprites\RaftSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Sprites\SemiTruckSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\TimePowerUpSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\WaterCrossingSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
