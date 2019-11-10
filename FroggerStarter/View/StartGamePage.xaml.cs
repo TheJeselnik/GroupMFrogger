@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using FroggerStarter.Utility;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -39,12 +40,15 @@ namespace FroggerStarter.View
                 .SetPreferredMinSize(new Size(this.applicationWidth, this.applicationHeight));
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
+
+            SoundEffects.PlayTitleSound();
         }
 
         private void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)
         {
             if (args.VirtualKey == VirtualKey.Enter)
             {
+                SoundEffects.PauseSound();
                 this.Frame.Navigate(typeof(GamePage), null);
             }
         }

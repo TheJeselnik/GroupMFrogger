@@ -22,6 +22,7 @@ namespace FroggerStarter
         public App()
         {
             this.InitializeComponent();
+
             Suspending += this.OnSuspending;
         }
 

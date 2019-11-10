@@ -140,6 +140,7 @@
     <Compile Include="Model\GameObject.cs" />
     <Compile Include="Utility\LifeTimer.cs" />
     <Compile Include="Controller\PowerUpManager.cs" />
+    <Compile Include="Utility\SoundEffects.cs" />
     <Compile Include="View\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
@@ -194,7 +195,15 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\bump.mp3" />
+    <Content Include="Assets\game_over.mp3" />
+    <Content Include="Assets\home.mp3" />
+    <Content Include="Assets\level_complete.mp3" />
     <Content Include="Assets\oil-logo.png" />
+    <Content Include="Assets\splat.mp3" />
+    <Content Include="Assets\time_beep.mp3" />
+    <Content Include="Assets\title_music.wav" />
+    <Content Include="Assets\water_splash.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FroggerStarter.Model;
+using FroggerStarter.Utility;
 
 namespace FroggerStarter.Controller
 {
@@ -55,6 +56,10 @@ namespace FroggerStarter.Controller
             {
                 this.player.MoveLeft();
             }
+            else
+            {
+                SoundEffects.PlayBoundarySound();
+            }
         }
 
         private bool playerAtLeftBoundary()
@@ -73,6 +78,10 @@ namespace FroggerStarter.Controller
             {
                 this.player.MoveRight();
             }
+            else
+            {
+                SoundEffects.PlayBoundarySound();
+            }
         }
 
         private bool playerAtRightBoundary()
@@ -90,6 +99,10 @@ namespace FroggerStarter.Controller
             if (this.playerCanMoveUp() || this.playerBelowFrogHome())
             {
                 this.player.MoveUp();
+            }
+            else
+            {
+                SoundEffects.PlayBoundarySound();
             }
         }
 
@@ -128,6 +141,10 @@ namespace FroggerStarter.Controller
             if (!this.playerAtBottomBoundary() && this.CanMove)
             {
                 this.player.MoveDown();
+            }
+            else
+            {
+                SoundEffects.PlayBoundarySound();
             }
         }
 

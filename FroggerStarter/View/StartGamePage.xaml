@@ -20,12 +20,31 @@
             <Setter Property="FontSize" Value="35"/>
             <Setter Property="FontFamily" Value ="Arial"/>
         </Style>
+
+        <SolidColorBrush x:Key="DotColor" Color="Purple"/>
     </Page.Resources>
 
     <Canvas x:Name="canvas" Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}" Background="Black">
 
         <sprites:FrogSprite Canvas.Left="300" Canvas.Top="67"/>
+        <sprites:FrogHomeSprite></sprites:FrogHomeSprite>
+        <sprites:FrogHomeSprite Canvas.Left="600" Canvas.Top="360"></sprites:FrogHomeSprite>
+        <sprites:FrogHomeSprite Canvas.Top="360"></sprites:FrogHomeSprite>
+        <sprites:FrogHomeSprite Canvas.Left="600"></sprites:FrogHomeSprite>
+
+
         <TextBlock Canvas.Left="233" Canvas.Top="139" Text="Big Ol' Frog" Style="{StaticResource TitleStyle}"/>
         <TextBlock Canvas.Left="194" Canvas.Top="256" Text="Press Enter to Start" Style="{StaticResource StartGameStyle}"/>
+        <Ellipse Height="30" Width="30" Canvas.Left="44" Canvas.Top="139" Fill="{StaticResource DotColor}"/>
+        <Ellipse Height="30" Width="30" Canvas.Left="139" Canvas.Top="62" Fill="{StaticResource DotColor}"/>
+        <Ellipse Height="30" Width="30" Canvas.Left="44" Canvas.Top="260" Fill="{StaticResource DotColor}"/>
+        <Ellipse Height="30" Width="30" Canvas.Left="497" Canvas.Top="62" Fill="{StaticResource DotColor}"/>
+        <Ellipse Height="30" Width="30" Canvas.Left="595" Canvas.Top="260" Fill="{StaticResource DotColor}"/>
+        <Ellipse Height="30" Width="30" Canvas.Left="497" Canvas.Top="190" Fill="{StaticResource DotColor}"/>
+        <Ellipse Height="30" Width="30" Canvas.Left="595" Canvas.Top="124" Fill="{StaticResource DotColor}"/>
+        <Ellipse Height="30" Width="30" Canvas.Left="139" Canvas.Top="190" Fill="{StaticResource DotColor}"/>
+        <Ellipse Height="30" Width="30" Canvas.Left="497" Canvas.Top="345" Fill="{StaticResource DotColor}"/>
+        <Ellipse Height="30" Width="30" Canvas.Left="139" Canvas.Top="345" Fill="{StaticResource DotColor}"/>
+        <Ellipse Height="30" Width="30" Canvas.Left="310" Canvas.Top="340" Fill="{StaticResource DotColor}"/>
     </Canvas>
 </Page>

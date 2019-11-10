@@ -298,8 +298,10 @@ namespace FroggerStarter.Controller
         {
             this.lifeTimer.DecreaseTimeRemaining();
             this.onLifeTimerUpdated(this.lifeTimer.TimeRemaining);
+
             if (this.lifeTimer.TimeRemaining <= 0.0 && !this.playerValues.FrogDying)
             {
+                SoundEffects.PlayTimeOutSound();
                 this.playerLosesLife();
             }
         }
@@ -327,6 +329,7 @@ namespace FroggerStarter.Controller
 
             if (collision)
             {
+                SoundEffects.PlayDeathSound();
                 this.playerLosesLife();
             }
 
@@ -360,6 +363,7 @@ namespace FroggerStarter.Controller
 
         private void addFrogToFrogHome(FrogHome frogHome)
         {
+            SoundEffects.PlayHomeLandingSound();
             frogHome.AddFrog();
             this.gameCanvas.Children.Add(frogHome.Sprite);
             this.playerScores();
