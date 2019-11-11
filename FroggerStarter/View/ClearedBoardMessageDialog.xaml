@@ -1,0 +1,15 @@
+﻿<ContentDialog
+    x:Class="FroggerStarter.View.ClearedBoardMessageDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FroggerStarter.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="HighScore board has been cleared!"
+    x:Name="dialog">
+
+    <Grid>
+        <Button Content="Close" HorizontalAlignment="Center" Height="44" Width="176" Click="CloseBtn_Click"/>
+    </Grid>
+</ContentDialog>

@@ -17,28 +17,16 @@ using Windows.UI.Xaml.Navigation;
 
 namespace FroggerStarter.View
 {
-    public sealed partial class GameOverMenuDialog : ContentDialog
+    public sealed partial class ClearedBoardMessageDialog : ContentDialog
     {
-        public GameOverMenuDialog()
+        public ClearedBoardMessageDialog()
         {
             this.InitializeComponent();
         }
 
-        private void RestartBtn_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO: handle restarting app
-        }
-
-        private async void ViewScoreBoardBtn_Click(object sender, RoutedEventArgs e)
+        private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
             this.dialog.Hide();
-            var highScoreDialog = new HighScoreBoardDialog { isOpenedAtStartScreen = false };
-            await highScoreDialog.ShowAsync();
-        }
-
-        private void EndGameBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(1);
         }
     }
 }

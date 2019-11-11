@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using FroggerStarter.Extensions;
 using FroggerStarter.Model;
 using FroggerStarter.Utility;
+using FroggerStarter.View;
 
 namespace FroggerStarter.ViewModel
 {
@@ -62,9 +63,12 @@ namespace FroggerStarter.ViewModel
             return this.scoreBoard.Count > 0 && this.scoreBoard != null;
         }
 
-        private void clearBoard(object obj)
+        private async void clearBoard(object obj)
         {
             //TODO: Handle removing all data from file
+
+            var clearBoardDialog = new ClearedBoardMessageDialog();
+            await clearBoardDialog.ShowAsync();
         }
 
         private void sortByName(object obj)
@@ -73,6 +77,7 @@ namespace FroggerStarter.ViewModel
             {
                 highScore.SortDescriptionDefault();
             }
+
             //TODO: Handle sorting list by name, score, level
 
             this.Scores = this.scoreBoard.Scores.ToObservableCollection();

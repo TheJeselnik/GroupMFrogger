@@ -39,25 +39,18 @@ namespace FroggerStarter.View
             ApplicationView.GetForCurrentView()
                 .SetPreferredMinSize(new Size(this.applicationWidth, this.applicationHeight));
             
-
-
-            Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
             SoundEffects.PlayTitleSound();
-            
         }
 
-        private void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)
+        private void StartGamedBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (args.VirtualKey == VirtualKey.Enter)
-            {
-                SoundEffects.PauseSound();
-                this.Frame.Navigate(typeof(GamePage), null);
-            }
+            SoundEffects.PauseSound();
+            this.Frame.Navigate(typeof(GamePage), null);
         }
 
         private async void ViewScoreBoardBtn_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new HighScoreBoardDialog();
+            var dialog = new HighScoreBoardDialog {isOpenedAtStartScreen = true};
             await dialog.ShowAsync();
         }
     }

@@ -37,8 +37,7 @@
         <sprites:FrogHomeSprite Margin="600,0,0,360" />
         <sprites:FrogHomeSprite Margin="0,0,600,360" />
 
-        <TextBlock Text="Big Ol' Frog" Style="{StaticResource TitleStyle}" Margin="233,134,226,231"/>
-        <TextBlock Text="Press Enter to Start" Style="{StaticResource StartGameStyle}" Margin="194,205,188,166"/>
+        <TextBlock Text="Big Ol' Frog" Style="{StaticResource TitleStyle}" Margin="233,144,226,221"/>
         <Ellipse Height="30" Width="30"  Fill="{StaticResource DotColor}" Margin="498,175,122,205"/>
         <Ellipse Height="30" Width="30"  Fill="{StaticResource DotColor}" Margin="127,175,493,205"/>
         <Ellipse Height="30" Width="30"  Fill="{StaticResource DotColor}" Margin="498,47,122,333"/>
@@ -49,9 +48,9 @@
         <Ellipse Height="30" Width="30"  Fill="{StaticResource DotColor}" Margin="25,175,595,205"/>
         <Button Content="View ScoreBoard"  Width="140" Height="45" Foreground="Purple" Background="ForestGreen" FontSize="16" Click="ViewScoreBoardBtn_Click" Margin="72,347,0,0" VerticalAlignment="Top" />
         <Button Content="Clear ScoreBoard"  Width="140" Height="45" Foreground="Purple" Background="ForestGreen" FontSize="16" Command="{Binding ClearCommand}" Margin="443,347,0,0" VerticalAlignment="Top"/>
-        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="310,258,310,122"/>
         <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="310,10,310,370"/>
         <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="397,347,223,33"/>
         <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="233,347,387,33"/>
+        <Button Content="Start Game"  Width="140" Height="45" Foreground="Purple" Background="ForestGreen" FontSize="16" Click="StartGamedBtn_Click" Margin="0,241,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
     </Grid>
 </Page>

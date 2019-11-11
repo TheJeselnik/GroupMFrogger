@@ -24,7 +24,7 @@ namespace FroggerStarter.View
             this.InitializeComponent();
         }
 
-        private async void SubmitButton_Click(object sender, RoutedEventArgs e)
+        private async void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             this.dialog.Hide();
             var menuDialog = new GameOverMenuDialog();

@@ -19,14 +19,27 @@ namespace FroggerStarter.View
 {
     public sealed partial class HighScoreBoardDialog : ContentDialog
     {
+        public bool isOpenedAtStartScreen { get; set; }
+
         public HighScoreBoardDialog()
         {
             this.InitializeComponent();
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private async void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
-           this.dialog.Hide();
+
+            if (this.isOpenedAtStartScreen)
+            {
+                this.dialog.Hide();
+            }
+            else
+            {
+                this.dialog.Hide();
+                var dialog = new GameOverMenuDialog();
+                await dialog.ShowAsync();
+            }
+           
         }
     }
 }
