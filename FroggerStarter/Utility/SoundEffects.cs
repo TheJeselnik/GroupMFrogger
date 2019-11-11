@@ -94,11 +94,13 @@ namespace FroggerStarter.Utility
 
             player.AutoPlay = false;
             player.Source = MediaSource.CreateFromStorageFile(file);
+            player.IsLoopingEnabled = true;
             player.Play();
         }
 
         public static void PauseSound()
         {
+            player.IsLoopingEnabled = false;
             player.Pause();
         }
     }

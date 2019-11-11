@@ -20,11 +20,23 @@ namespace FroggerStarter.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class HighScoreBoard : Page
+    public sealed partial class HighScoreBoardPage : Page
     {
-        public HighScoreBoard()
+        public HighScoreBoardPage()
         {
             this.InitializeComponent();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Frame.BackStack.Last().SourcePageType == typeof(GamePage))
+            {
+                //TODO: Handle showing dialog popup for restart, end game, or show score board again
+            }
+            else
+            {
+                this.Frame.GoBack();
+            }
         }
     }
 }

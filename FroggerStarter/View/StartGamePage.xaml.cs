@@ -40,7 +40,6 @@ namespace FroggerStarter.View
                 .SetPreferredMinSize(new Size(this.applicationWidth, this.applicationHeight));
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
-
             SoundEffects.PlayTitleSound();
         }
 
@@ -51,6 +50,11 @@ namespace FroggerStarter.View
                 SoundEffects.PauseSound();
                 this.Frame.Navigate(typeof(GamePage), null);
             }
+        }
+
+        private void ViewScoreBoardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(HighScoreBoardPage), null);
         }
     }
 }
