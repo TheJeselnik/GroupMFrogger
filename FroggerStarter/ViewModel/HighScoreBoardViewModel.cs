@@ -105,8 +105,6 @@ namespace FroggerStarter.ViewModel
             this.Scores = this.scoreBoard.Scores.ToObservableCollection();
         }
 
-
-
         protected virtual void onPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
