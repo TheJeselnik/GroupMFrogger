@@ -215,6 +215,114 @@ namespace FroggerStarter.Model
         public static IList<Lane> FirstLevelVehicleLanes { get; } = new List<Lane>
             {FirstLevelFirstLane, FirstLevelSecondLane, FirstLevelThirdLane, FirstLevelFourthLane, FirstLevelFifthLane};
 
+        /// <summary>
+        ///     Gets or sets the first lane of the first level.
+        /// </summary>
+        /// <value>
+        ///     The first lane.
+        /// </value>
+        private static Lane SecondLevelFirstLane { get; } =
+            new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 3.0, 3, false);
+
+        /// <summary>
+        ///     Gets or sets the second lane of the first level.
+        /// </summary>
+        /// <value>
+        ///     The second lane.
+        /// </value>
+        private static Lane SecondLevelSecondLane { get; } =
+            new Lane(Vehicle.VehicleType.SemiTruck, GameObject.Direction.Right, 3.5, 2, false);
+
+        /// <summary>
+        ///     Gets or sets the third lane of the first level.
+        /// </summary>
+        /// <value>
+        ///     The third lane.
+        /// </value>
+        private static Lane SecondLevelThirdLane { get; } =
+            new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 4.0, 4, false);
+
+        /// <summary>
+        ///     Gets or sets the fourth lane of the first level.
+        /// </summary>
+        /// <value>
+        ///     The fourth lane.
+        /// </value>
+        private static Lane SecondLevelFourthLane { get; } =
+            new Lane(Vehicle.VehicleType.OilSemiTruck, GameObject.Direction.Left, 5.0, 3, false);
+
+        /// <summary>
+        ///     Gets or sets the fifth lane of the first level.
+        /// </summary>
+        /// <value>
+        ///     The fifth lane.
+        /// </value>
+        private static Lane SecondLevelFifthLane { get; } = new
+            Lane(WaterObject.WaterObjectType.Log, GameObject.Direction.Right, 2.0, 2, true);
+
+        /// <summary>
+        ///     Gets the vehicle lanes of the first level.
+        /// </summary>
+        /// <value>
+        ///     The vehicle lanes.
+        /// </value>
+        public static IList<Lane> SecondLevelVehicleLanes { get; } = new List<Lane>
+            {SecondLevelFirstLane, SecondLevelSecondLane, SecondLevelThirdLane, SecondLevelFourthLane, SecondLevelFifthLane};
+
+        /// <summary>
+        ///     Gets or sets the first lane of the first level.
+        /// </summary>
+        /// <value>
+        ///     The first lane.
+        /// </value>
+        private static Lane ThirdLevelFirstLane { get; } =
+            new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 4.0, 4, false);
+
+        /// <summary>
+        ///     Gets or sets the second lane of the first level.
+        /// </summary>
+        /// <value>
+        ///     The second lane.
+        /// </value>
+        private static Lane ThirdLevelSecondLane { get; } =
+            new Lane(Vehicle.VehicleType.SemiTruck, GameObject.Direction.Right, 4.5, 3, false);
+
+        /// <summary>
+        ///     Gets or sets the third lane of the first level.
+        /// </summary>
+        /// <value>
+        ///     The third lane.
+        /// </value>
+        private static Lane ThirdLevelThirdLane { get; } =
+            new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 5.0, 5, false);
+
+        /// <summary>
+        ///     Gets or sets the fourth lane of the first level.
+        /// </summary>
+        /// <value>
+        ///     The fourth lane.
+        /// </value>
+        private static Lane ThirdLevelFourthLane { get; } =
+            new Lane(WaterObject.WaterObjectType.Log, GameObject.Direction.Left, 4.5, 2, true);
+
+        /// <summary>
+        ///     Gets or sets the fifth lane of the first level.
+        /// </summary>
+        /// <value>
+        ///     The fifth lane.
+        /// </value>
+        private static Lane ThirdLevelFifthLane { get; } = new
+            Lane(WaterObject.WaterObjectType.Raft, GameObject.Direction.Right, 5.0, 5, true);
+
+        /// <summary>
+        ///     Gets the vehicle lanes of the first level.
+        /// </summary>
+        /// <value>
+        ///     The vehicle lanes.
+        /// </value>
+        public static IList<Lane> ThirdLevelVehicleLanes { get; } = new List<Lane>
+            {ThirdLevelFirstLane, ThirdLevelSecondLane, ThirdLevelThirdLane, ThirdLevelFourthLane, ThirdLevelFifthLane};
+
         #endregion
     }
 }
