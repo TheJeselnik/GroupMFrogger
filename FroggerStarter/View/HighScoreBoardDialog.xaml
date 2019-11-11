@@ -18,11 +18,7 @@
             <RowDefinition Height="400" />
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="600"/>
-        </Grid.ColumnDefinitions>
-
-        <ListView Name="listView" Margin="0,45,104,225" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Path=Scores, Mode=TwoWay}"  ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <ListView Name="listView" Margin="0,45,0,225" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Path=Scores, Mode=TwoWay}"  ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

@@ -476,10 +476,12 @@ namespace FroggerStarter.Controller
         {
             if (this.playerValues.GameOver)
             {
+                SoundEffects.PlayGameOverSound();
                 this.gameOver();
             }
             else if (this.allFrogHomesFilled())
             {
+                SoundEffects.PlayLevelCompleteSound();
                 this.goToNextLevel();
             }
             else

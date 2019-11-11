@@ -65,6 +65,7 @@ namespace FroggerStarter.View
         private void gameOverOnGameOverReached(object sender, EventArgs e)
         {
             this.gameOverTextBlock.Visibility = Visibility.Visible;
+            handleRetrievePlayerName();
         }
 
         private void scoreOnScoreUpdated(object sender, int score)
@@ -94,6 +95,12 @@ namespace FroggerStarter.View
                     this.gameManager.MovePlayerDown();
                     break;
             }
+        }
+
+        private static async void handleRetrievePlayerName()
+        {
+            var dialog = new RetrievePlayerNameDialog();
+            await dialog.ShowAsync();
         }
 
         #endregion
