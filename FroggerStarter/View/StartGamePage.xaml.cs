@@ -38,9 +38,12 @@ namespace FroggerStarter.View
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.GetForCurrentView()
                 .SetPreferredMinSize(new Size(this.applicationWidth, this.applicationHeight));
+            
+
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
             SoundEffects.PlayTitleSound();
+            
         }
 
         private void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)
@@ -52,9 +55,10 @@ namespace FroggerStarter.View
             }
         }
 
-        private void ViewScoreBoardBtn_Click(object sender, RoutedEventArgs e)
+        private async void ViewScoreBoardBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(HighScoreBoardPage), null);
+            var dialog = new HighScoreBoardDialog();
+            await dialog.ShowAsync();
         }
     }
 }
