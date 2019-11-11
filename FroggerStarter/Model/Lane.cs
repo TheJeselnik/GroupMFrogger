@@ -17,7 +17,7 @@ namespace FroggerStarter.Model
 
         private Point location;
         private readonly double initialSpeed;
-        private readonly Vehicle.Direction direction;
+        private readonly GameObject.Direction direction;
         private readonly Vehicle.VehicleType vehicleType;
         private readonly bool hasWater;
 
@@ -52,7 +52,7 @@ namespace FroggerStarter.Model
         /// <summary>
         ///     Initializes a new instance of the <see cref="Lane" /> class.
         /// </summary>
-        public Lane(Vehicle.VehicleType vehicleType, Vehicle.Direction direction, double speed, int maxVehicles,
+        public Lane(Vehicle.VehicleType vehicleType, GameObject.Direction direction, double speed, int maxVehicles,
             bool hasWater)
         {
             this.vehicleType = vehicleType;
@@ -174,11 +174,11 @@ namespace FroggerStarter.Model
 
             switch (this.direction)
             {
-                case Vehicle.Direction.Left:
+                case GameObject.Direction.Left:
                     newVehicle.X = GameSettings.RoadWidth;
                     newVehicle.Y = this.Y - vehicleYOffset;
                     break;
-                case Vehicle.Direction.Right:
+                case GameObject.Direction.Right:
                     newVehicle.X = GameSettings.LeftEdgeOfRoad - newVehicle.Width;
                     newVehicle.Y = this.Y - vehicleYOffset;
                     break;
@@ -200,8 +200,6 @@ namespace FroggerStarter.Model
                     return new SemiTruck(this.direction, this.initialSpeed);
                 case Vehicle.VehicleType.OilSemiTruck:
                     return new OilSemiTruck(this.direction, this.initialSpeed);
-                case Vehicle.VehicleType.Raft:
-                    return new Raft(this.direction, this.initialSpeed);
                 default:
                     return new Car(this.direction, this.initialSpeed);
             }

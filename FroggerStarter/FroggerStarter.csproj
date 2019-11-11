@@ -124,11 +124,13 @@
     <Compile Include="Model\BonusTimePowerUp.cs" />
     <Compile Include="Model\Car.cs" />
     <Compile Include="Model\HighScore.cs" />
+    <Compile Include="Model\Log.cs" />
     <Compile Include="Model\OilSemiTruck.cs" />
     <Compile Include="Model\PowerUp.cs" />
     <Compile Include="Model\Raft.cs" />
     <Compile Include="Model\SemiTruck.cs" />
     <Compile Include="Model\WaterCrossing.cs" />
+    <Compile Include="Model\WaterObject.cs" />
     <Compile Include="Utility\CollisionDetector.cs" />
     <Compile Include="Controller\RoadManager.cs" />
     <Compile Include="Model\FrogHome.cs" />
@@ -183,6 +185,9 @@
       <DependentUpon>FrogThirdDeathSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\ISpriteRenderer.cs" />
+    <Compile Include="View\Sprites\LogSprite.xaml.cs">
+      <DependentUpon>LogSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\OilSemiTruckSprite.xaml.cs">
       <DependentUpon>OilSemiTruckSprite.xaml</DependentUpon>
     </Compile>
@@ -276,6 +281,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\FrogThirdDeathSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\LogSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

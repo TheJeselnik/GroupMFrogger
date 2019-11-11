@@ -160,7 +160,7 @@ namespace FroggerStarter.Model
         ///     The first lane.
         /// </value>
         private static Lane FirstLevelFirstLane { get; } =
-            new Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Left, 3.0, 3, false);
+            new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 3.0, 3, false);
 
         /// <summary>
         ///     Gets or sets the second lane of the first level.
@@ -169,7 +169,7 @@ namespace FroggerStarter.Model
         ///     The second lane.
         /// </value>
         private static Lane FirstLevelSecondLane { get; } =
-            new Lane(Vehicle.VehicleType.SemiTruck, Vehicle.Direction.Right, 3.5, 2, false);
+            new Lane(Vehicle.VehicleType.SemiTruck, GameObject.Direction.Right, 3.5, 2, false);
 
         /// <summary>
         ///     Gets or sets the third lane of the first level.
@@ -178,7 +178,7 @@ namespace FroggerStarter.Model
         ///     The third lane.
         /// </value>
         private static Lane FirstLevelThirdLane { get; } =
-            new Lane(Vehicle.VehicleType.Car, Vehicle.Direction.Left, 4.0, 4, false);
+            new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 4.0, 4, false);
 
         /// <summary>
         ///     Gets or sets the fourth lane of the first level.
@@ -187,7 +187,7 @@ namespace FroggerStarter.Model
         ///     The fourth lane.
         /// </value>
         private static Lane FirstLevelFourthLane { get; } =
-            new Lane(Vehicle.VehicleType.OilSemiTruck, Vehicle.Direction.Left, 4.5, 3, false);
+            new Lane(Vehicle.VehicleType.OilSemiTruck, GameObject.Direction.Left, 4.5, 3, false);
 
         /// <summary>
         ///     Gets or sets the fifth lane of the first level.
@@ -196,7 +196,7 @@ namespace FroggerStarter.Model
         ///     The fifth lane.
         /// </value>
         private static Lane FirstLevelFifthLane { get; } = new
-            Lane(Vehicle.VehicleType.Raft, Vehicle.Direction.Right, 5.0, 5, true);
+            Lane(Vehicle.VehicleType.Car, GameObject.Direction.Right, 5.0, 5, false);
 
         /// <summary>
         ///     Gets the vehicle lanes of the first level.

@@ -8,22 +8,6 @@
         #region Types and Delegates
 
         /// <summary>
-        ///     Enum Types of four directions a vehicle can be facing and move
-        /// </summary>
-        public enum Direction
-        {
-            /// <summary>
-            ///     The left direction
-            /// </summary>
-            Left,
-
-            /// <summary>
-            ///     The right direction
-            /// </summary>
-            Right
-        }
-
-        /// <summary>
         ///     Enum Types of vehicles
         /// </summary>
         public enum VehicleType
@@ -41,12 +25,7 @@
             /// <summary>
             ///     The oil semi truck
             /// </summary>
-            OilSemiTruck,
-
-            /// <summary>
-            /// The raft
-            /// </summary>
-            Raft
+            OilSemiTruck
         }
 
         #endregion
@@ -95,6 +74,10 @@
                     break;
                 case Direction.Right:
                     MoveRight();
+                    break;
+                case Direction.Up:
+                    break;
+                case Direction.Down:
                     break;
                 default:
                     MoveLeft();

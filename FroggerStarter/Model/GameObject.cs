@@ -10,6 +10,34 @@ namespace FroggerStarter.Model
     /// </summary>
     public abstract class GameObject
     {
+
+
+        /// <summary>
+        ///     Enum Types of four directions a vehicle can be facing and move
+        /// </summary>
+        public enum Direction
+        {
+            /// <summary>
+            /// The up direction
+            /// </summary>
+            Up,
+
+            /// <summary>
+            /// The down direction
+            /// </summary>
+            Down,
+
+            /// <summary>
+            ///     The left direction
+            /// </summary>
+            Left,
+
+            /// <summary>
+            ///     The right direction
+            /// </summary>
+            Right
+        }
+
         #region Data members
 
         private Point location;
