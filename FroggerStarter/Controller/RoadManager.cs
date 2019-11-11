@@ -12,7 +12,8 @@ namespace FroggerStarter.Controller
     {
         #region Data members
 
-        private int addVehicleTicks;
+        private int addObjectTicks;
+        private IList<Lane> currentLevelLanes;
 
         #endregion
 
@@ -55,6 +56,14 @@ namespace FroggerStarter.Controller
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RoadManager"/> class.
+        /// </summary>
+        public RoadManager()
+        {
+            this.currentLevelLanes = GameSettings.Levels[0];
+        }
+
         #region Methods
 
         /// <summary>
@@ -74,17 +83,27 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        ///     Occurs when [vehicle added].
+        ///     Occurs when [gameObject added].
         /// </summary>
         public event EventHandler<Vehicle> VehicleAdded;
 
         /// <summary>
-        ///     Occurs when [vehicle removed].
+        ///     Occurs when [gameObject removed].
         /// </summary>
         public event EventHandler<Vehicle> VehicleRemoved;
 
         /// <summary>
-        ///     Occurs when [vehicle removed].
+        ///     Occurs when [waterObject added].
+        /// </summary>
+        public event EventHandler<WaterObject> WaterObjectAdded;
+
+        /// <summary>
+        ///     Occurs when [waterObject removed].
+        /// </summary>
+        public event EventHandler<WaterObject> WaterObjectRemoved;
+
+        /// <summary>
+        ///     Occurs when [gameObject removed].
         /// </summary>
         public event EventHandler<PowerUp> PowerUpAdded;
 
@@ -100,20 +119,49 @@ namespace FroggerStarter.Controller
         {
             this.AllVehicles = new List<Vehicle>();
             var currentY = GameSettings.RoadHeight - GameSettings.LaneHeight * 2 + GameSettings.RoadOffsetHeight;
-            foreach (var currVehicleLane in GameSettings.FirstLevelVehicleLanes)
+            foreach (var currLane in this.currentLevelLanes)
             {
-                currVehicleLane.Y = currentY;
+                currLane.Y = currentY;
                 currentY -= GameSettings.LaneHeight;
 
-                currVehicleLane.VehicleAdded += this.addNewVehicle;
-                currVehicleLane.VehicleRemoved += this.removeVehicle;
-                currVehicleLane.WaterAdded += this.addWater;
+                currLane.VehicleAdded += this.addNewVehicle;
+                currLane.VehicleRemoved += this.removeVehicle;
+                currLane.WaterAdded += this.addWater;
+                currLane.WaterObjectAdded += this.addNewWaterObject;
+                currLane.WaterObjectRemoved += this.removeWaterObject;
 
-                currVehicleLane.AddWater();
+                currLane.AddWater();
             }
 
-            addVehicleToLanes();
+            addToLanes();
             this.getAllVehicles();
+        }
+
+        /// <summary>
+        /// Goes to next level.
+        /// </summary>
+        /// <param name="level">The level.</param>
+        public void GoToNextLevel(int level)
+        {
+            this.addObjectTicks = 0;
+            foreach (var currLane in this.currentLevelLanes)
+            {
+                currLane.RemoveAllVehicles();
+                currLane.RemoveAllWaterObjects();
+            }
+
+            this.currentLevelLanes = GameSettings.Levels[level - 1];
+            this.PlaceLanes();
+        }
+
+        private void removeWaterObject(object sender, WaterObject waterObject)
+        {
+            this.onWaterObjectRemoved(waterObject);
+        }
+
+        private void addNewWaterObject(object sender, WaterObject waterObject)
+        {
+            this.onWaterObjectAdded(waterObject);
         }
 
         private void addNewVehicle(object sender, Vehicle vehicle)
@@ -134,16 +182,16 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        ///     Moves the vehicles
+        ///     Moves the objects
         ///     Precondition: None
-        ///     Postcondition: VehiclesInLane X == X@prev + Speed
+        ///     Postcondition: ObjectsInLane X == X@prev + Speed
         /// </summary>
-        public void MoveVehicles()
+        public void MoveObjects()
         {
             foreach (var currVehicle in this.AllVehicles)
             {
-                resetVehiclePastRightBoundary(currVehicle);
-                resetVehicleIfPastLeftBoundary(currVehicle);
+                resetObjectIfPastRightBoundary(currVehicle);
+                resetObjectIfPastLeftBoundary(currVehicle);
                 currVehicle.Move();
             }
         }
@@ -157,29 +205,29 @@ namespace FroggerStarter.Controller
         public void AddPowerUp(PowerUp powerUp)
         {
             var random = new Random();
-            var index = random.Next(GameSettings.FirstLevelVehicleLanes.Count - 1);
-            GameSettings.FirstLevelVehicleLanes[index].AddPowerUp(powerUp);
+            var index = random.Next(GameSettings.FirstLevelLanes.Count - 1);
+            GameSettings.FirstLevelLanes[index].AddPowerUp(powerUp);
         }
 
         /// <summary>
-        ///     Adds a vehicle to lanes.
+        ///     Adds a gameObject to lanes.
         ///     Precondition: currVehicleLane.VehiclesInLane.Count lessThan currVehicleLane.MaxVehicles
-        ///     Postcondition: New vehicle queued up in currVehicleLane
+        ///     Postcondition: New gameObject queued up in currVehicleLane
         /// </summary>
         public void CheckToAddVehicleToLanes()
         {
-            if (this.addVehicleTicks % GameSettings.TicksUntilSpawnCars == 0)
+            if (this.addObjectTicks % GameSettings.TicksUntilSpawnCars == 0)
             {
-                addVehicleToLanes();
-                this.addVehicleTicks = 0;
+                addToLanes();
+                this.addObjectTicks = 0;
             }
 
-            this.addVehicleTicks++;
+            this.addObjectTicks++;
         }
 
-        private static void addVehicleToLanes()
+        private static void addToLanes()
         {
-            foreach (var currVehicleLane in GameSettings.FirstLevelVehicleLanes)
+            foreach (var currVehicleLane in GameSettings.FirstLevelLanes)
             {
                 if (currVehicleLane.HasRoomForVehicles())
                 {
@@ -189,38 +237,39 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        ///     Resets the vehicles to one.
-        ///     Precondition: currVehicleLane.VehiclesInLane.Count greaterThan 1
-        ///     Postcondition: Vehicle in currVehicleLane queued for deletion
+        ///     Resets the objects to one.
+        ///     Precondition: currLane.ObjectsInLane.Count greaterThan 1
+        ///     Postcondition: Object in currLane queued for deletion
         /// </summary>
-        public void ResetOneVehiclePerLane()
+        public void ResetOneObjectPerLane()
         {
-            foreach (var currVehicleLane in GameSettings.FirstLevelVehicleLanes)
+            foreach (var currLane in this.currentLevelLanes)
             {
-                currVehicleLane.RemoveAddedVehicles();
+                currLane.RemoveAddedVehicles();
+                currLane.RemoveAddedWaterObjects();
             }
         }
 
-        private static void resetVehicleIfPastLeftBoundary(GameObject vehicle)
+        private static void resetObjectIfPastLeftBoundary(GameObject gameObject)
         {
-            if (vehicle.X + vehicle.Width < GameSettings.LeftEdgeOfRoad)
+            if (gameObject.X + gameObject.Width < GameSettings.LeftEdgeOfRoad)
             {
-                vehicle.X = GameSettings.RoadWidth;
+                gameObject.X = GameSettings.RoadWidth;
             }
         }
 
-        private static void resetVehiclePastRightBoundary(GameObject vehicle)
+        private static void resetObjectIfPastRightBoundary(GameObject gameObject)
         {
-            if (vehicle.X > GameSettings.RoadWidth)
+            if (gameObject.X > GameSettings.RoadWidth)
             {
-                vehicle.X = GameSettings.LeftEdgeOfRoad - vehicle.Width;
+                gameObject.X = GameSettings.LeftEdgeOfRoad - gameObject.Width;
             }
         }
 
         private void getAllVehicles()
         {
             this.AllVehicles = new List<Vehicle>();
-            foreach (var currLane in GameSettings.FirstLevelVehicleLanes)
+            foreach (var currLane in GameSettings.FirstLevelLanes)
             {
                 var enumerator = currLane.GetEnumerator();
                 while (enumerator.MoveNext())
@@ -247,9 +296,20 @@ namespace FroggerStarter.Controller
         {
             this.PowerUpAdded?.Invoke(this, powerUp);
         }
+
         private void onWaterAdded(WaterCrossing waterCrossing)
         {
             this.WaterAdded?.Invoke(this, waterCrossing);
+        }
+
+        private void onWaterObjectAdded(WaterObject waterObject)
+        {
+            this.WaterObjectAdded?.Invoke(this, waterObject);
+        }
+
+        private void onWaterObjectRemoved(WaterObject waterObject)
+        {
+            this.WaterObjectRemoved?.Invoke(this, waterObject);
         }
 
         #endregion

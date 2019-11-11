@@ -46,6 +46,19 @@ namespace FroggerStarter.Model
             Y = oldY;
         }
 
+        /// <summary>
+        ///     Remove the frog from the home.
+        /// </summary>
+        public void RemoveFrog()
+        {
+            this.HasFrog = false;
+            var oldX = X;
+            var oldY = Y;
+            Sprite = new FrogHomeSprite();
+            X = oldX;
+            Y = oldY;
+        }
+
         #endregion
     }
 }

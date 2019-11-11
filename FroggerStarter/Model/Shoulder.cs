@@ -59,6 +59,17 @@ namespace FroggerStarter.Model
             return this.GetEnumerator();
         }
 
+        /// <summary>
+        /// Clears the homes.
+        /// </summary>
+        public void ClearHomes()
+        {
+            foreach (var currFrogHome in this.FrogHomes)
+            {
+                currFrogHome.RemoveFrog();
+            }
+        }
+
         private void calculateFrogHomePlacement()
         {
             var widthOfRoadSection = GameSettings.RoadWidth - this.columnWidth * 2;

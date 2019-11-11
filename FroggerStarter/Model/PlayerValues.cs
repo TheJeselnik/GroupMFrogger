@@ -24,6 +24,14 @@
         public int Score { get; private set; }
 
         /// <summary>
+        /// Gets the current level.
+        /// </summary>
+        /// <value>
+        /// The current level.
+        /// </value>
+        public int CurrentLevel { get; private set; } = 1;
+
+        /// <summary>
         ///     Gets a value indicating whether [game over].
         /// </summary>
         /// <value>
@@ -83,14 +91,28 @@
         }
 
         /// <summary>
-        ///     Checks for game over from score.
+        /// Checks for level completed.
+        ///     Precondition: CurrentLevel lessThanOrEqualTo GameSettings.GameSettings.LevelsInGame
+        ///     Postcondition: CurrentLevel++
+        /// </summary>
+        /// <param name="allFrogHomesFilled">if set to <c>true</c> [all frog homes filled].</param>
+        public void CheckForLevelCompleted(bool allFrogHomesFilled)
+        {
+            if (allFrogHomesFilled)
+            {
+                this.CurrentLevel++;
+            }
+            this.CheckForGameOverIfLevelsCompleted();
+        }
+
+        /// <summary>
+        /// Checks for game over if levels completed.
         ///     Precondition: GameOver = false
         ///     Postcondition: GameOver = true || GameOver = false
         /// </summary>
-        /// <param name="allFrogHomesFilled">if set to <c>true</c> [all frog homes filled].</param>
-        public void CheckForGameOverFromScore(bool allFrogHomesFilled)
+        public void CheckForGameOverIfLevelsCompleted()
         {
-            this.GameOver = allFrogHomesFilled;
+            this.GameOver = this.CurrentLevel > GameSettings.LevelsInGame;
         }
 
         /// <summary>

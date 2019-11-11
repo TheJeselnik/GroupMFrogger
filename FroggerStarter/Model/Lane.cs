@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Windows.Foundation;
 
 namespace FroggerStarter.Model
@@ -22,6 +21,7 @@ namespace FroggerStarter.Model
         private readonly Vehicle.VehicleType vehicleType;
         private readonly WaterObject.WaterObjectType waterObjectType;
         private readonly bool hasWater;
+        private bool waterPlaced;
 
         #endregion
 
@@ -210,6 +210,47 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
+        /// Removes the added water objects.
+        ///     Precondition: waterObjectsInLane.Count greaterThan 1
+        ///     Postcondition: WaterObject queued for deletion
+        /// </summary>
+        public void RemoveAddedWaterObjects()
+        {
+            const int firstItem = 1;
+            foreach (var currWaterObject in this.WaterObjectsInLane.TakeLast(this.WaterObjectsInLane.Count - firstItem))
+            {
+                this.WaterObjectsInLane.Remove(currWaterObject);
+                this.onWaterObjectRemoved(currWaterObject);
+            }
+        }
+
+        /// <summary>
+        /// Removes all vehicles.
+        /// </summary>
+        public void RemoveAllVehicles()
+        {
+            foreach (var currVehicle in this.VehiclesInLane)
+            {
+                this.onVehicleRemoved(currVehicle);
+            }
+
+            this.VehiclesInLane.Clear();
+        }
+
+        /// <summary>
+        /// Removes all water objects.
+        /// </summary>
+        public void RemoveAllWaterObjects()
+        {
+            foreach (var currWaterObject in this.WaterObjectsInLane)
+            {
+                this.onWaterObjectRemoved(currWaterObject);
+            }
+
+            this.WaterObjectsInLane.Clear();
+        }
+
+        /// <summary>
         ///     Adds the power up.
         ///     Precondition: None
         ///     Postcondition: Powerup added to lane
@@ -231,10 +272,12 @@ namespace FroggerStarter.Model
         /// </summary>
         public void AddWater()
         {
-            if (this.hasWater)
+            if (this.hasWater && !this.waterPlaced)
             {
                 this.onWaterAdded(new WaterCrossing {Y = this.Y - GameSettings.WaterCrossingOffsetHeight});
             }
+
+            this.waterPlaced = false;
         }
 
         private void placeVehicle()

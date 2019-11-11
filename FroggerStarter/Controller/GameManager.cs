@@ -153,6 +153,8 @@ namespace FroggerStarter.Controller
 
             this.roadManager.VehicleAdded += this.vehicleAdded;
             this.roadManager.VehicleRemoved += this.vehicleRemoved;
+            this.roadManager.WaterObjectAdded += this.waterObjectAdded;
+            this.roadManager.WaterObjectRemoved += this.waterObjectRemoved;
         }
 
         private void addNonPlayerSprites()
@@ -169,9 +171,9 @@ namespace FroggerStarter.Controller
 
         private void instantiateHelperClasses()
         {
+            this.playerValues = new PlayerValues();
             this.instantiateRoadManager();
             this.topShoulder = new Shoulder(this.player.Width);
-            this.playerValues = new PlayerValues();
             this.animationManager = new AnimationManager();
             this.collisionDetector = new CollisionDetector();
             this.lifeTimer = new LifeTimer();
@@ -182,7 +184,7 @@ namespace FroggerStarter.Controller
         {
             this.roadManager = new RoadManager();
             this.roadManager.WaterAdded += this.waterAdded;
-            this.roadManager.PlaceLanes();
+            this.roadManager.GoToNextLevel(this.playerValues.CurrentLevel);
         }
 
         private void vehicleAdded(object sender, Vehicle vehicle)
@@ -193,6 +195,16 @@ namespace FroggerStarter.Controller
         private void vehicleRemoved(object sender, Vehicle vehicle)
         {
             this.gameCanvas.Children.Remove(vehicle.Sprite);
+        }
+
+        private void waterObjectAdded(object sender, WaterObject waterObject)
+        {
+            this.gameCanvas.Children.Add(waterObject.Sprite);
+        }
+
+        private void waterObjectRemoved(object sender, WaterObject waterObject)
+        {
+            this.gameCanvas.Children.Remove(waterObject.Sprite);
         }
 
         private void waterAdded(object sender, WaterCrossing waterCrossing)
@@ -212,9 +224,17 @@ namespace FroggerStarter.Controller
 
         private void addFrogHomesToCanvas()
         {
-            foreach (var frogHome in this.topShoulder.FrogHomes)
+            foreach (var currFrogHome in this.topShoulder.FrogHomes)
             {
-                this.gameCanvas.Children.Add(frogHome.Sprite);
+                this.gameCanvas.Children.Add(currFrogHome.Sprite);
+            }
+        }
+
+        private void removeFrogHomesFromCanvas()
+        {
+            foreach (var currFrogHome in this.topShoulder.FrogHomes)
+            {
+                this.gameCanvas.Children.Remove(currFrogHome.Sprite);
             }
         }
 
@@ -286,7 +306,7 @@ namespace FroggerStarter.Controller
 
         private void timerOnTick(object sender, object e)
         {
-            this.roadManager.MoveVehicles();
+            this.roadManager.MoveObjects();
             this.checkToAddVehiclesToLanes();
 
             this.checkForPlayerCollision();
@@ -382,6 +402,7 @@ namespace FroggerStarter.Controller
             {
                 if (this.collisionDetector.IsCollisionBetween(currPowerUp, this.player))
                 {
+
                 }
             }
         }
@@ -434,7 +455,7 @@ namespace FroggerStarter.Controller
             this.playerValues.LoseALife();
             this.animateFrogDeath();
             this.onLivesUpdated(this.Lives);
-            this.roadManager.ResetOneVehiclePerLane();
+            this.roadManager.ResetOneObjectPerLane();
         }
 
         private void animateFrogDeath()
@@ -447,7 +468,7 @@ namespace FroggerStarter.Controller
             this.playerValues.IncreaseScore(this.lifeTimer.TimeRemaining);
             this.onScoreUpdated(this.Score);
             this.playerMovementManager.CanMove = false;
-            this.playerValues.CheckForGameOverFromScore(this.allFrogHomesFilled());
+            this.playerValues.CheckForLevelCompleted(this.allFrogHomesFilled());
             this.resetFrogIfGameIsNotOver();
         }
 
@@ -456,6 +477,10 @@ namespace FroggerStarter.Controller
             if (this.playerValues.GameOver)
             {
                 this.gameOver();
+            }
+            else if (this.allFrogHomesFilled())
+            {
+                this.goToNextLevel();
             }
             else
             {
@@ -478,6 +503,17 @@ namespace FroggerStarter.Controller
         {
             this.timer.Stop();
             this.onGameOverReached(EventArgs.Empty);
+        }
+
+        private void goToNextLevel()
+        {
+            this.removeFrogHomesFromCanvas();
+            this.topShoulder.ClearHomes();
+            this.addFrogHomesToCanvas();
+            this.setPlayerToCenterOfBottomLane();
+            this.playerMovementManager.CanMove = true;
+            this.lifeTimer.ResetTimeRemaining();
+            this.roadManager.GoToNextLevel(this.playerValues.CurrentLevel);
         }
 
         private void onScoreUpdated(int score)

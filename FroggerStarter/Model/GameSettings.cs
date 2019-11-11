@@ -50,6 +50,14 @@ namespace FroggerStarter.Model
         public static int TicksUntilSpawnCars { get; } = 200;
 
         /// <summary>
+        ///     Gets the levels in game.
+        /// </summary>
+        /// <value>
+        ///     The levels in game.
+        /// </value>
+        public static int LevelsInGame { get; } = 3;
+
+        /// <summary>
         ///     Gets the bonus time power up chance.
         /// </summary>
         /// <value>
@@ -90,10 +98,10 @@ namespace FroggerStarter.Model
         public static double VehicleSpacing { get; } = 25.0;
 
         /// <summary>
-        /// Gets the water object spacing.
+        ///     Gets the water object spacing.
         /// </summary>
         /// <value>
-        /// The water object spacing.
+        ///     The water object spacing.
         /// </value>
         public static double WaterObjectSpacing { get; } = 100.0;
 
@@ -207,16 +215,16 @@ namespace FroggerStarter.Model
             Lane(Vehicle.VehicleType.Car, GameObject.Direction.Right, 5.0, 5, false);
 
         /// <summary>
-        ///     Gets the vehicle lanes of the first level.
+        ///     Gets the lanes of the first level.
         /// </summary>
         /// <value>
-        ///     The vehicle lanes.
+        ///     The first level lanes.
         /// </value>
-        public static IList<Lane> FirstLevelVehicleLanes { get; } = new List<Lane>
+        public static IList<Lane> FirstLevelLanes { get; } = new List<Lane>
             {FirstLevelFirstLane, FirstLevelSecondLane, FirstLevelThirdLane, FirstLevelFourthLane, FirstLevelFifthLane};
 
         /// <summary>
-        ///     Gets or sets the first lane of the first level.
+        ///     Gets or sets the first lane of the second level.
         /// </summary>
         /// <value>
         ///     The first lane.
@@ -225,7 +233,7 @@ namespace FroggerStarter.Model
             new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 3.0, 3, false);
 
         /// <summary>
-        ///     Gets or sets the second lane of the first level.
+        ///     Gets or sets the second lane of the second level.
         /// </summary>
         /// <value>
         ///     The second lane.
@@ -234,7 +242,7 @@ namespace FroggerStarter.Model
             new Lane(Vehicle.VehicleType.SemiTruck, GameObject.Direction.Right, 3.5, 2, false);
 
         /// <summary>
-        ///     Gets or sets the third lane of the first level.
+        ///     Gets or sets the third lane of the second level.
         /// </summary>
         /// <value>
         ///     The third lane.
@@ -243,7 +251,7 @@ namespace FroggerStarter.Model
             new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 4.0, 4, false);
 
         /// <summary>
-        ///     Gets or sets the fourth lane of the first level.
+        ///     Gets or sets the fourth lane of the second level.
         /// </summary>
         /// <value>
         ///     The fourth lane.
@@ -252,7 +260,7 @@ namespace FroggerStarter.Model
             new Lane(Vehicle.VehicleType.OilSemiTruck, GameObject.Direction.Left, 5.0, 3, false);
 
         /// <summary>
-        ///     Gets or sets the fifth lane of the first level.
+        ///     Gets or sets the fifth lane of the second level.
         /// </summary>
         /// <value>
         ///     The fifth lane.
@@ -261,16 +269,18 @@ namespace FroggerStarter.Model
             Lane(WaterObject.WaterObjectType.Log, GameObject.Direction.Right, 2.0, 2, true);
 
         /// <summary>
-        ///     Gets the vehicle lanes of the first level.
+        ///     Gets the lanes of the second level.
         /// </summary>
         /// <value>
-        ///     The vehicle lanes.
+        ///     The second level lanes.
         /// </value>
-        public static IList<Lane> SecondLevelVehicleLanes { get; } = new List<Lane>
-            {SecondLevelFirstLane, SecondLevelSecondLane, SecondLevelThirdLane, SecondLevelFourthLane, SecondLevelFifthLane};
+        public static IList<Lane> SecondLevelLanes { get; } = new List<Lane> {
+            SecondLevelFirstLane, SecondLevelSecondLane, SecondLevelThirdLane, SecondLevelFourthLane,
+            SecondLevelFifthLane
+        };
 
         /// <summary>
-        ///     Gets or sets the first lane of the first level.
+        ///     Gets or sets the first lane of the third level.
         /// </summary>
         /// <value>
         ///     The first lane.
@@ -279,7 +289,7 @@ namespace FroggerStarter.Model
             new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 4.0, 4, false);
 
         /// <summary>
-        ///     Gets or sets the second lane of the first level.
+        ///     Gets or sets the second lane of the third level.
         /// </summary>
         /// <value>
         ///     The second lane.
@@ -288,7 +298,7 @@ namespace FroggerStarter.Model
             new Lane(Vehicle.VehicleType.SemiTruck, GameObject.Direction.Right, 4.5, 3, false);
 
         /// <summary>
-        ///     Gets or sets the third lane of the first level.
+        ///     Gets or sets the third lane of the third level.
         /// </summary>
         /// <value>
         ///     The third lane.
@@ -297,7 +307,7 @@ namespace FroggerStarter.Model
             new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 5.0, 5, false);
 
         /// <summary>
-        ///     Gets or sets the fourth lane of the first level.
+        ///     Gets or sets the fourth lane of the third level.
         /// </summary>
         /// <value>
         ///     The fourth lane.
@@ -306,7 +316,7 @@ namespace FroggerStarter.Model
             new Lane(WaterObject.WaterObjectType.Log, GameObject.Direction.Left, 4.5, 2, true);
 
         /// <summary>
-        ///     Gets or sets the fifth lane of the first level.
+        ///     Gets or sets the fifth lane of the third level.
         /// </summary>
         /// <value>
         ///     The fifth lane.
@@ -315,13 +325,22 @@ namespace FroggerStarter.Model
             Lane(WaterObject.WaterObjectType.Raft, GameObject.Direction.Right, 5.0, 5, true);
 
         /// <summary>
-        ///     Gets the vehicle lanes of the first level.
+        ///     Gets the lanes of the third level.
         /// </summary>
         /// <value>
-        ///     The vehicle lanes.
+        ///     The third level lanes.
         /// </value>
-        public static IList<Lane> ThirdLevelVehicleLanes { get; } = new List<Lane>
+        public static IList<Lane> ThirdLevelLanes { get; } = new List<Lane>
             {ThirdLevelFirstLane, ThirdLevelSecondLane, ThirdLevelThirdLane, ThirdLevelFourthLane, ThirdLevelFifthLane};
+
+        /// <summary>
+        ///     Gets the levels.
+        /// </summary>
+        /// <value>
+        ///     The levels.
+        /// </value>
+        public static IList<IList<Lane>> Levels { get; } = new List<IList<Lane>>
+            {FirstLevelLanes, SecondLevelLanes, ThirdLevelLanes};
 
         #endregion
     }
