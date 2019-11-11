@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sprites="using:FroggerStarter.View.Sprites"
+    xmlns:viewModel="using:FroggerStarter.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -24,16 +25,20 @@
         <SolidColorBrush x:Key="DotColor" Color="Purple"/>
     </Page.Resources>
 
-    <Canvas x:Name="canvas" Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}" Background="Black">
+    <Page.DataContext>
+        <viewModel:HighScoreBoardViewModel/>
+    </Page.DataContext>
 
-        <sprites:FrogSprite Canvas.Left="300" Canvas.Top="67"/>
+    <Canvas Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}" Background="Black">
+
+        <sprites:FrogSprite Canvas.Left="300" Canvas.Top="77"/>
         <sprites:FrogHomeSprite/>
         <sprites:FrogHomeSprite Canvas.Left="600" Canvas.Top="360"/>
         <sprites:FrogHomeSprite Canvas.Top="360"/>
         <sprites:FrogHomeSprite Canvas.Left="600"/>
 
         <TextBlock Canvas.Left="233" Canvas.Top="139" Text="Big Ol' Frog" Style="{StaticResource TitleStyle}"/>
-        <TextBlock Canvas.Left="194" Canvas.Top="256" Text="Press Enter to Start" Style="{StaticResource StartGameStyle}"/>
+        <TextBlock Canvas.Left="194" Canvas.Top="241" Text="Press Enter to Start" Style="{StaticResource StartGameStyle}"/>
         <Ellipse Height="30" Width="30" Canvas.Left="44" Canvas.Top="139" Fill="{StaticResource DotColor}"/>
         <Ellipse Height="30" Width="30" Canvas.Left="139" Canvas.Top="62" Fill="{StaticResource DotColor}"/>
         <Ellipse Height="30" Width="30" Canvas.Left="44" Canvas.Top="260" Fill="{StaticResource DotColor}"/>
@@ -42,8 +47,7 @@
         <Ellipse Height="30" Width="30" Canvas.Left="497" Canvas.Top="190" Fill="{StaticResource DotColor}"/>
         <Ellipse Height="30" Width="30" Canvas.Left="595" Canvas.Top="124" Fill="{StaticResource DotColor}"/>
         <Ellipse Height="30" Width="30" Canvas.Left="139" Canvas.Top="190" Fill="{StaticResource DotColor}"/>
-        <Ellipse Height="30" Width="30" Canvas.Left="497" Canvas.Top="345" Fill="{StaticResource DotColor}"/>
-        <Ellipse Height="30" Width="30" Canvas.Left="139" Canvas.Top="345" Fill="{StaticResource DotColor}"/>
-        <Ellipse Height="30" Width="30" Canvas.Left="310" Canvas.Top="340" Fill="{StaticResource DotColor}"/>
+        <Button Content="View ScoreBoard" Canvas.Left="120" Canvas.Top="340" Width="140" Height="45" Foreground="Purple" Background="ForestGreen" FontSize="16" Click="ViewScoreBoardBtn_Click" />
+        <Button Content="Clear ScoreBoard" Canvas.Left="400" Canvas.Top="340" Width="140" Height="45" Foreground="Purple" Background="ForestGreen" FontSize="16" Command="{Binding ClearCommand}"/>
     </Canvas>
 </Page>
