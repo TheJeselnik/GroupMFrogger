@@ -511,9 +511,9 @@ namespace FroggerStarter.Controller
             this.topShoulder.ClearHomes();
             this.addFrogHomesToCanvas();
             this.setPlayerToCenterOfBottomLane();
+            this.roadManager.GoToNextLevel(this.playerValues.CurrentLevel);
             this.playerMovementManager.CanMove = true;
             this.lifeTimer.ResetTimeRemaining();
-            this.roadManager.GoToNextLevel(this.playerValues.CurrentLevel);
         }
 
         private void onScoreUpdated(int score)

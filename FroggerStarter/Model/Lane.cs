@@ -20,7 +20,10 @@ namespace FroggerStarter.Model
         private readonly GameObject.Direction direction;
         private readonly Vehicle.VehicleType vehicleType;
         private readonly WaterObject.WaterObjectType waterObjectType;
-        private readonly bool hasWater;
+        /// <summary>
+        /// The has water
+        /// </summary>
+        public readonly bool HasWater;
         private bool waterPlaced;
 
         #endregion
@@ -74,7 +77,7 @@ namespace FroggerStarter.Model
             this.direction = direction;
             this.initialSpeed = speed;
             this.maxGameObjects = maxGameObjects;
-            this.hasWater = hasWater;
+            this.HasWater = hasWater;
             this.VehiclesInLane = new List<Vehicle>();
             this.WaterObjectsInLane = new List<WaterObject>();
         }
@@ -94,7 +97,7 @@ namespace FroggerStarter.Model
             this.direction = direction;
             this.initialSpeed = speed;
             this.maxGameObjects = maxGameObjects;
-            this.hasWater = hasWater;
+            this.HasWater = hasWater;
             this.VehiclesInLane = new List<Vehicle>();
             this.WaterObjectsInLane = new List<WaterObject>();
         }
@@ -272,7 +275,7 @@ namespace FroggerStarter.Model
         /// </summary>
         public void AddWater()
         {
-            if (this.hasWater && !this.waterPlaced)
+            if (this.HasWater && !this.waterPlaced)
             {
                 this.onWaterAdded(new WaterCrossing {Y = this.Y - GameSettings.WaterCrossingOffsetHeight});
             }

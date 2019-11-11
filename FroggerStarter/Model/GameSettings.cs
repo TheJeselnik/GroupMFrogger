@@ -42,12 +42,12 @@ namespace FroggerStarter.Model
         public static int TimerWidth { get; } = 640;
 
         /// <summary>
-        ///     Gets the ticks until spawn cars.
+        /// Gets the ticks until spawn objects.
         /// </summary>
         /// <value>
-        ///     The ticks until spawn cars.
+        /// The ticks until spawn objects.
         /// </value>
-        public static int TicksUntilSpawnCars { get; } = 200;
+        public static int TicksUntilSpawnObjects { get; } = 200;
 
         /// <summary>
         ///     Gets the levels in game.
@@ -212,7 +212,7 @@ namespace FroggerStarter.Model
         ///     The fifth lane.
         /// </value>
         private static Lane FirstLevelFifthLane { get; } = new
-            Lane(Vehicle.VehicleType.Car, GameObject.Direction.Right, 5.0, 5, false);
+            Lane(WaterObject.WaterObjectType.Raft, GameObject.Direction.Right, 5.0, 5, true);
 
         /// <summary>
         ///     Gets the lanes of the first level.

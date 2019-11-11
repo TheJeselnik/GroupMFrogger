@@ -216,7 +216,7 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void CheckToAddVehicleToLanes()
         {
-            if (this.addObjectTicks % GameSettings.TicksUntilSpawnCars == 0)
+            if (this.addObjectTicks % GameSettings.TicksUntilSpawnObjects == 0)
             {
                 this.addToLanes();
                 this.addObjectTicks = 0;
@@ -229,12 +229,12 @@ namespace FroggerStarter.Controller
         {
             foreach (var currLane in this.currentLevelLanes)
             {
-                if (currLane.HasRoomForVehicles())
+                if (currLane.HasRoomForVehicles() && !currLane.HasWater)
                 {
                     currLane.AddVehicle();
                 }
 
-                if (currLane.HasRoomForWaterObjects())
+                if (currLane.HasRoomForWaterObjects() && currLane.HasWater)
                 {
                     currLane.AddWaterObject();
                 }
