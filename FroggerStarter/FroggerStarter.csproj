@@ -221,6 +221,7 @@
     <Content Include="Assets\home.mp3" />
     <Content Include="Assets\level_complete.mp3" />
     <Content Include="Assets\oil-logo.png" />
+    <Content Include="Assets\power_up.mp3" />
     <Content Include="Assets\splat.mp3" />
     <Content Include="Assets\time_beep.mp3" />
     <Content Include="Assets\title_music.wav" />
