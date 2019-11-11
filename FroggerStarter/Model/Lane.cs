@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Windows.Foundation;
 
 namespace FroggerStarter.Model
@@ -13,12 +14,13 @@ namespace FroggerStarter.Model
     {
         #region Data members
 
-        private readonly int maxVehicles;
+        private readonly int maxGameObjects;
 
         private Point location;
         private readonly double initialSpeed;
         private readonly GameObject.Direction direction;
         private readonly Vehicle.VehicleType vehicleType;
+        private readonly WaterObject.WaterObjectType waterObjectType;
         private readonly bool hasWater;
 
         #endregion
@@ -32,6 +34,14 @@ namespace FroggerStarter.Model
         ///     The vehicles in lane.
         /// </value>
         private IList<Vehicle> VehiclesInLane { get; }
+
+        /// <summary>
+        /// Gets the water objects in lane.
+        /// </summary>
+        /// <value>
+        /// The water objects in lane.
+        /// </value>
+        private IList<WaterObject> WaterObjectsInLane { get; }
 
         /// <summary>
         ///     Gets or sets the y location of the lane.
@@ -50,17 +60,43 @@ namespace FroggerStarter.Model
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Lane" /> class.
+        /// Initializes a new instance of the <see cref="Lane" /> class.
         /// </summary>
-        public Lane(Vehicle.VehicleType vehicleType, GameObject.Direction direction, double speed, int maxVehicles,
+        /// <param name="vehicleType">Type of the vehicle.</param>
+        /// <param name="direction">The direction.</param>
+        /// <param name="speed">The speed.</param>
+        /// <param name="maxGameObjects">The maximum game objects.</param>
+        /// <param name="hasWater">if set to <c>true</c> [has water].</param>
+        public Lane(Vehicle.VehicleType vehicleType, GameObject.Direction direction, double speed, int maxGameObjects,
             bool hasWater)
         {
             this.vehicleType = vehicleType;
             this.direction = direction;
             this.initialSpeed = speed;
-            this.maxVehicles = maxVehicles;
+            this.maxGameObjects = maxGameObjects;
             this.hasWater = hasWater;
             this.VehiclesInLane = new List<Vehicle>();
+            this.WaterObjectsInLane = new List<WaterObject>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Lane"/> class.
+        /// </summary>
+        /// <param name="waterObjectType">Type of the water object.</param>
+        /// <param name="direction">The direction.</param>
+        /// <param name="speed">The speed.</param>
+        /// <param name="maxGameObjects">The maximum game objects.</param>
+        /// <param name="hasWater">if set to <c>true</c> [has water].</param>
+        public Lane(WaterObject.WaterObjectType waterObjectType, GameObject.Direction direction, double speed, int maxGameObjects,
+            bool hasWater)
+        {
+            this.waterObjectType = waterObjectType;
+            this.direction = direction;
+            this.initialSpeed = speed;
+            this.maxGameObjects = maxGameObjects;
+            this.hasWater = hasWater;
+            this.VehiclesInLane = new List<Vehicle>();
+            this.WaterObjectsInLane = new List<WaterObject>();
         }
 
         #endregion
@@ -99,21 +135,42 @@ namespace FroggerStarter.Model
         public event EventHandler<WaterCrossing> WaterAdded;
 
         /// <summary>
+        /// Occurs when [water object added].
+        /// </summary>
+        public event EventHandler<WaterObject> WaterObjectAdded;
+
+        /// <summary>
+        /// Occurs when [water object removed].
+        /// </summary>
+        public event EventHandler<WaterObject> WaterObjectRemoved;
+
+        /// <summary>
         ///     Determines whether [has room for vehicles].
         ///     Precondition: none
-        ///     Postcondition: True if VehiclesInLane.Count lessThan maxVehicles
+        ///     Postcondition: True if VehiclesInLane.Count lessThan maxGameObjects
         /// </summary>
         /// <returns>
         ///     <c>true</c> if [has room for vehicles]; otherwise, <c>false</c>.
         /// </returns>
         public bool HasRoomForVehicles()
         {
-            return this.VehiclesInLane.Count < this.maxVehicles;
+            return this.VehiclesInLane.Count < this.maxGameObjects;
+        }
+
+        /// <summary>
+        /// Determines whether [has room for water objects].
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if [has room for water objects]; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasRoomForWaterObjects()
+        {
+            return this.WaterObjectsInLane.Count < this.maxGameObjects;
         }
 
         /// <summary>
         ///     Adds the vehicle.
-        ///     Precondition: vehiclesInLane.Count lessThan maxVehicles
+        ///     Precondition: vehiclesInLane.Count lessThan maxGameObjects
         ///     Postcondition: New vehicle queued up
         /// </summary>
         public void AddVehicle()
@@ -121,6 +178,19 @@ namespace FroggerStarter.Model
             if (this.vehiclesClearOfLeftEdge() && this.vehiclesClearOfRightEdge())
             {
                 this.placeVehicle();
+            }
+        }
+
+        /// <summary>
+        /// Adds the water vehicle.
+        ///     Precondition: waterObjectsInLane.Count lessThan maxGameObjects
+        ///     Postcondition: New waterObject queued up
+        /// </summary>
+        public void AddWaterObject()
+        {
+            if (this.waterObjectsClearOfLeftEdge() && this.waterObjectsClearOfRightEdge())
+            {
+                this.placeWaterObject();
             }
         }
 
@@ -170,24 +240,40 @@ namespace FroggerStarter.Model
         private void placeVehicle()
         {
             var newVehicle = this.createVehicle();
-            var vehicleYOffset = calculateObjectYOffset(newVehicle);
+            this.placeObject(newVehicle);
+            this.VehiclesInLane.Add(newVehicle);
+            this.onVehicleAdded(newVehicle);
+        }
+
+        private void placeWaterObject()
+        {
+            var waterObject = this.createWaterObject();
+            this.placeObject(waterObject);
+            this.WaterObjectsInLane.Add(waterObject);
+            this.onWaterObjectAdded(waterObject);
+        }
+
+        private void placeObject(GameObject newObject)
+        {
+            var objectYOffset = calculateObjectYOffset(newObject);
 
             switch (this.direction)
             {
                 case GameObject.Direction.Left:
-                    newVehicle.X = GameSettings.RoadWidth;
-                    newVehicle.Y = this.Y - vehicleYOffset;
+                    newObject.X = GameSettings.RoadWidth;
+                    newObject.Y = this.Y - objectYOffset;
                     break;
                 case GameObject.Direction.Right:
-                    newVehicle.X = GameSettings.LeftEdgeOfRoad - newVehicle.Width;
-                    newVehicle.Y = this.Y - vehicleYOffset;
+                    newObject.X = GameSettings.LeftEdgeOfRoad - newObject.Width;
+                    newObject.Y = this.Y - objectYOffset;
+                    break;
+                case GameObject.Direction.Up:
+                    break;
+                case GameObject.Direction.Down:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            this.VehiclesInLane.Add(newVehicle);
-            this.onVehicleAdded(newVehicle);
         }
 
         private Vehicle createVehicle()
@@ -205,23 +291,16 @@ namespace FroggerStarter.Model
             }
         }
 
-        //TODO keeping to reuse in potential levels
-        private SemiTruck pickFromSemiTruckVariants()
+        private WaterObject createWaterObject()
         {
-            Vehicle.VehicleType[] vehicleTypes = {Vehicle.VehicleType.SemiTruck, Vehicle.VehicleType.OilSemiTruck};
-            var random = new Random();
-            var index = random.Next(vehicleTypes.Length - 1);
-
-            switch (vehicleTypes[index])
+            switch (this.waterObjectType)
             {
-                case Vehicle.VehicleType.Car:
-                    throw new ArgumentOutOfRangeException();
-                case Vehicle.VehicleType.SemiTruck:
-                    return new SemiTruck(this.direction, this.initialSpeed);
-                case Vehicle.VehicleType.OilSemiTruck:
-                    return new OilSemiTruck(this.direction, this.initialSpeed);
+                case WaterObject.WaterObjectType.Log:
+                    return new Log(true, this.initialSpeed);
+                case WaterObject.WaterObjectType.Raft:
+                    return new Raft(true, this.initialSpeed);
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    return new Raft(true, this.initialSpeed);
             }
         }
 
@@ -256,6 +335,31 @@ namespace FroggerStarter.Model
 
             return true;
         }
+        private bool waterObjectsClearOfLeftEdge()
+        {
+            foreach (var currWaterObject in this.WaterObjectsInLane)
+            {
+                if (currWaterObject.X - GameSettings.WaterObjectSpacing < GameSettings.LeftEdgeOfRoad)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool waterObjectsClearOfRightEdge()
+        {
+            foreach (var currWaterObject in this.WaterObjectsInLane)
+            {
+                if (currWaterObject.X + currWaterObject.Width + GameSettings.WaterObjectSpacing > GameSettings.RoadWidth)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
         private void onVehicleAdded(Vehicle vehicle)
         {
@@ -270,6 +374,16 @@ namespace FroggerStarter.Model
         private void onWaterAdded(WaterCrossing waterCrossing)
         {
             this.WaterAdded?.Invoke(this, waterCrossing);
+        }
+
+        private void onWaterObjectAdded(WaterObject waterObject)
+        {
+            this.WaterObjectAdded?.Invoke(this, waterObject);
+        }
+
+        private void onWaterObjectRemoved(WaterObject waterObject)
+        {
+            this.WaterObjectRemoved?.Invoke(this, waterObject);
         }
 
         #endregion

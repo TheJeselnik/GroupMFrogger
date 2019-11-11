@@ -298,7 +298,6 @@ namespace FroggerStarter.Controller
         private void checkForPlayerCollision()
         {
             //this.checkPlayerCollisionWithPowerUps();
-            this.checkPlayerCollisionWithWater();
             this.checkPlayerCollisionWithVehicles();
             this.checkPlayerCollisionWithFrogHomes();
         }
@@ -387,24 +386,22 @@ namespace FroggerStarter.Controller
             }
         }
 
-        private void checkPlayerCollisionWithWater()
+        private bool isPlayerOnWater()
         {
             foreach (var currWaterCrossing in this.waterCrossings)
             {
                 if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player))
                 {
+                    return true;
                 }
             }
+
+            return false;
         }
 
-        private void checkPlayerCollisionWithWaterVehicles()
+        private void checkPlayerCollisionWithWaterObjects()
         {
-            foreach (var currWaterCrossing in this.waterCrossings)
-            {
-                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player))
-                {
-                }
-            }
+
         }
 
         private void addFrogToFrogHome(FrogHome frogHome)

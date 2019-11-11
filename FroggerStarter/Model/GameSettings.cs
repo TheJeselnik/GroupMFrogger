@@ -90,6 +90,14 @@ namespace FroggerStarter.Model
         public static double VehicleSpacing { get; } = 25.0;
 
         /// <summary>
+        /// Gets the water object spacing.
+        /// </summary>
+        /// <value>
+        /// The water object spacing.
+        /// </value>
+        public static double WaterObjectSpacing { get; } = 100.0;
+
+        /// <summary>
         ///     Gets the road offset y.
         /// </summary>
         /// <value>

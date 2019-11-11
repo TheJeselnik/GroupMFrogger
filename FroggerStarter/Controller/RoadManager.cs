@@ -55,17 +55,6 @@ namespace FroggerStarter.Controller
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="RoadManager" /> class.
-        /// </summary>
-        public RoadManager()
-        {
-        }
-
-        #endregion
-
         #region Methods
 
         /// <summary>
