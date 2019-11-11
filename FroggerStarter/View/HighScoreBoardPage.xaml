@@ -12,7 +12,7 @@
         <viewModel:HighScoreBoardViewModel/>
     </Page.DataContext>
 
-    <Grid Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}">
+    <Grid Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}" Background="DarkGreen">
         <ListView Name="listView" Margin="10,45,10,145" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Path=Scores, Mode=TwoWay}" Canvas.Top="45" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListView.ItemTemplate>
                 <DataTemplate>
