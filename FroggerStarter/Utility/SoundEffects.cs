@@ -84,6 +84,30 @@ namespace FroggerStarter.Utility
             player.Play();
         }
 
+        public static async void PlayLevelCompleteSound()
+        {
+            var folder =
+                await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets");
+
+            var file = await folder.GetFileAsync("level_complete.mp3");
+
+            player.AutoPlay = false;
+            player.Source = MediaSource.CreateFromStorageFile(file);
+            player.Play();
+        }
+
+        public static async void PlayPowerUpSound()
+        {
+            var folder =
+                await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets");
+
+            var file = await folder.GetFileAsync("power_up.mp3");
+
+            player.AutoPlay = false;
+            player.Source = MediaSource.CreateFromStorageFile(file);
+            player.Play();
+        }
+
 
         public static async void PlayTitleSound()
         {
