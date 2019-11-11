@@ -75,10 +75,6 @@
                 case Direction.Right:
                     MoveRight();
                     break;
-                case Direction.Up:
-                    break;
-                case Direction.Down:
-                    break;
                 default:
                     MoveLeft();
                     break;

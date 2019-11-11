@@ -54,6 +54,7 @@ namespace FroggerStarter.Controller
         {
             if (!this.playerAtLeftBoundary() && this.CanMove)
             {
+                this.player.RotateSprite(GameObject.Direction.Left);
                 this.player.MoveLeft();
             }
             else
@@ -76,6 +77,7 @@ namespace FroggerStarter.Controller
         {
             if (!this.playerAtRightBoundary() && this.CanMove)
             {
+                this.player.RotateSprite(GameObject.Direction.Right);
                 this.player.MoveRight();
             }
             else
@@ -98,6 +100,7 @@ namespace FroggerStarter.Controller
         {
             if (this.playerCanMoveUp() || this.playerBelowFrogHome())
             {
+                this.player.RotateSprite(GameObject.Direction.Up);
                 this.player.MoveUp();
             }
             else
@@ -140,6 +143,7 @@ namespace FroggerStarter.Controller
         {
             if (!this.playerAtBottomBoundary() && this.CanMove)
             {
+                this.player.RotateSprite(GameObject.Direction.Down);
                 this.player.MoveDown();
             }
             else

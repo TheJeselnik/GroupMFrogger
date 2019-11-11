@@ -13,7 +13,7 @@ namespace FroggerStarter.Model
 
 
         /// <summary>
-        ///     Enum Types of four directions a vehicle can be facing and move
+        ///     Enum Types of four directions an object can be facing and move
         /// </summary>
         public enum Direction
         {
@@ -201,12 +201,58 @@ namespace FroggerStarter.Model
         }
 
         /// <summary>
-        /// Rotates the sprite.
+        /// Flips the sprite.
         /// </summary>
-        public void RotateSprite()
+        public void FlipSprite()
         {
             this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
             this.Sprite.RenderTransform = new ScaleTransform { ScaleX = -1 };
+        }
+
+        /// <summary>
+        /// Rotates the sprite.
+        /// </summary>
+        public void RotateSprite(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.Left:
+                    this.rotateLeft();
+                    break;
+                case Direction.Right:
+                    this.rotateRight();
+                    break;
+                case Direction.Down:
+                    this.rotateDown();
+                    break;
+                case Direction.Up:
+                    this.rotateUp();
+                    break;
+            }
+        }
+
+        private void rotateRight()
+        {
+            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.Sprite.RenderTransform = new RotateTransform { Angle = 90 };
+        }
+
+        private void rotateLeft()
+        {
+            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.Sprite.RenderTransform = new RotateTransform { Angle = -90 };
+        }
+
+        private void rotateDown()
+        {
+            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.Sprite.RenderTransform = new RotateTransform { Angle = 180 };
+        }
+
+        private void rotateUp()
+        {
+            this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
+            this.Sprite.RenderTransform = new RotateTransform { Angle = 0 };
         }
 
         #endregion

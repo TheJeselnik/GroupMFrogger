@@ -25,7 +25,7 @@ namespace FroggerStarter.Model
 
             if (direction == Direction.Right)
             {
-                this.RotateSprite();
+                this.FlipSprite();
             }
         }
     }
