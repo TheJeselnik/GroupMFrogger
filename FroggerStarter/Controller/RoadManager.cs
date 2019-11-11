@@ -133,7 +133,7 @@ namespace FroggerStarter.Controller
                 currLane.AddWater();
             }
 
-            addToLanes();
+            this.addToLanes();
             this.getAllVehicles();
         }
 
@@ -205,8 +205,8 @@ namespace FroggerStarter.Controller
         public void AddPowerUp(PowerUp powerUp)
         {
             var random = new Random();
-            var index = random.Next(GameSettings.FirstLevelLanes.Count - 1);
-            GameSettings.FirstLevelLanes[index].AddPowerUp(powerUp);
+            var index = random.Next(this.currentLevelLanes.Count - 1);
+            this.currentLevelLanes[index].AddPowerUp(powerUp);
         }
 
         /// <summary>
@@ -218,20 +218,25 @@ namespace FroggerStarter.Controller
         {
             if (this.addObjectTicks % GameSettings.TicksUntilSpawnCars == 0)
             {
-                addToLanes();
+                this.addToLanes();
                 this.addObjectTicks = 0;
             }
 
             this.addObjectTicks++;
         }
 
-        private static void addToLanes()
+        private void addToLanes()
         {
-            foreach (var currVehicleLane in GameSettings.FirstLevelLanes)
+            foreach (var currLane in this.currentLevelLanes)
             {
-                if (currVehicleLane.HasRoomForVehicles())
+                if (currLane.HasRoomForVehicles())
                 {
-                    currVehicleLane.AddVehicle();
+                    currLane.AddVehicle();
+                }
+
+                if (currLane.HasRoomForWaterObjects())
+                {
+                    currLane.AddWaterObject();
                 }
             }
         }
