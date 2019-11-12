@@ -47,6 +47,9 @@ namespace FroggerStarter.Controller
 
         #region Methods
 
+        /// <summary>
+        ///     Occurs when [player moved].
+        /// </summary>
         public event EventHandler<GameObject.Direction> PlayerMoved;
 
         /// <summary>
@@ -70,7 +73,7 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        /// Players at left boundary.
+        ///     Players at left boundary.
         /// </summary>
         /// <returns>True if player's X lessThanOrEqualTo LeftEdgeOfRoad</returns>
         public bool PlayerAtLeftBoundary()
@@ -99,7 +102,7 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        /// Players at right boundary.
+        ///     Players at right boundary.
         /// </summary>
         /// <returns>True if player's X + Width greaterThanOrEqualTo RoadWidth</returns>
         public bool PlayerAtRightBoundary()
@@ -177,11 +180,11 @@ namespace FroggerStarter.Controller
             return this.player.Y + this.player.Height >= GameSettings.RoadHeight - GameSettings.RoadOffsetHeight;
         }
 
-        #endregion
-
-        protected virtual void onPlayerMoved(GameObject.Direction direction)
+        private void onPlayerMoved(GameObject.Direction direction)
         {
             this.PlayerMoved?.Invoke(this, direction);
         }
+
+        #endregion
     }
 }

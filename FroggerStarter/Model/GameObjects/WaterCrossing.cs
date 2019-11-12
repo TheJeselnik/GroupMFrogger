@@ -15,9 +15,7 @@ namespace FroggerStarter.Model.GameObjects
         /// </summary>
         public WaterCrossing()
         {
-            Sprite = new WaterCrossingSprite();
-            Sprite.Width = GameSettings.RoadWidth;
-            Sprite.Height = GameSettings.LaneHeight;
+            Sprite = new WaterCrossingSprite {Width = GameSettings.RoadWidth, Height = GameSettings.LaneHeight};
         }
 
         #endregion

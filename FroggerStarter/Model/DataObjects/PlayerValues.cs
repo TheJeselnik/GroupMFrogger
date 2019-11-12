@@ -102,7 +102,7 @@
 
         /// <summary>
         ///     Checks for level completed.
-        ///     Precondition: CurrentLevel lessThanOrEqualTo GameSettings.GameSettings.LevelsInGame
+        ///     Precondition: CurrentLevel lessThanOrEqualTo GameSettings.GameSettings.FinalLevel
         ///     Postcondition: CurrentLevel++
         /// </summary>
         /// <param name="allFrogHomesFilled">if set to <c>true</c> [all frog homes filled].</param>
@@ -123,7 +123,7 @@
         /// </summary>
         public void CheckForGameOverIfLevelsCompleted()
         {
-            this.GameOver = this.CurrentLevel > GameSettings.LevelsInGame;
+            this.GameOver = this.CurrentLevel > GameSettings.FinalLevel;
         }
 
         /// <summary>

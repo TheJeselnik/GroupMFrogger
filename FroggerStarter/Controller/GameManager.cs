@@ -205,7 +205,7 @@ namespace FroggerStarter.Controller
         private void waterAdded(object sender, WaterCrossing waterCrossing)
         {
             this.gameCanvas.Children.Add(waterCrossing.Sprite);
-            this.gameCanvas.Children.Move((uint) (this.gameCanvas.Children.Count -1), GameSettings.BottomCanvasIndex);
+            this.gameCanvas.Children.Move((uint) (this.gameCanvas.Children.Count - 1), GameSettings.BottomCanvasIndex);
             this.waterCrossings.Add(waterCrossing);
         }
 
@@ -250,7 +250,7 @@ namespace FroggerStarter.Controller
             foreach (var currBush in this.topShoulder.Bushes)
             {
                 this.gameCanvas.Children.Add(currBush.Sprite);
-                this.gameCanvas.Children.Move((uint)(this.gameCanvas.Children.Count - 1), GameSettings.LowCanvasIndex);
+                this.gameCanvas.Children.Move((uint) (this.gameCanvas.Children.Count - 1), GameSettings.LowCanvasIndex);
             }
         }
 
@@ -337,6 +337,10 @@ namespace FroggerStarter.Controller
         private void timerOnTick(object sender, object e)
         {
             this.roadManager.MoveObjects();
+            if (this.playerValues.CurrentLevel == GameSettings.FinalLevel)
+            {
+                this.roadManager.IncreaseSpeed();
+            }
             this.checkToAddVehiclesToLanes();
             this.checkToAddRandomPowerUp();
 
@@ -483,7 +487,8 @@ namespace FroggerStarter.Controller
             {
                 this.addFrogToFrogHome(enumerator.Current);
             }
-            else if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player) && !this.playerValues.FrogDying)
+            else if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player) &&
+                     !this.playerValues.FrogDying)
             {
                 this.playerGetsHit();
             }
@@ -499,6 +504,7 @@ namespace FroggerStarter.Controller
                     collectedPowerUp = currPowerUp;
                 }
             }
+
             this.collectPowerUp(collectedPowerUp);
         }
 
@@ -508,6 +514,7 @@ namespace FroggerStarter.Controller
             {
                 return;
             }
+
             this.gameCanvas.Children.Remove(powerUp.Sprite);
             this.powerUps.Remove(powerUp);
             switch (powerUp)
@@ -519,6 +526,7 @@ namespace FroggerStarter.Controller
                     this.playerValues.AddBonusScore();
                     break;
             }
+
             this.onScoreUpdated(this.Score);
             SoundEffects.PlayPowerUpSound();
         }
@@ -527,7 +535,8 @@ namespace FroggerStarter.Controller
         {
             foreach (var currWaterCrossing in this.waterCrossings)
             {
-                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player) && !this.playerValues.FrogDying)
+                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player) &&
+                    !this.playerValues.FrogDying)
                 {
                     return true;
                 }
@@ -574,6 +583,7 @@ namespace FroggerStarter.Controller
             this.animateFrogDeath();
             this.onLivesUpdated(this.Lives);
             this.roadManager.ResetOneObjectPerLane();
+            this.roadManager.ResetSpeed();
         }
 
         private void animateFrogDeath()
@@ -642,6 +652,7 @@ namespace FroggerStarter.Controller
             {
                 this.gameCanvas.Children.Remove(currWaterCrossing.Sprite);
             }
+
             this.waterCrossings.Clear();
         }
 
@@ -670,7 +681,7 @@ namespace FroggerStarter.Controller
             var level = this.playerValues.CurrentLevel;
             var score = this.playerValues.Score;
 
-            if (this.playerValues.CurrentLevel > GameSettings.LevelsInGame)
+            if (this.playerValues.CurrentLevel > GameSettings.FinalLevel)
             {
                 level -= 1;
             }
@@ -678,6 +689,7 @@ namespace FroggerStarter.Controller
             var dialog = new RetrievePlayerNameDialog(score, level);
             await dialog.ShowAsync();
         }
+
         #endregion
     }
 }

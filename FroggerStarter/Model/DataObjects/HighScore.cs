@@ -1,31 +1,51 @@
 ﻿namespace FroggerStarter.Model.DataObjects
 {
-    /// <summary>Manages a high score of a player.</summary>
+    /// <summary>
+    ///     Defines the HighScore for displaying scores
+    /// </summary>
     public class HighScore
     {
         #region Properties
 
-        /// <summary>Gets the name.</summary>
-        /// <value>The name.</value>
+        /// <summary>
+        ///     Gets the name.
+        /// </summary>
+        /// <value>
+        ///     The name.
+        /// </value>
         public string Name { get; }
 
-        /// <summary>Gets the game score.</summary>
-        /// <value>The game score.</value>
+        /// <summary>
+        ///     Gets the game score.
+        /// </summary>
+        /// <value>
+        ///     The game score.
+        /// </value>
         public int GameScore { get; }
 
-        /// <summary>Gets the game level.</summary>
-        /// <value>The game level.</value>
+        /// <summary>
+        ///     Gets the game level.
+        /// </summary>
+        /// <value>
+        ///     The game level.
+        /// </value>
         public int GameLevel { get; }
 
-        /// <summary>Gets or sets the full description.</summary>
-        /// <value>The full description.</value>
+        /// <summary>
+        ///     Gets or sets the full description.
+        /// </summary>
+        /// <value>
+        ///     The full description.
+        /// </value>
         public string FullDescription { get; set; }
 
         #endregion
 
         #region Constructors
 
-        /// <summary>Initializes a new instance of the <see cref="HighScore" /> class.</summary>
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="HighScore" /> class.
+        /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="score">The score.</param>
         /// <param name="level">The level.</param>
@@ -42,9 +62,9 @@
         #region Methods
 
         /// <summary>
-        ///     Sorts the description property by default order.
+        ///     Sorts the description default.
         ///     Precondition: none
-        ///     Postcondition: description property is set to specified order
+        ///     PostCondition: HighScores sorted by Score
         /// </summary>
         public void SortDescriptionDefault()
         {
@@ -52,9 +72,9 @@
         }
 
         /// <summary>
-        ///     Sorts the description property by level order.
+        ///     Sorts the description by level.
         ///     Precondition: none
-        ///     Postcondition: description property is set to specified order
+        ///     PostCondition: HighScores sorted by Level
         /// </summary>
         public void SortDescriptionByLevel()
         {
@@ -62,9 +82,9 @@
         }
 
         /// <summary>
-        ///     Sorts the description property by score order.
+        ///     Sorts the name of the description by.
         ///     Precondition: none
-        ///     Postcondition: description property is set to specified order
+        ///     PostCondition: HighScores sorted by Name
         /// </summary>
         public void SortDescriptionByName()
         {

@@ -51,12 +51,12 @@ namespace FroggerStarter.Model.DataObjects
         public static int TicksUntilSpawnObjects { get; } = 200;
 
         /// <summary>
-        ///     Gets the levels in game.
+        /// Gets the final level.
         /// </summary>
         /// <value>
-        ///     The levels in game.
+        /// The final level.
         /// </value>
-        public static int LevelsInGame { get; } = 3;
+        public static int FinalLevel { get; } = 3;
 
         /// <summary>
         ///     Gets the default frog speed.
@@ -89,6 +89,22 @@ namespace FroggerStarter.Model.DataObjects
         ///     The index of the low canvas.
         /// </value>
         public static uint LowCanvasIndex { get; } = 3;
+
+        /// <summary>
+        /// Gets the speed increase.
+        /// </summary>
+        /// <value>
+        /// The speed increase.
+        /// </value>
+        public static double SpeedIncrease { get; } = 0.005;
+
+        /// <summary>
+        /// Gets the speed limit.
+        /// </summary>
+        /// <value>
+        /// The speed limit.
+        /// </value>
+        public static double SpeedLimit { get; } = 10.0;
 
         /// <summary>
         ///     Gets the landing cushion percentage.

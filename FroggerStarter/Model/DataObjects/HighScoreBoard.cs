@@ -2,24 +2,36 @@
 
 namespace FroggerStarter.Model.DataObjects
 {
-    /// <summary>Handles a collection of high scores</summary>
+    /// <summary>
+    ///     Defines the board for displaying HighScores
+    /// </summary>
     public class HighScoreBoard
     {
         #region Properties
 
-        /// <summary>Gets the scores.</summary>
-        /// <value>The scores.</value>
+        /// <summary>
+        ///     Gets the scores.
+        /// </summary>
+        /// <value>
+        ///     The scores.
+        /// </value>
         public IList<HighScore> Scores { get; }
 
-        /// <summary>Gets the count.</summary>
-        /// <value>The count.</value>
+        /// <summary>
+        ///     Gets the count.
+        /// </summary>
+        /// <value>
+        ///     The count.
+        /// </value>
         public int Count => this.Scores.Count;
 
         #endregion
 
         #region Constructors
 
-        /// <summary>Initializes a new instance of the <see cref="HighScoreBoard" /> class.</summary>
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="HighScoreBoard" /> class.
+        /// </summary>
         public HighScoreBoard()
         {
             this.Scores = new List<HighScore>();
@@ -32,7 +44,7 @@ namespace FroggerStarter.Model.DataObjects
         /// <summary>
         ///     Adds the specified score.
         ///     Precondition: none
-        ///     Postcondition: adds a new high score to the board.
+        ///     PostCondition: HighScore added to Board
         /// </summary>
         /// <param name="score">The score.</param>
         public void Add(HighScore score)

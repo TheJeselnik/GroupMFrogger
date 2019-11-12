@@ -29,14 +29,6 @@ namespace FroggerStarter.Controller
         public IList<Vehicle> AllVehicles { get; private set; }
 
         /// <summary>
-        /// Gets the power ups.
-        /// </summary>
-        /// <value>
-        /// The power ups.
-        /// </value>
-        public IList<PowerUp> PowerUps { get; private set; }
-
-        /// <summary>
         ///     The y coordinate of the top shoulder
         /// </summary>
         public double TopShoulderY { get; private set; }
@@ -57,13 +49,17 @@ namespace FroggerStarter.Controller
 
         #endregion
 
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="RoadManager"/> class.
+        ///     Initializes a new instance of the <see cref="RoadManager" /> class.
         /// </summary>
         public RoadManager()
         {
             this.currentLevelLanes = GameSettings.Levels[0];
         }
+
+        #endregion
 
         #region Methods
 
@@ -104,7 +100,7 @@ namespace FroggerStarter.Controller
         public event EventHandler<WaterCrossing> WaterAdded;
 
         /// <summary>
-        /// Places the lanes.
+        ///     Places the lanes.
         /// </summary>
         public void PlaceLanes()
         {
@@ -128,7 +124,7 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        /// Goes to next level.
+        ///     Goes to next level.
         /// </summary>
         /// <param name="level">The level.</param>
         public void GoToNextLevel(int level)
@@ -180,12 +176,33 @@ namespace FroggerStarter.Controller
             }
         }
 
+        /// <summary>
+        /// Increases the speed.
+        /// </summary>
+        public void IncreaseSpeed()
+        {
+            foreach (var currLane in this.currentLevelLanes)
+            {
+                currLane.IncreaseSpeed();
+            }
+        }
+
+        /// <summary>
+        /// Resets the speed of vehicles.
+        /// </summary>
+        public void ResetSpeed()
+        {
+            foreach (var currLane in this.currentLevelLanes)
+            {
+                currLane.ResetSpeed();
+            }
+        }
+
         private void addPowerUp()
         {
             var random = new Random();
             var index = random.Next(this.currentLevelLanes.Count - 1);
             var chosenLane = this.currentLevelLanes[index];
-
 
             if (chosenLane.HasWater)
             {
@@ -214,7 +231,7 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        /// Checks to add random power up.
+        ///     Checks to add random power up.
         ///     Precondition: Random Chance > 99.9%
         ///     Postcondition: TimePowerUp added to random lane
         /// </summary>

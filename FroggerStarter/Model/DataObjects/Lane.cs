@@ -19,15 +19,15 @@ namespace FroggerStarter.Model.DataObjects
         /// </summary>
         public readonly bool HasWater;
 
-        private readonly int maxGameObjects;
-
         private Point location;
+        private bool waterPlaced;
+        private readonly int maxGameObjects;
+        private double currentSpeed;
         private readonly double initialSpeed;
         private readonly double vehicleSpacing;
         private readonly GameObject.Direction direction;
         private readonly Vehicle.VehicleType vehicleType;
         private readonly WaterObject.WaterObjectType waterObjectType;
-        private bool waterPlaced;
 
         #endregion
 
@@ -69,6 +69,7 @@ namespace FroggerStarter.Model.DataObjects
             this.vehicleType = vehicleType;
             this.direction = direction;
             this.initialSpeed = speed;
+            this.currentSpeed = speed;
             this.maxGameObjects = maxGameObjects;
             this.VehiclesInLane = new List<Vehicle>();
             this.vehicleSpacing = GameSettings.VehicleSpacing;
@@ -88,6 +89,7 @@ namespace FroggerStarter.Model.DataObjects
             this.waterObjectType = waterObjectType;
             this.direction = direction;
             this.initialSpeed = speed;
+            this.currentSpeed = speed;
             this.maxGameObjects = maxGameObjects;
             this.HasWater = hasWater;
             this.VehiclesInLane = new List<Vehicle>();
@@ -219,6 +221,36 @@ namespace FroggerStarter.Model.DataObjects
             this.waterPlaced = false;
         }
 
+        /// <summary>
+        /// Increases the speed.
+        ///     Precondition: SpeedX lessThan GameSettings.SpeedLimit
+        ///     Postcondition: SpeedX = SpeedX + GameSettings.SpeedIncrease
+        /// </summary>
+        public void IncreaseSpeed()
+        {
+            if (this.currentSpeed < GameSettings.SpeedLimit)
+            {
+                this.currentSpeed += GameSettings.SpeedIncrease;
+            }
+            foreach (var currVehicle in this.VehiclesInLane)
+            {
+                currVehicle.SetSpeed(this.currentSpeed, currVehicle.SpeedY);
+            }
+        }
+
+        /// <summary>
+        /// Resets the speed.
+        ///     Precondition: none
+        ///     Postcondition: SpeedX = initialSpeed
+        /// </summary>
+        public void ResetSpeed()
+        {
+            foreach (var currVehicle in this.VehiclesInLane)
+            {
+                currVehicle.ResetSpeedX();
+            }
+        }
+
         private void placeVehicle()
         {
             if (this.HasWater)
@@ -265,13 +297,13 @@ namespace FroggerStarter.Model.DataObjects
             switch (this.vehicleType)
             {
                 case Vehicle.VehicleType.Car:
-                    return new Car(this.direction, this.initialSpeed);
+                    return new Car(this.direction, this.currentSpeed);
                 case Vehicle.VehicleType.SemiTruck:
-                    return new SemiTruck(this.direction, this.initialSpeed);
+                    return new SemiTruck(this.direction, this.currentSpeed);
                 case Vehicle.VehicleType.OilSemiTruck:
-                    return new OilSemiTruck(this.direction, this.initialSpeed);
+                    return new OilSemiTruck(this.direction, this.currentSpeed);
                 default:
-                    return new Car(this.direction, this.initialSpeed);
+                    return new Car(this.direction, this.currentSpeed);
             }
         }
 
@@ -280,11 +312,11 @@ namespace FroggerStarter.Model.DataObjects
             switch (this.waterObjectType)
             {
                 case WaterObject.WaterObjectType.Log:
-                    return new Log(true, this.direction, this.initialSpeed);
+                    return new Log(true, this.direction, this.currentSpeed);
                 case WaterObject.WaterObjectType.Raft:
-                    return new Raft(true, this.direction, this.initialSpeed);
+                    return new Raft(true, this.direction, this.currentSpeed);
                 default:
-                    return new Raft(true, this.direction, this.initialSpeed);
+                    return new Raft(true, this.direction, this.currentSpeed);
             }
         }
 
