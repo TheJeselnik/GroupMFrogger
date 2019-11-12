@@ -4,13 +4,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:FroggerStarter.ViewModel"
     mc:Ignorable="d"
     Title="Please enter your name to record new score!"
     x:Name="dialog">
 
+    <ContentDialog.DataContext>
+        <viewModel:HighScoreBoardViewModel/>
+    </ContentDialog.DataContext>
+
     <Grid>
-        <Button Content="Submit" Margin="146,59,0,0" VerticalAlignment="Top" Width="116" Click="SubmitBtn_Click"/>
-        <TextBox Name="nameTextBox" HorizontalAlignment="Left" Margin="164,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152"/>
-        <TextBlock HorizontalAlignment="Left" Margin="100,6,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="52" FontSize="18"/>
+        <Button Content="Submit" Margin="144,208,0,0" VerticalAlignment="Top" Width="116" Click="SubmitBtn_Click" Command="{Binding SubmitPlayerNameCommand}"/>
+        <TextBox Name="nameTextBox" HorizontalAlignment="Left" Margin="144,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Text="{Binding CurrentPlayerInfo, Mode=TwoWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,6,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="52" FontSize="18"/>
+
+        <TextBox Name="scoreTextBox" HorizontalAlignment="Left" Margin="144,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" IsReadOnly="True"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,56,0,0" Text="Current Score:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="114" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,107,0,0" Text="Current Level:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="114" FontSize="18"/>
+        <TextBox x:Name="levelTextBox" HorizontalAlignment="Left" Margin="144,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" IsReadOnly="True"/>
     </Grid>
 </ContentDialog>

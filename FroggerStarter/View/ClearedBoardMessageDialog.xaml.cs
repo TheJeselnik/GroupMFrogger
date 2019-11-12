@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace FroggerStarter.View
 {
-    public sealed partial class ClearedBoardMessageDialog : ContentDialog
+    public sealed partial class ClearedBoardMessageDialog
     {
         public ClearedBoardMessageDialog()
         {

@@ -4,6 +4,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using FroggerStarter.Model;
 using FroggerStarter.Utility;
+using FroggerStarter.View;
 
 namespace FroggerStarter.Controller
 {
@@ -505,6 +506,7 @@ namespace FroggerStarter.Controller
         {
             this.timer.Stop();
             this.onGameOverReached(EventArgs.Empty);
+            handleRetrievePlayerName();
         }
 
         private void goToNextLevel()
@@ -538,6 +540,11 @@ namespace FroggerStarter.Controller
             this.LifeTimerUpdated?.Invoke(this, timeRemaining);
         }
 
+        private async void handleRetrievePlayerName()
+        {
+            var dialog = new RetrievePlayerNameDialog(this.playerValues.Score, this.playerValues.CurrentLevel);
+            await dialog.ShowAsync();
+        }
         #endregion
     }
 }

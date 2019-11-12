@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace FroggerStarter.Model
 {
     public class HighScore
     {
-
         public string Name { get; private set; }
 
         public int GameScore { get; private set; }
@@ -22,7 +22,7 @@ namespace FroggerStarter.Model
             this.Name = name;
             this.GameScore = score;
             this.GameLevel = level;
-            this.SortDescriptionDefault();
+            this.FullDescription = $"Name: {this.Name}   |   Score: {this.GameScore}   |   Level: {this.GameLevel}";
         }
 
         public void SortDescriptionByScore()

@@ -18,7 +18,7 @@
             <RowDefinition Height="400" />
         </Grid.RowDefinitions>
 
-        <ListView Name="listView" Margin="0,45,0,225" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Path=Scores, Mode=TwoWay}"  ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <ListView Name="listView" Margin="0,45,0,225" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Path=Scores, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -29,9 +29,10 @@
         </ListView>
         <TextBlock HorizontalAlignment="Left" Text="~HighScore Board~" TextWrapping="Wrap" Width="179" Margin="157,0,0,363" FontSize="20"/>
         <TextBlock HorizontalAlignment="Left" Text="Sort By:" TextWrapping="Wrap" Width="60" Margin="10,214,0,164" FontSize="14"/>
-        <RadioButton Content="Score, Name, Level" GroupName="RadioGroup" Margin="10,253,0,0" VerticalAlignment="Top" Command="{Binding SortByScoreCommand}"></RadioButton>
-        <RadioButton Content="Name, Score, Level" GroupName="RadioGroup" Margin="10,290,0,0" VerticalAlignment="Top" Command="{Binding SortByNameCommand}"></RadioButton>
-        <RadioButton Content="Level, Score, Name" GroupName="RadioGroup" Margin="10,327,0,0" VerticalAlignment="Top" Command="{Binding SortByLevelCommand}"></RadioButton>
+        <RadioButton Name="scoreSortBtn" Content="Score, Name, Level" GroupName="RadioGroup" Margin="10,253,0,0" VerticalAlignment="Top" Command="{Binding SortByScoreCommand}"></RadioButton>
+        <RadioButton Name="nameSortBtn" Content="Name, Score, Level" GroupName="RadioGroup" Margin="10,290,0,0" VerticalAlignment="Top" Command="{Binding SortByNameCommand}"></RadioButton>
+        <RadioButton Name="levelSortBtn" Content="Level, Score, Name" GroupName="RadioGroup" Margin="10,327,0,0" VerticalAlignment="Top" Command="{Binding SortByLevelCommand}"></RadioButton>
         <Button Content="Close" Margin="327,277,0,0" VerticalAlignment="Top" Height="58" Width="169" Click="CloseBtn_Click"/>
+        <Button Name="displayBtn" Content="Display Scores" Margin="367,197,0,0" VerticalAlignment="Top" Height="49" Width="130" Click="DisplayScoresBtn_Click" Command="{Binding DisplayScoresCommand}"/>
     </Grid>
 </ContentDialog>

@@ -4,9 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:FroggerStarter.ViewModel"
     mc:Ignorable="d"
     Title="Menu Options"
     x:Name="dialog">
+
+    <ContentDialog.DataContext>
+        <viewModel:HighScoreBoardViewModel/>
+    </ContentDialog.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -17,7 +22,7 @@
 
         <Button Content="Close Game" Width="162" Margin="0,219,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="EndGameBtn_Click"/>
 
-        <Button Content="View HighScore Board" Width="162" Margin="0,144,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="ViewScoreBoardBtn_Click"/>
+        <Button Content="View HighScore Board" Width="162" Margin="0,144,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="ViewScoreBoardBtn_Click" Command="{Binding ViewScoreBoardGameOverCommand}"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="54,10,0,0" Text="What would you like to do?" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="176"/>
     </Grid>

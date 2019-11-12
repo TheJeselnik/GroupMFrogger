@@ -47,11 +47,5 @@ namespace FroggerStarter.View
             SoundEffects.PauseSound();
             this.Frame.Navigate(typeof(GamePage), null);
         }
-
-        private async void ViewScoreBoardBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var dialog = new HighScoreBoardDialog {isOpenedAtStartScreen = true};
-            await dialog.ShowAsync();
-        }
     }
 }
