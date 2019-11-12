@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using FroggerStarter.Model;
+using FroggerStarter.Model.DataObjects;
+using FroggerStarter.Model.GameObjects;
 using FroggerStarter.Utility;
 using FroggerStarter.View;
 
@@ -68,6 +69,14 @@ namespace FroggerStarter.Controller
         ///     The frog homes.
         /// </value>
         private IList<FrogHome> FrogHomes => this.topShoulder.FrogHomes;
+
+        /// <summary>
+        /// Gets the bushes.
+        /// </summary>
+        /// <value>
+        /// The bushes.
+        /// </value>
+        private IList<Bush> Bushes => this.topShoulder.Bushes;
 
         #endregion
 
@@ -151,17 +160,13 @@ namespace FroggerStarter.Controller
             this.waterCrossings = new List<WaterCrossing>();
             this.instantiateHelperClasses();
             this.addNonPlayerSprites();
-
-            this.roadManager.VehicleAdded += this.vehicleAdded;
-            this.roadManager.VehicleRemoved += this.vehicleRemoved;
-            this.roadManager.WaterObjectAdded += this.waterObjectAdded;
-            this.roadManager.WaterObjectRemoved += this.waterObjectRemoved;
         }
 
         private void addNonPlayerSprites()
         {
             this.addVehiclesToCanvas();
             this.addFrogHomesToCanvas();
+            this.addBushesToCanvas();
         }
 
         private void addFrogSprites()
@@ -186,26 +191,19 @@ namespace FroggerStarter.Controller
             this.roadManager = new RoadManager();
             this.roadManager.WaterAdded += this.waterAdded;
             this.roadManager.GoToNextLevel(this.playerValues.CurrentLevel);
+            this.roadManager.VehicleAdded += this.vehicleAdded;
+            this.roadManager.VehicleRemoved += this.vehicleRemoved;
         }
 
         private void vehicleAdded(object sender, Vehicle vehicle)
         {
             this.gameCanvas.Children.Add(vehicle.Sprite);
+            this.moveSpriteToBottomOfCanvas(vehicle);
         }
 
         private void vehicleRemoved(object sender, Vehicle vehicle)
         {
             this.gameCanvas.Children.Remove(vehicle.Sprite);
-        }
-
-        private void waterObjectAdded(object sender, WaterObject waterObject)
-        {
-            this.gameCanvas.Children.Add(waterObject.Sprite);
-        }
-
-        private void waterObjectRemoved(object sender, WaterObject waterObject)
-        {
-            this.gameCanvas.Children.Remove(waterObject.Sprite);
         }
 
         private void waterAdded(object sender, WaterCrossing waterCrossing)
@@ -220,6 +218,15 @@ namespace FroggerStarter.Controller
             foreach (var vehicle in this.roadManager.AllVehicles)
             {
                 this.gameCanvas.Children.Add(vehicle.Sprite);
+                this.moveSpriteToBottomOfCanvas(vehicle);
+            }
+        }
+
+        private void moveSpriteToBottomOfCanvas(Vehicle vehicle)
+        {
+            if (vehicle is WaterObject)
+            {
+                this.gameCanvas.Children.Move((uint) (this.gameCanvas.Children.Count - 1), 2);
             }
         }
 
@@ -228,6 +235,14 @@ namespace FroggerStarter.Controller
             foreach (var currFrogHome in this.topShoulder.FrogHomes)
             {
                 this.gameCanvas.Children.Add(currFrogHome.Sprite);
+            }
+        }
+
+        private void addBushesToCanvas()
+        {
+            foreach (var currBush in this.topShoulder.Bushes)
+            {
+                this.gameCanvas.Children.Add(currBush.Sprite);
             }
         }
 
@@ -338,9 +353,14 @@ namespace FroggerStarter.Controller
 
             if (this.lifeTimer.TimeRemaining <= 0.0 && !this.playerValues.FrogDying)
             {
-                SoundEffects.PlayTimeOutSound();
-                this.playerLosesLife();
+                this.playerRunsOutOfTime();
             }
+        }
+
+        private void playerRunsOutOfTime()
+        {
+            SoundEffects.PlayTimeOutSound();
+            this.playerLosesLife();
         }
 
         private void checkIfFrogIsDoneDying()
@@ -355,32 +375,56 @@ namespace FroggerStarter.Controller
         {
             var enumerator = this.roadManager.AllVehicles.GetEnumerator();
             var vehicleCollision = false;
-            var waterCollision = false;
             while (enumerator.MoveNext())
             {
-                if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player) &&
-                    !this.playerValues.FrogDying)
+                if (this.playerCollidesWith(enumerator.Current))
                 {
                     vehicleCollision = true;
                 }
-            }
 
-            foreach (var currWaterCrossing in this.waterCrossings)
-            {
-                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player) &&
-                    !this.playerValues.FrogDying)
+                if (enumerator.Current is WaterObject waterObject && vehicleCollision)
                 {
-                    waterCollision = true;
+                    waterObject.MoveLandedFrog(this.player);
+                    if (this.playerMovementManager.PlayerAtLeftBoundary())
+                    {
+                        this.player.X = 0.0;
+                    }
+
+                    if (this.playerMovementManager.PlayerAtRightBoundary())
+                    {
+                        this.player.X = GameSettings.RoadWidth - this.player.Width;
+                    }
+                }
+
+                if (vehicleCollision)
+                {
+                    break;
                 }
             }
 
-            if (vehicleCollision && !waterCollision)
+            if (vehicleCollision && !this.isPlayerOnWater())
             {
-                SoundEffects.PlayDeathSound();
-                this.playerLosesLife();
+                this.playerGetsHit();
+            }
+
+            if (!vehicleCollision && this.isPlayerOnWater())
+            {
+                this.playerDrowns();
             }
 
             enumerator.Dispose();
+        }
+
+        private void playerDrowns()
+        {
+            SoundEffects.PlayDeathSound();
+            this.playerLosesLife();
+        }
+
+        private void playerGetsHit()
+        {
+            SoundEffects.PlayDeathSound();
+            this.playerLosesLife();
         }
 
         private void checkPlayerCollisionWithFrogHomes()
@@ -388,13 +432,38 @@ namespace FroggerStarter.Controller
             var enumerator = this.topShoulder.FrogHomes.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player))
+                if (enumerator.Current != null)
                 {
-                    this.addFrogToFrogHome(enumerator.Current);
+                    this.checkFrogHomeLanding(enumerator);
                 }
             }
 
+            if (this.player.Y <= GameSettings.TopEdgeOfLanes && !this.playerValues.FrogDying)
+            {
+                this.playerGetsHit();
+            }
+
             enumerator.Dispose();
+        }
+
+        private void checkFrogHomeLanding(IEnumerator<FrogHome> enumerator)
+        {
+            if (enumerator.Current == null)
+            {
+                return;
+            }
+
+            var frogHomeWidth = enumerator.Current.Width;
+            var cushion = frogHomeWidth * GameSettings.LandingCushionPercentage;
+            if (this.collisionDetector.IsCollisionBetweenWithCushion(enumerator.Current, this.player, cushion) &&
+                !enumerator.Current.HasFrog)
+            {
+                this.addFrogToFrogHome(enumerator.Current);
+            }
+            else if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player) && !this.playerValues.FrogDying)
+            {
+                this.playerGetsHit();
+            }
         }
 
         private void checkPlayerCollisionWithPowerUps()
@@ -412,7 +481,7 @@ namespace FroggerStarter.Controller
         {
             foreach (var currWaterCrossing in this.waterCrossings)
             {
-                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player))
+                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player) && !this.playerValues.FrogDying)
                 {
                     return true;
                 }
@@ -421,9 +490,11 @@ namespace FroggerStarter.Controller
             return false;
         }
 
-        private void checkPlayerCollisionWithWaterObjects()
+        private bool playerCollidesWith(GameObject vehicle)
         {
-
+            return vehicle != null &&
+                   this.collisionDetector.IsCollisionBetween(vehicle, this.player) &&
+                   !this.playerValues.FrogDying;
         }
 
         private void addFrogToFrogHome(FrogHome frogHome)
@@ -477,7 +548,6 @@ namespace FroggerStarter.Controller
         {
             if (this.playerValues.GameOver)
             {
-                SoundEffects.PlayGameOverSound();
                 this.gameOver();
             }
             else if (this.allFrogHomesFilled())
@@ -504,6 +574,7 @@ namespace FroggerStarter.Controller
 
         private void gameOver()
         {
+            SoundEffects.PlayGameOverSound();
             this.timer.Stop();
             this.onGameOverReached(EventArgs.Empty);
             handleRetrievePlayerName();
@@ -512,12 +583,22 @@ namespace FroggerStarter.Controller
         private void goToNextLevel()
         {
             this.removeFrogHomesFromCanvas();
+            this.removeWaterCrossings();
             this.topShoulder.ClearHomes();
-            this.addFrogHomesToCanvas();
             this.setPlayerToCenterOfBottomLane();
             this.roadManager.GoToNextLevel(this.playerValues.CurrentLevel);
+            this.addFrogHomesToCanvas();
             this.playerMovementManager.CanMove = true;
             this.lifeTimer.ResetTimeRemaining();
+        }
+
+        private void removeWaterCrossings()
+        {
+            foreach (var currWaterCrossing in this.waterCrossings)
+            {
+                this.gameCanvas.Children.Remove(currWaterCrossing.Sprite);
+            }
+            this.waterCrossings.Clear();
         }
 
         private void onScoreUpdated(int score)

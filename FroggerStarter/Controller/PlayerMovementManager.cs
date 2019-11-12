@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using FroggerStarter.Model;
+using FroggerStarter.Model.DataObjects;
+using FroggerStarter.Model.GameObjects;
 using FroggerStarter.Utility;
 
 namespace FroggerStarter.Controller
@@ -52,8 +53,9 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerLeft()
         {
-            if (!this.playerAtLeftBoundary() && this.CanMove)
+            if (!this.PlayerAtLeftBoundary() && this.CanMove)
             {
+                this.player.SetSpeed(GameSettings.DefaultFrogSpeed, GameSettings.DefaultFrogSpeed);
                 this.player.RotateSprite(GameObject.Direction.Left);
                 this.player.MoveLeft();
             }
@@ -63,7 +65,11 @@ namespace FroggerStarter.Controller
             }
         }
 
-        private bool playerAtLeftBoundary()
+        /// <summary>
+        /// Players at left boundary.
+        /// </summary>
+        /// <returns>True if player's X lessThanOrEqualTo LeftEdgeOfRoad</returns>
+        public bool PlayerAtLeftBoundary()
         {
             return this.player.X <= GameSettings.LeftEdgeOfRoad;
         }
@@ -75,8 +81,9 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void MovePlayerRight()
         {
-            if (!this.playerAtRightBoundary() && this.CanMove)
+            if (!this.PlayerAtRightBoundary() && this.CanMove)
             {
+                this.player.SetSpeed(GameSettings.DefaultFrogSpeed, GameSettings.DefaultFrogSpeed);
                 this.player.RotateSprite(GameObject.Direction.Right);
                 this.player.MoveRight();
             }
@@ -86,7 +93,11 @@ namespace FroggerStarter.Controller
             }
         }
 
-        private bool playerAtRightBoundary()
+        /// <summary>
+        /// Players at right boundary.
+        /// </summary>
+        /// <returns>True if player's X + Width greaterThanOrEqualTo RoadWidth</returns>
+        public bool PlayerAtRightBoundary()
         {
             return this.player.X + this.player.Width >= GameSettings.RoadWidth;
         }
@@ -100,6 +111,7 @@ namespace FroggerStarter.Controller
         {
             if (this.playerCanMoveUp() || this.playerBelowFrogHome())
             {
+                this.player.SetSpeed(GameSettings.DefaultFrogSpeed, GameSettings.DefaultFrogSpeed);
                 this.player.RotateSprite(GameObject.Direction.Up);
                 this.player.MoveUp();
             }
@@ -116,7 +128,7 @@ namespace FroggerStarter.Controller
 
         private bool playerCanMoveUp()
         {
-            return !this.playerAtTopBoundary() && this.CanMove;
+            return this.CanMove;
         }
 
         private bool playerBelowFrogHome()
@@ -143,6 +155,7 @@ namespace FroggerStarter.Controller
         {
             if (!this.playerAtBottomBoundary() && this.CanMove)
             {
+                this.player.SetSpeed(GameSettings.DefaultFrogSpeed, GameSettings.DefaultFrogSpeed);
                 this.player.RotateSprite(GameObject.Direction.Down);
                 this.player.MoveDown();
             }

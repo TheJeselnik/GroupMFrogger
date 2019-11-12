@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using FroggerStarter.Model.GameObjects;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.DataObjects
 {
     /// <summary>
     ///     Defines a shoulder of the road, which may contain FrogHomes
@@ -24,6 +25,14 @@ namespace FroggerStarter.Model
         ///     The frog homes.
         /// </value>
         public IList<FrogHome> FrogHomes { get; } = new List<FrogHome>();
+
+        /// <summary>
+        ///     Gets the bushes
+        /// </summary>
+        /// <value>
+        ///     The bushes
+        /// </value>
+        public IList<Bush> Bushes { get; } = new List<Bush>();
 
         #endregion
 
@@ -77,12 +86,23 @@ namespace FroggerStarter.Model
 
             for (var i = 0; i < numberOfColumns; i++)
             {
+                if (i == 0)
+                {
+                    this.createBush();
+                }
                 this.offsetX += this.columnWidth;
                 if (isOddNumberedLane(i))
                 {
                     this.createFrogHome();
                 }
+                else
+                {
+                    this.createBush();
+                }
             }
+
+            this.offsetX += this.columnWidth;
+            this.createBush();
         }
 
         private void createFrogHome()
@@ -91,6 +111,13 @@ namespace FroggerStarter.Model
             this.FrogHomes.Add(frogHome);
             frogHome.X = this.offsetX;
             frogHome.Y = GameSettings.LaneHeight + GameSettings.RoadOffsetHeight;
+        }
+        private void createBush()
+        {
+            var bush = new Bush();
+            this.Bushes.Add(bush);
+            bush.X = this.offsetX;
+            bush.Y = GameSettings.LaneHeight + GameSettings.RoadOffsetHeight;
         }
 
         private static bool isOddNumberedLane(int laneIndex)

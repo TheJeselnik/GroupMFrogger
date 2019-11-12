@@ -1,9 +1,9 @@
 ﻿using System;
 using Windows.Foundation;
-using FroggerStarter.View.Sprites;
 using Windows.UI.Xaml.Media;
+using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.GameObjects
 {
     /// <summary>
     ///     Defines basic properties and behavior of every game object.

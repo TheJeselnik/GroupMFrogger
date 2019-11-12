@@ -1,11 +1,11 @@
 ﻿using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.GameObjects
 {
     /// <summary>
     ///     Defines the log water object
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.WaterObject" />
+    /// <seealso cref="WaterObject" />
     public class Log : WaterObject
     {
         #region Constructors
@@ -15,7 +15,7 @@ namespace FroggerStarter.Model
         /// </summary>
         /// <param name="canLandOn">if set to <c>true</c> [can land on].</param>
         /// <param name="speed">The speed.</param>
-        public Log(bool canLandOn, double speed) : base(canLandOn, speed)
+        public Log(bool canLandOn, Direction direction, double speed) : base(canLandOn, direction, speed)
         {
             Sprite = new LogSprite();
         }

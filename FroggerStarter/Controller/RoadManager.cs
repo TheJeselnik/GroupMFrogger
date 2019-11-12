@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using FroggerStarter.Model;
+using FroggerStarter.Model.DataObjects;
+using FroggerStarter.Model.GameObjects;
 
 namespace FroggerStarter.Controller
 {
@@ -93,16 +94,6 @@ namespace FroggerStarter.Controller
         public event EventHandler<Vehicle> VehicleRemoved;
 
         /// <summary>
-        ///     Occurs when [waterObject added].
-        /// </summary>
-        public event EventHandler<WaterObject> WaterObjectAdded;
-
-        /// <summary>
-        ///     Occurs when [waterObject removed].
-        /// </summary>
-        public event EventHandler<WaterObject> WaterObjectRemoved;
-
-        /// <summary>
         ///     Occurs when [gameObject removed].
         /// </summary>
         public event EventHandler<PowerUp> PowerUpAdded;
@@ -127,8 +118,6 @@ namespace FroggerStarter.Controller
                 currLane.VehicleAdded += this.addNewVehicle;
                 currLane.VehicleRemoved += this.removeVehicle;
                 currLane.WaterAdded += this.addWater;
-                currLane.WaterObjectAdded += this.addNewWaterObject;
-                currLane.WaterObjectRemoved += this.removeWaterObject;
 
                 currLane.AddWater();
             }
@@ -147,21 +136,10 @@ namespace FroggerStarter.Controller
             foreach (var currLane in this.currentLevelLanes)
             {
                 currLane.RemoveAllVehicles();
-                currLane.RemoveAllWaterObjects();
             }
 
             this.currentLevelLanes = GameSettings.Levels[level - 1];
             this.PlaceLanes();
-        }
-
-        private void removeWaterObject(object sender, WaterObject waterObject)
-        {
-            this.onWaterObjectRemoved(waterObject);
-        }
-
-        private void addNewWaterObject(object sender, WaterObject waterObject)
-        {
-            this.onWaterObjectAdded(waterObject);
         }
 
         private void addNewVehicle(object sender, Vehicle vehicle)
@@ -229,14 +207,9 @@ namespace FroggerStarter.Controller
         {
             foreach (var currLane in this.currentLevelLanes)
             {
-                if (currLane.HasRoomForVehicles() && !currLane.HasWater)
+                if (currLane.HasRoomForVehicles())
                 {
                     currLane.AddVehicle();
-                }
-
-                if (currLane.HasRoomForWaterObjects() && currLane.HasWater)
-                {
-                    currLane.AddWaterObject();
                 }
             }
         }
@@ -251,7 +224,6 @@ namespace FroggerStarter.Controller
             foreach (var currLane in this.currentLevelLanes)
             {
                 currLane.RemoveAddedVehicles();
-                currLane.RemoveAddedWaterObjects();
             }
         }
 
@@ -274,7 +246,7 @@ namespace FroggerStarter.Controller
         private void getAllVehicles()
         {
             this.AllVehicles = new List<Vehicle>();
-            foreach (var currLane in GameSettings.FirstLevelLanes)
+            foreach (var currLane in this.currentLevelLanes)
             {
                 var enumerator = currLane.GetEnumerator();
                 while (enumerator.MoveNext())
@@ -305,16 +277,6 @@ namespace FroggerStarter.Controller
         private void onWaterAdded(WaterCrossing waterCrossing)
         {
             this.WaterAdded?.Invoke(this, waterCrossing);
-        }
-
-        private void onWaterObjectAdded(WaterObject waterObject)
-        {
-            this.WaterObjectAdded?.Invoke(this, waterObject);
-        }
-
-        private void onWaterObjectRemoved(WaterObject waterObject)
-        {
-            this.WaterObjectRemoved?.Invoke(this, waterObject);
         }
 
         #endregion

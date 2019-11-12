@@ -1,23 +1,19 @@
 ﻿
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-using FroggerStarter.Model.DataObjects;
-
 namespace FroggerStarter.View.Sprites
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class WaterCrossingSprite
+    public sealed partial class BushSprite
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WaterCrossingSprite"/> class.
+        /// Initializes a new instance of the <see cref="BushSprite"/> class.
         /// </summary>
-        public WaterCrossingSprite()
+        public BushSprite()
         {
             this.InitializeComponent();
-            this.waterCrossingCanvas.Height = GameSettings.LaneHeight;
-            this.waterCrossingRectangle.Height = GameSettings.LaneHeight;
         }
     }
 }

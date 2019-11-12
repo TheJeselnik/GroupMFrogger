@@ -1,10 +1,9 @@
-﻿
-namespace FroggerStarter.Model
+﻿namespace FroggerStarter.Model.GameObjects
 {
     /// <summary>
     /// Defines the base for Power Up Game Objects
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.GameObject" />
+    /// <seealso cref="GameObject" />
     public abstract class PowerUp : GameObject
     {
 

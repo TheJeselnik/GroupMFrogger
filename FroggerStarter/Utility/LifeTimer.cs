@@ -1,4 +1,4 @@
-﻿using FroggerStarter.Model;
+﻿using FroggerStarter.Model.DataObjects;
 
 namespace FroggerStarter.Utility
 {
