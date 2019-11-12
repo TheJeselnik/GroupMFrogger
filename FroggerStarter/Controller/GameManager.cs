@@ -178,6 +178,7 @@ namespace FroggerStarter.Controller
             this.collisionDetector = new CollisionDetector();
             this.lifeTimer = new LifeTimer();
             this.playerMovementManager = new PlayerMovementManager(this.player, this.FrogHomes);
+            this.playerMovementManager.PlayerMoved += this.playerMoved;
         }
 
         private void instantiateRoadManager()
@@ -212,6 +213,11 @@ namespace FroggerStarter.Controller
         {
             this.gameCanvas.Children.Add(powerUp.Sprite);
             this.powerUps.Add(powerUp);
+        }
+
+        private void playerMoved(object sender, GameObject.Direction direction)
+        {
+            this.animationManager.AnimateFrogJump(this.player, direction);
         }
 
         private void addVehiclesToCanvas()
@@ -268,6 +274,12 @@ namespace FroggerStarter.Controller
             {
                 currDeathSprite.Visibility = Visibility.Collapsed;
                 this.gameCanvas.Children.Add(currDeathSprite);
+            }
+
+            foreach (var currJumpSprite in this.player.JumpSprites)
+            {
+                currJumpSprite.Visibility = Visibility.Collapsed;
+                this.gameCanvas.Children.Add(currJumpSprite);
             }
         }
 
