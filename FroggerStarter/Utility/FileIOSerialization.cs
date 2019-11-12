@@ -49,7 +49,6 @@ namespace FroggerStarter.Utility
             }
 
             var reader = new BinaryReader(await file.OpenStreamForReadAsync());
-            board.CreateDefaultScores();
 
             while (reader.BaseStream.Position != reader.BaseStream.Length)
             {

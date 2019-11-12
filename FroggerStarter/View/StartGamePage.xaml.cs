@@ -47,5 +47,10 @@ namespace FroggerStarter.View
             SoundEffects.PauseSound();
             this.Frame.Navigate(typeof(GamePage), null);
         }
+
+        private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.clearBtn.Visibility = Visibility.Collapsed;
+        }
     }
 }
