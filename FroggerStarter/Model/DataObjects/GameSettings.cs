@@ -59,6 +59,22 @@ namespace FroggerStarter.Model.DataObjects
         public static int LevelsInGame { get; } = 3;
 
         /// <summary>
+        /// Gets the default frog speed.
+        /// </summary>
+        /// <value>
+        /// The default frog speed.
+        /// </value>
+        public static int DefaultFrogSpeed { get; } = 50;
+
+        /// <summary>
+        /// Gets the landing cushion percentage.
+        /// </summary>
+        /// <value>
+        /// The landing cushion percentage.
+        /// </value>
+        public static double LandingCushionPercentage { get; } = 0.90;
+
+        /// <summary>
         ///     Gets the bonus time power up chance.
         /// </summary>
         /// <value>
@@ -160,7 +176,7 @@ namespace FroggerStarter.Model.DataObjects
         /// <value>
         ///     The top edge of lanes.
         /// </value>
-        public static double TopEdgeOfLanes { get; } = 105.0;
+        public static double TopEdgeOfLanes { get; } = 55.0;
 
         /// <summary>
         ///     Gets the score multiplier.
@@ -176,7 +192,7 @@ namespace FroggerStarter.Model.DataObjects
         /// <value>
         ///     The first lane.
         /// </value>
-        private static Lane FirstLevelFirstLane { get; } =
+        private static Lane FirstLevelFirstLane { get; } = 
             new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 3.0, 3);
 
         /// <summary>
@@ -185,7 +201,7 @@ namespace FroggerStarter.Model.DataObjects
         /// <value>
         ///     The second lane.
         /// </value>
-        private static Lane FirstLevelSecondLane { get; } =
+        private static Lane FirstLevelSecondLane { get; } = 
             new Lane(Vehicle.VehicleType.SemiTruck, GameObject.Direction.Right, 3.5, 2);
 
         /// <summary>
@@ -195,7 +211,7 @@ namespace FroggerStarter.Model.DataObjects
         ///     The third lane.
         /// </value>
         private static Lane FirstLevelThirdLane { get; } =
-            new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 4.0, 4);
+            new Lane(WaterObject.WaterObjectType.Log, GameObject.Direction.Left, 4.0, 2, true);
 
         /// <summary>
         ///     Gets or sets the fourth lane of the first level.
@@ -212,8 +228,8 @@ namespace FroggerStarter.Model.DataObjects
         /// <value>
         ///     The fifth lane.
         /// </value>
-        private static Lane FirstLevelFifthLane { get; } = new
-            Lane(WaterObject.WaterObjectType.Raft, GameObject.Direction.Right, 5.0, 5, true);
+        private static Lane FirstLevelFifthLane { get; } = 
+            new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Right, 5.0, 5);
 
         /// <summary>
         ///     Gets the lanes of the first level.
@@ -249,7 +265,7 @@ namespace FroggerStarter.Model.DataObjects
         ///     The third lane.
         /// </value>
         private static Lane SecondLevelThirdLane { get; } =
-            new Lane(WaterObject.WaterObjectType.Log, GameObject.Direction.Left, 4.0, 2, true);
+            new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 4.0, 4);
 
         /// <summary>
         ///     Gets or sets the fourth lane of the second level.
@@ -266,8 +282,8 @@ namespace FroggerStarter.Model.DataObjects
         /// <value>
         ///     The fifth lane.
         /// </value>
-        private static Lane SecondLevelFifthLane { get; } = new
-            Lane(Vehicle.VehicleType.Car, GameObject.Direction.Right, 5.0, 5);
+        private static Lane SecondLevelFifthLane { get; } = 
+            new Lane(WaterObject.WaterObjectType.Raft, GameObject.Direction.Right, 5.0, 5, true);
 
         /// <summary>
         ///     Gets the lanes of the second level.

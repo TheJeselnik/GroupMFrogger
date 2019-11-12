@@ -197,6 +197,7 @@ namespace FroggerStarter.Controller
         private void vehicleAdded(object sender, Vehicle vehicle)
         {
             this.gameCanvas.Children.Add(vehicle.Sprite);
+            this.moveSpriteToBottomOfCanvas(vehicle);
         }
 
         private void vehicleRemoved(object sender, Vehicle vehicle)
@@ -216,10 +217,15 @@ namespace FroggerStarter.Controller
             foreach (var vehicle in this.roadManager.AllVehicles)
             {
                 this.gameCanvas.Children.Add(vehicle.Sprite);
-                if (vehicle is WaterObject)
-                {
-                    this.gameCanvas.Children.Move((uint)(this.gameCanvas.Children.Count - 1), 1);
-                }
+                this.moveSpriteToBottomOfCanvas(vehicle);
+            }
+        }
+
+        private void moveSpriteToBottomOfCanvas(Vehicle vehicle)
+        {
+            if (vehicle is WaterObject)
+            {
+                this.gameCanvas.Children.Move((uint) (this.gameCanvas.Children.Count - 1), 2);
             }
         }
 
@@ -378,6 +384,20 @@ namespace FroggerStarter.Controller
                 if (enumerator.Current is WaterObject waterObject && vehicleCollision)
                 {
                     waterObject.MoveLandedFrog(this.player);
+                    if (this.playerMovementManager.PlayerAtLeftBoundary())
+                    {
+                        this.player.X = 0.0;
+                    }
+
+                    if (this.playerMovementManager.PlayerAtRightBoundary())
+                    {
+                        this.player.X = GameSettings.RoadWidth - this.player.Width;
+                    }
+                }
+
+                if (vehicleCollision)
+                {
+                    break;
                 }
             }
 
@@ -411,20 +431,37 @@ namespace FroggerStarter.Controller
             var enumerator = this.topShoulder.FrogHomes.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player))
+                if (enumerator.Current != null)
                 {
-                    this.addFrogToFrogHome(enumerator.Current);
+                    this.checkFrogHomeLanding(enumerator);
                 }
+            }
+
+            if (this.player.Y <= GameSettings.TopEdgeOfLanes && !this.playerValues.FrogDying)
+            {
+                this.playerGetsHit();
             }
 
             enumerator.Dispose();
         }
 
-        private void checkPlayerCollisionWithBushes()
+        private void checkFrogHomeLanding(IEnumerator<FrogHome> enumerator)
         {
-            foreach (var currBush in this.Bushes)
+            if (enumerator.Current == null)
             {
-                
+                return;
+            }
+
+            var frogHomeWidth = enumerator.Current.Width;
+            var cushion = frogHomeWidth * GameSettings.LandingCushionPercentage;
+            if (this.collisionDetector.IsCollisionBetweenWithCushion(enumerator.Current, this.player, cushion) &&
+                !enumerator.Current.HasFrog)
+            {
+                this.addFrogToFrogHome(enumerator.Current);
+            }
+            else if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player) && !this.playerValues.FrogDying)
+            {
+                this.playerGetsHit();
             }
         }
 

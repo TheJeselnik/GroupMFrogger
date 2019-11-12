@@ -65,8 +65,6 @@ namespace FroggerStarter.Model.GameObjects
         /// <param name="player">The player.</param>
         public void MoveLandedFrog(Frog player)
         {
-            var oldFrogSpeedX = player.SpeedX;
-            var oldFrogSpeedY = player.SpeedY;
             player.SetSpeed(this.initialSpeed, 0.0);
 
             switch (this.direction)
@@ -84,8 +82,6 @@ namespace FroggerStarter.Model.GameObjects
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            player.SetSpeed(oldFrogSpeedX, oldFrogSpeedY);
         }
 
         #endregion

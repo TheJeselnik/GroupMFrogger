@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FroggerStarter.Model.DataObjects;
 using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model.GameObjects
@@ -10,9 +11,6 @@ namespace FroggerStarter.Model.GameObjects
     public class Frog : GameObject
     {
         #region Data members
-
-        private const int SpeedXDirection = 50;
-        private const int SpeedYDirection = 50;
 
         /// <summary>
         ///     The frog sprite
@@ -38,7 +36,7 @@ namespace FroggerStarter.Model.GameObjects
         public Frog()
         {
             Sprite = this.FrogSprite;
-            SetSpeed(SpeedXDirection, SpeedYDirection);
+            SetSpeed(GameSettings.DefaultFrogSpeed, GameSettings.DefaultFrogSpeed);
             this.setDeathSprites();
         }
 
