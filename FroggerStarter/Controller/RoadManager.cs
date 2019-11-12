@@ -246,7 +246,7 @@ namespace FroggerStarter.Controller
         private void getAllVehicles()
         {
             this.AllVehicles = new List<Vehicle>();
-            foreach (var currLane in GameSettings.FirstLevelLanes)
+            foreach (var currLane in this.currentLevelLanes)
             {
                 var enumerator = currLane.GetEnumerator();
                 while (enumerator.MoveNext())

@@ -151,9 +151,6 @@ namespace FroggerStarter.Controller
             this.waterCrossings = new List<WaterCrossing>();
             this.instantiateHelperClasses();
             this.addNonPlayerSprites();
-
-            this.roadManager.VehicleAdded += this.vehicleAdded;
-            this.roadManager.VehicleRemoved += this.vehicleRemoved;
         }
 
         private void addNonPlayerSprites()
@@ -184,6 +181,8 @@ namespace FroggerStarter.Controller
             this.roadManager = new RoadManager();
             this.roadManager.WaterAdded += this.waterAdded;
             this.roadManager.GoToNextLevel(this.playerValues.CurrentLevel);
+            this.roadManager.VehicleAdded += this.vehicleAdded;
+            this.roadManager.VehicleRemoved += this.vehicleRemoved;
         }
 
         private void vehicleAdded(object sender, Vehicle vehicle)
@@ -501,9 +500,9 @@ namespace FroggerStarter.Controller
             this.removeFrogHomesFromCanvas();
             this.removeWaterCrossings();
             this.topShoulder.ClearHomes();
-            this.addFrogHomesToCanvas();
             this.setPlayerToCenterOfBottomLane();
             this.roadManager.GoToNextLevel(this.playerValues.CurrentLevel);
+            this.addFrogHomesToCanvas();
             this.playerMovementManager.CanMove = true;
             this.lifeTimer.ResetTimeRemaining();
         }

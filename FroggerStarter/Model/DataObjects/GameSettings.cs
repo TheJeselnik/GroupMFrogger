@@ -258,7 +258,7 @@ namespace FroggerStarter.Model.DataObjects
         ///     The fourth lane.
         /// </value>
         private static Lane SecondLevelFourthLane { get; } =
-            new Lane(Vehicle.VehicleType.OilSemiTruck, GameObject.Direction.Left, 5.0, 3);
+            new Lane(Vehicle.VehicleType.OilSemiTruck, GameObject.Direction.Left, 4.5, 3);
 
         /// <summary>
         ///     Gets or sets the fifth lane of the second level.
@@ -267,7 +267,7 @@ namespace FroggerStarter.Model.DataObjects
         ///     The fifth lane.
         /// </value>
         private static Lane SecondLevelFifthLane { get; } = new
-            Lane(Vehicle.VehicleType.Car, GameObject.Direction.Right, 2.0, 5);
+            Lane(Vehicle.VehicleType.Car, GameObject.Direction.Right, 5.0, 5);
 
         /// <summary>
         ///     Gets the lanes of the second level.
