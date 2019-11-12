@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Windows.UI.Xaml;
 using FroggerStarter.Model.DataObjects;
 using FroggerStarter.View.Sprites;
 
@@ -65,6 +66,18 @@ namespace FroggerStarter.Model.GameObjects
         public void SetSprite(BaseSprite sprite)
         {
             Sprite = sprite;
+        }
+
+        /// <summary>
+        /// Resets the sprite.
+        ///     Precondition: None
+        ///     Postcondition: player.Sprite = FrogSprite
+        /// </summary>
+        public void ResetSprite()
+        {
+            Sprite.Visibility = Visibility.Collapsed;
+            this.SetSprite(this.FrogSprite);
+            Sprite.Visibility = Visibility.Visible;
         }
 
         private void setDeathSprites()

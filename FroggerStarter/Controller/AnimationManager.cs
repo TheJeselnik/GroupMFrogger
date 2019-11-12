@@ -14,7 +14,8 @@ namespace FroggerStarter.Controller
         private int frogDeathTicks;
         private int frogJumpTicks;
         private Frog player;
-        private DispatcherTimer timer;
+        private DispatcherTimer deathTimer;
+        private DispatcherTimer jumpTimer;
         private GameObject.Direction direction;
 
         #endregion
@@ -49,12 +50,17 @@ namespace FroggerStarter.Controller
         /// <param name="frog">The frog.</param>
         public void AnimateFrogDeath(Frog frog)
         {
+            if (this.FrogJumping)
+            {
+                this.FrogJumping = false;
+                this.player.ResetSprite();
+            }
             this.player = frog;
             this.FrogDying = true;
             this.frogDeathTicks = 0;
             this.animateFrogDeathSprites();
             this.setupDeathAnimationTimer();
-            this.timer.Start();
+            this.deathTimer.Start();
         }
 
         /// <summary>
@@ -63,44 +69,47 @@ namespace FroggerStarter.Controller
         /// Postcondition: Frog animation queued to new timer
         /// </summary>
         /// <param name="frog">The frog.</param>
-        /// <param name="direction">The direction.</param>
-        public void AnimateFrogJump(Frog frog, GameObject.Direction direction)
+        /// <param name="frogDirection">The frog direction.</param>
+        public void AnimateFrogJump(Frog frog, GameObject.Direction frogDirection)
         {
             this.player = frog;
-            this.direction = direction;
+            this.direction = frogDirection;
             this.FrogJumping = true;
             this.frogJumpTicks = 0;
             this.animateFrogJumpSprite();
             this.setupJumpAnimationTimer();
-            this.timer.Start();
+            this.jumpTimer.Start();
         }
 
         private void setupDeathAnimationTimer()
         {
-            this.timer = new DispatcherTimer();
-            this.timer.Tick += this.timerOnTick;
-            this.timer.Interval = new TimeSpan(0, 0, 0, 0, 750);
-            this.timer.Start();
+            this.deathTimer = new DispatcherTimer();
+            this.deathTimer.Tick += this.deathTimerOnTick;
+            this.deathTimer.Interval = new TimeSpan(0, 0, 0, 0, 750);
+            this.deathTimer.Start();
         }
 
         private void setupJumpAnimationTimer()
         {
-            this.timer = new DispatcherTimer();
-            this.timer.Tick += this.timerOnTick;
-            this.timer.Interval = new TimeSpan(0, 0, 0, 0, 15);
-            this.timer.Start();
+            this.jumpTimer = new DispatcherTimer();
+            this.jumpTimer.Tick += this.jumpTimerOnTick;
+            this.jumpTimer.Interval = new TimeSpan(0, 0, 0, 0, 30);
+            this.jumpTimer.Start();
         }
 
-        private void timerOnTick(object sender, object e)
+        private void jumpTimerOnTick(object sender, object e)
+        {
+            if (this.FrogJumping)
+            {
+                this.animateFrogJumpSprite();
+            }
+        }
+
+        private void deathTimerOnTick(object sender, object e)
         {
             if (this.FrogDying)
             {
                 this.animateFrogDeathSprites();
-            }
-
-            if (this.FrogJumping)
-            {
-                this.animateFrogJumpSprite();
             }
         }
 
@@ -108,8 +117,7 @@ namespace FroggerStarter.Controller
         {
             if (this.frogJumpTicks >= 1)
             {
-                this.FrogJumping = false;
-                this.timer.Stop();
+                this.endJumpAnimation();
             }
             var oldX = this.player.X;
             var oldY = this.player.Y;
@@ -129,7 +137,7 @@ namespace FroggerStarter.Controller
         {
             if (this.frogDeathTicks == this.player.DeathSprites.Count)
             {
-                this.endFrogAnimation();
+                this.endDeathAnimation();
             }
             else
             {
@@ -148,10 +156,16 @@ namespace FroggerStarter.Controller
             }
         }
 
-        private void endFrogAnimation()
+        private void endJumpAnimation()
+        {
+            this.FrogJumping = false;
+            this.jumpTimer.Stop();
+        }
+
+        private void endDeathAnimation()
         {
             this.FrogDying = false;
-            this.timer.Stop();
+            this.deathTimer.Stop();
         }
 
         #endregion

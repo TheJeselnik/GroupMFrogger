@@ -205,7 +205,7 @@ namespace FroggerStarter.Controller
         private void waterAdded(object sender, WaterCrossing waterCrossing)
         {
             this.gameCanvas.Children.Add(waterCrossing.Sprite);
-            this.gameCanvas.Children.Move((uint) (this.gameCanvas.Children.Count -1), 0);
+            this.gameCanvas.Children.Move((uint) (this.gameCanvas.Children.Count -1), GameSettings.BottomCanvasIndex);
             this.waterCrossings.Add(waterCrossing);
         }
 
@@ -233,7 +233,7 @@ namespace FroggerStarter.Controller
         {
             if (vehicle is WaterObject)
             {
-                this.gameCanvas.Children.Move((uint) (this.gameCanvas.Children.Count - 1), 2);
+                this.gameCanvas.Children.Move((uint) (this.gameCanvas.Children.Count - 1), GameSettings.LowCanvasIndex);
             }
         }
 
@@ -250,6 +250,7 @@ namespace FroggerStarter.Controller
             foreach (var currBush in this.topShoulder.Bushes)
             {
                 this.gameCanvas.Children.Add(currBush.Sprite);
+                this.gameCanvas.Children.Move((uint)(this.gameCanvas.Children.Count - 1), GameSettings.LowCanvasIndex);
             }
         }
 
@@ -610,9 +611,7 @@ namespace FroggerStarter.Controller
 
         private void resetPlayerSpriteToFrog()
         {
-            this.player.Sprite.Visibility = Visibility.Collapsed;
-            this.player.SetSprite(this.player.FrogSprite);
-            this.player.Sprite.Visibility = Visibility.Visible;
+            this.player.ResetSprite();
         }
 
         private void gameOver()
