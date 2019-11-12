@@ -32,6 +32,7 @@ namespace FroggerStarter.Controller
         private PlayerMovementManager playerMovementManager;
         private AnimationManager animationManager;
         private IList<WaterCrossing> waterCrossings;
+        private IList<PowerUp> powerUps;
 
         #endregion
 
@@ -68,14 +69,6 @@ namespace FroggerStarter.Controller
         ///     The frog homes.
         /// </value>
         private IList<FrogHome> FrogHomes => this.topShoulder.FrogHomes;
-
-        /// <summary>
-        /// Gets the bushes.
-        /// </summary>
-        /// <value>
-        /// The bushes.
-        /// </value>
-        private IList<Bush> Bushes => this.topShoulder.Bushes;
 
         #endregion
 
@@ -157,6 +150,7 @@ namespace FroggerStarter.Controller
 
             this.addFrogSprites();
             this.waterCrossings = new List<WaterCrossing>();
+            this.powerUps = new List<PowerUp>();
             this.instantiateHelperClasses();
             this.addNonPlayerSprites();
         }
@@ -192,6 +186,7 @@ namespace FroggerStarter.Controller
             this.roadManager.GoToNextLevel(this.playerValues.CurrentLevel);
             this.roadManager.VehicleAdded += this.vehicleAdded;
             this.roadManager.VehicleRemoved += this.vehicleRemoved;
+            this.roadManager.PowerUpAdded += this.powerUpAdded;
         }
 
         private void vehicleAdded(object sender, Vehicle vehicle)
@@ -210,6 +205,12 @@ namespace FroggerStarter.Controller
             this.gameCanvas.Children.Add(waterCrossing.Sprite);
             this.gameCanvas.Children.Move((uint) (this.gameCanvas.Children.Count -1), 0);
             this.waterCrossings.Add(waterCrossing);
+        }
+
+        private void powerUpAdded(object sender, PowerUp powerUp)
+        {
+            this.gameCanvas.Children.Add(powerUp.Sprite);
+            this.powerUps.Add(powerUp);
         }
 
         private void addVehiclesToCanvas()
@@ -323,6 +324,7 @@ namespace FroggerStarter.Controller
         {
             this.roadManager.MoveObjects();
             this.checkToAddVehiclesToLanes();
+            this.checkToAddRandomPowerUp();
 
             this.checkForPlayerCollision();
 
@@ -332,7 +334,7 @@ namespace FroggerStarter.Controller
 
         private void checkForPlayerCollision()
         {
-            //this.checkPlayerCollisionWithPowerUps();
+            this.checkPlayerCollisionWithPowerUps();
             this.checkPlayerCollisionWithVehicles();
             this.checkPlayerCollisionWithFrogHomes();
         }
@@ -342,6 +344,14 @@ namespace FroggerStarter.Controller
             if (!this.playerValues.FrogDying)
             {
                 this.roadManager.CheckToAddVehicleToLanes();
+            }
+        }
+
+        private void checkToAddRandomPowerUp()
+        {
+            if (!this.playerValues.FrogDying)
+            {
+                this.roadManager.CheckToAddRandomPowerUp();
             }
         }
 
@@ -467,12 +477,33 @@ namespace FroggerStarter.Controller
 
         private void checkPlayerCollisionWithPowerUps()
         {
-            foreach (var currPowerUp in this.roadManager.PowerUps)
+            PowerUp collectedPowerUp = null;
+            foreach (var currPowerUp in this.powerUps)
             {
                 if (this.collisionDetector.IsCollisionBetween(currPowerUp, this.player))
                 {
-
+                    collectedPowerUp = currPowerUp;
                 }
+            }
+            this.collectPowerUp(collectedPowerUp);
+        }
+
+        private void collectPowerUp(PowerUp powerUp)
+        {
+            if (powerUp == null)
+            {
+                return;
+            }
+            this.gameCanvas.Children.Remove(powerUp.Sprite);
+            this.powerUps.Remove(powerUp);
+            switch (powerUp)
+            {
+                case TimePowerUp _:
+                    this.lifeTimer.AddTime();
+                    break;
+                case ScorePowerUp _:
+                    this.playerValues.AddBonusScore();
+                    break;
             }
         }
 

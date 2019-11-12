@@ -67,6 +67,14 @@ namespace FroggerStarter.Model.DataObjects
         public static int DefaultFrogSpeed { get; } = 50;
 
         /// <summary>
+        /// Gets the score power up value.
+        /// </summary>
+        /// <value>
+        /// The score power up value.
+        /// </value>
+        public static int ScorePowerUpValue { get; } = 50000;
+
+        /// <summary>
         /// Gets the landing cushion percentage.
         /// </summary>
         /// <value>
@@ -80,15 +88,7 @@ namespace FroggerStarter.Model.DataObjects
         /// <value>
         ///     The bonus time power up chance.
         /// </value>
-        public static double BonusTimePowerUpChance { get; } = 99.9;
-
-        /// <summary>
-        ///     Gets the bonus time power up chance ceiling.
-        /// </summary>
-        /// <value>
-        ///     The bonus time power up chance ceiling.
-        /// </value>
-        public static double BonusTimePowerUpChanceCeiling { get; } = 100.0;
+        public static double BonusTimePowerUpChance { get; } = 0.999;
 
         /// <summary>
         ///     Gets the time limit seconds.

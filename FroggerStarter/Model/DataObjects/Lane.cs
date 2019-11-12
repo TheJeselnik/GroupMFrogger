@@ -129,6 +129,11 @@ namespace FroggerStarter.Model.DataObjects
         public event EventHandler<WaterCrossing> WaterAdded;
 
         /// <summary>
+        /// Occurs when [power up added].
+        /// </summary>
+        public event EventHandler<PowerUp> PowerUpAdded;
+
+        /// <summary>
         ///     Determines whether [has room for vehicles].
         ///     Precondition: none
         ///     Postcondition: True if VehiclesInLane.Count lessThan maxGameObjects
@@ -195,6 +200,7 @@ namespace FroggerStarter.Model.DataObjects
             var random = new Random();
             var randomX = random.Next((int) GameSettings.RoadWidth);
             powerUp.X = randomX;
+            this.onPowerUpAdded(powerUp);
         }
 
         /// <summary>
@@ -326,6 +332,11 @@ namespace FroggerStarter.Model.DataObjects
         private void onWaterAdded(WaterCrossing waterCrossing)
         {
             this.WaterAdded?.Invoke(this, waterCrossing);
+        }
+
+        private void onPowerUpAdded(PowerUp powerUp)
+        {
+            this.PowerUpAdded?.Invoke(this, powerUp);
         }
 
         #endregion

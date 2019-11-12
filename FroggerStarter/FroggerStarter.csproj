@@ -122,7 +122,8 @@
     </Compile>
     <Compile Include="Controller\AnimationManager.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
-    <Compile Include="Model\GameObjects\BonusTimePowerUp.cs" />
+    <Compile Include="Model\GameObjects\ScorePowerUp.cs" />
+    <Compile Include="Model\GameObjects\TimePowerUp.cs" />
     <Compile Include="Model\GameObjects\Bush.cs" />
     <Compile Include="Model\GameObjects\Car.cs" />
     <Compile Include="Model\DataObjects\HighScore.cs" />
@@ -206,6 +207,9 @@
     </Compile>
     <Compile Include="View\Sprites\RaftSprite.xaml.cs">
       <DependentUpon>RaftSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\ScorePowerUpSprite.xaml.cs">
+      <DependentUpon>ScorePowerUpSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\SemiTruckSprite.xaml.cs">
       <DependentUpon>SemiTruckSprite.xaml</DependentUpon>
@@ -319,6 +323,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\RaftSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\ScorePowerUpSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

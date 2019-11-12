@@ -5,12 +5,12 @@ namespace FroggerStarter.Model.GameObjects
     /// <summary>
     /// Defines the power up for adding bonus time when collected
     /// </summary>
-    public class BonusTimePowerUp : PowerUp
+    public class TimePowerUp : PowerUp
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BonusTimePowerUp"/> class.
+        /// Initializes a new instance of the <see cref="TimePowerUp"/> class.
         /// </summary>
-        public BonusTimePowerUp()
+        public TimePowerUp()
         {
             this.Sprite = new TimePowerUpSprite();
         }

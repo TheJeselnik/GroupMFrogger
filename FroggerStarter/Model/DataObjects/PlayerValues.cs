@@ -91,6 +91,16 @@
         }
 
         /// <summary>
+        /// Adds the bonus score.
+        ///     Precondition: None
+        ///     Postcondition: Score += GameSettings.ScorePowerUpValue
+        /// </summary>
+        public void AddBonusScore()
+        {
+            this.Score += GameSettings.ScorePowerUpValue;
+        }
+
+        /// <summary>
         /// Checks for level completed.
         ///     Precondition: CurrentLevel lessThanOrEqualTo GameSettings.GameSettings.LevelsInGame
         ///     Postcondition: CurrentLevel++

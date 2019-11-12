@@ -13,7 +13,7 @@ namespace FroggerStarter.Controller
     {
         #region Data members
 
-        private int addObjectTicks;
+        private int addVehicleTicks;
         private IList<Lane> currentLevelLanes;
 
         #endregion
@@ -118,6 +118,7 @@ namespace FroggerStarter.Controller
                 currLane.VehicleAdded += this.addNewVehicle;
                 currLane.VehicleRemoved += this.removeVehicle;
                 currLane.WaterAdded += this.addWater;
+                currLane.PowerUpAdded += this.addPowerUp;
 
                 currLane.AddWater();
             }
@@ -132,7 +133,7 @@ namespace FroggerStarter.Controller
         /// <param name="level">The level.</param>
         public void GoToNextLevel(int level)
         {
-            this.addObjectTicks = 0;
+            this.addVehicleTicks = 0;
             foreach (var currLane in this.currentLevelLanes)
             {
                 currLane.RemoveAllVehicles();
@@ -159,6 +160,11 @@ namespace FroggerStarter.Controller
             this.onWaterAdded(waterCrossing);
         }
 
+        private void addPowerUp(object sender, PowerUp powerUp)
+        {
+            this.onPowerUpAdded(powerUp);
+        }
+
         /// <summary>
         ///     Moves the objects
         ///     Precondition: None
@@ -174,17 +180,21 @@ namespace FroggerStarter.Controller
             }
         }
 
-        /// <summary>
-        /// Adds the power up to a random lane.
-        ///     Precondition: None
-        ///     Postcondition: RandomLane.AddPowerUp
-        /// </summary>
-        /// <param name="powerUp">The power up.</param>
-        public void AddPowerUp(PowerUp powerUp)
+        private void addPowerUp()
         {
             var random = new Random();
             var index = random.Next(this.currentLevelLanes.Count - 1);
-            this.currentLevelLanes[index].AddPowerUp(powerUp);
+            var chosenLane = this.currentLevelLanes[index];
+
+
+            if (chosenLane.HasWater)
+            {
+                chosenLane.AddPowerUp(new ScorePowerUp());
+            }
+            else
+            {
+                chosenLane.AddPowerUp(new TimePowerUp());
+            }
         }
 
         /// <summary>
@@ -194,13 +204,28 @@ namespace FroggerStarter.Controller
         /// </summary>
         public void CheckToAddVehicleToLanes()
         {
-            if (this.addObjectTicks % GameSettings.TicksUntilSpawnObjects == 0)
+            if (this.addVehicleTicks % GameSettings.TicksUntilSpawnObjects == 0)
             {
                 this.addToLanes();
-                this.addObjectTicks = 0;
+                this.addVehicleTicks = 0;
             }
 
-            this.addObjectTicks++;
+            this.addVehicleTicks++;
+        }
+
+        /// <summary>
+        /// Checks to add random power up.
+        ///     Precondition: Random Chance > 99.9%
+        ///     Postcondition: TimePowerUp added to random lane
+        /// </summary>
+        public void CheckToAddRandomPowerUp()
+        {
+            var random = new Random();
+            var chance = random.NextDouble();
+            if (chance >= GameSettings.BonusTimePowerUpChance)
+            {
+                this.addPowerUp();
+            }
         }
 
         private void addToLanes()
@@ -268,7 +293,6 @@ namespace FroggerStarter.Controller
             this.VehicleRemoved?.Invoke(this, vehicle);
         }
 
-        //TODO potentially unnecessary
         private void onPowerUpAdded(PowerUp powerUp)
         {
             this.PowerUpAdded?.Invoke(this, powerUp);
