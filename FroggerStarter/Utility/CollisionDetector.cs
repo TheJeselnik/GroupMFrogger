@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using FroggerStarter.Model.DataObjects;
 using FroggerStarter.Model.GameObjects;
 
 namespace FroggerStarter.Utility

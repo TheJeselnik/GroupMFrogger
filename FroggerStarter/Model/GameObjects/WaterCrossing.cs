@@ -1,4 +1,5 @@
-﻿using FroggerStarter.View.Sprites;
+﻿using FroggerStarter.Model.DataObjects;
+using FroggerStarter.View.Sprites;
 
 namespace FroggerStarter.Model.GameObjects
 {
@@ -15,6 +16,8 @@ namespace FroggerStarter.Model.GameObjects
         public WaterCrossing()
         {
             Sprite = new WaterCrossingSprite();
+            this.Sprite.Width = GameSettings.RoadWidth;
+            this.Sprite.Height = GameSettings.LaneHeight;
         }
 
         #endregion

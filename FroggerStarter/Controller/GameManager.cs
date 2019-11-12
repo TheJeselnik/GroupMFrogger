@@ -342,7 +342,6 @@ namespace FroggerStarter.Controller
         {
             var enumerator = this.roadManager.AllVehicles.GetEnumerator();
             var vehicleCollision = false;
-            var waterCollision = false;
             while (enumerator.MoveNext())
             {
                 if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player) &&
@@ -352,16 +351,7 @@ namespace FroggerStarter.Controller
                 }
             }
 
-            foreach (var currWaterCrossing in this.waterCrossings)
-            {
-                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player) &&
-                    !this.playerValues.FrogDying)
-                {
-                    waterCollision = true;
-                }
-            }
-
-            if (vehicleCollision && !waterCollision)
+            if (vehicleCollision && !this.isPlayerOnWater())
             {
                 SoundEffects.PlayDeathSound();
                 this.playerLosesLife();
