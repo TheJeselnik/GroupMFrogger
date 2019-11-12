@@ -267,7 +267,7 @@ namespace FroggerStarter.Model.DataObjects
         ///     The fifth lane.
         /// </value>
         private static Lane SecondLevelFifthLane { get; } = new
-            Lane(WaterObject.WaterObjectType.Log, GameObject.Direction.Right, 2.0, 2, true);
+            Lane(WaterObject.WaterObjectType.Log, GameObject.Direction.Right, 2.0, 2, false);
 
         /// <summary>
         ///     Gets the lanes of the second level.

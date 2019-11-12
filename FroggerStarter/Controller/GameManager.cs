@@ -511,12 +511,22 @@ namespace FroggerStarter.Controller
         private void goToNextLevel()
         {
             this.removeFrogHomesFromCanvas();
+            this.removeWaterCrossings();
             this.topShoulder.ClearHomes();
             this.addFrogHomesToCanvas();
             this.setPlayerToCenterOfBottomLane();
             this.roadManager.GoToNextLevel(this.playerValues.CurrentLevel);
             this.playerMovementManager.CanMove = true;
             this.lifeTimer.ResetTimeRemaining();
+        }
+
+        private void removeWaterCrossings()
+        {
+            foreach (var currWaterCrossing in this.waterCrossings)
+            {
+                this.gameCanvas.Children.Remove(currWaterCrossing.Sprite);
+            }
+            this.waterCrossings.Clear();
         }
 
         private void onScoreUpdated(int score)
