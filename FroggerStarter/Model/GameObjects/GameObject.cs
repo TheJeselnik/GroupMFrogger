@@ -228,6 +228,8 @@ namespace FroggerStarter.Model.GameObjects
                 case Direction.Up:
                     this.rotateUp();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
         }
 

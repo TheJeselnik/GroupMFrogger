@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FroggerStarter.Model.DataObjects;
 using FroggerStarter.Model.GameObjects;
 using FroggerStarter.Utility;
@@ -46,6 +47,8 @@ namespace FroggerStarter.Controller
 
         #region Methods
 
+        public event EventHandler<GameObject.Direction> PlayerMoved;
+
         /// <summary>
         ///     Moves the player to the left.
         ///     Precondition: CanMove AND player.X greater than 0
@@ -57,6 +60,7 @@ namespace FroggerStarter.Controller
             {
                 this.player.SetSpeed(GameSettings.DefaultFrogSpeed, GameSettings.DefaultFrogSpeed);
                 this.player.RotateSprite(GameObject.Direction.Left);
+                this.onPlayerMoved(GameObject.Direction.Left);
                 this.player.MoveLeft();
             }
             else
@@ -85,6 +89,7 @@ namespace FroggerStarter.Controller
             {
                 this.player.SetSpeed(GameSettings.DefaultFrogSpeed, GameSettings.DefaultFrogSpeed);
                 this.player.RotateSprite(GameObject.Direction.Right);
+                this.onPlayerMoved(GameObject.Direction.Right);
                 this.player.MoveRight();
             }
             else
@@ -113,6 +118,7 @@ namespace FroggerStarter.Controller
             {
                 this.player.SetSpeed(GameSettings.DefaultFrogSpeed, GameSettings.DefaultFrogSpeed);
                 this.player.RotateSprite(GameObject.Direction.Up);
+                this.onPlayerMoved(GameObject.Direction.Up);
                 this.player.MoveUp();
             }
             else
@@ -157,6 +163,7 @@ namespace FroggerStarter.Controller
             {
                 this.player.SetSpeed(GameSettings.DefaultFrogSpeed, GameSettings.DefaultFrogSpeed);
                 this.player.RotateSprite(GameObject.Direction.Down);
+                this.onPlayerMoved(GameObject.Direction.Down);
                 this.player.MoveDown();
             }
             else
@@ -171,5 +178,10 @@ namespace FroggerStarter.Controller
         }
 
         #endregion
+
+        protected virtual void onPlayerMoved(GameObject.Direction direction)
+        {
+            this.PlayerMoved?.Invoke(this, direction);
+        }
     }
 }

@@ -187,6 +187,9 @@
     <Compile Include="View\Sprites\FrogHomeSprite.xaml.cs">
       <DependentUpon>FrogHomeSprite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\FrogJumpingSprite.xaml.cs">
+      <DependentUpon>FrogJumpingSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\FrogLandedSprite.xaml.cs">
       <DependentUpon>FrogLandedSprite.xaml</DependentUpon>
     </Compile>
@@ -200,6 +203,9 @@
       <DependentUpon>FrogThirdDeathSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\ISpriteRenderer.cs" />
+    <Compile Include="View\Sprites\JumpingFrogLegsSprite.xaml.cs">
+      <DependentUpon>JumpingFrogLegsSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\LogSprite.xaml.cs">
       <DependentUpon>LogSprite.xaml</DependentUpon>
     </Compile>
@@ -214,6 +220,9 @@
     </Compile>
     <Compile Include="View\Sprites\SemiTruckSprite.xaml.cs">
       <DependentUpon>SemiTruckSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\StationaryFrogLegsSprite.xaml.cs">
+      <DependentUpon>StationaryFrogLegsSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\TimePowerUpSprite.xaml.cs">
       <DependentUpon>TimePowerUpSprite.xaml</DependentUpon>
@@ -299,6 +308,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Sprites\FrogJumpingSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Sprites\FrogLandedSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -312,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\FrogThirdDeathSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\JumpingFrogLegsSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -332,6 +349,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\SemiTruckSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\StationaryFrogLegsSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

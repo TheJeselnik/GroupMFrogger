@@ -75,6 +75,22 @@ namespace FroggerStarter.Model.DataObjects
         public static int ScorePowerUpValue { get; } = 50000;
 
         /// <summary>
+        /// Gets the index of the bottom canvas.
+        /// </summary>
+        /// <value>
+        /// The index of the bottom canvas.
+        /// </value>
+        public static uint BottomCanvasIndex { get; } = 0;
+
+        /// <summary>
+        /// Gets the index of the low canvas.
+        /// </summary>
+        /// <value>
+        /// The index of the low canvas.
+        /// </value>
+        public static uint LowCanvasIndex { get; } = 3;
+
+        /// <summary>
         /// Gets the landing cushion percentage.
         /// </summary>
         /// <value>

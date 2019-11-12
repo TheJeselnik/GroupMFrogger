@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Windows.UI.Xaml;
 using FroggerStarter.Model.DataObjects;
 using FroggerStarter.View.Sprites;
 
@@ -22,9 +23,20 @@ namespace FroggerStarter.Model.GameObjects
         #region Properties
 
         /// <summary>
-        ///     The death sprites
+        /// Gets the death sprites.
         /// </summary>
+        /// <value>
+        /// The death sprites.
+        /// </value>
         public IList<BaseSprite> DeathSprites { get; private set; }
+
+        /// <summary>
+        /// Gets the jump sprites.
+        /// </summary>
+        /// <value>
+        /// The jump sprites.
+        /// </value>
+        public IList<BaseSprite> JumpSprites { get; private set; }
 
         #endregion
 
@@ -38,6 +50,7 @@ namespace FroggerStarter.Model.GameObjects
             Sprite = this.FrogSprite;
             SetSpeed(GameSettings.DefaultFrogSpeed, GameSettings.DefaultFrogSpeed);
             this.setDeathSprites();
+            this.setJumpSprites();
         }
 
         #endregion
@@ -55,6 +68,18 @@ namespace FroggerStarter.Model.GameObjects
             Sprite = sprite;
         }
 
+        /// <summary>
+        /// Resets the sprite.
+        ///     Precondition: None
+        ///     Postcondition: player.Sprite = FrogSprite
+        /// </summary>
+        public void ResetSprite()
+        {
+            Sprite.Visibility = Visibility.Collapsed;
+            this.SetSprite(this.FrogSprite);
+            Sprite.Visibility = Visibility.Visible;
+        }
+
         private void setDeathSprites()
         {
             IList<BaseSprite> deathSprites = new List<BaseSprite> {
@@ -62,6 +87,14 @@ namespace FroggerStarter.Model.GameObjects
                 new FrogCrossbonesSprite()
             };
             this.DeathSprites = deathSprites;
+        }
+
+        private void setJumpSprites()
+        {
+            IList<BaseSprite> jumpSprites = new List<BaseSprite>() {
+                new FrogJumpingSprite(), new FrogSprite()
+            };
+            this.JumpSprites = jumpSprites;
         }
 
         #endregion
