@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -24,9 +26,10 @@ namespace FroggerStarter.View
             this.InitializeComponent();
         }
 
-        private void RestartBtn_Click(object sender, RoutedEventArgs e)
+        private async void RestartBtn_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: handle restarting app
+            //TODO: Restart game
+            
         }
 
         private void ViewScoreBoardBtn_Click(object sender, RoutedEventArgs e)

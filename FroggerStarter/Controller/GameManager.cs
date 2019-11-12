@@ -507,6 +507,7 @@ namespace FroggerStarter.Controller
                     break;
             }
             this.onScoreUpdated(this.Score);
+            SoundEffects.PlayPowerUpSound();
         }
 
         private bool isPlayerOnWater()
@@ -605,15 +606,14 @@ namespace FroggerStarter.Controller
 
         private void gameOver()
         {
-            SoundEffects.PlayGameOverSound();
             this.timer.Stop();
             this.onGameOverReached(EventArgs.Empty);
-            handleRetrievePlayerName();
+            SoundEffects.PlayGameOverSound();
+            this.handleRetrievePlayerName();
         }
 
         private void goToNextLevel()
         {
-            SoundEffects.PlayLevelCompleteSound();
             this.removeFrogHomesFromCanvas();
             this.removeWaterCrossings();
             this.topShoulder.ClearHomes();
@@ -622,6 +622,7 @@ namespace FroggerStarter.Controller
             this.addFrogHomesToCanvas();
             this.playerMovementManager.CanMove = true;
             this.lifeTimer.ResetTimeRemaining();
+            SoundEffects.PlayLevelCompleteSound();
         }
 
         private void removeWaterCrossings()

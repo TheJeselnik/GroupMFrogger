@@ -65,9 +65,9 @@ namespace FroggerStarter.ViewModel
             this.SortByNameCommand = new RelayCommand(this.sortByName, this.canSort);
             this.SortByScoreCommand = new RelayCommand(this.sortByScore, this.canSort);
             this.SortByLevelCommand = new RelayCommand(this.sortByLevel, this.canSort);
-            this.ClearCommand = new RelayCommand(this.clearBoard, this.canClearBoard);
-            this.ViewScoreBoardGameOverCommand = new RelayCommand(this.viewScoreBoardFromGameOver, this.canViewScoreBoard);
-            this.ViewScoreBoardStartCommand = new RelayCommand(this.viewScoreBoardFromStart, this.canViewScoreBoard);
+            this.ClearCommand = new RelayCommand(clearBoard, this.canClearBoard);
+            this.ViewScoreBoardGameOverCommand = new RelayCommand(viewScoreBoardFromGameOver, this.canViewScoreBoard);
+            this.ViewScoreBoardStartCommand = new RelayCommand(viewScoreBoardFromStart, this.canViewScoreBoard);
             this.SubmitPlayerNameCommand = new RelayCommand(this.createHighScore, this.canCreateHighScore);
             this.DisplayScoresCommand = new RelayCommand(this.setupScoreBoard, this.canSort);
 
@@ -90,7 +90,7 @@ namespace FroggerStarter.ViewModel
             return this.scoreBoard.Count > 0 && this.scoreBoard != null;
         }
 
-        private async void clearBoard(object obj)
+        private static async void clearBoard(object obj)
         {
             FileIOSerialization.BinaryFileClear();
 
@@ -117,7 +117,7 @@ namespace FroggerStarter.ViewModel
                 highScore.SortDescriptionDefault();
             }
 
-            var result = this.scoreBoard.Scores.OrderBy(s => s.GameScore).Take(MaxSortSize);
+            var result = this.scoreBoard.Scores.OrderByDescending(s => s.GameScore).Take(MaxSortSize);
 
             this.Scores = result.ToObservableCollection();
         }
@@ -129,7 +129,7 @@ namespace FroggerStarter.ViewModel
                 highScore.SortDescriptionByLevel();
             }
 
-            var result = this.scoreBoard.Scores.OrderBy(s => s.GameLevel).Take(MaxSortSize);
+            var result = this.scoreBoard.Scores.OrderByDescending(s => s.GameLevel).Take(MaxSortSize);
 
             this.Scores = result.ToObservableCollection();
         }
@@ -139,13 +139,13 @@ namespace FroggerStarter.ViewModel
             return this.scoreBoard != null;
         }
 
-        private async void viewScoreBoardFromStart(object obj)
+        private static async void viewScoreBoardFromStart(object obj)
         {
             var dialog = new HighScoreBoardDialog { IsOpenedAtStartScreen = true };
             await dialog.ShowAsync();
         }
 
-        private async void viewScoreBoardFromGameOver(object obj)
+        private static async void viewScoreBoardFromGameOver(object obj)
         {
             var highScoreDialog = new HighScoreBoardDialog { IsOpenedAtStartScreen = false };
             await highScoreDialog.ShowAsync();
@@ -185,7 +185,7 @@ namespace FroggerStarter.ViewModel
 
         private void setupScoreBoard(object obj)
         {
-            var result = this.scoreBoard.Scores.OrderBy(s => s.GameScore).Take(MaxSortSize);
+            var result = this.scoreBoard.Scores.OrderByDescending(s => s.GameScore).Take(MaxSortSize);
 
             this.Scores = result.ToObservableCollection();
         }
