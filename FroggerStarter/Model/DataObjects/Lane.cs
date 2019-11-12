@@ -245,6 +245,7 @@ namespace FroggerStarter.Model.DataObjects
         /// </summary>
         public void ResetSpeed()
         {
+            this.currentSpeed = this.initialSpeed;
             foreach (var currVehicle in this.VehiclesInLane)
             {
                 currVehicle.ResetSpeedX();

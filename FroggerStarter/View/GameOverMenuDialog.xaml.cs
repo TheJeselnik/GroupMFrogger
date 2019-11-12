@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -23,9 +24,9 @@ namespace FroggerStarter.View
 
         #region Methods
 
-        private void RestartBtn_Click(object sender, RoutedEventArgs e)
+        private async void RestartBtn_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Restart game
+            await CoreApplication.RequestRestartAsync(string.Empty);
         }
 
         private void ViewScoreBoardBtn_Click(object sender, RoutedEventArgs e)
