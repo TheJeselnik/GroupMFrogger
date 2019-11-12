@@ -176,6 +176,28 @@ namespace FroggerStarter.Controller
             }
         }
 
+        /// <summary>
+        /// Increases the speed.
+        /// </summary>
+        public void IncreaseSpeed()
+        {
+            foreach (var currLane in this.currentLevelLanes)
+            {
+                currLane.IncreaseSpeed();
+            }
+        }
+
+        /// <summary>
+        /// Resets the speed of vehicles.
+        /// </summary>
+        public void ResetSpeed()
+        {
+            foreach (var currLane in this.currentLevelLanes)
+            {
+                currLane.ResetSpeed();
+            }
+        }
+
         private void addPowerUp()
         {
             var random = new Random();

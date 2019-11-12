@@ -337,6 +337,10 @@ namespace FroggerStarter.Controller
         private void timerOnTick(object sender, object e)
         {
             this.roadManager.MoveObjects();
+            if (this.playerValues.CurrentLevel == GameSettings.FinalLevel)
+            {
+                this.roadManager.IncreaseSpeed();
+            }
             this.checkToAddVehiclesToLanes();
             this.checkToAddRandomPowerUp();
 
@@ -579,6 +583,7 @@ namespace FroggerStarter.Controller
             this.animateFrogDeath();
             this.onLivesUpdated(this.Lives);
             this.roadManager.ResetOneObjectPerLane();
+            this.roadManager.ResetSpeed();
         }
 
         private void animateFrogDeath()
@@ -676,7 +681,7 @@ namespace FroggerStarter.Controller
             var level = this.playerValues.CurrentLevel;
             var score = this.playerValues.Score;
 
-            if (this.playerValues.CurrentLevel > GameSettings.LevelsInGame)
+            if (this.playerValues.CurrentLevel > GameSettings.FinalLevel)
             {
                 level -= 1;
             }

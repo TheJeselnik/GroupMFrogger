@@ -65,7 +65,7 @@ namespace FroggerStarter.Model.GameObjects
         /// <param name="player">The player.</param>
         public void MoveLandedFrog(Frog player)
         {
-            player.SetSpeed(this.initialSpeed, 0.0);
+            player.SetSpeed(this.SpeedX, 0.0);
 
             switch (this.direction)
             {
