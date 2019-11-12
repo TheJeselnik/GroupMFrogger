@@ -117,7 +117,7 @@ namespace FroggerStarter.Controller
 
         private bool playerCanMoveUp()
         {
-            return !this.playerAtTopBoundary() && this.CanMove;
+            return this.CanMove;
         }
 
         private bool playerBelowFrogHome()

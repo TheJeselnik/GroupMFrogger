@@ -69,6 +69,14 @@ namespace FroggerStarter.Controller
         /// </value>
         private IList<FrogHome> FrogHomes => this.topShoulder.FrogHomes;
 
+        /// <summary>
+        /// Gets the bushes.
+        /// </summary>
+        /// <value>
+        /// The bushes.
+        /// </value>
+        private IList<Bush> Bushes => this.topShoulder.Bushes;
+
         #endregion
 
         #region Constructors
@@ -157,6 +165,7 @@ namespace FroggerStarter.Controller
         {
             this.addVehiclesToCanvas();
             this.addFrogHomesToCanvas();
+            this.addBushesToCanvas();
         }
 
         private void addFrogSprites()
@@ -207,6 +216,10 @@ namespace FroggerStarter.Controller
             foreach (var vehicle in this.roadManager.AllVehicles)
             {
                 this.gameCanvas.Children.Add(vehicle.Sprite);
+                if (vehicle is WaterObject)
+                {
+                    this.gameCanvas.Children.Move((uint)(this.gameCanvas.Children.Count - 1), 1);
+                }
             }
         }
 
@@ -215,6 +228,14 @@ namespace FroggerStarter.Controller
             foreach (var currFrogHome in this.topShoulder.FrogHomes)
             {
                 this.gameCanvas.Children.Add(currFrogHome.Sprite);
+            }
+        }
+
+        private void addBushesToCanvas()
+        {
+            foreach (var currBush in this.topShoulder.Bushes)
+            {
+                this.gameCanvas.Children.Add(currBush.Sprite);
             }
         }
 
@@ -325,9 +346,14 @@ namespace FroggerStarter.Controller
 
             if (this.lifeTimer.TimeRemaining <= 0.0 && !this.playerValues.FrogDying)
             {
-                SoundEffects.PlayTimeOutSound();
-                this.playerLosesLife();
+                this.playerRunsOutOfTime();
             }
+        }
+
+        private void playerRunsOutOfTime()
+        {
+            SoundEffects.PlayTimeOutSound();
+            this.playerLosesLife();
         }
 
         private void checkIfFrogIsDoneDying()
@@ -357,11 +383,27 @@ namespace FroggerStarter.Controller
 
             if (vehicleCollision && !this.isPlayerOnWater())
             {
-                SoundEffects.PlayDeathSound();
-                this.playerLosesLife();
+                this.playerGetsHit();
+            }
+
+            if (!vehicleCollision && this.isPlayerOnWater())
+            {
+                this.playerDrowns();
             }
 
             enumerator.Dispose();
+        }
+
+        private void playerDrowns()
+        {
+            SoundEffects.PlayDeathSound();
+            this.playerLosesLife();
+        }
+
+        private void playerGetsHit()
+        {
+            SoundEffects.PlayDeathSound();
+            this.playerLosesLife();
         }
 
         private void checkPlayerCollisionWithFrogHomes()
@@ -376,6 +418,14 @@ namespace FroggerStarter.Controller
             }
 
             enumerator.Dispose();
+        }
+
+        private void checkPlayerCollisionWithBushes()
+        {
+            foreach (var currBush in this.Bushes)
+            {
+                
+            }
         }
 
         private void checkPlayerCollisionWithPowerUps()
@@ -393,7 +443,7 @@ namespace FroggerStarter.Controller
         {
             foreach (var currWaterCrossing in this.waterCrossings)
             {
-                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player))
+                if (this.collisionDetector.IsCollisionBetween(currWaterCrossing, this.player) && !this.playerValues.FrogDying)
                 {
                     return true;
                 }
@@ -460,7 +510,6 @@ namespace FroggerStarter.Controller
         {
             if (this.playerValues.GameOver)
             {
-                SoundEffects.PlayGameOverSound();
                 this.gameOver();
             }
             else if (this.allFrogHomesFilled())
@@ -487,6 +536,7 @@ namespace FroggerStarter.Controller
 
         private void gameOver()
         {
+            SoundEffects.PlayGameOverSound();
             this.timer.Stop();
             this.onGameOverReached(EventArgs.Empty);
         }
