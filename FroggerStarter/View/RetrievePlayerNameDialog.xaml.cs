@@ -12,24 +12,35 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using FroggerStarter.ViewModel;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace FroggerStarter.View
 {
-    public sealed partial class RetrievePlayerNameDialog : ContentDialog
+    public sealed partial class RetrievePlayerNameDialog
     {
-        public RetrievePlayerNameDialog()
+        private int playerScore;
+
+        private int playerLevel;
+
+        public RetrievePlayerNameDialog(int score, int level)
         {
             this.InitializeComponent();
+
+            this.scoreTextBox.Text = score.ToString();
+            this.levelTextBox.Text = level.ToString();
+
+            this.playerScore = score;
+            this.playerLevel = level;
         }
 
-        private async void SubmitBtn_Click(object sender, RoutedEventArgs e)
+        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.dialog.Hide();
-            var menuDialog = new GameOverMenuDialog();
-            await menuDialog.ShowAsync();
-        }
+            var name = this.nameTextBox.Text;
 
+            this.nameTextBox.Text = name + "," + this.playerScore + "," + this.playerLevel;
+            this.dialog.Hide();
+        }
     }
 }

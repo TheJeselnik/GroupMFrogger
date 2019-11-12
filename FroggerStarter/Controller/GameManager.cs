@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Controls;
 using FroggerStarter.Model.DataObjects;
 using FroggerStarter.Model.GameObjects;
 using FroggerStarter.Utility;
+using FroggerStarter.View;
 
 namespace FroggerStarter.Controller
 {
@@ -426,7 +427,7 @@ namespace FroggerStarter.Controller
 
         private void playerDrowns()
         {
-            SoundEffects.PlayDeathSound();
+            SoundEffects.PlayWaterSplashSound();
             this.playerLosesLife();
         }
 
@@ -582,7 +583,6 @@ namespace FroggerStarter.Controller
             }
             else if (this.allFrogHomesFilled())
             {
-                SoundEffects.PlayLevelCompleteSound();
                 this.goToNextLevel();
             }
             else
@@ -607,10 +607,12 @@ namespace FroggerStarter.Controller
             SoundEffects.PlayGameOverSound();
             this.timer.Stop();
             this.onGameOverReached(EventArgs.Empty);
+            handleRetrievePlayerName();
         }
 
         private void goToNextLevel()
         {
+            SoundEffects.PlayLevelCompleteSound();
             this.removeFrogHomesFromCanvas();
             this.removeWaterCrossings();
             this.topShoulder.ClearHomes();
@@ -650,6 +652,19 @@ namespace FroggerStarter.Controller
             this.LifeTimerUpdated?.Invoke(this, timeRemaining);
         }
 
+        private async void handleRetrievePlayerName()
+        {
+            var level = this.playerValues.CurrentLevel;
+            var score = this.playerValues.Score;
+
+            if (this.playerValues.CurrentLevel > GameSettings.LevelsInGame)
+            {
+                level -= 1;
+            }
+
+            var dialog = new RetrievePlayerNameDialog(score, level);
+            await dialog.ShowAsync();
+        }
         #endregion
     }
 }

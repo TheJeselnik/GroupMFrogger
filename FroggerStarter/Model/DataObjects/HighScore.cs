@@ -1,8 +1,14 @@
-﻿namespace FroggerStarter.Model.DataObjects
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
+
+namespace FroggerStarter.Model
 {
     public class HighScore
     {
-
         public string Name { get; private set; }
 
         public int GameScore { get; private set; }
@@ -16,10 +22,10 @@
             this.Name = name;
             this.GameScore = score;
             this.GameLevel = level;
-            this.SortDescriptionDefault();
+            this.FullDescription = $"Score: {this.GameScore}   |   Name: {this.Name}   |   Level: {this.GameLevel}";
         }
 
-        public void SortDescriptionByScore()
+        public void SortDescriptionDefault()
         {
             this.FullDescription = $"Score: {this.GameScore}   |   Name: {this.Name}   |   Level: {this.GameLevel}";
         }
@@ -29,7 +35,7 @@
             this.FullDescription = $"Level: {this.GameLevel}   |   Score: {this.GameScore}   |   Name: {this.Name}";
         }
 
-        public void SortDescriptionDefault()
+        public void SortDescriptionByName()
         {
             this.FullDescription = $"Name: {this.Name}   |   Score: {this.GameScore}   |   Level: {this.GameLevel}";
         }
