@@ -344,10 +344,14 @@ namespace FroggerStarter.Controller
             var vehicleCollision = false;
             while (enumerator.MoveNext())
             {
-                if (this.collisionDetector.IsCollisionBetween(enumerator.Current, this.player) &&
-                    !this.playerValues.FrogDying)
+                if (this.playerCollidesWith(enumerator.Current))
                 {
                     vehicleCollision = true;
+                }
+
+                if (enumerator.Current is WaterObject waterObject && vehicleCollision)
+                {
+                    waterObject.MoveLandedFrog(this.player);
                 }
             }
 
@@ -398,9 +402,11 @@ namespace FroggerStarter.Controller
             return false;
         }
 
-        private void checkPlayerCollisionWithWaterObjects()
+        private bool playerCollidesWith(GameObject vehicle)
         {
-
+            return vehicle != null &&
+                   this.collisionDetector.IsCollisionBetween(vehicle, this.player) &&
+                   !this.playerValues.FrogDying;
         }
 
         private void addFrogToFrogHome(FrogHome frogHome)

@@ -1,4 +1,6 @@
-﻿namespace FroggerStarter.Model.GameObjects
+﻿using System;
+
+namespace FroggerStarter.Model.GameObjects
 {
     /// <summary>
     ///     Defines the model for objects in water
@@ -32,6 +34,9 @@
         /// </summary>
         public bool CanLandOn;
 
+        private readonly Direction direction;
+        private readonly double initialSpeed;
+
         #endregion
 
         #region Constructors
@@ -45,7 +50,42 @@
         protected WaterObject(bool canLandOn, Direction direction, double speed) : base(direction, speed)
         {
             this.CanLandOn = canLandOn;
-            this.SetSpeed(speed, 0.0);
+            this.direction = direction;
+            this.initialSpeed = speed;
+            SetSpeed(speed, 0.0);
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Moves the landed frog.
+        /// </summary>
+        /// <param name="player">The player.</param>
+        public void MoveLandedFrog(Frog player)
+        {
+            var oldFrogSpeedX = player.SpeedX;
+            var oldFrogSpeedY = player.SpeedY;
+            player.SetSpeed(this.initialSpeed, 0.0);
+
+            switch (this.direction)
+            {
+                case Direction.Left:
+                    player.MoveLeft();
+                    break;
+                case Direction.Right:
+                    player.MoveRight();
+                    break;
+                case Direction.Up:
+                    break;
+                case Direction.Down:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            player.SetSpeed(oldFrogSpeedX, oldFrogSpeedY);
         }
 
         #endregion
