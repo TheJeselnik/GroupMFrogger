@@ -198,7 +198,7 @@ namespace FroggerStarter.Model.DataObjects
             var powerUpYOffset = calculateObjectYOffset(powerUp);
             powerUp.Y = this.Y - powerUpYOffset;
             var random = new Random();
-            var randomX = random.Next((int) GameSettings.RoadWidth);
+            var randomX = random.Next((int) (GameSettings.RoadWidth - powerUp.Width));
             powerUp.X = randomX;
             this.onPowerUpAdded(powerUp);
         }

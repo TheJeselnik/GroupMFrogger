@@ -506,6 +506,7 @@ namespace FroggerStarter.Controller
                     this.playerValues.AddBonusScore();
                     break;
             }
+            this.onScoreUpdated(this.Score);
         }
 
         private bool isPlayerOnWater()
