@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FroggerStarter.View.Sprites;
+﻿using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.GameObjects
 {
     /// <summary>
     /// Defines the oil semi truck type of vehicle
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.SemiTruck" />
+    /// <seealso cref="SemiTruck" />
     public class OilSemiTruck : SemiTruck
     {
         /// <summary>

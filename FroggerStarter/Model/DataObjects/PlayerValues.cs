@@ -1,4 +1,4 @@
-﻿namespace FroggerStarter.Model
+﻿namespace FroggerStarter.Model.DataObjects
 {
     /// <summary>
     ///     Manages values of the player, like lives, score, and if the game is over.

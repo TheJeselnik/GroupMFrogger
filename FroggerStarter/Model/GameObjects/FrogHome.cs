@@ -1,6 +1,6 @@
 ﻿using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.GameObjects
 {
     /// <summary>
     ///     Defines the frog homes the frog lands in

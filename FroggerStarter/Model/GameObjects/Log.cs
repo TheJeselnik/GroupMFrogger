@@ -1,11 +1,11 @@
 ﻿using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.GameObjects
 {
     /// <summary>
     ///     Defines the log water object
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.WaterObject" />
+    /// <seealso cref="WaterObject" />
     public class Log : WaterObject
     {
         #region Constructors

@@ -1,7 +1,6 @@
-﻿
-using FroggerStarter.View.Sprites;
+﻿using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.GameObjects
 {
     /// <summary>
     /// Defines the power up for adding bonus time when collected

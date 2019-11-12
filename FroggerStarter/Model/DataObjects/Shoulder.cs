@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using FroggerStarter.Model.GameObjects;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.DataObjects
 {
     /// <summary>
     ///     Defines a shoulder of the road, which may contain FrogHomes

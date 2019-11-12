@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.GameObjects
 {
     /// <summary>
     ///     Defines the frog model
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.GameObject" />
+    /// <seealso cref="GameObject" />
     public class Frog : GameObject
     {
         #region Data members

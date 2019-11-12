@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using FroggerStarter.Model.GameObjects;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.DataObjects
 {
     /// <summary>
     ///     Contains settings and values needed throughout the game.

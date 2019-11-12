@@ -1,11 +1,11 @@
 ﻿using FroggerStarter.View.Sprites;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.GameObjects
 {
     /// <summary>
     /// Defines the semi truck type of vehicle
     /// </summary>
-    /// <seealso cref="FroggerStarter.Model.Vehicle" />
+    /// <seealso cref="Vehicle" />
     public class SemiTruck : Vehicle
     {
         /// <summary>

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using FroggerStarter.Model;
+using FroggerStarter.Model.DataObjects;
+using FroggerStarter.Model.GameObjects;
 
 namespace FroggerStarter.Controller
 {

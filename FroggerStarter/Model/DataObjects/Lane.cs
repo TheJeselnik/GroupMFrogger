@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation;
+using FroggerStarter.Model.GameObjects;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.DataObjects
 {
     /// <summary>
     ///     Represents a horizontal lane.

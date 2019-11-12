@@ -1,6 +1,5 @@
-﻿
-using System.Collections.Generic;
-using FroggerStarter.Model;
+﻿using System.Collections.Generic;
+using FroggerStarter.Model.GameObjects;
 
 namespace FroggerStarter.Controller
 {

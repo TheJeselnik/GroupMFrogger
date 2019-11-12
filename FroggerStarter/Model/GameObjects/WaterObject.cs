@@ -1,4 +1,4 @@
-﻿namespace FroggerStarter.Model
+﻿namespace FroggerStarter.Model.GameObjects
 {
     /// <summary>
     ///     Defines the model for objects in water

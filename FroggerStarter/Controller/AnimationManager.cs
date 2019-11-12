@@ -1,6 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml;
-using FroggerStarter.Model;
+using FroggerStarter.Model.GameObjects;
 
 namespace FroggerStarter.Controller
 {
