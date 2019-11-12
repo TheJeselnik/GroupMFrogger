@@ -22,10 +22,10 @@ namespace FroggerStarter.Model
             this.Name = name;
             this.GameScore = score;
             this.GameLevel = level;
-            this.FullDescription = $"Name: {this.Name}   |   Score: {this.GameScore}   |   Level: {this.GameLevel}";
+            this.FullDescription = $"Score: {this.GameScore}   |   Name: {this.Name}   |   Level: {this.GameLevel}";
         }
 
-        public void SortDescriptionByScore()
+        public void SortDescriptionDefault()
         {
             this.FullDescription = $"Score: {this.GameScore}   |   Name: {this.Name}   |   Level: {this.GameLevel}";
         }
@@ -35,7 +35,7 @@ namespace FroggerStarter.Model
             this.FullDescription = $"Level: {this.GameLevel}   |   Score: {this.GameScore}   |   Name: {this.Name}";
         }
 
-        public void SortDescriptionDefault()
+        public void SortDescriptionByName()
         {
             this.FullDescription = $"Name: {this.Name}   |   Score: {this.GameScore}   |   Level: {this.GameLevel}";
         }

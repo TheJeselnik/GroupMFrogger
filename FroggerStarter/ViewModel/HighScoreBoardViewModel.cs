@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using FroggerStarter.Extensions;
+using FroggerStarter.Model;
 using FroggerStarter.Model.DataObjects;
 using FroggerStarter.Utility;
 using FroggerStarter.View;
@@ -11,6 +13,8 @@ namespace FroggerStarter.ViewModel
 {
     public class HighScoreBoardViewModel : INotifyPropertyChanged
     {
+
+        private const int MaxSortSize = 10;
 
         private readonly HighScoreBoard scoreBoard;
 
@@ -98,24 +102,24 @@ namespace FroggerStarter.ViewModel
         {
             foreach (var highScore in this.scoreBoard.Scores)
             {
-                highScore.SortDescriptionDefault();
+                highScore.SortDescriptionByName();
             }
 
-            //TODO: Handle sorting list by name, score, level
+            var result = this.scoreBoard.Scores.OrderBy(s => s.Name).Take(MaxSortSize);
 
-            this.Scores = this.scoreBoard.Scores.ToObservableCollection();
+            this.Scores = result.ToObservableCollection();
         }
 
         private void sortByScore(object obj)
         {
             foreach (var highScore in this.scoreBoard.Scores)
             {
-                highScore.SortDescriptionByScore();
+                highScore.SortDescriptionDefault();
             }
 
-            //TODO: Handle sorting list by name, score, level
+            var result = this.scoreBoard.Scores.OrderBy(s => s.GameScore).Take(MaxSortSize);
 
-            this.Scores = this.scoreBoard.Scores.ToObservableCollection();
+            this.Scores = result.ToObservableCollection();
         }
 
         private void sortByLevel(object obj)
@@ -125,9 +129,9 @@ namespace FroggerStarter.ViewModel
                 highScore.SortDescriptionByLevel();
             }
 
-            //TODO: Handle sorting list by name, score, level
+            var result = this.scoreBoard.Scores.OrderBy(s => s.GameLevel).Take(MaxSortSize);
 
-            this.Scores = this.scoreBoard.Scores.ToObservableCollection();
+            this.Scores = result.ToObservableCollection();
         }
 
         private bool canViewScoreBoard(object obj)
@@ -164,6 +168,11 @@ namespace FroggerStarter.ViewModel
             var score = Convert.ToInt32(info[scoreIndex]);
             var level = Convert.ToInt32(info[levelIndex]);
 
+            if (string.IsNullOrEmpty(name))
+            {
+                name = "No Name";
+            }
+
             var highScore = new HighScore(name, score, level);
 
             FileIOSerialization.BinarySerializer(highScore);
@@ -176,10 +185,9 @@ namespace FroggerStarter.ViewModel
 
         private void setupScoreBoard(object obj)
         {
-            //TODO: Sort scoreboard by top 10
+            var result = this.scoreBoard.Scores.OrderBy(s => s.GameScore).Take(MaxSortSize);
 
-
-            this.Scores = this.scoreBoard.Scores.ToObservableCollection();
+            this.Scores = result.ToObservableCollection();
         }
 
         protected virtual void onPropertyChanged([CallerMemberName] string propertyName = null)

@@ -417,7 +417,7 @@ namespace FroggerStarter.Controller
 
         private void playerDrowns()
         {
-            SoundEffects.PlayDeathSound();
+            SoundEffects.PlayWaterSplashSound();
             this.playerLosesLife();
         }
 
@@ -552,7 +552,6 @@ namespace FroggerStarter.Controller
             }
             else if (this.allFrogHomesFilled())
             {
-                SoundEffects.PlayLevelCompleteSound();
                 this.goToNextLevel();
             }
             else
@@ -582,6 +581,7 @@ namespace FroggerStarter.Controller
 
         private void goToNextLevel()
         {
+            SoundEffects.PlayLevelCompleteSound();
             this.removeFrogHomesFromCanvas();
             this.removeWaterCrossings();
             this.topShoulder.ClearHomes();
@@ -623,7 +623,15 @@ namespace FroggerStarter.Controller
 
         private async void handleRetrievePlayerName()
         {
-            var dialog = new RetrievePlayerNameDialog(this.playerValues.Score, this.playerValues.CurrentLevel);
+            var level = this.playerValues.CurrentLevel;
+            var score = this.playerValues.Score;
+
+            if (this.playerValues.CurrentLevel > GameSettings.LevelsInGame)
+            {
+                level -= 1;
+            }
+
+            var dialog = new RetrievePlayerNameDialog(score, level);
             await dialog.ShowAsync();
         }
         #endregion
