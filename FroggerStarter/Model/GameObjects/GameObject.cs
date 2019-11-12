@@ -10,7 +10,7 @@ namespace FroggerStarter.Model.GameObjects
     /// </summary>
     public abstract class GameObject
     {
-
+        #region Types and Delegates
 
         /// <summary>
         ///     Enum Types of four directions an object can be facing and move
@@ -18,12 +18,12 @@ namespace FroggerStarter.Model.GameObjects
         public enum Direction
         {
             /// <summary>
-            /// The up direction
+            ///     The up direction
             /// </summary>
             Up,
 
             /// <summary>
-            /// The down direction
+            ///     The down direction
             /// </summary>
             Down,
 
@@ -37,6 +37,8 @@ namespace FroggerStarter.Model.GameObjects
             /// </summary>
             Right
         }
+
+        #endregion
 
         #region Data members
 
@@ -201,16 +203,16 @@ namespace FroggerStarter.Model.GameObjects
         }
 
         /// <summary>
-        /// Flips the sprite.
+        ///     Flips the sprite.
         /// </summary>
         public void FlipSprite()
         {
             this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-            this.Sprite.RenderTransform = new ScaleTransform { ScaleX = -1 };
+            this.Sprite.RenderTransform = new ScaleTransform {ScaleX = -1};
         }
 
         /// <summary>
-        /// Rotates the sprite.
+        ///     Rotates the sprite.
         /// </summary>
         public void RotateSprite(Direction direction)
         {
@@ -236,25 +238,25 @@ namespace FroggerStarter.Model.GameObjects
         private void rotateRight()
         {
             this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-            this.Sprite.RenderTransform = new RotateTransform { Angle = 90 };
+            this.Sprite.RenderTransform = new RotateTransform {Angle = 90};
         }
 
         private void rotateLeft()
         {
             this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-            this.Sprite.RenderTransform = new RotateTransform { Angle = -90 };
+            this.Sprite.RenderTransform = new RotateTransform {Angle = -90};
         }
 
         private void rotateDown()
         {
             this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-            this.Sprite.RenderTransform = new RotateTransform { Angle = 180 };
+            this.Sprite.RenderTransform = new RotateTransform {Angle = 180};
         }
 
         private void rotateUp()
         {
             this.Sprite.RenderTransformOrigin = new Point(0.5, 0.5);
-            this.Sprite.RenderTransform = new RotateTransform { Angle = 0 };
+            this.Sprite.RenderTransform = new RotateTransform {Angle = 0};
         }
 
         #endregion

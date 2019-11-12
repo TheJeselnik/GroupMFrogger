@@ -43,10 +43,10 @@ namespace FroggerStarter.Model.DataObjects
         public static int TimerWidth { get; } = 640;
 
         /// <summary>
-        /// Gets the ticks until spawn objects.
+        ///     Gets the ticks until spawn objects.
         /// </summary>
         /// <value>
-        /// The ticks until spawn objects.
+        ///     The ticks until spawn objects.
         /// </value>
         public static int TicksUntilSpawnObjects { get; } = 200;
 
@@ -59,42 +59,42 @@ namespace FroggerStarter.Model.DataObjects
         public static int LevelsInGame { get; } = 3;
 
         /// <summary>
-        /// Gets the default frog speed.
+        ///     Gets the default frog speed.
         /// </summary>
         /// <value>
-        /// The default frog speed.
+        ///     The default frog speed.
         /// </value>
         public static int DefaultFrogSpeed { get; } = 50;
 
         /// <summary>
-        /// Gets the score power up value.
+        ///     Gets the score power up value.
         /// </summary>
         /// <value>
-        /// The score power up value.
+        ///     The score power up value.
         /// </value>
         public static int ScorePowerUpValue { get; } = 50000;
 
         /// <summary>
-        /// Gets the index of the bottom canvas.
+        ///     Gets the index of the bottom canvas.
         /// </summary>
         /// <value>
-        /// The index of the bottom canvas.
+        ///     The index of the bottom canvas.
         /// </value>
         public static uint BottomCanvasIndex { get; } = 0;
 
         /// <summary>
-        /// Gets the index of the low canvas.
+        ///     Gets the index of the low canvas.
         /// </summary>
         /// <value>
-        /// The index of the low canvas.
+        ///     The index of the low canvas.
         /// </value>
         public static uint LowCanvasIndex { get; } = 3;
 
         /// <summary>
-        /// Gets the landing cushion percentage.
+        ///     Gets the landing cushion percentage.
         /// </summary>
         /// <value>
-        /// The landing cushion percentage.
+        ///     The landing cushion percentage.
         /// </value>
         public static double LandingCushionPercentage { get; } = 0.90;
 
@@ -208,7 +208,7 @@ namespace FroggerStarter.Model.DataObjects
         /// <value>
         ///     The first lane.
         /// </value>
-        private static Lane FirstLevelFirstLane { get; } = 
+        private static Lane FirstLevelFirstLane { get; } =
             new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Left, 3.0, 3);
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace FroggerStarter.Model.DataObjects
         /// <value>
         ///     The second lane.
         /// </value>
-        private static Lane FirstLevelSecondLane { get; } = 
+        private static Lane FirstLevelSecondLane { get; } =
             new Lane(Vehicle.VehicleType.SemiTruck, GameObject.Direction.Right, 3.5, 2);
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace FroggerStarter.Model.DataObjects
         /// <value>
         ///     The fifth lane.
         /// </value>
-        private static Lane FirstLevelFifthLane { get; } = 
+        private static Lane FirstLevelFifthLane { get; } =
             new Lane(Vehicle.VehicleType.Car, GameObject.Direction.Right, 5.0, 5);
 
         /// <summary>
@@ -298,7 +298,7 @@ namespace FroggerStarter.Model.DataObjects
         /// <value>
         ///     The fifth lane.
         /// </value>
-        private static Lane SecondLevelFifthLane { get; } = 
+        private static Lane SecondLevelFifthLane { get; } =
             new Lane(WaterObject.WaterObjectType.Raft, GameObject.Direction.Right, 5.0, 5, true);
 
         /// <summary>

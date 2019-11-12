@@ -14,19 +14,19 @@ namespace FroggerStarter.Model.DataObjects
     {
         #region Data members
 
-        private readonly int maxGameObjects;
+        /// <summary>
+        ///     The has water
+        /// </summary>
+        public readonly bool HasWater;
 
         private Point location;
+        private bool waterPlaced;
+        private readonly int maxGameObjects;
         private readonly double initialSpeed;
         private readonly double vehicleSpacing;
         private readonly GameObject.Direction direction;
         private readonly Vehicle.VehicleType vehicleType;
         private readonly WaterObject.WaterObjectType waterObjectType;
-        /// <summary>
-        /// The has water
-        /// </summary>
-        public readonly bool HasWater;
-        private bool waterPlaced;
 
         #endregion
 
@@ -57,7 +57,7 @@ namespace FroggerStarter.Model.DataObjects
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Lane" /> class.
+        ///     Initializes a new instance of the <see cref="Lane" /> class.
         /// </summary>
         /// <param name="vehicleType">Type of the vehicle.</param>
         /// <param name="direction">The direction.</param>
@@ -74,7 +74,7 @@ namespace FroggerStarter.Model.DataObjects
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Lane" /> class.
+        ///     Initializes a new instance of the <see cref="Lane" /> class.
         /// </summary>
         /// <param name="waterObjectType">Type of the water object.</param>
         /// <param name="direction">The direction.</param>
@@ -129,7 +129,7 @@ namespace FroggerStarter.Model.DataObjects
         public event EventHandler<WaterCrossing> WaterAdded;
 
         /// <summary>
-        /// Occurs when [power up added].
+        ///     Occurs when [power up added].
         /// </summary>
         public event EventHandler<PowerUp> PowerUpAdded;
 
@@ -175,7 +175,7 @@ namespace FroggerStarter.Model.DataObjects
         }
 
         /// <summary>
-        /// Removes all vehicles.
+        ///     Removes all vehicles.
         /// </summary>
         public void RemoveAllVehicles()
         {

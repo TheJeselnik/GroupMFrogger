@@ -149,7 +149,6 @@
     <Compile Include="Model\GameObjects\GameObject.cs" />
     <Compile Include="Utility\FileIOSerialization.cs" />
     <Compile Include="Utility\LifeTimer.cs" />
-    <Compile Include="Controller\PowerUpManager.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
     <Compile Include="Utility\SoundEffects.cs" />
     <Compile Include="ViewModel\HighScoreBoardViewModel.cs" />

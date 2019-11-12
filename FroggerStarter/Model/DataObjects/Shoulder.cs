@@ -69,7 +69,7 @@ namespace FroggerStarter.Model.DataObjects
         }
 
         /// <summary>
-        /// Clears the homes.
+        ///     Clears the homes.
         /// </summary>
         public void ClearHomes()
         {
@@ -90,6 +90,7 @@ namespace FroggerStarter.Model.DataObjects
                 {
                     this.createBush();
                 }
+
                 this.offsetX += this.columnWidth;
                 if (isOddNumberedLane(i))
                 {
@@ -112,6 +113,7 @@ namespace FroggerStarter.Model.DataObjects
             frogHome.X = this.offsetX;
             frogHome.Y = GameSettings.LaneHeight + GameSettings.RoadOffsetHeight;
         }
+
         private void createBush()
         {
             var bush = new Bush();

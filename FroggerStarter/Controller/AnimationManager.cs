@@ -31,10 +31,10 @@ namespace FroggerStarter.Controller
         public bool FrogDying { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether [frog jumping].
+        ///     Gets a value indicating whether [frog jumping].
         /// </summary>
         /// <value>
-        ///   <c>true</c> if [frog jumping]; otherwise, <c>false</c>.
+        ///     <c>true</c> if [frog jumping]; otherwise, <c>false</c>.
         /// </value>
         public bool FrogJumping { get; private set; }
 
@@ -55,6 +55,7 @@ namespace FroggerStarter.Controller
                 this.FrogJumping = false;
                 this.player.ResetSprite();
             }
+
             this.player = frog;
             this.FrogDying = true;
             this.frogDeathTicks = 0;
@@ -64,9 +65,9 @@ namespace FroggerStarter.Controller
         }
 
         /// <summary>
-        /// Animates the frog jump.
-        /// Precondition: none
-        /// Postcondition: Frog animation queued to new timer
+        ///     Animates the frog jump.
+        ///     Precondition: none
+        ///     Postcondition: Frog animation queued to new timer
         /// </summary>
         /// <param name="frog">The frog.</param>
         /// <param name="frogDirection">The frog direction.</param>
@@ -119,6 +120,7 @@ namespace FroggerStarter.Controller
             {
                 this.endJumpAnimation();
             }
+
             var oldX = this.player.X;
             var oldY = this.player.Y;
 

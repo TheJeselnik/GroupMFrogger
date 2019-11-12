@@ -1,29 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Collections.Generic;
 
-namespace FroggerStarter.Model
+namespace FroggerStarter.Model.DataObjects
 {
-    
+    /// <summary>
+    ///     Defines the board for displaying HighScores
+    /// </summary>
     public class HighScoreBoard
     {
-        private readonly IList<HighScore> highScoreBoard;
+        #region Properties
 
-        public IList<HighScore> Scores => this.highScoreBoard;
+        /// <summary>
+        ///     Gets the scores.
+        /// </summary>
+        /// <value>
+        ///     The scores.
+        /// </value>
+        public IList<HighScore> Scores { get; }
 
-        public int Count => this.highScoreBoard.Count;
+        /// <summary>
+        ///     Gets the count.
+        /// </summary>
+        /// <value>
+        ///     The count.
+        /// </value>
+        public int Count => this.Scores.Count;
 
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="HighScoreBoard" /> class.
+        /// </summary>
         public HighScoreBoard()
         {
-            this.highScoreBoard = new List<HighScore>();
+            this.Scores = new List<HighScore>();
         }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Adds the specified score.
+        ///     Precondition: none
+        ///     PostCondition: HighScore added to Board
+        /// </summary>
+        /// <param name="score">The score.</param>
         public void Add(HighScore score)
         {
-            this.highScoreBoard.Add(score);
+            this.Scores.Add(score);
         }
+
+        #endregion
     }
 }
