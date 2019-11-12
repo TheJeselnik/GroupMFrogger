@@ -10,25 +10,25 @@
     Width="120">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="TireColor" Color="DarkSlateBlue"/>
-        <SolidColorBrush x:Key="PrimaryBodyColor" Color="DodgerBlue"/>
-        <SolidColorBrush x:Key="SecondaryBodyColor" Color="Coral"/>
-        <SolidColorBrush x:Key="WindowColor" Color="LightBlue"/>
-        <SolidColorBrush x:Key="HeadlightColor" Color="LightGoldenrodYellow"/>
+        <SolidColorBrush x:Key="TireColor" Color="DarkSlateBlue" />
+        <SolidColorBrush x:Key="PrimaryBodyColor" Color="DodgerBlue" />
+        <SolidColorBrush x:Key="SecondaryBodyColor" Color="Coral" />
+        <SolidColorBrush x:Key="WindowColor" Color="LightBlue" />
+        <SolidColorBrush x:Key="HeadlightColor" Color="LightGoldenrodYellow" />
     </UserControl.Resources>
 
     <Canvas Height="40" Width="120" Background="Transparent">
-        <Rectangle Canvas.Top="35" Canvas.Left="15" Fill="{StaticResource TireColor}" Height="5" Width="10"/>
-        <Rectangle Canvas.Top="35" Canvas.Left="85" Fill="{StaticResource TireColor}" Height="5" Width="10"/>
-        <Rectangle Canvas.Top="35" Canvas.Left="98" Fill="{StaticResource TireColor}" Height="5" Width="10"/>
-        <Rectangle Canvas.Left="15" Fill="{StaticResource TireColor}" Height="5" Width="10"/>
-        <Rectangle Canvas.Left="85" Fill="{StaticResource TireColor}" Height="5" Width="10"/>
-        <Rectangle Canvas.Left="98" Fill="{StaticResource TireColor}" Height="5" Width="10"/>
+        <Rectangle Canvas.Top="35" Canvas.Left="15" Fill="{StaticResource TireColor}" Height="5" Width="10" />
+        <Rectangle Canvas.Top="35" Canvas.Left="85" Fill="{StaticResource TireColor}" Height="5" Width="10" />
+        <Rectangle Canvas.Top="35" Canvas.Left="98" Fill="{StaticResource TireColor}" Height="5" Width="10" />
+        <Rectangle Canvas.Left="15" Fill="{StaticResource TireColor}" Height="5" Width="10" />
+        <Rectangle Canvas.Left="85" Fill="{StaticResource TireColor}" Height="5" Width="10" />
+        <Rectangle Canvas.Left="98" Fill="{StaticResource TireColor}" Height="5" Width="10" />
 
-        <Rectangle Canvas.Top="4" Fill="{StaticResource PrimaryBodyColor}" Height="32" Width="30"/>
-        <Rectangle Canvas.Top="5" Fill="{StaticResource WindowColor}" Height="30" Width="11" Canvas.Left="9"/>
-        <Rectangle Canvas.Top="29" Fill="{StaticResource HeadlightColor}" Height="7" Width="2"/>
-        <Rectangle Canvas.Top="2" Canvas.Left="30" Fill="{StaticResource SecondaryBodyColor}" Height="36" Width="90"/>
-        <Rectangle Canvas.Top="4" Fill="{StaticResource HeadlightColor}" Height="7" Width="2"/>
+        <Rectangle Canvas.Top="4" Fill="{StaticResource PrimaryBodyColor}" Height="32" Width="30" />
+        <Rectangle Canvas.Top="5" Fill="{StaticResource WindowColor}" Height="30" Width="11" Canvas.Left="9" />
+        <Rectangle Canvas.Top="29" Fill="{StaticResource HeadlightColor}" Height="7" Width="2" />
+        <Rectangle Canvas.Top="2" Canvas.Left="30" Fill="{StaticResource SecondaryBodyColor}" Height="36" Width="90" />
+        <Rectangle Canvas.Top="4" Fill="{StaticResource HeadlightColor}" Height="7" Width="2" />
     </Canvas>
 </local:BaseSprite>

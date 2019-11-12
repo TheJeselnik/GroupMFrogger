@@ -1,29 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using FroggerStarter.ViewModel;
+﻿using Windows.UI.Xaml;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace FroggerStarter.View
 {
+    /// <summary>Content dialog for retrieving the players name at end of game.</summary>
+    /// <seealso cref="Windows.UI.Xaml.Controls.ContentDialog" />
+    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
+    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
     public sealed partial class RetrievePlayerNameDialog
     {
-        private int playerScore;
+        #region Data members
 
-        private int playerLevel;
+        private readonly int playerScore;
 
+        private readonly int playerLevel;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a new instance of the <see cref="RetrievePlayerNameDialog" /> class.</summary>
+        /// <param name="score">The score.</param>
+        /// <param name="level">The level.</param>
         public RetrievePlayerNameDialog(int score, int level)
         {
             this.InitializeComponent();
@@ -35,6 +34,10 @@ namespace FroggerStarter.View
             this.playerLevel = level;
         }
 
+        #endregion
+
+        #region Methods
+
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             var name = this.nameTextBox.Text;
@@ -42,5 +45,7 @@ namespace FroggerStarter.View
             this.nameTextBox.Text = name + "," + this.playerScore + "," + this.playerLevel;
             this.dialog.Hide();
         }
+
+        #endregion
     }
 }

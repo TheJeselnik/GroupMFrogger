@@ -24,10 +24,10 @@
         public int Score { get; private set; }
 
         /// <summary>
-        /// Gets the current level.
+        ///     Gets the current level.
         /// </summary>
         /// <value>
-        /// The current level.
+        ///     The current level.
         /// </value>
         public int CurrentLevel { get; private set; } = 1;
 
@@ -91,7 +91,7 @@
         }
 
         /// <summary>
-        /// Adds the bonus score.
+        ///     Adds the bonus score.
         ///     Precondition: None
         ///     Postcondition: Score += GameSettings.ScorePowerUpValue
         /// </summary>
@@ -101,7 +101,7 @@
         }
 
         /// <summary>
-        /// Checks for level completed.
+        ///     Checks for level completed.
         ///     Precondition: CurrentLevel lessThanOrEqualTo GameSettings.GameSettings.LevelsInGame
         ///     Postcondition: CurrentLevel++
         /// </summary>
@@ -112,11 +112,12 @@
             {
                 this.CurrentLevel++;
             }
+
             this.CheckForGameOverIfLevelsCompleted();
         }
 
         /// <summary>
-        /// Checks for game over if levels completed.
+        ///     Checks for game over if levels completed.
         ///     Precondition: GameOver = false
         ///     Postcondition: GameOver = true || GameOver = false
         /// </summary>

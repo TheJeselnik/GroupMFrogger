@@ -10,28 +10,32 @@
 
     <Page.Resources>
         <Style x:Key="PlayerHudStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="25"/>
-            <Setter Property="FontFamily" Value ="Arial"/>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="FontFamily" Value="Arial" />
         </Style>
 
         <Style x:Key="LargerHudStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="LawnGreen"/>
-            <Setter Property="FontSize" Value="35"/>
-            <Setter Property="FontFamily" Value ="Arial"/>
+            <Setter Property="Foreground" Value="LawnGreen" />
+            <Setter Property="FontSize" Value="35" />
+            <Setter Property="FontFamily" Value="Arial" />
         </Style>
     </Page.Resources>
 
     <Canvas x:Name="canvas" Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}" Background="Black">
         <Rectangle Canvas.Top="55" Fill="Gray" Width="{StaticResource AppWidth}" Height="50" />
         <Rectangle Canvas.Top="355" Fill="Gray" Width="{StaticResource AppWidth}" Height="55" />
-        <TextBlock Canvas.Left="1" Text="Lives" Style="{StaticResource PlayerHudStyle}"/>
-        <TextBlock x:Name="livesRemainingTextBlock" Text="0" Style="{StaticResource PlayerHudStyle}" Canvas.Left="1" Canvas.Top="25" />
-        <TextBlock Canvas.Left="234" Canvas.Top="3" Text="Big Ol' Frog" Style="{StaticResource LargerHudStyle}"/>
-        <TextBlock Canvas.Left="582" Text="Score" Style="{StaticResource PlayerHudStyle}" Width="118"/>
-        <TextBlock x:Name="scoreTextBlock" Canvas.Left="530" Text="000000" Style="{StaticResource PlayerHudStyle}" Canvas.Top="25" Width="118" TextAlignment="Right"/>
-        <TextBlock x:Name="gameOverTextBlock" Canvas.Left="220" Canvas.Top="185" Text="GAME OVER" Style="{StaticResource LargerHudStyle}" Visibility="Collapsed" Canvas.ZIndex="1"/>
-        <TextBlock Canvas.Left="5" Canvas.Top="360" Text="Time:" Style="{StaticResource PlayerHudStyle}"/>
-        <Rectangle x:Name="timeProgressRectangle" Height="15" Width="640" Canvas.Left="5" Canvas.Top="390" Fill="HotPink"/>
+        <TextBlock Canvas.Left="1" Text="Lives" Style="{StaticResource PlayerHudStyle}" />
+        <TextBlock x:Name="livesRemainingTextBlock" Text="0" Style="{StaticResource PlayerHudStyle}" Canvas.Left="1"
+                   Canvas.Top="25" />
+        <TextBlock Canvas.Left="234" Canvas.Top="3" Text="Big Ol' Frog" Style="{StaticResource LargerHudStyle}" />
+        <TextBlock Canvas.Left="582" Text="Score" Style="{StaticResource PlayerHudStyle}" Width="118" />
+        <TextBlock x:Name="scoreTextBlock" Canvas.Left="530" Text="000000" Style="{StaticResource PlayerHudStyle}"
+                   Canvas.Top="25" Width="118" TextAlignment="Right" />
+        <TextBlock x:Name="gameOverTextBlock" Canvas.Left="220" Canvas.Top="185" Text="GAME OVER"
+                   Style="{StaticResource LargerHudStyle}" Visibility="Collapsed" Canvas.ZIndex="1" />
+        <TextBlock Canvas.Left="5" Canvas.Top="360" Text="Time:" Style="{StaticResource PlayerHudStyle}" />
+        <Rectangle x:Name="timeProgressRectangle" Height="15" Width="640" Canvas.Left="5" Canvas.Top="390"
+                   Fill="HotPink" />
     </Canvas>
 </Page>

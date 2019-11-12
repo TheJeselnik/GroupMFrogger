@@ -446,7 +446,7 @@ namespace FroggerStarter.Controller
 
         private void playerGetsHit()
         {
-            SoundEffects.PlayDeathSound();
+            SoundEffects.PlaySplatSound();
             this.playerLosesLife();
         }
 

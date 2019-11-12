@@ -10,10 +10,9 @@ namespace FroggerStarter.Model.GameObjects
     {
         #region Constructors
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="Log" /> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="Log"/> class.</summary>
         /// <param name="canLandOn">if set to <c>true</c> [can land on].</param>
+        /// <param name="direction"></param>
         /// <param name="speed">The speed.</param>
         public Log(bool canLandOn, Direction direction, double speed) : base(canLandOn, direction, speed)
         {

@@ -1,28 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using FroggerStarter.Model;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace FroggerStarter.View
 {
+    /// <summary>Content dialog for showing the high score board.</summary>
+    /// <seealso cref="Windows.UI.Xaml.Controls.ContentDialog" />
+    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
+    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
     public sealed partial class HighScoreBoardDialog
     {
+        #region Properties
+
+        /// <summary>Gets or sets a value indicating whether this instance is opened at start screen.</summary>
+        /// <value>
+        ///     <c>true</c> if this instance is opened at start screen; otherwise, <c>false</c>.
+        /// </value>
         public bool IsOpenedAtStartScreen { get; set; }
 
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a new instance of the <see cref="HighScoreBoardDialog" /> class.</summary>
         public HighScoreBoardDialog()
         {
             this.InitializeComponent();
@@ -31,6 +32,10 @@ namespace FroggerStarter.View
             this.nameSortBtn.IsEnabled = false;
             this.scoreSortBtn.IsEnabled = false;
         }
+
+        #endregion
+
+        #region Methods
 
         private async void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -53,5 +58,7 @@ namespace FroggerStarter.View
             this.scoreSortBtn.IsEnabled = true;
             this.displayBtn.IsEnabled = false;
         }
+
+        #endregion
     }
 }

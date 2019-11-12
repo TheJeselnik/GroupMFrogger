@@ -8,10 +8,11 @@
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="WaterPrimaryColor" Color="DodgerBlue"/>
+        <SolidColorBrush x:Key="WaterPrimaryColor" Color="DodgerBlue" />
     </UserControl.Resources>
 
     <Canvas x:Name="waterCrossingCanvas" Width="{StaticResource AppWidth}" Background="Transparent">
-        <Rectangle x:Name="waterCrossingRectangle" Width="{StaticResource AppWidth}" Fill="{StaticResource WaterPrimaryColor}"/>
+        <Rectangle x:Name="waterCrossingRectangle" Width="{StaticResource AppWidth}"
+                   Fill="{StaticResource WaterPrimaryColor}" />
     </Canvas>
 </local:BaseSprite>

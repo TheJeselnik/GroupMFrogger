@@ -10,16 +10,16 @@
     Width="120">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="SpotColor" Color="DarkSlateBlue"/>
-        <SolidColorBrush x:Key="OilColor" Color="DimGray"/>
+        <SolidColorBrush x:Key="SpotColor" Color="DarkSlateBlue" />
+        <SolidColorBrush x:Key="OilColor" Color="DimGray" />
     </UserControl.Resources>
 
     <Canvas Height="40" Width="120" Background="Transparent">
-        <local:SemiTruckSprite/>
+        <local:SemiTruckSprite />
         <Ellipse Height="8" Width="8" Canvas.Left="112" Canvas.Top="2" Fill="{StaticResource SpotColor}" />
         <Ellipse Height="8" Width="8" Canvas.Left="112" Canvas.Top="30" Fill="{StaticResource SpotColor}" />
         <Ellipse Height="8" Width="8" Canvas.Left="30" Canvas.Top="2" Fill="{StaticResource SpotColor}" />
         <Ellipse Height="8" Width="8" Canvas.Left="30" Canvas.Top="30" Fill="{StaticResource SpotColor}" />
-        <Image Height="13" Width="18" Canvas.Left="67" Canvas.Top="12" Source="/Assets/oil-logo.png"/>
+        <Image Height="13" Width="18" Canvas.Left="67" Canvas.Top="12" Source="/Assets/oil-logo.png" />
     </Canvas>
 </local:BaseSprite>

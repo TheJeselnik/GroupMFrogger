@@ -10,7 +10,7 @@
     Background="DarkGreen">
 
     <ContentDialog.DataContext>
-        <viewModel:HighScoreBoardViewModel/>
+        <viewModel:HighScoreBoardViewModel />
     </ContentDialog.DataContext>
 
     <Grid Background="DarkGreen">
@@ -18,21 +18,29 @@
             <RowDefinition Height="400" />
         </Grid.RowDefinitions>
 
-        <ListView Name="listView" Margin="0,45,0,168" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Path=Scores, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <ListView Name="listView" Margin="0,45,0,168" BorderBrush="Black" BorderThickness="1"
+                  ItemsSource="{Binding Path=Scores, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBlock HorizontalAlignment="Left" Text="{Binding FullDescription}"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{Binding FullDescription}" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <TextBlock HorizontalAlignment="Left" Text="~HighScore Board~" TextWrapping="Wrap" Width="179" Margin="157,0,0,363" FontSize="20"/>
-        <TextBlock HorizontalAlignment="Left" Text="Sort By:" TextWrapping="Wrap" Width="60" Margin="10,238,0,140" FontSize="14"/>
-        <RadioButton Name="scoreSortBtn" Content="Score, Name, Level" GroupName="RadioGroup" Margin="10,261,0,0" VerticalAlignment="Top" Command="{Binding SortByScoreCommand}"></RadioButton>
-        <RadioButton Name="nameSortBtn" Content="Name, Score, Level" GroupName="RadioGroup" Margin="10,298,0,0" VerticalAlignment="Top" Command="{Binding SortByNameCommand}"></RadioButton>
-        <RadioButton Name="levelSortBtn" Content="Level, Score, Name" GroupName="RadioGroup" Margin="10,337,0,0" VerticalAlignment="Top" Command="{Binding SortByLevelCommand}"></RadioButton>
-        <Button Content="Close" Margin="328,307,0,0" VerticalAlignment="Top" Height="58" Width="169" Click="CloseBtn_Click"/>
-        <Button Name="displayBtn" Content="Display Scores" Margin="367,243,0,0" VerticalAlignment="Top" Height="49" Width="130" Click="DisplayScoresBtn_Click" Command="{Binding DisplayScoresCommand}"/>
+        <TextBlock HorizontalAlignment="Left" Text="~HighScore Board~" TextWrapping="Wrap" Width="179"
+                   Margin="157,0,0,363" FontSize="20" />
+        <TextBlock HorizontalAlignment="Left" Text="Sort By:" TextWrapping="Wrap" Width="60" Margin="10,238,0,140"
+                   FontSize="14" />
+        <RadioButton Name="scoreSortBtn" Content="Score, Name, Level" GroupName="RadioGroup" Margin="10,261,0,0"
+                     VerticalAlignment="Top" Command="{Binding SortByScoreCommand}" />
+        <RadioButton Name="nameSortBtn" Content="Name, Score, Level" GroupName="RadioGroup" Margin="10,298,0,0"
+                     VerticalAlignment="Top" Command="{Binding SortByNameCommand}" />
+        <RadioButton Name="levelSortBtn" Content="Level, Score, Name" GroupName="RadioGroup" Margin="10,337,0,0"
+                     VerticalAlignment="Top" Command="{Binding SortByLevelCommand}" />
+        <Button Content="Close" Margin="328,307,0,0" VerticalAlignment="Top" Height="58" Width="169"
+                Click="CloseBtn_Click" />
+        <Button Name="displayBtn" Content="Display Scores" Margin="367,243,0,0" VerticalAlignment="Top" Height="49"
+                Width="130" Click="DisplayScoresBtn_Click" Command="{Binding DisplayScoresCommand}" />
     </Grid>
 </ContentDialog>

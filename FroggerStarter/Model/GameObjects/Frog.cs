@@ -23,18 +23,18 @@ namespace FroggerStarter.Model.GameObjects
         #region Properties
 
         /// <summary>
-        /// Gets the death sprites.
+        ///     Gets the death sprites.
         /// </summary>
         /// <value>
-        /// The death sprites.
+        ///     The death sprites.
         /// </value>
         public IList<BaseSprite> DeathSprites { get; private set; }
 
         /// <summary>
-        /// Gets the jump sprites.
+        ///     Gets the jump sprites.
         /// </summary>
         /// <value>
-        /// The jump sprites.
+        ///     The jump sprites.
         /// </value>
         public IList<BaseSprite> JumpSprites { get; private set; }
 
@@ -69,7 +69,7 @@ namespace FroggerStarter.Model.GameObjects
         }
 
         /// <summary>
-        /// Resets the sprite.
+        ///     Resets the sprite.
         ///     Precondition: None
         ///     Postcondition: player.Sprite = FrogSprite
         /// </summary>
@@ -91,7 +91,7 @@ namespace FroggerStarter.Model.GameObjects
 
         private void setJumpSprites()
         {
-            IList<BaseSprite> jumpSprites = new List<BaseSprite>() {
+            IList<BaseSprite> jumpSprites = new List<BaseSprite> {
                 new FrogJumpingSprite(), new FrogSprite()
             };
             this.JumpSprites = jumpSprites;

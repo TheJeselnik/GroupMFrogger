@@ -10,6 +10,6 @@
     x:Name="dialog">
 
     <Grid>
-        <Button Content="Close" HorizontalAlignment="Center" Height="44" Width="176" Click="CloseBtn_Click"/>
+        <Button Content="Close" HorizontalAlignment="Center" Height="44" Width="176" Click="CloseBtn_Click" />
     </Grid>
 </ContentDialog>

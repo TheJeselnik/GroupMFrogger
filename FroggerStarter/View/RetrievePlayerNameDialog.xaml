@@ -10,17 +10,24 @@
     x:Name="dialog">
 
     <ContentDialog.DataContext>
-        <viewModel:HighScoreBoardViewModel/>
+        <viewModel:HighScoreBoardViewModel />
     </ContentDialog.DataContext>
 
     <Grid>
-        <Button Content="Submit" Margin="144,208,0,0" VerticalAlignment="Top" Width="116" Click="SubmitBtn_Click" Command="{Binding SubmitPlayerNameCommand}"/>
-        <TextBox Name="nameTextBox" HorizontalAlignment="Left" Margin="144,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" Text="{Binding CurrentPlayerInfo, Mode=TwoWay}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,6,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="52" FontSize="18"/>
+        <Button Content="Submit" Margin="144,208,0,0" VerticalAlignment="Top" Width="116" Click="SubmitBtn_Click"
+                Command="{Binding SubmitPlayerNameCommand}" />
+        <TextBox Name="nameTextBox" HorizontalAlignment="Left" Margin="144,3,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="152" Text="{Binding CurrentPlayerInfo, Mode=TwoWay}" />
+        <TextBlock HorizontalAlignment="Left" Margin="10,6,0,0" Text="Name:" TextWrapping="Wrap"
+                   VerticalAlignment="Top" Height="25" Width="52" FontSize="18" />
 
-        <TextBox Name="scoreTextBox" HorizontalAlignment="Left" Margin="144,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" IsReadOnly="True"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,56,0,0" Text="Current Score:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="114" FontSize="18"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,107,0,0" Text="Current Level:" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Width="114" FontSize="18"/>
-        <TextBox x:Name="levelTextBox" HorizontalAlignment="Left" Margin="144,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" IsReadOnly="True"/>
+        <TextBox Name="scoreTextBox" HorizontalAlignment="Left" Margin="144,52,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="152" IsReadOnly="True" />
+        <TextBlock HorizontalAlignment="Left" Margin="10,56,0,0" Text="Current Score:" TextWrapping="Wrap"
+                   VerticalAlignment="Top" Height="25" Width="114" FontSize="18" />
+        <TextBlock HorizontalAlignment="Left" Margin="10,107,0,0" Text="Current Level:" TextWrapping="Wrap"
+                   VerticalAlignment="Top" Height="25" Width="114" FontSize="18" />
+        <TextBox x:Name="levelTextBox" HorizontalAlignment="Left" Margin="144,101,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="152" IsReadOnly="True" />
     </Grid>
 </ContentDialog>

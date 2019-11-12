@@ -11,46 +11,51 @@
 
     <Page.Resources>
         <Style x:Key="StartGameStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="FontFamily" Value ="Arial"/>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="FontFamily" Value="Arial" />
         </Style>
 
         <Style x:Key="TitleStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="LawnGreen"/>
-            <Setter Property="FontSize" Value="35"/>
-            <Setter Property="FontFamily" Value ="Arial"/>
+            <Setter Property="Foreground" Value="LawnGreen" />
+            <Setter Property="FontSize" Value="35" />
+            <Setter Property="FontFamily" Value="Arial" />
         </Style>
 
-        <SolidColorBrush x:Key="DotColor" Color="Purple"/>
+        <SolidColorBrush x:Key="DotColor" Color="Purple" />
     </Page.Resources>
 
     <Page.DataContext>
-        <viewModel:HighScoreBoardViewModel/>
+        <viewModel:HighScoreBoardViewModel />
     </Page.DataContext>
 
     <Grid Width="{StaticResource AppWidth}" Height="{StaticResource AppHeight}" Background="Black">
 
         <sprites:FrogSprite Margin="300,79,300,281" />
-        <sprites:FrogHomeSprite Margin="0,360,600,0"/>
+        <sprites:FrogHomeSprite Margin="0,360,600,0" />
         <sprites:FrogHomeSprite Margin="600,360,0,0" />
         <sprites:FrogHomeSprite Margin="600,0,0,360" />
         <sprites:FrogHomeSprite Margin="0,0,600,360" />
 
-        <TextBlock Text="Big Ol' Frog" Style="{StaticResource TitleStyle}" Margin="233,144,226,221"/>
-        <Ellipse Height="30" Width="30"  Fill="{StaticResource DotColor}" Margin="498,175,122,205"/>
-        <Ellipse Height="30" Width="30"  Fill="{StaticResource DotColor}" Margin="127,175,493,205"/>
-        <Ellipse Height="30" Width="30"  Fill="{StaticResource DotColor}" Margin="498,47,122,333"/>
-        <Ellipse Height="30" Width="30"  Fill="{StaticResource DotColor}" Margin="595,175,25,205"/>
-        <Ellipse Height="30" Width="30"  Fill="{StaticResource DotColor}" Margin="127,297,493,83"/>
-        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="127,47,493,333"/>
-        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="498,295,122,85"/>
-        <Ellipse Height="30" Width="30"  Fill="{StaticResource DotColor}" Margin="25,175,595,205"/>
-        <Button Content="View ScoreBoard"  Width="140" Height="45" Foreground="Purple" Background="ForestGreen" FontSize="16" Command="{Binding ViewScoreBoardStartCommand}" Margin="72,347,0,0" VerticalAlignment="Top" />
-        <Button Name="clearBtn" Content="Clear ScoreBoard"  Width="140" Height="45" Foreground="Purple" Background="ForestGreen" FontSize="16" Click="ClearBtn_Click" Command="{Binding ClearCommand}" Margin="443,347,0,0" VerticalAlignment="Top"/>
-        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="310,10,310,370"/>
-        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="397,347,223,33"/>
-        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="233,347,387,33"/>
-        <Button Content="Start Game"  Width="140" Height="45" Foreground="Purple" Background="ForestGreen" FontSize="16" Click="StartGamedBtn_Click" Margin="0,241,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+        <TextBlock Text="Big Ol' Frog" Style="{StaticResource TitleStyle}" Margin="233,144,226,221" />
+        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="498,175,122,205" />
+        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="127,175,493,205" />
+        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="498,47,122,333" />
+        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="595,175,25,205" />
+        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="127,297,493,83" />
+        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="127,47,493,333" />
+        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="498,295,122,85" />
+        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="25,175,595,205" />
+        <Button Content="View ScoreBoard" Width="140" Height="45" Foreground="Purple" Background="ForestGreen"
+                FontSize="16" Command="{Binding ViewScoreBoardStartCommand}" Margin="72,347,0,0"
+                VerticalAlignment="Top" />
+        <Button Name="clearBtn" Content="Clear ScoreBoard" Width="140" Height="45" Foreground="Purple"
+                Background="ForestGreen" FontSize="16" Click="ClearBtn_Click" Command="{Binding ClearCommand}"
+                Margin="443,347,0,0" VerticalAlignment="Top" />
+        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="310,10,310,370" />
+        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="397,347,223,33" />
+        <Ellipse Height="30" Width="30" Fill="{StaticResource DotColor}" Margin="233,347,387,33" />
+        <Button Content="Start Game" Width="140" Height="45" Foreground="Purple" Background="ForestGreen" FontSize="16"
+                Click="StartGamedBtn_Click" Margin="0,241,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" />
     </Grid>
 </Page>

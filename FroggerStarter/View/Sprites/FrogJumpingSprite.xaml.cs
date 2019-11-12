@@ -3,16 +3,20 @@
 namespace FroggerStarter.View.Sprites
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    ///     An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class FrogJumpingSprite
     {
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="FrogJumpingSprite"/> class.
+        ///     Initializes a new instance of the <see cref="FrogJumpingSprite" /> class.
         /// </summary>
         public FrogJumpingSprite()
         {
             this.InitializeComponent();
         }
+
+        #endregion
     }
 }

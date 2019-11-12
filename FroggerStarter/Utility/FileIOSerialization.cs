@@ -1,20 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using Windows.Storage;
 using FroggerStarter.Model;
 using FroggerStarter.Model.DataObjects;
 
 namespace FroggerStarter.Utility
 {
-    public static class FileIOSerialization
+    /// <summary>Handles reading/writing HighScore data to a binary file </summary>
+    public static class FileIoSerialization
     {
+        #region Data members
+
+        /// <summary>The filename binary</summary>
         public const string FilenameBinary = "HighScoreBoard.bin";
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Binaries the serializer.
+        ///     Precondition: none
+        ///     Postcondition: writes the new score to the binary file.
+        /// </summary>
+        /// <param name="score">The score.</param>
         public static async void BinarySerializer(HighScore score)
         {
             var storageFolder = ApplicationData.Current.LocalFolder;
@@ -33,6 +42,12 @@ namespace FroggerStarter.Utility
             writer.Dispose();
         }
 
+        /// <summary>
+        ///     Binaries the deserializer.
+        ///     Precondition: none
+        ///     Postcondition: reads the binary file data into the scoreboard.
+        /// </summary>
+        /// <param name="board">The board.</param>
         public static async void BinaryDeserializer(HighScoreBoard board)
         {
             var folder = ApplicationData.Current.LocalFolder;
@@ -63,12 +78,19 @@ namespace FroggerStarter.Utility
             reader.Dispose();
         }
 
-        public static async void BinaryFileClear()
+        /// <summary>
+        ///     Creates a new empty binary file.
+        ///     Precondition: none
+        ///     Postcondition: a new binary file is created.
+        /// </summary>
+        public static async void BinaryFileOverwrite()
         {
             var folder = ApplicationData.Current.LocalFolder;
 
             await folder.CreateFileAsync(FilenameBinary,
-                    CreationCollisionOption.ReplaceExisting);
+                CreationCollisionOption.ReplaceExisting);
         }
+
+        #endregion
     }
 }

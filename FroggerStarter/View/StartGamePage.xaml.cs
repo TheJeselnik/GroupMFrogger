@@ -1,20 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.System;
-using Windows.UI.Core;
+﻿using Windows.Foundation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using FroggerStarter.Utility;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -22,35 +8,48 @@ using FroggerStarter.Utility;
 namespace FroggerStarter.View
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    ///     An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class StartGamePage
     {
-        private readonly double applicationHeight = (double)Application.Current.Resources["AppHeight"];
-        private readonly double applicationWidth = (double)Application.Current.Resources["AppWidth"];
+        #region Data members
 
+        private readonly double applicationHeight = (double) Application.Current.Resources["AppHeight"];
+        private readonly double applicationWidth = (double) Application.Current.Resources["AppWidth"];
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a new instance of the <see cref="StartGamePage" /> class.</summary>
         public StartGamePage()
         {
             this.InitializeComponent();
 
             ApplicationView.PreferredLaunchViewSize = new Size
-                { Width = this.applicationWidth, Height = this.applicationHeight };
+                {Width = this.applicationWidth, Height = this.applicationHeight};
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.GetForCurrentView()
-                .SetPreferredMinSize(new Size(this.applicationWidth, this.applicationHeight));
-            
+                           .SetPreferredMinSize(new Size(this.applicationWidth, this.applicationHeight));
+
             SoundEffects.PlayTitleSound();
         }
+
+        #endregion
+
+        #region Methods
 
         private void StartGamedBtn_Click(object sender, RoutedEventArgs e)
         {
             SoundEffects.PauseSound();
-            this.Frame.Navigate(typeof(GamePage), null);
+            Frame.Navigate(typeof(GamePage), null);
         }
 
         private void ClearBtn_Click(object sender, RoutedEventArgs e)
         {
             this.clearBtn.Visibility = Visibility.Collapsed;
         }
+
+        #endregion
     }
 }

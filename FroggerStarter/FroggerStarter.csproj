@@ -147,7 +147,7 @@
     <Compile Include="Model\GameObjects\Frog.cs" />
     <Compile Include="Controller\GameManager.cs" />
     <Compile Include="Model\GameObjects\GameObject.cs" />
-    <Compile Include="Utility\FileIOSerialization.cs" />
+    <Compile Include="Utility\FileIoSerialization.cs" />
     <Compile Include="Utility\LifeTimer.cs" />
     <Compile Include="Controller\PowerUpManager.cs" />
     <Compile Include="Utility\RelayCommand.cs" />

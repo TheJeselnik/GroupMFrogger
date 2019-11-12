@@ -11,8 +11,11 @@ using FroggerStarter.View;
 
 namespace FroggerStarter.ViewModel
 {
+    /// <summary>ViewModel for the HighScore Board.</summary>
+    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public class HighScoreBoardViewModel : INotifyPropertyChanged
     {
+        #region Data members
 
         private const int MaxSortSize = 10;
 
@@ -22,24 +25,44 @@ namespace FroggerStarter.ViewModel
 
         private string playerInfo;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
-        public RelayCommand SortByNameCommand { get; private set; }
+        #region Properties
 
-        public RelayCommand SortByScoreCommand { get; private set; }
+        /// <summary>Gets the sort by name command.</summary>
+        /// <value>The sort by name command.</value>
+        public RelayCommand SortByNameCommand { get; }
 
-        public RelayCommand SortByLevelCommand { get; private set; }
+        /// <summary>Gets the sort by score command.</summary>
+        /// <value>The sort by score command.</value>
+        public RelayCommand SortByScoreCommand { get; }
 
-        public RelayCommand ClearCommand { get; private set; }
+        /// <summary>Gets the sort by level command.</summary>
+        /// <value>The sort by level command.</value>
+        public RelayCommand SortByLevelCommand { get; }
 
-        public RelayCommand ViewScoreBoardGameOverCommand { get; private set; }
+        /// <summary>Gets the clear command.</summary>
+        /// <value>The clear command.</value>
+        public RelayCommand ClearCommand { get; }
 
-        public RelayCommand ViewScoreBoardStartCommand { get; private set; }
+        /// <summary>Gets the view score board game over command.</summary>
+        /// <value>The view score board game over command.</value>
+        public RelayCommand ViewScoreBoardGameOverCommand { get; }
 
-        public RelayCommand SubmitPlayerNameCommand { get; private set; }
+        /// <summary>Gets the view score board start command.</summary>
+        /// <value>The view score board start command.</value>
+        public RelayCommand ViewScoreBoardStartCommand { get; }
 
-        public RelayCommand DisplayScoresCommand { get; private set; }
+        /// <summary>Gets the submit player name command.</summary>
+        /// <value>The submit player name command.</value>
+        public RelayCommand SubmitPlayerNameCommand { get; }
 
+        /// <summary>Gets the display scores command.</summary>
+        /// <value>The display scores command.</value>
+        public RelayCommand DisplayScoresCommand { get; }
+
+        /// <summary>Gets or sets the current player information.</summary>
+        /// <value>The current player information.</value>
         public string CurrentPlayerInfo
         {
             get => this.playerInfo;
@@ -50,9 +73,11 @@ namespace FroggerStarter.ViewModel
             }
         }
 
+        /// <summary>Gets or sets the scores.</summary>
+        /// <value>The scores.</value>
         public ObservableCollection<HighScore> Scores
         {
-            get => scores;
+            get => this.scores;
             set
             {
                 this.scores = value;
@@ -60,6 +85,11 @@ namespace FroggerStarter.ViewModel
             }
         }
 
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a new instance of the <see cref="HighScoreBoardViewModel" /> class.</summary>
         public HighScoreBoardViewModel()
         {
             this.SortByNameCommand = new RelayCommand(this.sortByName, this.canSort);
@@ -68,17 +98,25 @@ namespace FroggerStarter.ViewModel
             this.ClearCommand = new RelayCommand(clearBoard, this.canClearBoard);
             this.ViewScoreBoardGameOverCommand = new RelayCommand(viewScoreBoardFromGameOver, this.canViewScoreBoard);
             this.ViewScoreBoardStartCommand = new RelayCommand(viewScoreBoardFromStart, this.canViewScoreBoard);
-            this.SubmitPlayerNameCommand = new RelayCommand(this.createHighScore, this.canCreateHighScore);
+            this.SubmitPlayerNameCommand = new RelayCommand(this.writeHighScore, this.canCreateHighScore);
             this.DisplayScoresCommand = new RelayCommand(this.setupScoreBoard, this.canSort);
 
             this.scoreBoard = new HighScoreBoard();
 
-            FileIOSerialization.BinaryDeserializer(this.scoreBoard);
+            FileIoSerialization.BinaryDeserializer(this.scoreBoard);
 
             this.Scores = this.scoreBoard.Scores.ToObservableCollection();
 
             this.CurrentPlayerInfo = "No Name";
         }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>Occurs when a property value changes.</summary>
+        /// <returns>PropertyChangedEventHandler for ViewModel</returns>
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private bool canSort(object obj)
         {
@@ -90,10 +128,15 @@ namespace FroggerStarter.ViewModel
             return this.scoreBoard.Count > 0 && this.scoreBoard != null;
         }
 
-        private static async void clearBoard(object obj)
+        private static void clearBoard(object obj)
         {
-            FileIOSerialization.BinaryFileClear();
+            FileIoSerialization.BinaryFileOverwrite();
 
+            showClearedBoardMessageDialog();
+        }
+
+        private static async void showClearedBoardMessageDialog()
+        {
             var clearBoardDialog = new ClearedBoardMessageDialog();
             await clearBoardDialog.ShowAsync();
         }
@@ -139,15 +182,25 @@ namespace FroggerStarter.ViewModel
             return this.scoreBoard != null;
         }
 
-        private static async void viewScoreBoardFromStart(object obj)
+        private static void viewScoreBoardFromStart(object obj)
         {
-            var dialog = new HighScoreBoardDialog { IsOpenedAtStartScreen = true };
-            await dialog.ShowAsync();
+            openHighScoreBoardDialogFromStart();
         }
 
-        private static async void viewScoreBoardFromGameOver(object obj)
+        private static void viewScoreBoardFromGameOver(object obj)
         {
-            var highScoreDialog = new HighScoreBoardDialog { IsOpenedAtStartScreen = false };
+            openHighScoreBoardDialogFromGameOver();
+        }
+
+        private static async void openHighScoreBoardDialogFromStart()
+        {
+            var highScoreDialog = new HighScoreBoardDialog {IsOpenedAtStartScreen = true};
+            await highScoreDialog.ShowAsync();
+        }
+
+        private static async void openHighScoreBoardDialogFromGameOver()
+        {
+            var highScoreDialog = new HighScoreBoardDialog {IsOpenedAtStartScreen = false};
             await highScoreDialog.ShowAsync();
         }
 
@@ -156,7 +209,13 @@ namespace FroggerStarter.ViewModel
             return this.CurrentPlayerInfo != string.Empty;
         }
 
-        private async void createHighScore(object obj)
+        private void writeHighScore(object obj)
+        {
+            this.handleWritingHighScoreToFile();
+            openGameOverMenuDialog();
+        }
+
+        private void handleWritingHighScoreToFile()
         {
             const int nameIndex = 0;
             const int scoreIndex = 1;
@@ -175,12 +234,9 @@ namespace FroggerStarter.ViewModel
 
             var highScore = new HighScore(name, score, level);
 
-            FileIOSerialization.BinarySerializer(highScore);
+            FileIoSerialization.BinarySerializer(highScore);
 
             this.Scores = this.scoreBoard.Scores.ToObservableCollection();
-
-            var menuDialog = new GameOverMenuDialog();
-            await menuDialog.ShowAsync();
         }
 
         private void setupScoreBoard(object obj)
@@ -190,9 +246,19 @@ namespace FroggerStarter.ViewModel
             this.Scores = result.ToObservableCollection();
         }
 
+        private static async void openGameOverMenuDialog()
+        {
+            var menuDialog = new GameOverMenuDialog();
+            await menuDialog.ShowAsync();
+        }
+
+        /// <summary>Ons the property changed.</summary>
+        /// <param name="propertyName">Name of the property.</param>
         protected virtual void onPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #endregion
     }
 }

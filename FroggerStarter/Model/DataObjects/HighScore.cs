@@ -1,22 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-
-namespace FroggerStarter.Model
+﻿namespace FroggerStarter.Model.DataObjects
 {
+    /// <summary>Manages a high score of a player.</summary>
     public class HighScore
     {
-        public string Name { get; private set; }
+        #region Properties
 
-        public int GameScore { get; private set; }
+        /// <summary>Gets the name.</summary>
+        /// <value>The name.</value>
+        public string Name { get; }
 
-        public int GameLevel { get; private set; }
+        /// <summary>Gets the game score.</summary>
+        /// <value>The game score.</value>
+        public int GameScore { get; }
 
+        /// <summary>Gets the game level.</summary>
+        /// <value>The game level.</value>
+        public int GameLevel { get; }
+
+        /// <summary>Gets or sets the full description.</summary>
+        /// <value>The full description.</value>
         public string FullDescription { get; set; }
 
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a new instance of the <see cref="HighScore" /> class.</summary>
+        /// <param name="name">The name.</param>
+        /// <param name="score">The score.</param>
+        /// <param name="level">The level.</param>
         public HighScore(string name, int score, int level)
         {
             this.Name = name;
@@ -25,19 +37,40 @@ namespace FroggerStarter.Model
             this.FullDescription = $"Score: {this.GameScore}   |   Name: {this.Name}   |   Level: {this.GameLevel}";
         }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Sorts the description property by default order.
+        ///     Precondition: none
+        ///     Postcondition: description property is set to specified order
+        /// </summary>
         public void SortDescriptionDefault()
         {
             this.FullDescription = $"Score: {this.GameScore}   |   Name: {this.Name}   |   Level: {this.GameLevel}";
         }
 
+        /// <summary>
+        ///     Sorts the description property by level order.
+        ///     Precondition: none
+        ///     Postcondition: description property is set to specified order
+        /// </summary>
         public void SortDescriptionByLevel()
         {
             this.FullDescription = $"Level: {this.GameLevel}   |   Score: {this.GameScore}   |   Name: {this.Name}";
         }
 
+        /// <summary>
+        ///     Sorts the description property by score order.
+        ///     Precondition: none
+        ///     Postcondition: description property is set to specified order
+        /// </summary>
         public void SortDescriptionByName()
         {
             this.FullDescription = $"Name: {this.Name}   |   Score: {this.GameScore}   |   Level: {this.GameLevel}";
         }
+
+        #endregion
     }
 }

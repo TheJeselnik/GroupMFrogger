@@ -28,25 +28,24 @@ namespace FroggerStarter.Utility
         }
 
         /// <summary>
-        /// Determines whether [is collision between with cushion] [the specified first game object].
-        /// Precondition: None
-        /// Postcondition: None
+        ///     Determines whether [is collision between with cushion] [the specified first game object].
+        ///     Precondition: None
+        ///     Postcondition: None
         /// </summary>
         /// <param name="firstGameObject">The first game object.</param>
         /// <param name="secondGameObject">The second game object.</param>
         /// <param name="cushionRange">The cushion range.</param>
         /// <returns>
-        ///   <c>true</c> if [is collision between with cushion] [the specified first game object]; otherwise, <c>false</c>.
+        ///     <c>true</c> if [is collision between with cushion] [the specified first game object]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsCollisionBetweenWithCushion(GameObject firstGameObject, GameObject secondGameObject, double cushionRange)
+        public bool IsCollisionBetweenWithCushion(GameObject firstGameObject, GameObject secondGameObject,
+            double cushionRange)
         {
             var firstGameObjectRect = constructRectangleCushioned(firstGameObject, cushionRange);
             var secondGameObjectRect = constructRectangle(secondGameObject);
-            var secondGameObjectRightX = secondGameObjectRect.X + secondGameObjectRect.Width;
-            var secondGameObjectLeftPoint = new Point(secondGameObjectRect.X, secondGameObjectRect.Y);
-            var secondGameObjectRightPoint = new Point(secondGameObjectRightX, secondGameObjectRect.Y);
 
-            return firstGameObjectRect.IntersectsWith(secondGameObjectRect) || firstGameObjectRect.IntersectsWith(secondGameObjectRect);
+            return firstGameObjectRect.IntersectsWith(secondGameObjectRect) ||
+                   firstGameObjectRect.IntersectsWith(secondGameObjectRect);
         }
 
         private static Rectangle constructRectangle(GameObject gameObject)
@@ -60,8 +59,8 @@ namespace FroggerStarter.Utility
             cushionRange /= 2;
             var cushionedX = gameObject.X + cushionRange;
             var cushionedWidth = gameObject.Width - cushionRange;
-            return new Rectangle((int)cushionedX, (int)gameObject.Y, (int)cushionedWidth,
-                (int)gameObject.Height);
+            return new Rectangle((int) cushionedX, (int) gameObject.Y, (int) cushionedWidth,
+                (int) gameObject.Height);
         }
 
         #endregion

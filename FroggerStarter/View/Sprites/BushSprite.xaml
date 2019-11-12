@@ -10,40 +10,40 @@
     Width="50">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryBushColor" Color="ForestGreen"/>
-        <SolidColorBrush x:Key="SecondaryBushColor" Color="MediumSeaGreen"/>
-        <SolidColorBrush x:Key="TertiaryBushColor" Color="GreenYellow"/>
+        <SolidColorBrush x:Key="PrimaryBushColor" Color="ForestGreen" />
+        <SolidColorBrush x:Key="SecondaryBushColor" Color="MediumSeaGreen" />
+        <SolidColorBrush x:Key="TertiaryBushColor" Color="GreenYellow" />
     </UserControl.Resources>
 
     <Canvas Height="50" Width="50" Background="Transparent">
-        <Rectangle Height="46" Width="46" Fill="{StaticResource PrimaryBushColor}" Canvas.Top="2" Canvas.Left="2"/>
-        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="46"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="7"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="12"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="17"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="25"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="34"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="38"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="45"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="31"/>
-        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="41"/>
-        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="2"/>
-        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="8"/>
-        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="17"/>
-        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="12"/>
-        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="20"/>
-        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="26"/>
-        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="30"/>
-        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="35"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="2"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="10"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="14"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="20"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="22"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="27"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="42"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="47"/>
-        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="29" Canvas.Left="-1"/>
+        <Rectangle Height="46" Width="46" Fill="{StaticResource PrimaryBushColor}" Canvas.Top="2" Canvas.Left="2" />
+        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="46" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="7" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="12" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="17" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="25" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="34" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="38" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="45" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="31" />
+        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="41" />
+        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="2" />
+        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="8" />
+        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="17" />
+        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="12" />
+        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="20" />
+        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="26" />
+        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="30" />
+        <Rectangle Height="50" Width="1" Fill="{StaticResource TertiaryBushColor}" Canvas.Left="35" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="2" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="10" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="14" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="20" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="22" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="27" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="42" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="47" />
+        <Rectangle Height="1" Width="50" Fill="{StaticResource SecondaryBushColor}" Canvas.Top="29" Canvas.Left="-1" />
 
     </Canvas>
 </local:BaseSprite>

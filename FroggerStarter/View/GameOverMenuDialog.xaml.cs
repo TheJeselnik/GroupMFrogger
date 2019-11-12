@@ -1,35 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel.Core;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace FroggerStarter.View
 {
+    /// <summary>Content dialog for the game over menu.</summary>
+    /// <seealso cref="Windows.UI.Xaml.Controls.ContentDialog" />
+    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
+    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
     public sealed partial class GameOverMenuDialog
     {
+        #region Constructors
+
+        /// <summary>Initializes a new instance of the <see cref="GameOverMenuDialog" /> class.</summary>
         public GameOverMenuDialog()
         {
             this.InitializeComponent();
         }
 
-        private async void RestartBtn_Click(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region Methods
+
+        private void RestartBtn_Click(object sender, RoutedEventArgs e)
         {
             //TODO: Restart game
-            
         }
 
         private void ViewScoreBoardBtn_Click(object sender, RoutedEventArgs e)
@@ -41,5 +37,7 @@ namespace FroggerStarter.View
         {
             Environment.Exit(1);
         }
+
+        #endregion
     }
 }
