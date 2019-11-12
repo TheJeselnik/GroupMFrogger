@@ -3,7 +3,7 @@
     /// <summary>
     ///     Defines the model for objects in water
     /// </summary>
-    public abstract class WaterObject : GameObject
+    public abstract class WaterObject : Vehicle
     {
         #region Types and Delegates
 
@@ -40,8 +40,9 @@
         ///     Initializes a new instance of the <see cref="WaterObject" /> class.
         /// </summary>
         /// <param name="canLandOn">if set to <c>true</c> [can land on].</param>
+        /// <param name="direction">The direction</param>
         /// <param name="speed">The speed.</param>
-        protected WaterObject(bool canLandOn, double speed)
+        protected WaterObject(bool canLandOn, Direction direction, double speed) : base(direction, speed)
         {
             this.CanLandOn = canLandOn;
             this.SetSpeed(speed, 0.0);

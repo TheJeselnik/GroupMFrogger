@@ -38,11 +38,6 @@
 
         #endregion
 
-        /// <summary>
-        /// The is water vehicle
-        /// </summary>
-        public bool IsWaterVehicle = false;
-
         #region Constructors
 
         /// <summary>
@@ -61,9 +56,9 @@
         #region Methods
 
         /// <summary>
-        ///     Moves the vehicle the direction it is facing.
+        ///     Moves the object the direction it is facing.
         ///     Precondition: None
-        ///     Postcondition: Vehicle.X == X@prev + Speed || Vehicle.Y == Y@prev + Speed
+        ///     Postcondition: Object.X == X@prev + Speed || Object.Y == Y@prev + Speed
         /// </summary>
         public void Move()
         {
@@ -74,6 +69,10 @@
                     break;
                 case Direction.Right:
                     MoveRight();
+                    break;
+                case Direction.Up:
+                    break;
+                case Direction.Down:
                     break;
                 default:
                     MoveLeft();

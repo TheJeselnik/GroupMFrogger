@@ -154,8 +154,6 @@ namespace FroggerStarter.Controller
 
             this.roadManager.VehicleAdded += this.vehicleAdded;
             this.roadManager.VehicleRemoved += this.vehicleRemoved;
-            this.roadManager.WaterObjectAdded += this.waterObjectAdded;
-            this.roadManager.WaterObjectRemoved += this.waterObjectRemoved;
         }
 
         private void addNonPlayerSprites()
@@ -196,16 +194,6 @@ namespace FroggerStarter.Controller
         private void vehicleRemoved(object sender, Vehicle vehicle)
         {
             this.gameCanvas.Children.Remove(vehicle.Sprite);
-        }
-
-        private void waterObjectAdded(object sender, WaterObject waterObject)
-        {
-            this.gameCanvas.Children.Add(waterObject.Sprite);
-        }
-
-        private void waterObjectRemoved(object sender, WaterObject waterObject)
-        {
-            this.gameCanvas.Children.Remove(waterObject.Sprite);
         }
 
         private void waterAdded(object sender, WaterCrossing waterCrossing)

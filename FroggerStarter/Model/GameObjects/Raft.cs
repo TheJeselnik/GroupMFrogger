@@ -13,8 +13,9 @@ namespace FroggerStarter.Model.GameObjects
         ///     Initializes a new instance of the <see cref="Raft" /> class.
         /// </summary>
         /// <param name="canLandOn">if set to <c>true</c> [can land on].</param>
+        /// <param name="direction">The direction</param>
         /// <param name="speed">The speed.</param>
-        public Raft(bool canLandOn, double speed) : base(canLandOn, speed)
+        public Raft(bool canLandOn, Direction direction, double speed) : base(canLandOn, direction, speed)
         {
             Sprite = new RaftSprite();
         }

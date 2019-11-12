@@ -15,7 +15,7 @@ namespace FroggerStarter.Model.GameObjects
         /// </summary>
         /// <param name="canLandOn">if set to <c>true</c> [can land on].</param>
         /// <param name="speed">The speed.</param>
-        public Log(bool canLandOn, double speed) : base(canLandOn, speed)
+        public Log(bool canLandOn, Direction direction, double speed) : base(canLandOn, direction, speed)
         {
             Sprite = new LogSprite();
         }
